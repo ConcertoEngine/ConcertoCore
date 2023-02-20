@@ -3,6 +3,7 @@
 //
 
 #include "Vector.hpp"
+#include <algorithm>
 
 namespace Concerto::Math
 {
