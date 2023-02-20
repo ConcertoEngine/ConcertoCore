@@ -1,3 +1,7 @@
+build
+.xmake
+.idea
+CMakeLists.txt
 # Prerequisites
 *.d
 
