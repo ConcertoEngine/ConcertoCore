@@ -10,7 +10,7 @@ target("ConcertoCore")
     add_includedirs('Include', 'Include/Math')
     add_files('Src/*.cpp', 'Src/Math/*.cpp')
 
-target("ConcertoCoreTest")
+target("ConcertoCoreTests")
     set_kind("binary")
     set_symbols("debug")
     set_warnings("everything")
