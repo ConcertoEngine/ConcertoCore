@@ -162,7 +162,7 @@ TEST(Quaternion, operatorMultVector)
 {
 	Concerto::Math::Quaternionf quaternion1(1,2,3);
 	Concerto::Math::Vector3f vec = quaternion1 * Concerto::Math::Vector3f::Forward();
-	EXPECT_NEAR(vec.X(), 0.0348941758, near);
-	EXPECT_NEAR(vec.Y(), -0.0174524058, near);
-	EXPECT_NEAR(vec.Z(), 0.99923861, near);
+	EXPECT_NEAR(vec.X(), 0.0348941758f, near);
+	EXPECT_NEAR(vec.Y(), -0.0174524058f, near);
+	EXPECT_NEAR(vec.Z(), 0.99923861f, near);
 }

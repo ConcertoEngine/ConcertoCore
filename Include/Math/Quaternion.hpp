@@ -171,6 +171,7 @@ namespace Concerto::Math
 		/**
 		 * @brief Multiply the given quaternion to the current one
 		 * @param other The quaternion to multiply
+		 * @attention Quaternion multiplication is not commutative
 		 * @return A new quaternion that is the multiplication of the two
 		 */
 		Quaternion<T> operator*(const Quaternion<T>& other) const noexcept
