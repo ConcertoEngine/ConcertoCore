@@ -5,7 +5,7 @@
 #include <iostream>
 #include <version>
 #include <stdexcept>
-//#include <source_location>
+#include <source_location>
 
 namespace Concerto
 {
@@ -37,15 +37,17 @@ namespace Concerto
         {
 			Log(message, LoggingLevel::INFO);
         }
+
         /**
         * @brief Log a message with the DEBUG level = DEBUG
         * @param message The message to Log
         */
         template<typename T>
-        static void Debug(const T& message/*, const std::source_location& location = std::source_location::current()*/)
+        static void Debug(const T& message, const std::source_location& location = std::source_location::current())
         {
-			Log(message, LoggingLevel::DEBUG/*, location*/);
+			Log(message, LoggingLevel::DEBUG, location);
         }
+
         /**
         * @brief Log a message with the DEBUG level = WARNING
         * @param message The message to Log
@@ -55,6 +57,7 @@ namespace Concerto
         {
 			Log(message, LoggingLevel::WARNING);
         }
+
         /**
         * @brief Log a message with the DEBUG level = ERROR
         * @param message The message to Log
@@ -65,6 +68,7 @@ namespace Concerto
 			Log(message, LoggingLevel::ERROR);
 			throw std::runtime_error(message);
         }
+
         /**
         * @brief Log a message
         * @param level The level of the message
@@ -72,12 +76,12 @@ namespace Concerto
         * @param location The location of the message
         */
         template<typename T>
-        static void Log(const T& message, LoggingLevel level/*, const std::source_location& location = std::experimental::source_location::current()*/)
+        static void Log(const T& message, LoggingLevel level, const std::source_location& location = std::source_location::current())
         {
             switch (level)
             {
                 case LoggingLevel::DEBUG:
-                    std::cout << Terminal::Color::CYAN << "[D] "/* << location.function_name() << ":" << location.line()  */<< " message: " << message << Terminal::Color::DEFAULT << std::endl;
+                    std::cout << Terminal::Color::CYAN << "[D] " << location.function_name() << ":" << location.line() << " message: " << message << Terminal::Color::DEFAULT << std::endl;
                     break;
                 case LoggingLevel::INFO:
                     std::cout << Terminal::Color::GREEN << "[i] " << message << Terminal::Color::DEFAULT << std::endl;
