@@ -2,7 +2,7 @@
 // Created by arthur on 22/05/22.
 //
 
-#include "math/Transform.hpp"
+#include "Math/Transform.hpp"
 
 void Concerto::Math::Transform::translate(float x, float y, float z)
 {
