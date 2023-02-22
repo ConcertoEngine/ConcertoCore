@@ -1,0 +1,18 @@
+{
+  "Test1": 1,
+  "Test2": "teststring",
+  "Test3": {
+    "Test4": 2,
+    "Test5": "teststring2"
+  },
+  "Test6": [
+    {
+      "Test7": 3,
+      "Test8": "teststring3"
+    },
+    {
+      "Test7": 4,
+      "Test8": "teststring4"
+    }
+  ]
+}

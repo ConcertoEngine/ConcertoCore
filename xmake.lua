@@ -1,4 +1,4 @@
-add_requires('gtest', 'nlohmann_json')
+add_requires('gtest', 'nlohmann_json 3.11.2')
 add_rules("mode.debug")
 
 target("ConcertoCore")
@@ -20,3 +20,9 @@ target("ConcertoCoreTests")
     add_packages('nlohmann_json')
     add_includedirs('Include', 'Include/Math')
     add_files('Src/*.cpp', 'Src/Math/*.cpp')
+    after_build(function(target)
+            print("Copying resources...")
+            local binaryPath = "$(buildir)/$(plat)/$(arch)/$(mode)"
+            os.cp("config.json", binaryPath .. "/goodConfig.json")
+            print("Copying resources... Done !")
+    end)
