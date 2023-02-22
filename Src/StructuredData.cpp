@@ -16,7 +16,7 @@ namespace Concerto
 		_config = GetObject(json::parse(i));
 	}
 
-	const Config::Object& StructuredData::getConfig() const
+	const Config::Object& StructuredData::GetConfig() const
 	{
 		return _config;
 	}
@@ -34,6 +34,8 @@ namespace Concerto
 				config.push_back({ key, std::make_shared<Config::Node>(GetArray(value)) });
 			else if (value.is_string())
 				config.push_back({ key, std::make_shared<Config::Node>(value.get<std::string>()) });
+			else if (value.is_primitive())
+				config.push_back({ key, GetPrimitive(value) });
 			else
 				throw std::logic_error("Unknow value type: " + value.dump());
 		}
@@ -64,9 +66,9 @@ namespace Concerto
 		if (primitive.is_string())
 			return std::make_shared<Config::Node>(primitive.get<Config::String>());
 		else if (primitive.is_number_integer())
-			return std::make_shared<Config::Node>(primitive.get<Config::Int32>());
+			return std::make_shared<Config::Node>(primitive.get<Int32>());
 		else if (primitive.is_number_unsigned())
-			return std::make_shared<Config::Node>(primitive.get<Config::UInt32>());
+			return std::make_shared<Config::Node>(primitive.get<UInt32>());
 		else if (primitive.is_number_float())
 			return std::make_shared<Config::Node>(primitive.get<Config::Double>());
 		else if (primitive.is_boolean())
