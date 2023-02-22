@@ -23,6 +23,6 @@ target("ConcertoCoreTests")
     after_build(function(target)
             print("Copying resources...")
             local binaryPath = "$(buildir)/$(plat)/$(arch)/$(mode)"
-            os.cp("config.json", binaryPath .. "/goodConfig.json")
+            os.cp("goodConfig.json", binaryPath .. "/goodConfig.json")
             print("Copying resources... Done !")
     end)
