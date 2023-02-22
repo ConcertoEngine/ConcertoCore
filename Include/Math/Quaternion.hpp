@@ -6,6 +6,7 @@
 #define CONCERTO_QUATERNION_H
 
 #include <iostream>
+#include <cmath>
 #include "Algorithm.hpp"
 #include "Vector.hpp"
 
