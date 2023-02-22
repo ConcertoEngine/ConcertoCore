@@ -4,6 +4,7 @@
 
 #ifndef CONCERTO_CONFIG_HPP
 #define CONCERTO_CONFIG_HPP
+
 #include <algorithm>
 #include <cstdint>
 #include <initializer_list>
@@ -15,6 +16,7 @@
 #include <vector>
 #include <type_traits>
 #include <memory>
+#include "Types.hpp"
 
 namespace Concerto::Config {
 	struct nullNode {};
@@ -50,25 +52,23 @@ namespace Concerto::Config {
 
 
 	using Array = std::vector<NodePtr>;
-/**
- * @brief std::unordered_map<std::string, NodePtr> is not used because we want
- * to conserve the insertion order
- **/
+	/**
+	 * @brief std::unordered_map<std::string, NodePtr> is not used because we want
+	 * to conserve the insertion order
+	 **/
 	using Object = Vector<std::pair<std::string, NodePtr>>;
 
-	using Int32 = std::int32_t;
-	using UInt32 = std::uint32_t;
 	using Double = double;
 	using Bool = bool;
 	using String = std::string;
 
 	using Variant =
 			std::variant<Bool, Int32, UInt32, Double, Array, Object, String, nullNode>;
-/**
- * @brief The Node class
- *
- * This class is the base class of all the nodes of the config file.
- **/
+	/**
+	 * @brief The Node class
+	 *
+	 * This class is the base class of all the nodes of the config file.
+	 **/
 	struct Node {
 	public:
 		explicit Node(const Array &array) : _variant(array) {}
