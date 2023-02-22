@@ -17,7 +17,7 @@ namespace Concerto
 	public:
 		StructuredData(const std::string &file);
 		StructuredData(StructuredData&&) = default;
-		const Config::Object &getConfig() const;
+		const Config::Object &GetConfig() const;
 	private:
 		Config::Object GetObject(const json &object);
 		Config::Array GetArray(const json &array);
