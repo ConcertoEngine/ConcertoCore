@@ -6,6 +6,7 @@
 #define CONCERTO_MATRIX_HPP
 
 #include <array>
+#include "Types.hpp"
 
 namespace Concerto::Math
 {
@@ -434,8 +435,8 @@ namespace Concerto::Math
 	using Matrix3d = Matrix<double, 3, 3>;
 	using Matrix2d = Matrix<double, 2, 2>;
 
-	using Matrix4i = Matrix<int, 4, 4>;
-	using Matrix3i = Matrix<int, 3, 3>;
-	using Matrix2i = Matrix<int, 2, 2>;
+	using Matrix4i = Matrix<Int32, 4, 4>;
+	using Matrix3i = Matrix<Int32, 3, 3>;
+	using Matrix2i = Matrix<Int32, 2, 2>;
 }
 #endif //CONCERTO_MATRIX_HPP

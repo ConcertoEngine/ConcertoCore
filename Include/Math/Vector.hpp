@@ -8,6 +8,7 @@
 #include <array>
 #include <iostream>
 #include <type_traits>
+#include "Types.hpp"
 
 namespace Concerto::Math
 {
@@ -338,19 +339,19 @@ namespace Concerto::Math
 		return os;
 	}
 
-	using Vector2i = Vector<int, 2>;
+	using Vector2i = Vector<Int32, 2>;
 	using Vector2d = Vector<double, 2>;
 	using Vector2f = Vector<float, 2>;
 	template<typename T>
 	using Vector2 = Vector<T, 2>;
 
-	using Vector3i = Vector<int, 3>;
+	using Vector3i = Vector<Int32, 3>;
 	using Vector3d = Vector<double, 3>;
 	using Vector3f = Vector<float, 3>;
 	template<typename T>
 	using Vector3 = Vector<T, 3>;
 
-	using Vector4i = Vector<int, 4>;
+	using Vector4i = Vector<Int32, 4>;
 	using Vector4d = Vector<double, 4>;
 	using Vector4f = Vector<float, 4>;
 	template<typename T>
