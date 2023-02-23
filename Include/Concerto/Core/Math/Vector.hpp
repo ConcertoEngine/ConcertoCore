@@ -8,7 +8,8 @@
 #include <array>
 #include <iostream>
 #include <type_traits>
-#include "Types.hpp"
+
+#include "Concerto/Core/Types.hpp"
 
 namespace Concerto::Math
 {

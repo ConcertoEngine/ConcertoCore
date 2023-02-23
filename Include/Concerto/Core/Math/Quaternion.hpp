@@ -7,8 +7,9 @@
 
 #include <iostream>
 #include <cmath>
-#include "Algorithm.hpp"
-#include "Vector.hpp"
+
+#include "Concerto/Core/Math/Algorithm.hpp"
+#include "Concerto/Core/Math/Vector.hpp"
 
 namespace Concerto::Math
 {

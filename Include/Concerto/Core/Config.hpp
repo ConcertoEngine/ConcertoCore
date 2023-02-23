@@ -16,7 +16,7 @@
 #include <vector>
 #include <type_traits>
 #include <memory>
-#include "Types.hpp"
+#include "Concerto/Core/Types.hpp"
 
 namespace Concerto::Config {
 	struct nullNode {};

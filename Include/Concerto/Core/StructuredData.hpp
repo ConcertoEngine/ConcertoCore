@@ -10,7 +10,7 @@
 #ifndef CONCERTO_STRUCTUREDDATA_HPP
 #define CONCERTO_STRUCTUREDDATA_HPP
 
-#include "Types.hpp"
+#include "Concerto/Core/Types.hpp"
 
 namespace Concerto
 {

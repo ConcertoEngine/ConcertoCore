@@ -2,8 +2,9 @@
 // Created by arthur on 22/05/22.
 //
 
-#include "Vector.hpp"
 #include <algorithm>
+
+#include "Vector.hpp"
 
 namespace Concerto::Math
 {

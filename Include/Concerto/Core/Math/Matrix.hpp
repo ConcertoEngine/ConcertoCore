@@ -6,7 +6,7 @@
 #define CONCERTO_MATRIX_HPP
 
 #include <array>
-#include "Types.hpp"
+#include "Concerto/Core/Types.hpp"
 
 namespace Concerto::Math
 {
