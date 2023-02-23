@@ -11,6 +11,7 @@ target("ConcertoCore")
     add_files('Src/*.cpp', 'Src/Concerto/Core/*.cpp', 'Src/Math/*.cpp')
     add_defines("LIB_BUILD")
     add_headerfiles('Include/(Concerto/*.hpp)','Include/(Concerto/Core/*.hpp)', 'Include/(Concerto/Core/Math/*.hpp)')
+    add_headerfiles('Include/(Concerto/*.inl)','Include/(Concerto/Core/*.inl)', 'Include/(Concerto/Core/Math/*.inl)')
 
 target("ConcertoCoreTests")
     set_kind("binary")
