@@ -4,8 +4,8 @@
 
 #include <fstream>
 #include <stdexcept>
-#include "StructuredData.hpp"
-#include "Config.hpp"
+#include "Concerto/Core/StructuredData.hpp"
+#include "Concerto/Core/Config.hpp"
 
 namespace Concerto
 {

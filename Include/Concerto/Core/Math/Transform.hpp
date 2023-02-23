@@ -4,8 +4,10 @@
 
 #ifndef CONCERTO_TRANSFORM_HPP
 #define CONCERTO_TRANSFORM_HPP
-#include "Vector.hpp"
-#include "Quaternion.hpp"
+
+#include "Concerto/Core/Types.hpp"
+#include "Concerto/Core/Math/Vector.hpp"
+#include "Concerto/Core/Math/Quaternion.hpp"
 
 namespace Concerto::Math
 {
