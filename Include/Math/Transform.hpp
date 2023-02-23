@@ -9,7 +9,7 @@
 
 namespace Concerto::Math
 {
-	class Transform
+	class CONCERTO_PUBLIC_API Transform
 	{
 	public:
 		Transform() = default;

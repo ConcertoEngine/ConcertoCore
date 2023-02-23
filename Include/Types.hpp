@@ -9,6 +9,25 @@
 
 namespace Concerto
 {
+#ifndef LIB_STATIC
+	#ifdef _WIN32
+		#define CONCERTO_EXPORT __declspec(dllexport)
+		#define CONCERTO_IMPORT __declspec(dllimport)
+	#else
+		#define CONCERTO_EXPORT [[gnu::visibility("default")]]
+		#define CONCERTO_IMPORT [[gnu::visibility("default")]]
+	#endif
+#else
+	#define CONCERTO_EXPORT
+	#define CONCERTO_IMPORT
+#endif
+
+#ifdef LIB_BUILD
+	#define CONCERTO_PUBLIC_API CONCERTO_EXPORT
+#else
+	#define CONCERTO_PUBLIC_API CONCERTO_IMPORT
+#endif
+
 	using Int8 = std::uint8_t;
 	using Int16 = std::uint16_t;
 	using Int32 = std::uint32_t;

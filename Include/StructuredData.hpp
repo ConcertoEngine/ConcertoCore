@@ -9,9 +9,12 @@
 
 #ifndef CONCERTO_STRUCTUREDDATA_HPP
 #define CONCERTO_STRUCTUREDDATA_HPP
+
+#include "Types.hpp"
+
 namespace Concerto
 {
-	class StructuredData
+	class CONCERTO_PUBLIC_API StructuredData
 	{
 		using json = nlohmann::ordered_json;
 	public:
