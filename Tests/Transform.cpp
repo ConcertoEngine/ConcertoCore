@@ -3,14 +3,14 @@
 //
 
 #include <gtest/gtest.h>
-#include "Math/Transform.hpp"
+#include "Concerto/Core/Math/Transform.hpp"
 
 using namespace Concerto::Math;
 
 TEST(Transform, Constructor)
 {
 	Transform transform(Vector3f(0.f, 0.f, 0.f), Quaternionf (0.f, 0.f, 0.f, 0.f), Vector3f(0.f, 0.f, 0.f));
-	ASSERT_EQ(transform.Location, Vector3f(0.f, 0.f, 0.f));
-	ASSERT_EQ(transform.Rotation, Quaternionf (0.f, 0.f, 0.f, 0.f));
-	ASSERT_EQ(transform.Scale, Vector3f(0.f, 0.f, 0.f));
+	ASSERT_EQ(transform.GetLocation(), Vector3f(0.f, 0.f, 0.f));
+	ASSERT_EQ(transform.GetRotation(), Quaternionf (0.f, 0.f, 0.f, 0.f));
+	ASSERT_EQ(transform.GetScale(), Vector3f(0.f, 0.f, 0.f));
 }
