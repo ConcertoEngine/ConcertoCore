@@ -22,7 +22,7 @@ namespace Concerto
 	#define CONCERTO_IMPORT
 #endif
 
-#ifdef LIB_BUILD
+#ifdef CONCERTO_BUILD
 	#define CONCERTO_PUBLIC_API CONCERTO_EXPORT
 #else
 	#define CONCERTO_PUBLIC_API CONCERTO_IMPORT
