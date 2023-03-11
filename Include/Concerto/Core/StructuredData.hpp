@@ -18,7 +18,8 @@ namespace Concerto
 	{
 		using json = nlohmann::ordered_json;
 	public:
-		StructuredData(const std::string &file);
+		explicit StructuredData(const std::string &file);
+		explicit StructuredData(std::istream &stream);
 		StructuredData(StructuredData&&) = default;
 		const Config::Object &GetConfig() const;
 	private:

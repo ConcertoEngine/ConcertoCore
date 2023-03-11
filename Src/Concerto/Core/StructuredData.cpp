@@ -6,6 +6,7 @@
 #include <stdexcept>
 #include "Concerto/Core/StructuredData.hpp"
 #include "Concerto/Core/Config.hpp"
+#include "Concerto/Core/Logger.hpp"
 
 namespace Concerto
 {
@@ -13,7 +14,16 @@ namespace Concerto
 	StructuredData::StructuredData(const std::string& file)
 	{
 		std::ifstream i(file);
+		if (!i.good())
+			Logger::Error("StructuredData: file is not good");
 		_config = GetObject(json::parse(i));
+	}
+
+	StructuredData::StructuredData(std::istream& stream)
+	{
+		if (!stream.good())
+			Logger::Error("StructuredData: stream is not good");
+		_config = GetObject(json::parse(stream));
 	}
 
 	const Config::Object& StructuredData::GetConfig() const
