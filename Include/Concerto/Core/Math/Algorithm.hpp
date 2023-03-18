@@ -23,7 +23,18 @@ namespace Concerto::Math
 	template<typename T>
 	constexpr T ToRadians(T degrees) noexcept
 	{
-		return degrees * Pi<T> / 180;
+		return degrees * Pi<T> / T(180);
+	}
+
+	/**
+	 * @brief Convert radians to degrees
+	 * @param radians The radians
+	 * @return T The degrees
+	 */
+	template<typename T>
+	constexpr T ToDegrees(T radians) noexcept
+	{
+		return radians * T(180) / Pi<T>;
 	}
 
 }
