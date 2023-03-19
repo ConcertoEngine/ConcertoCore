@@ -10,13 +10,14 @@
 
 #include "Concerto/Core/Math/Algorithm.hpp"
 #include "Concerto/Core/Math/Vector.hpp"
+#include "Concerto/Core/Math/EulerAngles.hpp"
 
 namespace Concerto::Math
 {
 	template<typename T>
 	class Quaternion
 	{
-	public:
+	 public:
 		Quaternion() = default;
 
 		/**
@@ -27,32 +28,73 @@ namespace Concerto::Math
 		 * @param z The z axis
 		 * @param w The w scalar
 		 */
-		constexpr Quaternion(T x, T y, T z, T w) noexcept: _scalar(w), _vector(x, y, z)
+		constexpr Quaternion(T x, T y, T z, T w) noexcept: _w(w), _x(x), _y(y), _z(z)
 		{
 
 		}
 
 		/**
-		 * @brief Construct a new Quaternion object
-		 *
-		 * @param x The x axis
-		 * @param y The y axis
-		 * @param z The z axis
+		 * @brief Construct a new Quaternion object from euler angles
+		 * @param eulerAngles The euler angles
 		 */
-		constexpr Quaternion(T x, T y, T z) noexcept: _scalar(0), _vector(0, 0, 0)
+		explicit constexpr Quaternion(const EulerAngles<T>& eulerAngles) noexcept: _w(0), _x(0), _y(0), _z(0)
 		{
-			Set(x, y, z);
+			Set(eulerAngles.Pitch(), eulerAngles.Yaw(), eulerAngles.Roll());
 		}
 
 		/**
-		 * @brief Construct a new Quaternion object
-		 *
-		 * @param vector The vector
-		 * @param scalar The scalar
+		 * @brief Normalize the quaternion
 		 */
-		constexpr Quaternion(const Vector3<T>& vector, T scalar) noexcept: _scalar(scalar), _vector(vector)
+		Quaternion<T> Normalize()
 		{
+			auto res = *this;
+			T length = Length();
+			res._w /= length;
+			res._x /= length;
+			res._y /= length;
+			res._z /= length;
+			return res;
+		}
 
+		/**
+		 * @brief Calculates the Magnitude of the quaternion
+		 * @return T The Magnitude
+		 */
+		T Magnitude() const
+		{
+			return _w * _w + _x * _x + _y * _y
+				+ _z * _z;
+		}
+
+		/**
+		 * @brief Calculates the length of the quaternion
+		 * @return T The length
+		 */
+		T Length() const
+		{
+			return std::sqrt(Magnitude());
+		}
+
+		/**
+		 * @brief Convert a quaternion to euler angles
+		 * @attention The quaternion must be normalized
+		 * @return Vector3<T> The euler angles
+		 */
+		EulerAngles<T> ToEulerAngles() const
+		{
+			//According to http://www.euclideanspace.com/maths/geometry/rotations/conversions/quaternionToEuler/
+			T test = _x * _y + _z * _w;
+			if (test > T(0.499))
+				return EulerAngles<T>(T(Math::Pi<T>) / T(2), T(2) * std::atan2(_x, _w), T(0));
+			if (test < T(-0.499))
+				return EulerAngles<T>(-T(Math::Pi<T>), T(-2) * std::atan2(_x, _w), T(0));
+			T sqx = _x * _x;
+			T sqy = _y * _y;
+			T sqz = _z * _z;
+			return EulerAngles<T>(
+				ToDegrees(std::atan2(T(2.0) * _x * _w - T(2.0) * _y * _z, T(1.0) - T(2.0) * sqx - T(2.0) * sqz)),
+				ToDegrees(std::atan2(T(2.0) * _y * _w - T(2.0) * _x * _z, T(1.0) - T(2.0) * sqy - T(2.0) * sqz)),
+				ToDegrees(std::asin(T(2) * test)));
 		}
 
 		/**
@@ -69,20 +111,20 @@ namespace Concerto::Math
 		/**
 		 * @brief Assign a new value to this quaternion
 		 */
-		void Set(T x, T y, T z) noexcept
+		void Set(T pitch, T yaw, T roll) noexcept
 		{
-			T cosX = std::cos(ToRadians(x / 2));
-			T cosY = std::cos(ToRadians(y / 2));
-			T cosZ = std::cos(ToRadians(z / 2));
+			T cosRoll = std::cos(ToRadians(roll / T(2.0)));
+			T cosPitch = std::cos(ToRadians(pitch / T(2.0)));
+			T cosYaw = std::cos(ToRadians(yaw / T(2.0)));
 
-			T sinX = std::sin(ToRadians(x / 2));
-			T sinY = std::sin(ToRadians(y / 2));
-			T sinZ = std::sin(ToRadians(z / 2));
+			T sinRoll = std::sin(ToRadians(roll / T(2.0)));
+			T sinPitch = std::sin(ToRadians(pitch / T(2.0)));
+			T sinYaw = std::sin(ToRadians(yaw / T(2.0)));
 
-			_scalar = cosX * cosY * cosZ - sinX * sinY * sinZ;
-			_vector.X() = sinX * cosY * cosZ + cosX * sinY * sinZ;
-			_vector.Y() = cosX * sinY * cosZ - sinX * cosY * sinZ;
-			_vector.Z() = cosX * cosY * sinZ + sinX * sinY * cosZ;
+			_w = cosYaw * cosRoll * cosPitch - sinYaw * sinRoll * sinPitch;
+			_x = sinYaw * sinRoll * cosPitch + cosYaw * cosRoll * sinPitch;
+			_y = sinYaw * cosRoll * cosPitch + cosYaw * sinRoll * sinPitch;
+			_z = cosYaw * sinRoll * cosPitch - sinYaw * cosRoll * sinPitch;
 		}
 
 		/**
@@ -91,7 +133,7 @@ namespace Concerto::Math
 		 */
 		T& W() noexcept
 		{
-			return _scalar;
+			return _w;
 		}
 
 		/**
@@ -100,7 +142,7 @@ namespace Concerto::Math
 		 */
 		constexpr T X() const noexcept
 		{
-			return _vector.X();
+			return _x;
 		}
 
 		/**
@@ -109,7 +151,7 @@ namespace Concerto::Math
 		 */
 		constexpr T Y() const noexcept
 		{
-			return _vector.Y();
+			return _y;
 		}
 
 		/**
@@ -118,7 +160,7 @@ namespace Concerto::Math
 		 */
 		constexpr T Z() const noexcept
 		{
-			return _vector.Z();
+			return _z;
 		}
 
 		/**
@@ -127,7 +169,7 @@ namespace Concerto::Math
 		 */
 		constexpr T W() const noexcept
 		{
-			return _scalar;
+			return _w;
 		}
 
 		/**
@@ -136,7 +178,7 @@ namespace Concerto::Math
 		 */
 		Quaternion<T> Inverse() const noexcept
 		{
-			return Quaternion<T>(-_vector.X(), -_vector.Y(), -_vector.Z(), -_scalar);
+			return Quaternion<T>(-_x, -_y, -_z, -_w);
 		}
 
 		/**
@@ -157,7 +199,8 @@ namespace Concerto::Math
 		 */
 		Quaternion<T> operator+(const Quaternion<T>& other) const noexcept
 		{
-			return Quaternion<T>(_vector + other._vector, _scalar + other._scalar);
+			return Quaternion<T>(_x + other._x, _y + other._y, _z + other._z,
+				_w + other._w);
 		}
 
 		/**
@@ -167,7 +210,8 @@ namespace Concerto::Math
 		 */
 		Quaternion<T> operator-(const Quaternion<T>& other) const noexcept
 		{
-			return Quaternion<T>(_vector - other._vector, _scalar - other._scalar);
+			return Quaternion<T>(_x - other._x, _y - other._y, _z - other._z,
+				_w - other._w);
 		}
 
 		/**
@@ -179,18 +223,18 @@ namespace Concerto::Math
 		Quaternion<T> operator*(const Quaternion<T>& other) const noexcept
 		{
 			Quaternion<T> result;
-			result._vector.X() =
-					_scalar * other._vector.X() + other._scalar * _vector.X() + _vector.Y() * other._vector.Z() -
-					_vector.Z() * other._vector.Y();
-			result._vector.Y() =
-					_scalar * other._vector.Y() + other._scalar * _vector.Y() + _vector.Z() * other._vector.X() -
-					_vector.X() * other._vector.Z();
-			result._vector.Z() =
-					_scalar * other._vector.Z() + other._scalar * _vector.Z() + _vector.X() * other._vector.Y() -
-					_vector.Y() * other._vector.X();
-			result._scalar =
-					_scalar * other._scalar - _vector.X() * other._vector.X() - _vector.Y() * other._vector.Y() -
-					_vector.Z() * other._vector.Z();
+			result._x =
+				_w * other._x + other._w * _x + _y * other._z -
+					_z * other._y;
+			result._y =
+				_w * other._y + other._w * _y + _z * other._x -
+					_x * other._z;
+			result._z =
+				_w * other._z + other._w * _z + _x * other._y -
+					_y * other._x;
+			result._w =
+				_w * other._w - _x * other._x - _y * other._y -
+					_z * other._z;
 			return result;
 		}
 
@@ -211,7 +255,8 @@ namespace Concerto::Math
 		 */
 		Quaternion<T> operator+(T value) const noexcept
 		{
-			return Quaternion<T>(_vector + value, _scalar + value);
+			return Quaternion<T>(_x + value, _y + value, _z + value,
+				_w + value);
 		}
 
 		/**
@@ -222,7 +267,8 @@ namespace Concerto::Math
 
 		Quaternion<T> operator-(T value) const noexcept
 		{
-			return Quaternion<T>(_vector - value, _scalar - value);
+			return Quaternion<T>(_x - value, _y - value, _z - value,
+				_w - value);
 		}
 
 		/**
@@ -233,7 +279,8 @@ namespace Concerto::Math
 
 		Quaternion<T> operator*(T value) const noexcept
 		{
-			return Quaternion<T>(_vector * value, _scalar * value);
+			return Quaternion<T>(_x * value, _y * value, _z * value,
+				_w * value);
 		}
 
 		/**
@@ -244,7 +291,8 @@ namespace Concerto::Math
 
 		Quaternion<T> operator/(T value) const noexcept
 		{
-			return Quaternion<T>(_vector / value, _scalar / value);
+			return Quaternion<T>(_x / value, _y / value, _z / value,
+				_w / value);
 		}
 
 		/**
@@ -254,8 +302,10 @@ namespace Concerto::Math
 		 */
 		Quaternion<T>& operator+=(const Quaternion<T>& other) noexcept
 		{
-			_vector += other._vector;
-			_scalar += other._scalar;
+			_x += other._x;
+			_y += other._y;
+			_z += other._z;
+			_w += other._w;
 			return *this;
 		}
 
@@ -266,8 +316,10 @@ namespace Concerto::Math
 		 */
 		Quaternion<T>& operator-=(const Quaternion<T>& other) noexcept
 		{
-			_vector -= other._vector;
-			_scalar -= other._scalar;
+			_x -= other._x;
+			_y -= other._y;
+			_z -= other._z;
+			_w -= other._w;
 			return *this;
 		}
 
@@ -300,14 +352,12 @@ namespace Concerto::Math
 		 */
 		Vector3<T> operator*(const Vector3<T>& vector) const noexcept
 		{
-			Vector3<T> q(_vector);
+			Vector3<T> q(_x, _y, _z);
 			Vector3<T> uv = q.Cross(vector);
 			Vector3<T> uuv = q.Cross(uv);
-			uv *= T(2.0) * _scalar;
+			uv *= T(2.0) * _w;
 			uuv *= T(2.0);
-			auto x = vector + uv + uuv;
-			return x;
-//			return Vector3<T>(-x.X(), -x.Y(), -x.Z());
+			return vector + uv + uuv;
 		}
 
 		/**
@@ -317,7 +367,8 @@ namespace Concerto::Math
 		 */
 		bool operator==(const Quaternion<T>& other) const noexcept
 		{
-			return _vector == other._vector && _scalar == other._scalar;
+			return _x == other._x && _y == other._y && _z == other._z &&
+				_w == other._w;
 		}
 
 		/**
@@ -330,9 +381,11 @@ namespace Concerto::Math
 			return !(*this == other);
 		}
 
-	private:
-		T _scalar;
-		Vector3<T> _vector;
+	 private:
+		T _w;
+		T _x;
+		T _y;
+		T _z;
 	};
 
 	// Aliases

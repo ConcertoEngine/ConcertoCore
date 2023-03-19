@@ -4,7 +4,7 @@
 
 #include <gtest/gtest.h>
 
-#include "Matrix.hpp"
+#include "Concerto/Core/Math/Matrix.hpp"
 
 using namespace Concerto::Math;
 
