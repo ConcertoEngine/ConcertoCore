@@ -130,4 +130,78 @@ namespace Concerto::Math
 		_roll /= other._roll;
 		return *this;
 	}
+
+	template<typename T>
+	EulerAngles<T> EulerAngles<T>::operator+(const Vector<T, 3>& other) const
+	{
+		EulerAngles<T> result(*this);
+		result += other;
+		return result;
+	}
+
+	template<typename T>
+	EulerAngles<T> EulerAngles<T>::operator-(const Vector<T, 3>& other) const
+	{
+		EulerAngles<T> result(*this);
+		result -= other;
+		return result;
+	}
+
+	template<typename T>
+	EulerAngles<T> EulerAngles<T>::operator*(const Vector<T, 3>& other) const
+	{
+		EulerAngles<T> result(*this);
+		result *= other;
+		return result;
+	}
+
+	template<typename T>
+	EulerAngles<T> EulerAngles<T>::operator/(const Vector<T, 3>& other) const
+	{
+		EulerAngles<T> result(*this);
+		result /= other;
+		return result;
+	}
+
+	template<typename T>
+	EulerAngles<T>& EulerAngles<T>::operator+=(const Vector<T, 3>& other)
+	{
+		_pitch += other.X();
+		_yaw += other.Y();
+		_roll += other.Z();
+		return *this;
+	}
+
+	template<typename T>
+	EulerAngles<T>& EulerAngles<T>::operator-=(const Vector<T, 3>& other)
+	{
+		_pitch -= other.X();
+		_yaw -= other.Y();
+		_roll -= other.Z();
+		return *this;
+	}
+
+	template<typename T>
+	EulerAngles<T>& EulerAngles<T>::operator*=(const Vector<T, 3>& other)
+	{
+		_pitch *= other.X();
+		_yaw *= other.Y();
+		_roll *= other.Z();
+		return *this;
+	}
+
+	template<typename T>
+	EulerAngles<T>& EulerAngles<T>::operator/=(const Vector<T, 3>& other)
+	{
+		_pitch /= other.X();
+		_yaw /= other.Y();
+		_roll /= other.Z();
+		return *this;
+	}
+
+	template<typename T>
+	EulerAngles<T> EulerAngles<T>::Zero()
+	{
+		return EulerAngles<T>(0, 0, 0);
+	}
 }

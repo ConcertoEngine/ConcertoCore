@@ -5,7 +5,7 @@
 #ifndef CONCERTOCORE_INCLUDE_CONCERTO_CORE_MATH_EULERANGLES_HPP_
 #define CONCERTOCORE_INCLUDE_CONCERTO_CORE_MATH_EULERANGLES_HPP_
 
-//#include "Quaternion.hpp"
+#include "Vector.hpp"
 
 namespace Concerto::Math
 {
@@ -76,6 +76,21 @@ namespace Concerto::Math
 		EulerAngles<T>& operator-=(const EulerAngles<T>& other);
 		EulerAngles<T>& operator*=(const EulerAngles<T>& other);
 		EulerAngles<T>& operator/=(const EulerAngles<T>& other);
+
+		EulerAngles<T> operator+(const Vector<T, 3>& other) const;
+		EulerAngles<T> operator-(const Vector<T, 3>& other) const;
+		EulerAngles<T> operator*(const Vector<T, 3>& other) const;
+		EulerAngles<T> operator/(const Vector<T, 3>& other) const;
+		EulerAngles<T>& operator+=(const Vector<T, 3>& other);
+		EulerAngles<T>& operator-=(const Vector<T, 3>& other);
+		EulerAngles<T>& operator*=(const Vector<T, 3>& other);
+		EulerAngles<T>& operator/=(const Vector<T, 3>& other);
+
+		/**
+		 * @brief Get the zero Euler angles
+		 * @return EulerAngles<T> The zero Euler angles
+		 */
+		[[nodiscard]] static EulerAngles<T> Zero();
 
 	 private:
 		T _pitch;
