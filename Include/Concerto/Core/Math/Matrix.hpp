@@ -427,6 +427,13 @@ namespace Concerto::Math
 
 	// Aliases
 
+	template<typename T>
+	using Matrix4 = Matrix<T, 4, 4>;
+	template<typename T>
+	using Matrix3 = Matrix<T, 3, 3>;
+	template<typename T>
+	using Matrix2 = Matrix<T, 2, 2>;
+
 	using Matrix4f = Matrix<float, 4, 4>;
 	using Matrix3f = Matrix<float, 3, 3>;
 	using Matrix2f = Matrix<float, 2, 2>;
