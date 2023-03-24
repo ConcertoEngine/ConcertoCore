@@ -11,6 +11,7 @@
 #include "Concerto/Core/Math/Algorithm.hpp"
 #include "Concerto/Core/Math/Vector.hpp"
 #include "Concerto/Core/Math/EulerAngles.hpp"
+#include "Concerto/Core/Math/Matrix.hpp"
 
 namespace Concerto::Math
 {
@@ -173,6 +174,24 @@ namespace Concerto::Math
 		}
 
 		/**
+		 * @brief Construct a new Quaternion object from axis-angle representation
+		 * @param axis The rotation axis
+		 * @param angle The rotation angle, in radians
+		 * @return Quaternion<T> The new quaternion
+		 */
+		static Quaternion<T> FromAxisAngle(const Vector3<T>& axis, const T angle)
+		{
+			const T halfAngle = angle * T(0.5);
+			const T sinHalfAngle = std::sin(halfAngle);
+			return Quaternion<T>(
+				axis.X() * sinHalfAngle,
+				axis.Y() * sinHalfAngle,
+				axis.Z() * sinHalfAngle,
+				std::cos(halfAngle)
+			);
+		}
+
+		/**
 		 * @brief Get the inverse of this quaternion
 		 * @return Quaternion The inverse of this quaternion
 		 */
@@ -190,6 +209,36 @@ namespace Concerto::Math
 			Quaternion<T> q = *this;
 			q._vector = Vector3<T>(-q.X(), -q.Y(), -q.Z());
 			return q;
+		}
+
+		/**
+		 * @brief Convert the quaternion to the rotation matrix
+		 * @return Matrix4x4<T> The matrix
+		 */
+		Matrix4<T> ToMatrix() const
+		{
+			Matrix4<T> matrix;
+			matrix.GetElement(0, 0) = T(1.0) - T(2.0) * (_y * _y + _z * _z);
+			matrix.GetElement(0, 1) = T(2.0) * (_x * _y + _z * _w);
+			matrix.GetElement(0, 2) = T(2.0) * (_x * _z - _y * _w);
+			matrix.GetElement(0, 3) = T(0.0);
+
+			matrix.GetElement(1, 0) = T(2.0) * (_x * _y - _z * _w);
+			matrix.GetElement(1, 1) = T(1.0) - T(2.0) * (_x * _x + _z * _z);
+			matrix.GetElement(1, 2) = T(2.0) * (_y * _z + _x * _w);
+			matrix.GetElement(1, 3) = T(0.0);
+
+			matrix.GetElement(2, 0) = T(2.0) * (_x * _z + _y * _w);
+			matrix.GetElement(2, 1) = T(2.0) * (_y * _z - _x * _w);
+			matrix.GetElement(2, 2) = T(1.0) - T(2.0) * (_x * _x + _y * _y);
+			matrix.GetElement(2, 3) = T(0.0);
+
+			matrix.GetElement(3, 0) = T(0.0);
+			matrix.GetElement(3, 1) = T(0.0);
+			matrix.GetElement(3, 2) = T(0.0);
+			matrix.GetElement(3, 3) = T(1.0);
+
+			return matrix;
 		}
 
 		/**
