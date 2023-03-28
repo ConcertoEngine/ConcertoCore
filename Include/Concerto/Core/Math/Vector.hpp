@@ -147,6 +147,24 @@ namespace Concerto::Math
 			return result;
 		}
 
+		/**
+		 * @brief Normalize the vector
+		 * @return A new vector that is the normalized version of the vector
+		 */
+		constexpr Vector<T, Size> Normalize() const noexcept
+		{
+			return *this / Length();
+		}
+
+		/**
+		 * @brief Get the length of the vector
+		 * @return The length of the vector
+		 */
+		constexpr T Length() const noexcept
+		{
+			return std::sqrt(Dot(*this));
+		}
+
 		constexpr Vector<T, Size> Reflect(const Vector& normal) const noexcept
 		{
 			return *this - normal * 2 * Dot(normal);
