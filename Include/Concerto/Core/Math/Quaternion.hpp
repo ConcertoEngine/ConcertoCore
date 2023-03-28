@@ -176,13 +176,15 @@ namespace Concerto::Math
 		/**
 		 * @brief Construct a new Quaternion object from axis-angle representation
 		 * @param axis The rotation axis
-		 * @param angle The rotation angle, in radians
+		 * @param angle The rotation angle, in degrees
 		 * @return Quaternion<T> The new quaternion
 		 */
 		static Quaternion<T> FromAxisAngle(const Vector3<T>& axis, const T angle)
 		{
-			const T halfAngle = angle * T(0.5);
+			const T halfAngle = ToRadians(angle) * T(0.5);
+			const auto normalizedAxis = axis.Normalize();
 			const T sinHalfAngle = std::sin(halfAngle);
+
 			return Quaternion<T>(
 				axis.X() * sinHalfAngle,
 				axis.Y() * sinHalfAngle,
