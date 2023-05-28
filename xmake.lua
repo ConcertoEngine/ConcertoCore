@@ -7,11 +7,14 @@ target("ConcertoCore")
     set_warnings("everything")
     set_languages("cxx20")
     add_packages('nlohmann_json')
-    add_includedirs('Include', 'Include/Concerto','Include/Concerto/Core', 'Include/Concerto/Core/Math')
+    add_includedirs('Include', 'Include/Concerto','Include/Concerto/Core', 'Include/Concerto/Core/Math', 'Include/Concerto/Core/Network', 'Src/Concerto/Core/Network/IpAddress', 'Src/Concerto/Core/Network/Socket')
     add_files('Src/**.cpp')
     add_defines("CONCERTO_BUILD")
-    add_headerfiles('Include/(Concerto/*.hpp)','Include/(Concerto/Core/*.hpp)', 'Include/(Concerto/Core/Math/*.hpp)')
-    add_headerfiles('Include/(Concerto/*.inl)','Include/(Concerto/Core/*.inl)', 'Include/(Concerto/Core/Math/*.inl)')
+    add_headerfiles('Include/(Concerto/*.hpp)','Include/(Concerto/Core/*.hpp)', 'Include/(Concerto/Core/Math/*.hpp)', 'Include/(Concerto/Core/Network/*.hpp)')
+    add_headerfiles('Include/(Concerto/*.inl)','Include/(Concerto/Core/*.inl)', 'Include/(Concerto/Core/Math/*.inl)', 'Include/(Concerto/Core/Network/*.inl)')
+    if is_plat("windows") then
+        add_syslinks("ws2_32")
+    end
 
 target("ConcertoCoreTests")
     set_kind("binary")
@@ -21,9 +24,12 @@ target("ConcertoCoreTests")
     add_files('Tests/*.cpp')
     add_packages('gtest')
     add_packages('nlohmann_json')
-    add_includedirs('Include', 'Include/Concerto','Include/Concerto/Core', 'Include/Concerto/Core/Math')
-    add_files('Tests/*.cpp', 'Src/Concerto/Core/*.cpp', 'Src/Concerto/Core/Math/*.cpp')
+    add_includedirs('Include', 'Include/Concerto','Include/Concerto/Core', 'Include/Concerto/Core/Math', 'Include/Concerto/Core/Network', 'Src/Concerto/Core/Network/IpAddress', 'Src/Concerto/Core/Network/Socket')
+    add_files('Tests/*.cpp', 'Src/Concerto/Core/*.cpp', 'Src/Concerto/Core/Math/*.cpp', 'Src/Concerto/Core/Network/**.cpp')
     add_defines("CONCERTO_BUILD")
+    if is_plat("windows") then
+        add_syslinks("ws2_32")
+    end
     after_build(function(target)
             print("Copying resources...")
             local binaryPath = "$(buildir)/$(plat)/$(arch)/$(mode)"
