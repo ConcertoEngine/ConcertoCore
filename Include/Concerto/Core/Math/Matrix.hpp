@@ -5,6 +5,7 @@
 #ifndef CONCERTO_MATRIX_HPP
 #define CONCERTO_MATRIX_HPP
 
+#include <cassert>
 #include <array>
 #include "Concerto/Core/Types.hpp"
 
