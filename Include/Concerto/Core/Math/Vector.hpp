@@ -8,6 +8,7 @@
 #include <array>
 #include <iostream>
 #include <type_traits>
+#include <cmath>
 
 #include "Concerto/Core/Types.hpp"
 
