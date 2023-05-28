@@ -4,6 +4,10 @@ Concerto Core is a C++ library that provides a set of common functionality used 
 
 It is essentially developed for learning purposes.
 
+Windows | [![Windows build status](https://github.com/ConcertoEngine/ConcertoCore/actions/workflows/windows.yml/badge.svg)](https://github.com/ConcertoEngine/ConcertoCore/actions/workflows/windows.yml)
+Linux | [![Linux build status](https://github.com/ConcertoEngine/ConcertoCore/actions/workflows/ubuntu22.yml/badge.svg)](https://github.com/ConcertoEngine/ConcertoCore/actions/workflows/ubuntu22.yml)
+macOS | [![macOS build status](https://github.com/ConcertoEngine/ConcertoCore/actions/workflows/macos.yml/badge.svg)](https://github.com/ConcertoEngine/ConcertoCore/actions/workflows/macos.yml)
+
 ## Installation
 
 Install [xmake](https://xmake.io/#/)
