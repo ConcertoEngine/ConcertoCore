@@ -28,19 +28,18 @@ namespace Concerto
 	#define CONCERTO_PUBLIC_API CONCERTO_IMPORT
 #endif
 
-#ifdef _WIN32
+#if defined(_WIN32)
 #define CONCERTO_PLATFORM_WINDOWS
-#elif __linux__
+#elif defined(__linux__)
 #define CONCERTO_PLATFORM_LINUX
 #define CONCERTO_PLATFORM_POSIX
-#elif __FreeBSD__
+#elif defined(__FreeBSD__)
 #define CONCERTO_PLATFORM_FREEBSD
 #define CONCERTO_PLATFORM_POSIX
-#elif __APPLE__
+#elif defined(__APPLE__)
 #define CONCERTO_PLATFORM_MACOS
 #define CONCERTO_PLATFORM_POSIX
 #endif
-
 
 	using Int8 = std::int8_t;
 	using Int16 = std::int16_t;
