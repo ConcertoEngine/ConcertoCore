@@ -21,9 +21,11 @@ namespace Concerto::Network
 
 		[[nodiscard]] UInt32 GetPacketType() const;
 		[[nodiscard]] const Byte* GetData() const;
+		[[nodiscard]] UInt64 GetDataSize() const;
 		[[nodiscard]] std::size_t Capacity() const;
 
 		[[nodiscard]] bool DecodeHeader(UInt32 *packetType = nullptr, UInt32 *size = nullptr);
+		[[nodiscard]] bool EncodeHeader();
 
 		bool operator==(bool) const;
 		bool operator!=(bool) const;
@@ -33,7 +35,7 @@ namespace Concerto::Network
 		UInt32 _size;
 		UInt32 _packetType;
 		bool _validHeader;
-		bool _validData;
+		bool _validData{};
 	};
 }
 
