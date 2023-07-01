@@ -13,10 +13,11 @@ namespace Concerto
 	 * @brief Performs a byte swap on the given value
 	 * @tparam T The type of the value, must be integral
 	 * @param value The value to swap the bytes of
+	 * @return The swapped value
 	 */
 	template<typename T>
 	requires std::is_integral_v<T> || std::is_floating_point_v<T>
-	inline void ByteSwap(T& value)
+	[[nodiscard]] inline T ByteSwap(T value)
 	{
 		Byte* bytes = reinterpret_cast<Byte*>(&value);
 		std::size_t i = 0;
@@ -24,6 +25,7 @@ namespace Concerto
 
 		while (i < j)
 			std::swap(bytes[i++], bytes[j--]);
+		return value;
 	}
 }
 
