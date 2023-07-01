@@ -3,11 +3,13 @@
 //
 
 #include <gtest/gtest.h>
+#include <array>
 #include "Concerto/Core/Network/Packet.hpp"
 
 using namespace Concerto;
 using namespace Concerto::Network;
 constexpr UInt32 PacketType = 0xF;
+const UInt32 ByteSwappedPacketType = ByteSwap(PacketType);
 struct PacketHeader
 {
 	UInt32 PacketType;
@@ -40,32 +42,32 @@ TEST(Packet, DecodeHeader)
 	Packet packet(PacketType, nullptr, 0);
 	EXPECT_TRUE(packet.EncodeHeader());
 	EXPECT_TRUE(packet.DecodeHeader(&header.PacketType, &header.Size));
-	EXPECT_EQ(header.PacketType, PacketType);
+	EXPECT_EQ(header.PacketType, ByteSwappedPacketType);
 	EXPECT_EQ(header.Size, 0);
 
 	Packet packet2(PacketType, 5);
 	EXPECT_TRUE(packet2.EncodeHeader());
 	EXPECT_TRUE(packet2.DecodeHeader(&header.PacketType, &header.Size));
-	EXPECT_EQ(header.PacketType, PacketType);
+	EXPECT_EQ(header.PacketType, ByteSwappedPacketType);
 	EXPECT_EQ(header.Size, 0);
 
 	Packet packet3;
 	EXPECT_FALSE(packet3.EncodeHeader());
 	EXPECT_FALSE(packet3.DecodeHeader(&header.PacketType, &header.Size));
-	EXPECT_EQ(header.PacketType, PacketType);
+	EXPECT_EQ(header.PacketType, ByteSwappedPacketType);
 	EXPECT_EQ(header.Size, 0);
 
 	const char* data = "Hello";
 	Packet packet4(PacketType, data, 5);
 	EXPECT_TRUE(packet4.EncodeHeader());
 	EXPECT_TRUE(packet4.DecodeHeader(&header.PacketType, &header.Size));
-	EXPECT_EQ(header.PacketType, PacketType);
+	EXPECT_EQ(header.PacketType, ByteSwappedPacketType);
 	EXPECT_EQ(header.Size, 5);
 
 	Packet packet5(PacketType);
 	packet5 << UInt32(12) << UInt32(13);
 	EXPECT_TRUE(packet5.EncodeHeader());
 	EXPECT_TRUE(packet5.DecodeHeader(&header.PacketType, &header.Size));
-	EXPECT_EQ(header.PacketType, PacketType);
+	EXPECT_EQ(header.PacketType, ByteSwappedPacketType);
 	EXPECT_EQ(header.Size, 2 * sizeof(Int32));
 }
