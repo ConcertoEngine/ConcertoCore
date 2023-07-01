@@ -40,6 +40,11 @@ namespace Concerto::Network
 		return _buffer.data();
 	}
 
+	UInt64 Packet::GetDataSize() const
+	{
+		return GetSize() - HeaderSize;
+	}
+
 	std::size_t Packet::Capacity() const
 	{
 		return _buffer.capacity();
@@ -49,13 +54,28 @@ namespace Concerto::Network
 	{
 		if (_buffer.size() < HeaderSize)
 			return false;
-		std::memcpy(&_packetType, _buffer.data(), sizeof(UInt32));
-		std::memcpy(&_size, _buffer.data() + sizeof(UInt32), sizeof(UInt32));
+		Stream headerStream(HeaderSize);
+		headerStream.Write(_buffer.data(), HeaderSize);
+		headerStream >> _packetType >> _size;
+
 		_validHeader = true;
 		if (packetType != nullptr)
 			*packetType = _packetType;
 		if (size != nullptr)
 			*size = _size;
+		return true;
+	}
+
+	bool Packet::EncodeHeader()
+	{
+		if (_buffer.size() < HeaderSize)
+			return false;
+		const UInt32 size = _buffer.size() - HeaderSize;
+		Stream headerStream(HeaderSize);
+		headerStream << _packetType << size;
+		headerStream.SetCursorPos(0);
+		headerStream.Read(_buffer.data(), HeaderSize);
+		_validHeader = true;
 		return true;
 	}
 
