@@ -8,16 +8,16 @@
 #include <stdexcept>
 #include <memory>
 
-#ifndef CONCERTO_SPARSEARRAY_HPP
-#define CONCERTO_SPARSEARRAY_HPP
+#ifndef CONCERTO_SPARSEVECTOR_HPP
+#define CONCERTO_SPARSEVECTOR_HPP
 /**
- * @brief Sparse array
+ * @brief SparseVector
  * A container which offers fixed time access to individual elements in any order, its indices can contain gaps.
  * @tparam value_type Type of the elements
  * @tparam allocator Allocator used to allocate the elements
  */
 template<typename value_type, typename allocator = std::allocator<std::optional<value_type>>>
-class SparseArray
+class SparseVector
 {
 public:
 	using container_type = std::vector<std::optional<value_type>, allocator>;
@@ -27,21 +27,21 @@ public:
 	using iterator = typename container_type::iterator;
 	using const_iterator = typename container_type::const_iterator;
 
-	SparseArray() = default;
+	SparseVector() = default;
 
-	explicit SparseArray(size_type size) : _container(size)
+	explicit SparseVector(size_type size) : _container(size)
 	{
 	}
 
-	SparseArray(const SparseArray&) = delete;
-	SparseArray(SparseArray&&) noexcept = default;
-	~SparseArray() = default;
-	SparseArray& operator=(const SparseArray&) = delete;
-	SparseArray& operator=(SparseArray&&) noexcept = default;
+	SparseVector(const SparseVector&) = delete;
+	SparseVector(SparseVector&&) noexcept = default;
+	~SparseVector() = default;
+	SparseVector& operator=(const SparseVector&) = delete;
+	SparseVector& operator=(SparseVector&&) noexcept = default;
 
 	/**
-	 * @brief Get the size of the SparseArray
-	 * @return The size of the SparseArray
+	 * @brief Get the size of the SparseVector
+	 * @return The size of the SparseVector
 	 */
 	size_type size() const
 	{
@@ -49,7 +49,7 @@ public:
 	}
 
 	/**
-	 *  Returns true if the %SparseArray is empty.  (Thus begin() would equal end().)
+	 *  Returns true if the %SparseVector is empty.  (Thus begin() would equal end().)
 	 * @return
 	 */
 	[[nodiscard]] bool empty() const
@@ -58,7 +58,7 @@ public:
 	}
 
 	/**
-	 * @return Returns a read/write iterator that points to the first element in the %SparseArray.
+	 * @return Returns a read/write iterator that points to the first element in the %SparseVector.
 	 * Iteration is done in ordinary element order.
 	 */
 	iterator begin()
@@ -67,7 +67,7 @@ public:
 	}
 
 	/**
-	 * @return Returns a read/write iterator that points one past the last element in the %SparseArray.
+	 * @return Returns a read/write iterator that points one past the last element in the %SparseVector.
 	 * Iteration is done in ordinary element order.
 	 */
 	iterator end()
@@ -76,7 +76,7 @@ public:
 	}
 
 	/**
-	 * @return Returns a read-only (constant) iterator that points to the first element in the %SparseArray.
+	 * @return Returns a read-only (constant) iterator that points to the first element in the %SparseVector.
 	 * Iteration is done in ordinary element order.
 	 */
 	const_iterator begin() const
@@ -85,7 +85,7 @@ public:
 	}
 
 	/**
-	 * @return Returns a read-only (constant) iterator that points one past the last element in the %SparseArray.
+	 * @return Returns a read-only (constant) iterator that points one past the last element in the %SparseVector.
 	 * Iteration is done in ordinary element order.
 	 */
 	const_iterator end() const
@@ -94,7 +94,7 @@ public:
 	}
 
 	/**
-	 * @brief Subscript access to the data contained in the %SparseArray.
+	 * @brief Subscript access to the data contained in the %SparseVector.
 	 * @param index The index of the element for which data should be accessed.
 	 * @return Returns a read/write reference to the element at specified location.
 	 */
@@ -108,7 +108,7 @@ public:
 	}
 
 	/**
-	 * @brief Subscript access to the data contained in the %SparseArray.
+	 * @brief Subscript access to the data contained in the %SparseVector.
 	 * @param index The index of the element for which data should be accessed.
 	 * @return Read-only (constant) reference to data.
 	 */
@@ -122,7 +122,7 @@ public:
 	}
 
 	/**
-	 * @brief Attempts to build and insert an element into the %SparseArray.
+	 * @brief Attempts to build and insert an element into the %SparseVector.
 	 * @param index The index of the element to be inserted.
 	 * @param args Arguments used to construct the element.
 	 * @return
@@ -137,7 +137,7 @@ public:
 	}
 
 	/**
-	 * @brief Removes the element at specified index from the %SparseArray.
+	 * @brief Removes the element at specified index from the %SparseVector.
 	 * @param index The index of the element to be removed.
 	 */
 	void Erase(size_type index)
@@ -160,4 +160,4 @@ private:
 	container_type _container;
 };
 
-#endif // CONCERTO_SPARSEARRAY_HPP
+#endif // CONCERTO_SPARSEVECTOR_HPP
