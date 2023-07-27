@@ -10,11 +10,11 @@
 namespace Concerto::Network
 {
 	Socket::Socket(SocketType socketType, IpProtocol ipProtocol)
-		: _type(socketType),
+		: _handle(SocketImpl::InvalidSocket), 
+			_type(socketType),
+		  _lastError(SocketError::NoError),
 		  _ipProtocol(ipProtocol),
-		  _handle(SocketImpl::InvalidSocket),
-		  _blocking(false),
-		  _lastError(SocketError::NoError)
+		  _blocking(false)
 	{
 	}
 
