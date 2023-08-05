@@ -10,18 +10,17 @@ namespace Concerto::Network
 {
 	const IpAddress IpAddress::AnyIPV4 = IpAddress(0, 0, 0, 0, 0);
 
-	IpAddress::IpAddress(const IpAddress::IPv4& ip, UInt16 port) : _ipv4(ip), _port(port), _protocol(IpProtocol::IPV4)
+	IpAddress::IpAddress(const IpAddress::IPv4& ip, UInt16 port) : _ipv4(ip), _protocol(IpProtocol::IPV4), _port(port)
 	{
 
 	}
-	IpAddress::IpAddress(const IpAddress::IPv6& ip, UInt16 port) : _ipv6(ip), _port(port), _protocol(IpProtocol::IPV6)
+	IpAddress::IpAddress(const IpAddress::IPv6& ip, UInt16 port) : _ipv6(ip), _protocol(IpProtocol::IPV6), _port(port)
 	{
 
 	}
 
 	IpAddress::IpAddress(UInt8 a, UInt8 b, UInt8 c, UInt8 d, UInt16 port) : _ipv4({ a, b, c, d }),
-																			_port(port),
-																			_protocol(IpProtocol::IPV4)
+																			_protocol(IpProtocol::IPV4), _port(port)
 	{
 
 	}
@@ -30,8 +29,7 @@ namespace Concerto::Network
 																static_cast<UInt8>(address >> 16),
 																static_cast<UInt8>(address >> 8),
 																static_cast<UInt8>(address) }),
-														_port(port),
-														_protocol(IpProtocol::IPV4)
+														_protocol(IpProtocol::IPV4), _port(port)
 	{
 	}
 
@@ -39,13 +37,13 @@ namespace Concerto::Network
 																static_cast<UInt8>(address >> 16),
 																static_cast<UInt8>(address >> 8),
 																static_cast<UInt8>(address) }),
-														_port(port),
-														_protocol(IpProtocol::IPV4)
+														_protocol(IpProtocol::IPV4),
+														_port(port)
 	{
 
 	}
 
-	IpAddress::IpAddress(const std::string& ip, UInt16 port) : _port(port), _protocol(IpProtocol::IPV4)
+	IpAddress::IpAddress(const std::string& ip, UInt16 port) : _protocol(IpProtocol::IPV4), _port(port)
 	{
 		//TODO: Implement
 		throw std::runtime_error("Not implemented");

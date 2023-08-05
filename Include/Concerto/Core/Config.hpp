@@ -69,15 +69,22 @@ namespace Concerto::Config {
 	 *
 	 * This class is the base class of all the nodes of the config file.
 	 **/
-	struct Node {
+	class Node {
 	public:
 		explicit Node(const Array &array) : _variant(array) {}
+
 		explicit Node(const Object &object) : _variant(object) {}
+		
 		explicit Node(const String &str) : _variant(str) {}
+		
 		explicit Node(Bool b) : _variant(b) {}
+		
 		explicit Node(Int32 i) : _variant(i) {}
+		
 		explicit Node(UInt32 u) : _variant(u) {}
+		
 		explicit Node(Double d) : _variant(d) {}
+		
 		Node(Node &&) = default;
 
 		/**
@@ -88,7 +95,9 @@ namespace Concerto::Config {
 		T &As() { return std::get<T>(_variant); }
 
 		Config::String &AsString() {return std::get<Config::String>(_variant);}
+
 		Config::Object &AsObject() {return std::get<Config::Object>(_variant);}
+		
 		Config::Array &AsArray() {return std::get<Config::Array>(_variant);}
 
 		/**
@@ -97,8 +106,11 @@ namespace Concerto::Config {
 		**/
 		template <typename T> [[nodiscard]]
 		const T &As() const { return std::get<T>(_variant); }
+		
 		[[nodiscard]] const Config::String &AsString() const {return std::get<Config::String>(_variant);}
+		
 		[[nodiscard]] const Config::Object &AsObject() const {return std::get<Config::Object>(_variant);}
+		
 		[[nodiscard]] const Config::Array &AsArray() const {return std::get<Config::Array>(_variant);}
 
 		/**
@@ -118,7 +130,12 @@ namespace Concerto::Config {
 		* @brief Cast the node As an Array
 		* @return The node contained at index
 		**/
-		Node &operator[](std::size_t index) const { return *As<Array>().at(index); }
+		Node &operator[](std::size_t index) const
+		{
+			auto array = AsArray();
+			assert(index < array.size(), "Index out of range");
+			return *array[index];
+		}
 
 	private:
 		Variant _variant;
