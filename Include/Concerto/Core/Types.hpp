@@ -7,8 +7,6 @@
 
 #include <cstdint>
 
-namespace Concerto
-{
 #ifndef LIB_STATIC
 	#ifdef _WIN32
 		#define CONCERTO_EXPORT __declspec(dllexport)
@@ -41,6 +39,30 @@ namespace Concerto
 #define CONCERTO_PLATFORM_POSIX
 #endif
 
+#if defined(NDEBUG)
+#define CONCERTO_RELEASE
+#else
+#define CONCERTO_DEBUG
+#endif
+
+#if defined(CONCERTO_PLATFORM_WINDOWS)
+#define CONCERTO_BREAK_IN_DEBUGGER __debugbreak();
+#elif defined(CONCERTO_PLATFORM_POSIX)
+#define CONCERTO_BREAK_IN_DEBUGGER asm ("int $3");
+#else
+#define CONCERTO_BREAK_IN_DEBUGGER {}
+#endif
+
+#if defined(CONCERTO_DEBUG)
+#define CONCERTO_ASSERT(expression)  { if (Concerto::IsDebuggerAttached() && !(expression)) { CONCERTO_BREAK_IN_DEBUGGER; } }
+#else
+#define CONCERTO_ASSERT(expression) {}
+#endif
+
+#define CONCERTO_ASSERT_FALSE CONCERTO_ASSERT(false)
+
+namespace Concerto
+{
 	using Int8 = std::int8_t;
 	using Int16 = std::int16_t;
 	using Int32 = std::int32_t;
@@ -53,6 +75,8 @@ namespace Concerto
 
 	using Byte = std::int8_t;
 	using UByte = std::uint8_t;
-}
+
+	CONCERTO_PUBLIC_API bool IsDebuggerAttached();
+}; // namespace Concerto
 
 #endif //CONCERTOCORE_INCLUDE_TYPES_HPP_
