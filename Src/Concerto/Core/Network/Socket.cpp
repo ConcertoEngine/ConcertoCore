@@ -10,11 +10,11 @@
 namespace Concerto::Network
 {
 	Socket::Socket(SocketType socketType, IpProtocol ipProtocol)
-		: _type(socketType),
+		: _handle(SocketImpl::InvalidSocket), 
+			_type(socketType),
+		  _lastError(SocketError::NoError),
 		  _ipProtocol(ipProtocol),
-		  _handle(SocketImpl::InvalidSocket),
-		  _blocking(false),
-		  _lastError(SocketError::NoError)
+		  _blocking(false)
 	{
 	}
 
@@ -75,7 +75,7 @@ namespace Concerto::Network
 
 	void Socket::Accept(Socket& socket)
 	{
-		assert(_handle != SocketImpl::InvalidSocket);
+		CONCERTO_ASSERT(_handle != SocketImpl::InvalidSocket);
 		SocketHandle handle = SocketImpl::Accept(_handle, nullptr, &_lastError);
 		if (handle == SocketImpl::InvalidSocket)
 			return;
@@ -101,7 +101,7 @@ namespace Concerto::Network
 
 	std::size_t Socket::Receive(void* buffer, std::size_t size)
 	{
-		assert(_handle != SocketImpl::InvalidSocket);
+		CONCERTO_ASSERT(_handle != SocketImpl::InvalidSocket);
 		std::size_t received = 0;
 		SocketImpl::Receive(_handle, buffer, size, &received, &_lastError);
 		return received;
@@ -114,7 +114,7 @@ namespace Concerto::Network
 
 	std::size_t Socket::Send(const void* buffer, std::size_t size)
 	{
-		assert(_handle != SocketImpl::InvalidSocket);
+		CONCERTO_ASSERT(_handle != SocketImpl::InvalidSocket);
 		std::size_t sent = 0;
 		SocketImpl::Send(_handle, buffer, size, &sent, &_lastError);
 		return sent;
