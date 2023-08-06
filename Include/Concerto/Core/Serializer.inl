@@ -21,10 +21,8 @@ namespace Concerto
 	requires ((std::is_integral_v<T> || std::is_floating_point_v<T>) && !std::is_same_v<T, bool>)
 	void Concerto::Serialize(Stream& stream, T value)
 	{
-		if constexpr (std::endian::native == std::endian::little)
-			ByteSwap(value);
+		ByteSwap(value);
 		stream.Write(&value, sizeof(T));
-
 	}
 
 	template<typename T>
@@ -32,8 +30,7 @@ namespace Concerto
 	void Deserialize(Stream& stream, T& value)
 	{
 		stream.Read(&value, sizeof(T));
-		if constexpr (std::endian::native == std::endian::little)
-			ByteSwap(value);
+		ByteSwap(value);
 	}
 
 	template<typename T>

@@ -56,8 +56,9 @@ namespace Concerto::Network
 			return false;
 		Stream headerStream(HeaderSize);
 		headerStream.Write(_buffer.data(), HeaderSize);
+		headerStream.SetCursorPos(0);
 		headerStream >> _packetType >> _size;
-
+		SetCursorPos(HeaderSize);
 		_validHeader = true;
 		if (packetType != nullptr)
 			*packetType = _packetType;

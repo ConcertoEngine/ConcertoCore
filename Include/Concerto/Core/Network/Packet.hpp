@@ -30,6 +30,14 @@ namespace Concerto::Network
 		bool operator==(bool) const;
 		bool operator!=(bool) const;
 
+		template<typename T>
+		Packet& operator<<(T value)
+		{
+			Stream::operator<<(value);
+			_size += sizeof(T);
+			return *this;
+		}
+
 		static constexpr std::size_t HeaderSize = sizeof(UInt32) + sizeof(UInt32);
 	 private:
 		UInt32 _size;
