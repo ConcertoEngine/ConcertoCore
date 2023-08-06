@@ -2,6 +2,8 @@
 // Created by arthur on 28/05/2023.
 //
 
+#include <cstring>
+
 #include "Packet.hpp"
 
 namespace Concerto::Network
