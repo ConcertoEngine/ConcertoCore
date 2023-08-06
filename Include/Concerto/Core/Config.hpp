@@ -133,7 +133,7 @@ namespace Concerto::Config {
 		Node &operator[](std::size_t index) const
 		{
 			auto array = AsArray();
-			assert(index < array.size(), "Index out of range");
+			CONCERTO_ASSERT(index < array.size());
 			return *array[index];
 		}
 

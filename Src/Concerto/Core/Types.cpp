@@ -8,7 +8,7 @@
 #include <windows.h>
 namespace Concerto
 {
-	inline bool Concerto::IsDebuggerAttached()
+	inline bool IsDebuggerAttached()
 	{
 		return IsDebuggerPresent() != 0;
 	}
@@ -17,7 +17,7 @@ namespace Concerto
 #include <fstream>
 namespace Concerto
 {
-	bool Concerto::IsDebuggerAttached()
+	bool IsDebuggerAttached()
 	{
 		std::ifstream status_file("/proc/self/status");
 		std::string line;
@@ -35,7 +35,7 @@ namespace Concerto
 #else
 namespace Concerto
 {
-	inline bool Concerto::IsDebuggerAttached()
+	inline bool IsDebuggerAttached()
 	{
 		return false;
 	}

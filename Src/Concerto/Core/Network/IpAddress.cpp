@@ -56,13 +56,13 @@ namespace Concerto::Network
 
 	const IpAddress::IPv4& IpAddress::GetIPv4() const
 	{
-		assert(_protocol == IpProtocol::IPV4);
+		CONCERTO_ASSERT(_protocol == IpProtocol::IPV4);
 		return _ipv4;
 	}
 
 	const IpAddress::IPv6& IpAddress::GetIPv6() const
 	{
-		assert(_protocol == IpProtocol::IPV6);
+		CONCERTO_ASSERT(_protocol == IpProtocol::IPV6);
 		return _ipv6;
 	}
 
@@ -90,13 +90,13 @@ namespace Concerto::Network
 
 	UInt32 IpAddress::ToUInt32() const
 	{
-		assert(_protocol == IpProtocol::IPV4);
+		CONCERTO_ASSERT(_protocol == IpProtocol::IPV4);
 		return (_ipv4[0] << 24) | (_ipv4[1] << 16) | (_ipv4[2] << 8) | _ipv4[3];
 	}
 
 	UInt64 IpAddress::ToUInt64() const
 	{
-		assert(_protocol == IpProtocol::IPV4);
+		CONCERTO_ASSERT(_protocol == IpProtocol::IPV4);
 		return (_ipv4[0] << 24) | (_ipv4[1] << 16) | (_ipv4[2] << 8) | _ipv4[3];
 	}
 }

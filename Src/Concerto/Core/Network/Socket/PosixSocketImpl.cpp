@@ -19,7 +19,7 @@ namespace Concerto::Network
 
 	SocketHandle SocketImpl::Accept(SocketHandle socket, IpAddress* address, SocketError* error)
 	{
-		assert(socket != SocketImpl::InvalidSocket);
+		CONCERTO_ASSERT(socket != SocketImpl::InvalidSocket);
 		sockaddr_in addr;
 		socklen_t len = sizeof(addr);
 		SocketHandle handle = accept(socket, reinterpret_cast<sockaddr*>(&addr), &len);
@@ -36,7 +36,7 @@ namespace Concerto::Network
 
 	bool SocketImpl::Connect(SocketHandle socket, const IpAddress& address, SocketError* error)
 	{
-		assert(socket != SocketImpl::InvalidSocket);
+		CONCERTO_ASSERT(socket != SocketImpl::InvalidSocket);
 		sockaddr_in addr = IpAddressImpl::ToSockAddr(address);
 		if (connect(socket, reinterpret_cast<sockaddr*>(&addr), sizeof(sockaddr)) == -1)
 		{
@@ -62,7 +62,7 @@ namespace Concerto::Network
 
 	bool SocketImpl::Bind(SocketHandle socket, const IpAddress& address, SocketError* error)
 	{
-		assert(socket != SocketImpl::InvalidSocket);
+		CONCERTO_ASSERT(socket != SocketImpl::InvalidSocket);
 		sockaddr_in addr = IpAddressImpl::ToSockAddr(address);
 		if (bind(socket, reinterpret_cast<sockaddr*>(&addr), sizeof(sockaddr)) == -1)
 		{
@@ -75,7 +75,7 @@ namespace Concerto::Network
 
 	bool SocketImpl::Listen(SocketHandle socket, const IpAddress& address, int backlog, SocketError* error)
 	{
-		assert(socket != SocketImpl::InvalidSocket);
+		CONCERTO_ASSERT(socket != SocketImpl::InvalidSocket);
 		if (error != nullptr)
 			*error = SocketError::NoError;
 		if (!Bind(socket, address, error))
@@ -91,7 +91,7 @@ namespace Concerto::Network
 
 	bool SocketImpl::Close(SocketHandle socket, SocketError* error)
 	{
-		assert(socket != SocketImpl::InvalidSocket);
+		CONCERTO_ASSERT(socket != SocketImpl::InvalidSocket);
 		if (error != nullptr)
 			*error = SocketError::NoError;
 		if (close(socket) == -1)
@@ -105,7 +105,7 @@ namespace Concerto::Network
 
 	bool SocketImpl::SetBlocking(SocketHandle socket, bool blocking, SocketError* error)
 	{
-		assert(socket != SocketImpl::InvalidSocket);
+		CONCERTO_ASSERT(socket != SocketImpl::InvalidSocket);
 		if (error != nullptr)
 			*error = SocketError::NoError;
 		int flags = fcntl(socket, F_GETFL, 0);
@@ -134,7 +134,7 @@ namespace Concerto::Network
 		std::size_t* received,
 		SocketError* error)
 	{
-		assert(socket != SocketImpl::InvalidSocket);
+		CONCERTO_ASSERT(socket != SocketImpl::InvalidSocket);
 		if (error != nullptr)
 			*error = SocketError::NoError;
 		auto ret = recv(socket, buffer, size, 0);
@@ -167,7 +167,7 @@ namespace Concerto::Network
 		std::size_t* sent,
 		SocketError* error)
 	{
-		assert(socket != SocketImpl::InvalidSocket);
+		CONCERTO_ASSERT(socket != SocketImpl::InvalidSocket);
 		if (error != nullptr)
 			*error = SocketError::NoError;
 		auto ret = send(socket, buffer, size, 0);
@@ -191,7 +191,7 @@ namespace Concerto::Network
 
 	int SocketImpl::GetSocketState(SocketHandle socket, SocketError* error)
 	{
-		assert(socket != SocketImpl::InvalidSocket);
+		CONCERTO_ASSERT(socket != SocketImpl::InvalidSocket);
 		if (error != nullptr)
 			*error = SocketError::NoError;
 		int state = 0;
@@ -250,7 +250,7 @@ namespace Concerto::Network
 
 	std::size_t SocketImpl::GetAvailableBytes(SocketHandle handle)
 	{
-		assert(handle != SocketImpl::InvalidSocket);
+		CONCERTO_ASSERT(handle != SocketImpl::InvalidSocket);
 		std::size_t available = 0;
 		if (ioctl(handle, FIONREAD, &available) == -1)
 			return 0;

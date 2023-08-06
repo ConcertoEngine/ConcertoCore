@@ -56,8 +56,8 @@ namespace Concerto::Math
 		 */
 		constexpr T& GetElement(std::size_t row, std::size_t column) noexcept
 		{
-			assert(row < Rows);
-			assert(column < Columns);
+			CONCERTO_ASSERT(row < Rows);
+			CONCERTO_ASSERT(column < Columns);
 			return _data[row * Columns + column];
 		}
 
@@ -70,8 +70,8 @@ namespace Concerto::Math
 		 */
 		constexpr const T& GetElement(std::size_t row, std::size_t column) const noexcept
 		{
-			assert(row < Rows);
-			assert(column < Columns);
+			CONCERTO_ASSERT(row < Rows);
+			CONCERTO_ASSERT(column < Columns);
 			return _data[row * Columns + column];
 		}
 
