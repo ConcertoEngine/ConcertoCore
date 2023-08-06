@@ -8,13 +8,16 @@
 
 using namespace Concerto;
 using namespace Concerto::Network;
+
 constexpr UInt32 PacketType = 0xF;
 const UInt32 ByteSwappedPacketType = ByteSwap(PacketType);
+
 struct PacketHeader
 {
 	UInt32 PacketType;
 	UInt32 Size;
 };
+
 TEST(Packet, Constructor)
 {
 	Packet packet(PacketType, nullptr, 0);
@@ -70,4 +73,8 @@ TEST(Packet, DecodeHeader)
 	EXPECT_TRUE(packet5.DecodeHeader(&header.PacketType, &header.Size));
 	EXPECT_EQ(header.PacketType, ByteSwappedPacketType);
 	EXPECT_EQ(header.Size, 2 * sizeof(Int32));
+	UInt32 a, b;
+	packet5 >> a >> b;
+	EXPECT_EQ(a, 12);
+	EXPECT_EQ(b, 13);
 }
