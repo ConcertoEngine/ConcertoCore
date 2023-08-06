@@ -19,6 +19,8 @@ namespace Concerto
 	requires std::is_integral_v<T> || std::is_floating_point_v<T>
 	[[nodiscard]] inline T ByteSwap(T value)
 	{
+		if constexpr (std::endian::native == std::endian::little)
+			return value;
 		Byte* bytes = reinterpret_cast<Byte*>(&value);
 		std::size_t i = 0;
 		std::size_t j = sizeof(T) - 1;
