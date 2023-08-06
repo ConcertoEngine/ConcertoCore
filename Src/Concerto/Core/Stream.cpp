@@ -2,6 +2,8 @@
 // Created by arthur on 29/05/2023.
 //
 
+#include <cstring>
+
 #include "Stream.hpp"
 #include "Buffer.hpp"
 
