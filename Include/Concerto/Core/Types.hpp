@@ -59,7 +59,7 @@
 #define CONCERTO_ASSERT(expression) {}
 #endif
 
-#define CONCERTO_ASSERT_FALSE CONCERTO_CONCERTO_ASSERTfalse)
+#define CONCERTO_ASSERT_FALSE CONCERTO_CONCERTO_ASSERT(false)
 
 namespace Concerto
 {
