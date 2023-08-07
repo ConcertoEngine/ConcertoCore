@@ -19,7 +19,7 @@ target("ConcertoCore")
     end
 
     if has_config("unitybuild") then
-        add_rules("c++.unity_build", {batchsize = 12})
+        add_rules("c++.unity_build", {batchsize = 12, uniqueid = "CONCERTO_UNITY_BUILD_ID"})
     end
 
 target("ConcertoCoreTests")
@@ -37,7 +37,7 @@ target("ConcertoCoreTests")
         add_syslinks("ws2_32")
     end
     if has_config("unitybuild") then
-        add_rules("c++.unity_build", {batchsize = 12})
+        add_rules("c++.unity_build", {batchsize = 12, uniqueid = "CONCERTO_UNITY_BUILD_ID"})
     end
     after_build(function(target)
             print("Copying resources...")
