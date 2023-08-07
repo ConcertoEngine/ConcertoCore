@@ -61,6 +61,8 @@
 
 #define CONCERTO_ASSERT_FALSE CONCERTO_CONCERTO_ASSERT(false)
 
+#define CONCERTO_ANONYMOUS_NAMESPACE CONCERTO_UNITY_BUILD_ID
+
 namespace Concerto
 {
 	using Int8 = std::int8_t;
