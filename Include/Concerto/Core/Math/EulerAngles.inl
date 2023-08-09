@@ -4,6 +4,7 @@
 
 #include "EulerAngles.hpp"
 #include "Quaternion.hpp"
+#include "Serializer.hpp"
 
 namespace Concerto::Math
 {
@@ -203,5 +204,21 @@ namespace Concerto::Math
 	EulerAngles<T> EulerAngles<T>::Zero()
 	{
 		return EulerAngles<T>(0, 0, 0);
+	}
+
+	template<typename T>
+	void EulerAngles<T>::Serialize(Stream& stream) const
+	{
+		Concerto::Serialize(stream, _pitch);
+		Concerto::Serialize(stream, _yaw);
+		Concerto::Serialize(stream, _roll);
+	}
+
+	template<typename T>
+	void EulerAngles<T>::Deserialize(Stream& stream)
+	{
+		Concerto::Deserialize(stream, _pitch);
+		Concerto::Deserialize(stream, _yaw);
+		Concerto::Deserialize(stream, _roll);
 	}
 }

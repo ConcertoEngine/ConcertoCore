@@ -5,6 +5,7 @@
 #ifndef CONCERTOCORE_INCLUDE_CONCERTO_CORE_MATH_EULERANGLES_HPP_
 #define CONCERTOCORE_INCLUDE_CONCERTO_CORE_MATH_EULERANGLES_HPP_
 
+#include "ISerializable.hpp"
 #include "Vector.hpp"
 
 namespace Concerto::Math
@@ -16,7 +17,7 @@ namespace Concerto::Math
 	 * @tparam T The type of the angles
 	 */
 	template<typename T>
-	class EulerAngles
+	class EulerAngles : public ISerializable
 	{
 	 public:
 		EulerAngles() = default;
@@ -91,6 +92,9 @@ namespace Concerto::Math
 		 * @return EulerAngles<T> The zero Euler angles
 		 */
 		[[nodiscard]] static EulerAngles<T> Zero();
+
+		void Serialize(Stream& stream) const override;
+		void Deserialize(Stream& stream) override;
 
 	 private:
 		T _pitch;
