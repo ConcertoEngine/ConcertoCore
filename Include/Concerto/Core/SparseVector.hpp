@@ -5,7 +5,7 @@
 #include <vector>
 #include <optional>
 #include <stdexcept>
-
+#include "Types.hpp"
 #ifndef CONCERTO_SPARSEVECTOR_HPP
 #define CONCERTO_SPARSEVECTOR_HPP
 /**
@@ -98,8 +98,7 @@ public:
 	 */
 	reference_type operator[](size_type index)
 	{
-		if (index >= _container.size())
-			throw std::out_of_range("Index out of range");
+		CONCERTO_ASSERT(index >= _container.size())
 		if (!Has(index))
 			throw std::runtime_error("Index Has no value");
 		return _container[index].value();
@@ -112,8 +111,7 @@ public:
 	 */
 	const_reference_type operator[](size_type index) const
 	{
-		if (index >= _container.size())
-			throw std::out_of_range("Index out of range");
+		CONCERTO_ASSERT(index >= _container.size())
 		if (!Has(index))
 			throw std::runtime_error("Index Has no value");
 		return _container[index].value();
@@ -140,8 +138,7 @@ public:
 	 */
 	void Erase(size_type index)
 	{
-		if (index >= _container.size() || !_container[index].has_value())
-			throw std::out_of_range("Index out of range");
+		CONCERTO_ASSERT(index >= _container.size() || !_container[index].has_value())
 		_container[index].reset();
 	}
 
