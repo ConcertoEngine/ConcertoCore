@@ -3,10 +3,8 @@
 //
 
 #include <vector>
-#include <any>
 #include <optional>
 #include <stdexcept>
-#include <memory>
 
 #ifndef CONCERTO_SPARSEVECTOR_HPP
 #define CONCERTO_SPARSEVECTOR_HPP
