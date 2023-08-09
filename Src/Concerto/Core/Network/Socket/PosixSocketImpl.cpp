@@ -50,7 +50,7 @@ namespace Concerto::Network
 	SocketHandle SocketImpl::Create(SocketType socketType, IpProtocol protocol, SocketError* error)
 	{
 		SocketHandle handle = socket(protocol == IpProtocol::IPV4 ? AF_INET : AF_INET6,
-			socketType == SocketType::TCP ? SOCK_STREAM : SOCK_DGRAM, 0);
+									 socketType == SocketType::TCP ? SOCK_STREAM : SOCK_DGRAM, 0);
 		if (handle == InvalidSocket)
 		{
 			if (error != nullptr)
@@ -129,10 +129,10 @@ namespace Concerto::Network
 	}
 
 	bool SocketImpl::Receive(SocketHandle socket,
-		void* buffer,
-		std::size_t size,
-		std::size_t* received,
-		SocketError* error)
+							 void* buffer,
+							 std::size_t size,
+							 std::size_t* received,
+							 SocketError* error)
 	{
 		CONCERTO_ASSERT(socket != SocketImpl::InvalidSocket);
 		if (error != nullptr)
@@ -162,10 +162,10 @@ namespace Concerto::Network
 	}
 
 	bool SocketImpl::Send(SocketHandle socket,
-		const void* buffer,
-		std::size_t size,
-		std::size_t* sent,
-		SocketError* error)
+						  const void* buffer,
+						  std::size_t size,
+						  std::size_t* sent,
+						  SocketError* error)
 	{
 		CONCERTO_ASSERT(socket != SocketImpl::InvalidSocket);
 		if (error != nullptr)
@@ -256,5 +256,5 @@ namespace Concerto::Network
 			return 0;
 		return available;
 	}
-}
-#endif
+}// namespace Concerto::Network
+#endif// CONCERTO_PLATFORM_LINUX
