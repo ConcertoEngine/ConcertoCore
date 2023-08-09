@@ -2,6 +2,9 @@
 // Created by arthur on 25/05/22.
 //
 
+#ifndef CONCERTO_LOGGER_HPP
+#define CONCERTO_LOGGER_HPP
+
 #include <iostream>
 #include <version>
 #include <stdexcept>
@@ -96,3 +99,4 @@ namespace Concerto
         }
     };
 }
+#endif //CONCERTO_LOGGER_HPP
