@@ -5,7 +5,12 @@
 #include <cassert>
 #include "Concerto/Core/Network/Socket.hpp"
 #include "Concerto/Core/Buffer.hpp"
+#ifdef CONCERTO_PLATFORM_WINDOWS
 #include "Socket/WinSocketImpl.hpp"
+#endif// CONCERTO_PLATFORM_WINDOWS
+#ifdef CONCERTO_PLATFORM_POSIX
+#include "Socket/PosixSocketImpl.hpp"
+#endif//CONCERTO_PLATFORM_POSIX
 
 namespace Concerto::Network
 {

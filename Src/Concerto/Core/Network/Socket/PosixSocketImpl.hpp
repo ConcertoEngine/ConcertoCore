@@ -6,7 +6,6 @@
 #define CONCERTOCORE_SRC_CONCERTO_CORE_NETWORK_SOCKET_POSIXSOCKETIMPL_HPP_
 
 #include "Types.hpp"
-#ifdef CONCERTO_PLATFORM_POSIX
 #include "Network/SocketHandle.hpp"
 #include "Network/IpAddress.hpp"
 
@@ -35,5 +34,4 @@ namespace Concerto::Network
 		static const SocketHandle InvalidSocket;
 	};
 }// namespace Concerto::Network
-#endif //CONCERTO_PLATFORM_POSIX
 #endif //CONCERTOCORE_SRC_CONCERTO_CORE_NETWORK_SOCKET_POSIXSOCKETIMPL_HPP_
