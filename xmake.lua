@@ -1,10 +1,12 @@
 add_requires('gtest', 'nlohmann_json 3.11.2')
 add_rules("mode.debug")
 
+option("unitybuild", { description = "Build using unity build", default = false })
+
 target("ConcertoCore")
     set_kind("shared")
     set_symbols("debug")
-    set_warnings("everything")
+    set_warnings("allextra")
     set_languages("cxx20")
     add_packages('nlohmann_json')
     add_includedirs('Include', 'Include/Concerto','Include/Concerto/Core', 'Include/Concerto/Core/Math', 'Include/Concerto/Core/Network', 'Src/Concerto/Core/Network/IpAddress', 'Src/Concerto/Core/Network/Socket')
@@ -16,10 +18,14 @@ target("ConcertoCore")
         add_syslinks("ws2_32")
     end
 
+    if has_config("unitybuild") then
+        add_rules("c++.unity_build", {batchsize = 12, uniqueid = "CONCERTO_UNITY_BUILD_ID"})
+    end
+
 target("ConcertoCoreTests")
     set_kind("binary")
     set_symbols("debug")
-    set_warnings("everything")
+    set_warnings("allextra")
     set_languages("cxx20")
     add_files('Tests/*.cpp')
     add_packages('gtest')
@@ -29,6 +35,9 @@ target("ConcertoCoreTests")
     add_defines("CONCERTO_BUILD")
     if is_plat("windows") then
         add_syslinks("ws2_32")
+    end
+    if has_config("unitybuild") then
+        add_rules("c++.unity_build", {batchsize = 12, uniqueid = "CONCERTO_UNITY_BUILD_ID"})
     end
     after_build(function(target)
             print("Copying resources...")

@@ -5,12 +5,15 @@
 #include <gtest/gtest.h>
 #include "Concerto/Core/Math/Transform.hpp"
 
-using namespace Concerto::Math;
-
-TEST(Transform, Constructor)
+namespace CONCERTO_ANONYMOUS_NAMESPACE
 {
-	Transform transform(Vector3f(0.f, 0.f, 0.f), Quaternionf (0.f, 0.f, 0.f, 0.f), Vector3f(0.f, 0.f, 0.f));
-	ASSERT_EQ(transform.GetLocation(), Vector3f(0.f, 0.f, 0.f));
-	ASSERT_EQ(transform.GetRotation(), Quaternionf (0.f, 0.f, 0.f, 0.f));
-	ASSERT_EQ(transform.GetScale(), Vector3f(0.f, 0.f, 0.f));
-}
+	using namespace Concerto::Math;
+
+	TEST(Transform, Constructor)
+	{
+		Transform transform(Vector3f(0.f, 0.f, 0.f), Quaternionf(0.f, 0.f, 0.f, 0.f), Vector3f(0.f, 0.f, 0.f));
+		ASSERT_EQ(transform.GetLocation(), Vector3f(0.f, 0.f, 0.f));
+		ASSERT_EQ(transform.GetRotation(), Quaternionf(0.f, 0.f, 0.f, 0.f));
+		ASSERT_EQ(transform.GetScale(), Vector3f(0.f, 0.f, 0.f));
+	}
+}// namespace CONCERTO_ANONYMOUS_NAMESPACE

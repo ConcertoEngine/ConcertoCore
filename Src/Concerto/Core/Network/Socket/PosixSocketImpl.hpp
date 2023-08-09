@@ -33,5 +33,5 @@ namespace Concerto::Network
 		static std::size_t GetAvailableBytes(SocketHandle handle);
 		static const SocketHandle InvalidSocket;
 	};
-}
+}// namespace Concerto::Network
 #endif //CONCERTOCORE_SRC_CONCERTO_CORE_NETWORK_SOCKET_POSIXSOCKETIMPL_HPP_

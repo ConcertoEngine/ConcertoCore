@@ -6,60 +6,63 @@
 #include <fstream>
 #include "Concerto/Core/StructuredData.hpp"
 
-using namespace Concerto;
-
-TEST(StructuredData, Constructor)
+namespace CONCERTO_ANONYMOUS_NAMESPACE
 {
-	try
-	{
-		StructuredData data("./goodConfig.json");
-		const auto& config = data.GetConfig();
-		ASSERT_EQ(config["Test1"].As<Int32>(), 1);
-		ASSERT_EQ(config["Test2"].AsString(), "teststring");
-		ASSERT_EQ(config["Test3"]["Test4"].As<Int32>(), 2);
-		ASSERT_EQ(config["Test3"]["Test5"].AsString(), "teststring2");
-		ASSERT_EQ(config["Test6"][0]["Test7"].As<Int32>(), 3);
-		ASSERT_EQ(config["Test6"][0]["Test8"].AsString(), "teststring3");
-		ASSERT_EQ(config["Test6"][1]["Test7"].As<Int32>(), 4);
-		ASSERT_EQ(config["Test6"][1]["Test8"].AsString(), "teststring4");
-	}
-	catch (const std::exception& e)
-	{
-		FAIL() << e.what();
-	}
-}
+	using namespace Concerto;
 
-TEST(StructuredData, ifstreamConstructor)
-{
-	try
+	TEST(StructuredData, Constructor)
 	{
-		std::ifstream file("./goodConfig.json");
-		StructuredData data(file);
-		const auto& config = data.GetConfig();
-		ASSERT_EQ(config["Test1"].As<Int32>(), 1);
-		ASSERT_EQ(config["Test2"].AsString(), "teststring");
-		ASSERT_EQ(config["Test3"]["Test4"].As<Int32>(), 2);
-		ASSERT_EQ(config["Test3"]["Test5"].AsString(), "teststring2");
-		ASSERT_EQ(config["Test6"][0]["Test7"].As<Int32>(), 3);
-		ASSERT_EQ(config["Test6"][0]["Test8"].AsString(), "teststring3");
-		ASSERT_EQ(config["Test6"][1]["Test7"].As<Int32>(), 4);
-		ASSERT_EQ(config["Test6"][1]["Test8"].AsString(), "teststring4");
+		try
+		{
+			StructuredData data("./goodConfig.json");
+			const auto& config = data.GetConfig();
+			ASSERT_EQ(config["Test1"].As<Int32>(), 1);
+			ASSERT_EQ(config["Test2"].AsString(), "teststring");
+			ASSERT_EQ(config["Test3"]["Test4"].As<Int32>(), 2);
+			ASSERT_EQ(config["Test3"]["Test5"].AsString(), "teststring2");
+			ASSERT_EQ(config["Test6"][0]["Test7"].As<Int32>(), 3);
+			ASSERT_EQ(config["Test6"][0]["Test8"].AsString(), "teststring3");
+			ASSERT_EQ(config["Test6"][1]["Test7"].As<Int32>(), 4);
+			ASSERT_EQ(config["Test6"][1]["Test8"].AsString(), "teststring4");
+		}
+		catch (const std::exception& e)
+		{
+			FAIL() << e.what();
+		}
 	}
-	catch (const std::exception& e)
-	{
-		FAIL() << e.what();
-	}
-}
 
-TEST(StructuredData, BadConstructor)
-{
-	try
+	TEST(StructuredData, ifstreamConstructor)
 	{
-		StructuredData data("./badConfig.json");
-		FAIL() << "Should have thrown an exception";
+		try
+		{
+			std::ifstream file("./goodConfig.json");
+			StructuredData data(file);
+			const auto& config = data.GetConfig();
+			ASSERT_EQ(config["Test1"].As<Int32>(), 1);
+			ASSERT_EQ(config["Test2"].AsString(), "teststring");
+			ASSERT_EQ(config["Test3"]["Test4"].As<Int32>(), 2);
+			ASSERT_EQ(config["Test3"]["Test5"].AsString(), "teststring2");
+			ASSERT_EQ(config["Test6"][0]["Test7"].As<Int32>(), 3);
+			ASSERT_EQ(config["Test6"][0]["Test8"].AsString(), "teststring3");
+			ASSERT_EQ(config["Test6"][1]["Test7"].As<Int32>(), 4);
+			ASSERT_EQ(config["Test6"][1]["Test8"].AsString(), "teststring4");
+		}
+		catch (const std::exception& e)
+		{
+			FAIL() << e.what();
+		}
 	}
-	catch (const std::exception& e)
+
+	TEST(StructuredData, BadConstructor)
 	{
-		SUCCEED();
+		try
+		{
+			StructuredData data("./badConfig.json");
+			FAIL() << "Should have thrown an exception";
+		}
+		catch (const std::exception& e)
+		{
+			SUCCEED();
+		}
 	}
-}
+}// namespace CONCERTO_ANONYMOUS_NAMESPACE

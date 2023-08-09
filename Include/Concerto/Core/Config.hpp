@@ -20,7 +20,7 @@
 
 namespace Concerto::Config {
 	struct nullNode {};
-	struct Node;
+	class Node;
 
 	using NodePtr = std::shared_ptr<Node>;
 

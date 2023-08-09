@@ -2,6 +2,9 @@
 // Created by arthur on 25/05/22.
 //
 
+#ifndef CONCERTO_LOGGER_HPP
+#define CONCERTO_LOGGER_HPP
+
 #include <iostream>
 #include <version>
 #include <stdexcept>
@@ -21,11 +24,11 @@ namespace Concerto
     class Logger
     {
         public:
-            enum class LoggingLevel {
-                DEBUG,
-                INFO,
-                WARNING,
-                ERROR
+            enum class LogLevel {
+                Debug,
+                Info,
+                Warning,
+                Error
             };
 
         /**
@@ -35,7 +38,7 @@ namespace Concerto
         template<typename T>
         static void Info(const T& message)
         {
-			Log(message, LoggingLevel::INFO);
+			Log(message, LogLevel::Info);
         }
 
         /**
@@ -45,7 +48,7 @@ namespace Concerto
         template<typename T>
         static void Debug(const T& message, const std::source_location& location = std::source_location::current())
         {
-			Log(message, LoggingLevel::DEBUG, location);
+			Log(message, LogLevel::Debug, location);
         }
 
         /**
@@ -55,7 +58,7 @@ namespace Concerto
         template<typename T>
         static void Warning(const T& message)
         {
-			Log(message, LoggingLevel::WARNING);
+			Log(message, LogLevel::Warning);
         }
 
         /**
@@ -65,7 +68,7 @@ namespace Concerto
         template<typename T>
         static void Error(const T& message)
         {
-			Log(message, LoggingLevel::ERROR);
+			Log(message, LogLevel::Error);
 			throw std::runtime_error(message);
         }
 
@@ -76,23 +79,24 @@ namespace Concerto
         * @param location The location of the message
         */
         template<typename T>
-        static void Log(const T& message, LoggingLevel level, const std::source_location& location = std::source_location::current())
+        static void Log(const T& message, LogLevel level, const std::source_location& location = std::source_location::current())
         {
             switch (level)
             {
-                case LoggingLevel::DEBUG:
+                case LogLevel::Debug:
                     std::cout << Terminal::Color::CYAN << "[D] " << location.function_name() << ":" << location.line() << " message: " << message << Terminal::Color::DEFAULT << std::endl;
                     break;
-                case LoggingLevel::INFO:
+                case LogLevel::Info:
                     std::cout << Terminal::Color::GREEN << "[i] " << message << Terminal::Color::DEFAULT << std::endl;
                     break;
-                case LoggingLevel::WARNING:
+                case LogLevel::Warning:
                     std::cout << Terminal::Color::YELLOW << "[!] " << message << Terminal::Color::DEFAULT << std::endl;
                     break;
-                case LoggingLevel::ERROR:
+                case LogLevel::Error:
                     std::cerr << Terminal::Color::RED << "[X] " << message << Terminal::Color::DEFAULT << std::endl;
                     break;
             }
         }
     };
 }
+#endif //CONCERTO_LOGGER_HPP
