@@ -23,7 +23,12 @@ namespace Concerto::Network
 	{
 	}
 
-	Socket::Socket(Socket&&) noexcept
+	Socket::Socket(Socket&& other) noexcept
+		: _handle(std::move(other._handle)),
+		  _type(std::move(other._type)),
+		  _lastError(std::move(other._lastError)),
+		  _ipProtocol(std::move(other._ipProtocol)),
+		  _blocking(std::move(other._blocking))
 	{
 
 	}
