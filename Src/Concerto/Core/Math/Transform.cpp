@@ -58,4 +58,18 @@ namespace Concerto::Math
 	{
 		return (*this == other);
 	}
+
+	void Transform::Serialize(Stream& stream) const
+	{
+		_location.Serialize(stream);
+		_rotation.Serialize(stream);
+		_scale.Serialize(stream);
+	}
+
+	void Transform::Deserialize(Stream& stream)
+	{
+		_location.Deserialize(stream);
+		_rotation.Deserialize(stream);
+		_scale.Deserialize(stream);
+	}
 }

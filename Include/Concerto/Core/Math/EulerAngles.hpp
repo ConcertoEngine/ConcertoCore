@@ -6,6 +6,7 @@
 #define CONCERTOCORE_INCLUDE_CONCERTO_CORE_MATH_EULERANGLES_HPP_
 
 #include "Vector.hpp"
+#include "Stream.hpp"
 
 namespace Concerto::Math
 {
@@ -91,6 +92,9 @@ namespace Concerto::Math
 		 * @return EulerAngles<T> The zero Euler angles
 		 */
 		[[nodiscard]] static EulerAngles<T> Zero();
+
+		void Serialize(Stream& stream) const;
+		void Deserialize(Stream& stream);
 
 	 private:
 		T _pitch;

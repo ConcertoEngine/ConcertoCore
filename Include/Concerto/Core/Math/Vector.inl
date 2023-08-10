@@ -144,6 +144,20 @@ namespace Concerto::Math
 	}
 
 	template<typename T, std::size_t Size>
+	inline void Vector<T, Size>::Serialize(Stream& stream) const
+	{
+		for (const T& x : _data)
+			Concerto::Serialize(stream, x);
+	}
+
+	template<typename T, std::size_t Size>
+	inline void Vector<T, Size>::Deserialize(Stream& stream)
+	{
+		for (T& x : _data)
+			Concerto::Deserialize(stream, x);
+	}
+
+	template<typename T, std::size_t Size>
 	const std::array<T, Size>& Vector<T, Size>::GetData() const
 	{
 		return _data;
