@@ -6,9 +6,9 @@
 #define CONCERTOCORE_INCLUDE_CONCERTO_CORE_NETWORK_PACKET_HPP_
 
 #include <cstddef>
-#include "Types.hpp"
-#include "Buffer.hpp"
-#include "Stream.hpp"
+#include "Concerto/Core/Types.hpp"
+#include "Concerto/Core/Buffer.hpp"
+#include "Concerto/Core/Stream.hpp"
 
 namespace Concerto::Network
 {

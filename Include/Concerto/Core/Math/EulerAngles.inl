@@ -2,9 +2,9 @@
 // Created by arthur on 14/03/2023.
 //
 
-#include "EulerAngles.hpp"
-#include "Quaternion.hpp"
-#include "Serializer.hpp"
+#include "Concerto/Core/Math/EulerAngles.hpp"
+#include "Concerto/Core/Math/Quaternion.hpp"
+#include "Concerto/Core/Serializer.hpp"
 
 namespace Concerto::Math
 {

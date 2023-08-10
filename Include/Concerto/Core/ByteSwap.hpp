@@ -5,7 +5,7 @@
 #ifndef CONCERTOCORE_INCLUDE_CONCERTO_CORE_BYTESWAP_HPP_
 #define CONCERTOCORE_INCLUDE_CONCERTO_CORE_BYTESWAP_HPP_
 #include <bit>
-#include "Types.hpp"
+#include "Concerto/Core/Types.hpp"
 
 namespace Concerto
 {

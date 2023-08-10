@@ -4,7 +4,7 @@
 
 #include <cstring>
 
-#include "Packet.hpp"
+#include "Concerto/Core/Network/Packet.hpp"
 
 namespace Concerto::Network
 {

@@ -7,7 +7,7 @@
 
 #include <array>
 #include <string_view>
-#include "Types.hpp"
+#include "Concerto/Core/Types.hpp"
 
 namespace Concerto::Network
 {

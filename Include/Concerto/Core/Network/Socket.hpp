@@ -7,8 +7,8 @@
 
 #include <cstddef>
 
-#include "SocketHandle.hpp"
-#include "IpAddress.hpp"
+#include "Concerto/Core/Network/SocketHandle.hpp"
+#include "Concerto/Core/Network/IpAddress.hpp"
 
 namespace Concerto
 {

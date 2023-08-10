@@ -6,12 +6,13 @@
 
 #ifndef CONCERTO_STRUCTUREDDATA_HPP
 #define CONCERTO_STRUCTUREDDATA_HPP
+
 #include <string>
 
-#include "nlohmann/json.hpp"
-#include "nlohmann/json_fwd.hpp"
+#include <nlohmann/json.hpp>
+#include <nlohmann/json_fwd.hpp>
 
-#include "Config.hpp"
+#include "Concerto/Core/Config.hpp"
 #include "Concerto/Core/Types.hpp"
 
 namespace Concerto

@@ -4,6 +4,7 @@
 
 #include <fstream>
 #include <stdexcept>
+
 #include "Concerto/Core/StructuredData.hpp"
 #include "Concerto/Core/Config.hpp"
 #include "Concerto/Core/Logger.hpp"

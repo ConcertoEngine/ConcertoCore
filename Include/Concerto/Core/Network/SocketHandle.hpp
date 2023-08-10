@@ -5,7 +5,7 @@
 #ifndef CONCERTOCORE_INCLUDE_CONCERTO_CORE_NETWORK_SOCKETHANDLE_HPP_
 #define CONCERTOCORE_INCLUDE_CONCERTO_CORE_NETWORK_SOCKETHANDLE_HPP_
 
-#include "Types.hpp"
+#include "Concerto/Core/Types.hpp"
 #ifdef CONCERTO_PLATFORM_WINDOWS
 #include <basetsd.h>
 #endif

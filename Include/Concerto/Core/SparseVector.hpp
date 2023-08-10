@@ -2,12 +2,13 @@
 // Created by arthur on 21/05/22.
 //
 
+#ifndef CONCERTO_SPARSEVECTOR_HPP
+#define CONCERTO_SPARSEVECTOR_HPP
+
 #include <vector>
 #include <optional>
 #include <stdexcept>
-#include "Types.hpp"
-#ifndef CONCERTO_SPARSEVECTOR_HPP
-#define CONCERTO_SPARSEVECTOR_HPP
+#include "Concerto/Core/Types.hpp"
 /**
  * @brief SparseVector
  * A container which offers fixed time access to individual elements in any order, its indices can contain gaps.

@@ -2,7 +2,7 @@
 // Created by arthur on 05/08/2023.
 //
 
-#include "Types.hpp"
+#include "Concerto/Core/Types.hpp"
 
 #if defined(CONCERTO_PLATFORM_WINDOWS)
 #include <windows.h>

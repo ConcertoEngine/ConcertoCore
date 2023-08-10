@@ -4,6 +4,7 @@
 
 #ifndef CONCERTOCORE_INCLUDE_CONCERTO_SERIALIZER_HPP_
 #define CONCERTOCORE_INCLUDE_CONCERTO_SERIALIZER_HPP_
+
 #include <type_traits>
 
 namespace Concerto

@@ -5,7 +5,7 @@
 #ifndef CONCERTOCORE_INCLUDE_CONCERTO_CORE_BUFFER_HPP_
 #define CONCERTOCORE_INCLUDE_CONCERTO_CORE_BUFFER_HPP_
 #include <vector>
-#include "Types.hpp"
+#include "Concerto/Core/Types.hpp"
 
 namespace Concerto
 {

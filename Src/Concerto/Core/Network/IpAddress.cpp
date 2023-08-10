@@ -7,7 +7,8 @@
 #include <regex>
 #include <ranges>
 #include <charconv>
-#include "Network/IpAddress.hpp"
+
+#include "Concerto/Core/Network/IpAddress.hpp"
 
 namespace Concerto::Network
 {

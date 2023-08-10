@@ -5,8 +5,8 @@
 #ifndef CONCERTOCORE_INCLUDE_CONCERTO_CORE_MATH_EULERANGLES_HPP_
 #define CONCERTOCORE_INCLUDE_CONCERTO_CORE_MATH_EULERANGLES_HPP_
 
-#include "Vector.hpp"
-#include "Stream.hpp"
+#include "Concerto/Core/Math/Vector.hpp"
+#include "Concerto/Core/Stream.hpp"
 
 namespace Concerto::Math
 {

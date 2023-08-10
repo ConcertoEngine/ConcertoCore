@@ -4,8 +4,8 @@
 
 #include <cstring>
 
-#include "Stream.hpp"
-#include "Buffer.hpp"
+#include "Concerto/Core/Stream.hpp"
+#include "Concerto/Core/Buffer.hpp"
 
 namespace Concerto
 {

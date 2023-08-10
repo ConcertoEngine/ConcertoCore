@@ -5,8 +5,8 @@
 #ifndef CONCERTOCORE_INCLUDE_CONCERTO_CORE_STREAM_INL_
 #define CONCERTOCORE_INCLUDE_CONCERTO_CORE_STREAM_INL_
 
-#include "Stream.hpp"
-#include "Serializer.hpp"
+#include "Concerto/Core/Stream.hpp"
+#include "Concerto/Core/Serializer.hpp"
 
 namespace Concerto
 {

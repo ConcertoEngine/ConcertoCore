@@ -2,7 +2,7 @@
 // Created by arthur on 27/05/2023.
 //
 
-#include "Buffer.hpp"
+#include "Concerto/Core/Buffer.hpp"
 
 namespace Concerto
 {

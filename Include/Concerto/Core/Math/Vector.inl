@@ -4,7 +4,7 @@
 
 #include <algorithm>
 
-#include "Vector.hpp"
+#include "Concerto/Core/Math/Vector.hpp"
 
 namespace Concerto::Math
 {
