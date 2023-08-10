@@ -35,7 +35,7 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 
 	TEST(IpAddress, IsIpV4)
 	{
-		EXPECT_TRUE(IpAddress::IsIpV4("127.0.0.1"), true);
+		EXPECT_TRUE(IpAddress::IsIpV4("127.0.0.1"));
 		
 		EXPECT_FALSE(IpAddress::IsIpV4("1277.0.0.1"));
 		EXPECT_FALSE(IpAddress::IsIpV4("127.1277.0.1"));
