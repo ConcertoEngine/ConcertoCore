@@ -14,21 +14,21 @@
 
 namespace Concerto::Network
 {
-	Socket::Socket(SocketType socketType, IpProtocol ipProtocol)
-		: _handle(SocketImpl::InvalidSocket), 
-			_type(socketType),
-		  _lastError(SocketError::NoError),
-		  _ipProtocol(ipProtocol),
-		  _blocking(false)
+	Socket::Socket(SocketType socketType, IpProtocol ipProtocol) :
+		_handle(SocketImpl::InvalidSocket), 
+		_type(socketType),
+		_lastError(SocketError::NoError),
+		_ipProtocol(ipProtocol),
+		_blocking(false)
 	{
 	}
 
-	Socket::Socket(Socket&& other) noexcept
-		: _handle(std::move(other._handle)),
-		  _type(std::move(other._type)),
-		  _lastError(std::move(other._lastError)),
-		  _ipProtocol(std::move(other._ipProtocol)),
-		  _blocking(std::move(other._blocking))
+	Socket::Socket(Socket&& other) noexcept :
+		_handle(std::move(other._handle)),
+		_type(std::move(other._type)),
+		_lastError(std::move(other._lastError)),
+		_ipProtocol(std::move(other._ipProtocol)),
+		_blocking(std::move(other._blocking))
 	{
 
 	}
@@ -81,6 +81,18 @@ namespace Concerto::Network
 		if (!SocketImpl::Listen(handle, address, backlog, &_lastError))
 			return;
 		_handle = handle;
+	}
+
+	bool Socket::Bind(IpAddress address, UInt16 port)
+	{
+		address.SetPort(port);
+		SocketHandle handle = SocketImpl::Create(_type, _ipProtocol, &_lastError);
+		if (handle == SocketImpl::InvalidSocket)
+			return false;
+		if (!SocketImpl::Bind(handle, address, &_lastError))
+			return false;
+		_handle = handle;
+		return true;
 	}
 
 	void Socket::Accept(Socket& socket)

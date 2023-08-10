@@ -17,7 +17,7 @@ namespace Concerto::Network
 	{
 		CONCERTO_ASSERT(socket != SocketImpl::InvalidSocket);
 		sockaddr addr = {};
-		int addrSize = sizeof(addr);
+		int addrSize = sizeof(sockaddr);
 		SocketHandle newSocket = accept(socket, &addr, &addrSize);
 		if (newSocket == SocketImpl::InvalidSocket)
 		{

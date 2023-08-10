@@ -70,6 +70,7 @@ namespace Concerto::Network
 		}
 		else if (IsIpV6(ip))
 		{
+			CONCERTO_ASSERT_FALSE;
 			return;
 		}
 		_protocol = IpProtocol::Error;
