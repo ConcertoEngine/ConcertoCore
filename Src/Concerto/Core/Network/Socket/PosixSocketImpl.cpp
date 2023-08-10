@@ -10,6 +10,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/ioctl.h>
+#include <errno.h>
 #include "PosixSocketImpl.hpp"
 #include "PosixIpAddressImpl.hpp"
 
