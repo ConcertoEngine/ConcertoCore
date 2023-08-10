@@ -98,7 +98,7 @@ public:
 	 */
 	reference_type operator[](size_type index)
 	{
-		CONCERTO_ASSERT(index >= _container.size())
+		CONCERTO_ASSERT(index >= _container.size() - 1)
 		if (!Has(index))
 			throw std::runtime_error("Index Has no value");
 		return _container[index].value();
@@ -111,7 +111,7 @@ public:
 	 */
 	const_reference_type operator[](size_type index) const
 	{
-		CONCERTO_ASSERT(index >= _container.size())
+		CONCERTO_ASSERT(index >= _container.size() - 1)
 		if (!Has(index))
 			throw std::runtime_error("Index Has no value");
 		return _container[index].value();
@@ -138,7 +138,7 @@ public:
 	 */
 	void Erase(size_type index)
 	{
-		CONCERTO_ASSERT(index >= _container.size() || !_container[index].has_value())
+		CONCERTO_ASSERT(index >= _container.size() - 1 || !_container[index].has_value())
 		_container[index].reset();
 	}
 
