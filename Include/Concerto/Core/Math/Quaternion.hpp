@@ -432,6 +432,9 @@ namespace Concerto::Math
 			return !(*this == other);
 		}
 
+		void Serialize(Stream& stream) const;
+		void Deserialize(Stream& stream);
+
 	 private:
 		T _w;
 		T _x;
@@ -450,6 +453,24 @@ namespace Concerto::Math
 			   << ", W: " << quaternion.W() << ")";
 		return stream;
 	}
-}
+	
+	template<typename T>
+	inline void Quaternion<T>::Serialize(Stream& stream) const
+	{
+		Concerto::Serialize(stream, _w);
+		Concerto::Serialize(stream, _x);
+		Concerto::Serialize(stream, _y);
+		Concerto::Serialize(stream, _z);
+	}
+
+	template<typename T>
+	inline void Quaternion<T>::Deserialize(Stream& stream)
+	{
+		Concerto::Deserialize(stream, _w);
+		Concerto::Deserialize(stream, _x);
+		Concerto::Deserialize(stream, _y);
+		Concerto::Deserialize(stream, _z);
+	}
+}// namespace Concerto::Math
 
 #endif //CONCERTO_QUATERNION_H

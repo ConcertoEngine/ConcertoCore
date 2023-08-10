@@ -75,6 +75,9 @@ namespace Concerto::Math
 		bool operator==(const Transform& other) const;
 		bool operator!=(const Transform& other) const;
 
+		void Serialize(Stream& stream) const;
+		void Deserialize(Stream& stream);
+		
 	 private:
 		Vector3f _location;
 		Quaternionf _rotation;

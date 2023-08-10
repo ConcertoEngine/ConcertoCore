@@ -11,6 +11,7 @@
 #include <cmath>
 
 #include "Concerto/Core/Types.hpp"
+#include "Concerto/Core/Stream.hpp"
 
 namespace Concerto::Math
 {
@@ -339,6 +340,8 @@ namespace Concerto::Math
 			return result;
 		}
 
+		void Serialize(Stream& stream) const;
+		void Deserialize(Stream& stream);
 	private:
 		std::array<T, Size> _data;
 	};
