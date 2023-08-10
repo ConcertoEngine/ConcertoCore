@@ -34,8 +34,8 @@ jobs:
       - name: Update xmake repo
         run: xmake repo --update
 
-      - name: Config xmake and install dependencies
-        run: xmake config --unitybuild=y --yes
+      # - name: Config xmake and install dependencies
+      #   run: xmake config --unitybuild=y --yes
         
       - name: Build
         run: xmake --yes -v
