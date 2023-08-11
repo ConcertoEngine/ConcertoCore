@@ -20,8 +20,8 @@ namespace Concerto
         static constexpr auto BLUE = "\x1B[34m";
         static constexpr auto MAGENTA = "\x1B[35m";
         static constexpr auto CYAN = "\x1B[36m";
-    }
-    class Logger
+    }// namespace Terminal::Color
+	class CONCERTO_PUBLIC_API Logger
     {
         public:
             enum class LogLevel {

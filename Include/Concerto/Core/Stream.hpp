@@ -13,7 +13,7 @@ namespace Concerto
 {
 	class Buffer;
 
-	class Stream
+	class CONCERTO_PUBLIC_API Stream
 	{
 	 public:
 		explicit Stream(std::size_t capacity = 0xFFF);
