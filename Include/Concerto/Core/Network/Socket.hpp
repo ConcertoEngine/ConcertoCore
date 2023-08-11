@@ -17,7 +17,7 @@ namespace Concerto
 
 namespace Concerto::Network
 {
-	class Socket
+	class CONCERTO_PUBLIC_API Socket
 	{
 	 public:
 		Socket(SocketType socketType, IpProtocol ipProtocol);
