@@ -65,8 +65,6 @@ namespace Concerto::Network
 
 	void Socket::SetBlocking(bool blocking)
 	{
-		if (blocking == _blocking)
-			return;
 		if (_handle == SocketImpl::InvalidSocket)
 			return;
 		SocketImpl::SetBlocking(_handle, blocking, &_lastError);
