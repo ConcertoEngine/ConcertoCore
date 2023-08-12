@@ -10,6 +10,8 @@
 #include <stdexcept>
 #include <source_location>
 
+#include "Concerto/Core/Types.hpp"
+
 namespace Concerto
 {
     namespace Terminal::Color {
