@@ -9,7 +9,7 @@ target("ConcertoCore")
     set_warnings("allextra")
     set_languages("cxx20")
 
-    add_packages('nlohmann_json', 'enet')
+    add_packages('nlohmann_json', 'enet', {public = true})
     add_files('Src/**.cpp')
     add_defines("CONCERTO_BUILD")
 
@@ -20,7 +20,7 @@ target("ConcertoCore")
                     'Include/Concerto/Core/Network',
                     'Include/Concerto/Core/Network/Enet',
                     'Src/Concerto/Core/Network/IpAddress',
-                    'Src/Concerto/Core/Network/Socket')
+                    'Src/Concerto/Core/Network/Socket', {public = true})
 
     add_headerfiles('Include/(Concerto/*.hpp)',
                     'Include/(Concerto/Core/*.hpp)',
