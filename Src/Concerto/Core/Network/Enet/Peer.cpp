@@ -4,7 +4,7 @@
 
 #include "Concerto/Core/Network/Enet/Peer.hpp"
 #include "Concerto/Core/Network/Packet.hpp"
-#include <Enet/enet.h>
+#include <enet/enet.h>
 
 namespace Concerto::Network
 {
