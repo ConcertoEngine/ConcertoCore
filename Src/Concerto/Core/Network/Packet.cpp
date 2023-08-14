@@ -13,8 +13,8 @@ namespace Concerto::Network
 	{
 	}
 
-	Packet::Packet(UInt32 packetType, const void* data, std::size_t size)
-		: Stream(HeaderSize + size), _size(size), _packetType(packetType), _validHeader(true)
+	Packet::Packet(UInt32 packetType, const void* data, std::size_t size) :
+		Stream(HeaderSize + size), _size(size), _packetType(packetType), _validHeader(true)
 	{
 		_buffer.resize(HeaderSize + size);
 		std::memcpy(_buffer.data(), &_packetType, sizeof(UInt32));
@@ -23,8 +23,8 @@ namespace Concerto::Network
 		_cursorPos = HeaderSize + size;
 	}
 
-	Packet::Packet(UInt32 packetType, std::size_t capacity)
-		: Stream(HeaderSize + capacity), _size(0), _packetType(packetType), _validHeader(true)
+	Packet::Packet(UInt32 packetType, std::size_t capacity) :
+		Stream(HeaderSize + capacity), _size(0), _packetType(packetType), _validHeader(true)
 	{
 		_buffer.resize(HeaderSize);
 		std::memcpy(_buffer.data(), &_packetType, sizeof(UInt32));
@@ -85,6 +85,13 @@ namespace Concerto::Network
 	bool Packet::operator==(bool value) const
 	{
 		return _validHeader == value && _validData == value;
+	}
+
+	bool Packet::operator==(const Packet& value) const
+	{
+		if (GetDataSize() != value.GetDataSize())
+			return false;
+		return std::memcmp(GetData(), value.GetData(), GetDataSize()) == 0;
 	}
 
 	bool Packet::operator!=(bool value) const

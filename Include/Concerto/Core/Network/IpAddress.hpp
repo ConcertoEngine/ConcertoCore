@@ -37,6 +37,7 @@ namespace Concerto::Network
 		[[nodiscard]] UInt16 GetPort() const;
 
 		[[nodiscard]] UInt32 ToUInt32() const;
+		[[nodiscard]] std::string ToString() const;
 
 		static bool IsIpV4(std::string_view ip);
 		static bool IsIpV6(std::string_view ip);
