@@ -9,7 +9,8 @@ target("ConcertoCore")
     set_warnings("allextra")
     set_languages("cxx20")
 
-    add_packages('nlohmann_json', 'enet', {public = true})
+    add_packages('nlohmann_json', {public = true})
+    add_packages('enet', {public = false})
     add_files('Src/**.cpp')
     add_defines("CONCERTO_BUILD")
 

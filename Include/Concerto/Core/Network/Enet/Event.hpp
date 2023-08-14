@@ -5,24 +5,27 @@
 #ifndef CONCERTO_CORE_NETWORK_ENET_EVENT_HPP_
 #define CONCERTO_CORE_NETWORK_ENET_EVENT_HPP_
 
-#include "enet/enet.h"
-#include "Concerto/Core/Types.hpp"
+#include <memory>
+#include "Concerto/Core/Network/Packet.hpp"
+#include "Concerto/Core/Network/Enet/Peer.hpp"
 
 namespace Concerto::Network
 {
-	struct CONCERTO_PUBLIC_API EnetEvent
+	struct CONCERTO_PUBLIC_API ENetEvent
 	{
 		enum Type 
 		{
-			None = ENET_EVENT_TYPE_NONE,
-			Connect = ENET_EVENT_TYPE_CONNECT,
-			Disconnect = ENET_EVENT_TYPE_DISCONNECT,
-			Receive = ENET_EVENT_TYPE_RECEIVE
+			None,
+			Connect,
+			Disconnect,
+			Receive
 		};
-		
+
 		Type eventType;
-		ENetPeer* peer;
+		std::unique_ptr<ENetPeer> peer;
 		UInt8 channelId;
+		UInt32 data;
+		std::unique_ptr<Packet> packet;
 	};
 }
 

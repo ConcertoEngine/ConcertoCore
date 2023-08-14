@@ -15,9 +15,9 @@ namespace Concerto::Network
 	class CONCERTO_PUBLIC_API Packet : public Stream
 	{
 	 public:
-		explicit Packet();
+		Packet();
 		Packet(UInt32 packetType, const void* data, std::size_t size);
-		explicit Packet(UInt32 packetType, std::size_t capacity = 0);
+		Packet(UInt32 packetType, std::size_t capacity = 0);
 
 		[[nodiscard]] UInt32 GetPacketType() const;
 		[[nodiscard]] const Byte* GetData() const;
@@ -28,6 +28,7 @@ namespace Concerto::Network
 		[[nodiscard]] bool EncodeHeader();
 
 		bool operator==(bool) const;
+		bool operator==(const Packet&) const;
 		bool operator!=(bool) const;
 
 		template<typename T>

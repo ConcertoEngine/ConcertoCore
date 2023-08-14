@@ -109,6 +109,24 @@ namespace Concerto::Network
 		CONCERTO_ASSERT(_protocol == IpProtocol::IPV4);
 		return (_ipv4[0] << 24) | (_ipv4[1] << 16) | (_ipv4[2] << 8) | _ipv4[3];
 	}
+
+	std::string IpAddress::ToString() const
+	{
+		std::string ip;
+		if (_protocol == IpProtocol::IPV4)
+		{
+			ip = std::to_string(_ipv4[0]) + "." + std::to_string(_ipv4[1]) + "." + std::to_string(_ipv4[2]) + "." + std::to_string(_ipv4[3]);
+		}
+		else if (_protocol == IpProtocol::IPV6)
+		{
+			CONCERTO_ASSERT_FALSE;
+		}
+		else
+		{
+			CONCERTO_ASSERT_FALSE;
+		}
+		return ip;
+	}
 	
 	bool IpAddress::IsIpV4(std::string_view ip)
 	{
