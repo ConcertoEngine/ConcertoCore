@@ -75,8 +75,9 @@ namespace Concerto::Network
 				event->peer = std::make_unique<ENetPeer>(static_cast<void*>(enetEvent.peer));
 				event->channelId = enetEvent.channelID;
 				event->data = enetEvent.data;
-				event->packet = std::make_unique<Packet>();
+				event->packet = std::make_unique<ENetPacket>();
 				event->packet->Write(enetEvent.packet->data, enetEvent.packet->dataLength);
+				event->packet->SetCursorPos(0);
 				break;
 			}
 		}
@@ -89,7 +90,7 @@ namespace Concerto::Network
 		return peer->SendPacket(data, size, channel, flags);
 	}
 
-	bool ENetHost::SendPacket(const Packet& packet, ENetPeer* peer, UInt8 channel, ENetPacket::Flag flags)
+	bool ENetHost::SendPacket(const ENetPacket& packet, ENetPeer* peer, UInt8 channel, ENetPacket::Flag flags)
 	{
 		return SendPacket(packet.GetData(), packet.GetSize(), peer, channel, flags);
 	}

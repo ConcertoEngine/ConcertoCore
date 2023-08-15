@@ -11,12 +11,12 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 	using namespace Concerto;
 	using namespace Concerto::Network;
 
-	constexpr UInt32 PacketType = 0xF;
-	const UInt32 ByteSwappedPacketType = ByteSwap(PacketType);
+	constexpr UInt8 PacketType = 0xF;
+	const UInt8 ByteSwappedPacketType = ByteSwap(PacketType);
 
 	struct PacketHeader
 	{
-		UInt32 PacketType;
+		UInt8 PacketType;
 		UInt32 Size;
 	};
 

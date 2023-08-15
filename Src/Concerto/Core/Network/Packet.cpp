@@ -5,34 +5,34 @@
 #include <cstring>
 
 #include "Concerto/Core/Network/Packet.hpp"
+#include "Packet.hpp"
 
 namespace Concerto::Network
 {
-
 	Packet::Packet() : Stream(HeaderSize), _size(0), _packetType(0), _validHeader(false)
 	{
 	}
 
-	Packet::Packet(UInt32 packetType, const void* data, std::size_t size) :
+	Packet::Packet(UInt8 packetType, const void* data, std::size_t size) :
 		Stream(HeaderSize + size), _size(size), _packetType(packetType), _validHeader(true)
 	{
 		_buffer.resize(HeaderSize + size);
-		std::memcpy(_buffer.data(), &_packetType, sizeof(UInt32));
-		std::memcpy(_buffer.data() + sizeof(UInt32), &size, sizeof(UInt32));
+		std::memcpy(_buffer.data(), &_packetType, sizeof(UInt8));
+		std::memcpy(_buffer.data() + sizeof(UInt8), &size, sizeof(UInt32));
 		std::memcpy(_buffer.data() + HeaderSize, data, size);
 		_cursorPos = HeaderSize + size;
 	}
 
-	Packet::Packet(UInt32 packetType, std::size_t capacity) :
+	Packet::Packet(UInt8 packetType, std::size_t capacity) :
 		Stream(HeaderSize + capacity), _size(0), _packetType(packetType), _validHeader(true)
 	{
 		_buffer.resize(HeaderSize);
-		std::memcpy(_buffer.data(), &_packetType, sizeof(UInt32));
-		std::memcpy(_buffer.data() + sizeof(UInt32), &_size, sizeof(UInt32));
+		std::memcpy(_buffer.data(), &_packetType, sizeof(UInt8));
+		std::memcpy(_buffer.data() + sizeof(UInt8), &_size, sizeof(UInt32));
 		_cursorPos = HeaderSize;
 	}
 
-	UInt32 Packet::GetPacketType() const
+	UInt8 Packet::GetPacketType() const
 	{
 		return _packetType;
 	}
@@ -52,7 +52,7 @@ namespace Concerto::Network
 		return _buffer.capacity();
 	}
 
-	bool Packet::DecodeHeader(UInt32* packetType, UInt32* size)
+	bool Packet::DecodeHeader(UInt8* packetType, UInt32* size)
 	{
 		if (_buffer.size() < HeaderSize)
 			return false;
@@ -84,7 +84,7 @@ namespace Concerto::Network
 
 	bool Packet::operator==(bool value) const
 	{
-		return _validHeader == value && _validData == value;
+		return _validHeader == value;
 	}
 
 	bool Packet::operator==(const Packet& value) const
@@ -98,4 +98,4 @@ namespace Concerto::Network
 	{
 		return !operator==(value);
 	}
-}
+}// namespace Concerto::Network

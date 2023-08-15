@@ -6,16 +6,30 @@
 #define CONCERTO_CORE_NETWORK_ENET_PACKET_HPP_
 
 #include "Concerto/Core/Types.hpp"
+#include "Concerto/Core/Stream.hpp"
 
-namespace Concerto::Network::ENetPacket
+namespace Concerto::Network
 {
-	enum Flag
+	class CONCERTO_PUBLIC_API ENetPacket : public Stream
 	{
-		Reliable,
-		Unsequenced,
-		NoAllocate,
-		UnreliableFragment,
-		Sent
+	public:
+		enum Flag
+		{
+			Reliable,
+			Unsequenced,
+			NoAllocate,
+			UnreliableFragment,
+			Sent
+		};
+
+	   ENetPacket();
+	   ENetPacket(const void* data, std::size_t size);
+
+	   [[nodiscard]] const Byte* GetData() const;
+	   [[nodiscard]] std::size_t Capacity() const;
+
+	   bool operator==(const ENetPacket&) const;
+	   bool operator!=(const ENetPacket&) const;
 	};
 }// namespace Concerto::Network::ENetPacket
 

@@ -11,49 +11,11 @@ namespace Concerto::Network
 {
 	EnetClient::EnetClient(UInt32 maxIncomingBandwidth, UInt32 maxOutgoingBandwidth) : 
 		ENetHost(nullptr, 1, 2, maxIncomingBandwidth, maxOutgoingBandwidth),
-		_onConnectCallback(),
-		_onDisconnectCallback(),
-		_peer(nullptr),
-		_isConnected(false)
+		_peer(nullptr)
 	{
 	}
 
-	Int32 EnetClient::PollEvent(ENetEvent* event, UInt32 timeout)
-	{
-		Int32 ret = ENetHost::PollEvent(event, timeout);
-		if (ret <= 0)
-			return ret;
-		switch (event->eventType)
-		{
-		case ENetEvent::Connect: 
-		{
-			_isConnected = true;
-			if (_onConnectCallback)
-				_onConnectCallback(*this);
-			return 0;
-		}
-		case ENetEvent::Disconnect:
-		{
-			_isConnected = false;
-			if (_onDisconnectCallback)
-				_onDisconnectCallback(*this);
-			return 0;
-		}
-		case ENetEvent::Receive:
-		{
-			if (!_isConnected)
-			{
-				event->packet = nullptr;
-				return 0;
-			}
-		}
-		default:
-			break;
-		}
-		return ret;
-	}
-
-	bool EnetClient::SendPacket(const Packet& packet, UInt8 channel, ENetPacket::Flag flags)
+	bool EnetClient::SendPacket(const ENetPacket& packet, UInt8 channel, ENetPacket::Flag flags)
 	{
 		return ENetHost::SendPacket(packet, _peer.get(), channel, flags);
 	}
@@ -74,24 +36,8 @@ namespace Concerto::Network
 		_peer = std::make_unique<ENetPeer>(peer);
 	}
 
-	bool EnetClient::IsConnected() const
-	{
-		return _isConnected;
-	}
-
-	void EnetClient::SetConnectionCallback(OnConnectCallback&& callback)
-	{
-		_onConnectCallback = std::move(callback);
-	}
-
-	void EnetClient::SetDisconnectCallback(OnDisconnectCallback&& callback)
-	{
-		_onDisconnectCallback = std::move(callback);
-	}
-
 	void EnetClient::Disconnect()
 	{
-		_isConnected = false;
 		CONCERTO_ASSERT(_peer);
 		_peer->Disconnect();
 	}

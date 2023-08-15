@@ -16,15 +16,15 @@ namespace Concerto::Network
 	{
 	 public:
 		Packet();
-		Packet(UInt32 packetType, const void* data, std::size_t size);
-		Packet(UInt32 packetType, std::size_t capacity = 0);
+		Packet(UInt8 packetType, const void* data, std::size_t size);
+		Packet(UInt8 packetType, std::size_t capacity = 0);
 
-		[[nodiscard]] UInt32 GetPacketType() const;
+		[[nodiscard]] UInt8 GetPacketType() const;
 		[[nodiscard]] const Byte* GetData() const;
 		[[nodiscard]] UInt64 GetDataSize() const;
 		[[nodiscard]] std::size_t Capacity() const;
 
-		[[nodiscard]] bool DecodeHeader(UInt32 *packetType = nullptr, UInt32 *size = nullptr);
+		[[nodiscard]] bool DecodeHeader(UInt8* packetType = nullptr, UInt32* size = nullptr);
 		[[nodiscard]] bool EncodeHeader();
 
 		bool operator==(bool) const;
@@ -39,12 +39,11 @@ namespace Concerto::Network
 			return *this;
 		}
 
-		static constexpr std::size_t HeaderSize = sizeof(UInt32) + sizeof(UInt32);
+		static constexpr std::size_t HeaderSize = sizeof(UInt8) + sizeof(UInt32);
 	 private:
 		UInt32 _size;
-		UInt32 _packetType;
+		UInt8 _packetType;
 		bool _validHeader;
-		bool _validData{};
 	};
 }
 

@@ -21,7 +21,7 @@ namespace Concerto::Network
 
 		virtual Int32 PollEvent(ENetEvent* event, UInt32 timeout = 0);
 		bool SendPacket(const void* data, std::size_t size, ENetPeer* peer, UInt8 channel = 0, ENetPacket::Flag flags = ENetPacket::Flag::Reliable);
-		bool SendPacket(const Packet& packet, ENetPeer* peer, UInt8 channel = 0, ENetPacket::Flag flags = ENetPacket::Flag::Reliable);
+		bool SendPacket(const ENetPacket& packet, ENetPeer* peer, UInt8 channel = 0, ENetPacket::Flag flags = ENetPacket::Flag::Reliable);
 		void Flush();
 	 protected:
 		bool CreateHost(IpAddress* address = nullptr);
