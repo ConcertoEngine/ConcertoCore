@@ -2,7 +2,7 @@
 // Created by arthur on 14/08/2023.
 //
 
-#include "Concerto/Core/Network/Enet/Peer.hpp"
+#include "Concerto/Core/Network/ENet/Peer.hpp"
 #include "Concerto/Core/Network/Packet.hpp"
 #include <enet/enet.h>
 

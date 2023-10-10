@@ -2,7 +2,7 @@
 // Created by arthur on 12/08/2023.
 //
 
-#include "Concerto/Core/Network/Enet/Client.hpp"
+#include "Concerto/Core/Network/ENet/Client.hpp"
 #include "Concerto/Core/Logger.hpp"
 
 #include <enet/enet.h>

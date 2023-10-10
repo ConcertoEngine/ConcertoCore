@@ -3,7 +3,7 @@
 //
 
 #include <enet/enet.h>
-#include "Concerto/Core/Network/Enet/Host.hpp"
+#include "Concerto/Core/Network/ENet/Host.hpp"
 #include "Concerto/Core/Logger.hpp"
 
 namespace Concerto::Network

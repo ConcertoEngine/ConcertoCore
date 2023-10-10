@@ -8,9 +8,9 @@
 
 #include <gtest/gtest.h>
 #include <Concerto/Core/Logger.hpp>
-#include <Concerto/Core/Network/Enet/ENet.hpp>
-#include <Concerto/Core/Network/Enet/Server.hpp>
-#include <Concerto/Core/Network/Enet/Client.hpp>
+#include <Concerto/Core/Network/ENet/ENet.hpp>
+#include <Concerto/Core/Network/ENet/Server.hpp>
+#include <Concerto/Core/Network/ENet/Client.hpp>
 
 namespace CONCERTO_ANONYMOUS_NAMESPACE
 {

@@ -7,8 +7,8 @@
 
 #include "Concerto/Core/Types.hpp"
 #include "Concerto/Core/Network/IpAddress.hpp"
-#include "Concerto/Core/Network/Enet/Event.hpp"
-#include "Concerto/Core/Network/Enet/Packet.hpp"
+#include "Concerto/Core/Network/ENet/Event.hpp"
+#include "Concerto/Core/Network/ENet/Packet.hpp"
 
 namespace Concerto::Network
 {

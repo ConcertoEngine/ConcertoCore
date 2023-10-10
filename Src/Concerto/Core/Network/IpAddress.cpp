@@ -9,6 +9,7 @@
 #include <charconv>
 
 #include "Concerto/Core/Network/IpAddress.hpp"
+#include "Concerto/Core/Logger.hpp"
 
 namespace Concerto::Network
 {
@@ -54,6 +55,10 @@ namespace Concerto::Network
 	{
 		if (IsIpV4(ip))
 		{
+#ifdef CONCERTO_PLATFORM_POSIX
+			Logger::Error("Parsing IP address on POSIX systems is not yet supported");
+			CONCERTO_ASSERT_FALSE;
+#else
 			_protocol = IpProtocol::IPV4;
 			auto segments = ip
 				| std::views::split('.')
@@ -68,6 +73,7 @@ namespace Concerto::Network
 				_ipv4[i++] = segment;
 			}
 			return;
+#endif
 		}
 		else if (IsIpV6(ip))
 		{

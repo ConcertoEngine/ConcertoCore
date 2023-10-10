@@ -7,7 +7,7 @@
 
 #include <cstddef>
 #include "Concerto/Core/Types.hpp"
-#include "Concerto/Core/Network/Enet/Packet.hpp"
+#include "Concerto/Core/Network/ENet/Packet.hpp"
 
 namespace Concerto::Network
 {

@@ -8,7 +8,7 @@
 #include <functional>
 
 #include "Concerto/Core/Network/IpAddress.hpp"
-#include "Concerto/Core/Network/Enet/Host.hpp"
+#include "Concerto/Core/Network/ENet/Host.hpp"
 
 namespace Concerto::Network
 {

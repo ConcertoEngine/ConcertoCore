@@ -19,7 +19,7 @@ target("ConcertoCore")
                     'Include/Concerto/Core',
                     'Include/Concerto/Core/Math',
                     'Include/Concerto/Core/Network',
-                    'Include/Concerto/Core/Network/Enet',
+                    'Include/Concerto/Core/Network/ENet',
                     'Src/Concerto/Core/Network/IpAddress',
                     'Src/Concerto/Core/Network/Socket', {public = true})
 
@@ -27,13 +27,13 @@ target("ConcertoCore")
                     'Include/(Concerto/Core/*.hpp)',
                     'Include/(Concerto/Core/Math/*.hpp)',
                     'Include/(Concerto/Core/Network/*.hpp)',
-                    'Include/(Concerto/Core/Network/Enet/*.hpp)')
+                    'Include/(Concerto/Core/Network/ENet/*.hpp)')
 
     add_headerfiles('Include/(Concerto/*.inl)',
                     'Include/(Concerto/Core/*.inl)',
                     'Include/(Concerto/Core/Math/*.inl)',
                     'Include/(Concerto/Core/Network/*.inl)',
-                    'Include/(Concerto/Core/Network/Enet/*.inl)')
+                    'Include/(Concerto/Core/Network/ENet/*.inl)')
 
     if is_plat("windows") then
         add_syslinks("ws2_32")
