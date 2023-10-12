@@ -2,158 +2,92 @@
 // Created by arthur on 21/05/22.
 //
 
-#ifndef CONCERTO_SPARSEVECTOR_HPP
-#define CONCERTO_SPARSEVECTOR_HPP
+#ifndef CONCERTOCORE_SPARSEVECTOR_HPP
+#define CONCERTOCORE_SPARSEVECTOR_HPP
 
 #include <vector>
 #include <optional>
 #include <stdexcept>
 #include "Concerto/Core/Types.hpp"
-/**
- * @brief SparseVector
- * A container which offers fixed time access to individual elements in any order, its indices can contain gaps.
- * @tparam value_type Type of the elements
- * @tparam allocator Allocator used to allocate the elements
- */
-template<typename value_type, typename allocator = std::allocator<std::optional<value_type>>>
-class SparseVector
+
+namespace Concerto
 {
-public:
-	using container_type = std::vector<std::optional<value_type>, allocator>;
-	using reference_type = value_type&;
-	using const_reference_type = const value_type&;
-	using size_type = typename container_type::size_type;
-	using iterator = typename container_type::iterator;
-	using const_iterator = typename container_type::const_iterator;
-
-	SparseVector() = default;
-
-	explicit SparseVector(size_type size) : _container(size)
-	{
-	}
-
-	SparseVector(const SparseVector&) = delete;
-	SparseVector(SparseVector&&) noexcept = default;
-	~SparseVector() = default;
-	SparseVector& operator=(const SparseVector&) = delete;
-	SparseVector& operator=(SparseVector&&) noexcept = default;
-
 	/**
-	 * @brief Get the size of the SparseVector
-	 * @return The size of the SparseVector
-	 */
-	size_type size() const
+	* @brief SparseVector
+	* A container which offers fixed time access to individual elements in any order, its indices can contain gaps.
+	* @tparam value_type Type of the elements
+	* @tparam allocator Allocator used to allocate the elements
+	*/
+	template<typename value_type, typename allocator = std::allocator<std::optional<value_type>>>
+	class SparseVector
 	{
-		return _container.size();
-	}
+	public:
+		using container_type = std::vector<std::optional<value_type>, allocator>;
+		using reference_type = value_type&;
+		using const_reference_type = const value_type&;
+		using size_type = typename container_type::size_type;
+		using iterator = typename container_type::iterator;
+		using const_iterator = typename container_type::const_iterator;
 
-	/**
-	 *  Returns true if the %SparseVector is empty.  (Thus begin() would equal end().)
-	 * @return
-	 */
-	[[nodiscard]] bool empty() const
-	{
-		return _container.empty();
-	}
+		SparseVector() = default;
+		explicit SparseVector(size_type size);
+		SparseVector(const SparseVector&) = default;
+		SparseVector(SparseVector&&) noexcept = default;
+		~SparseVector() = default;
+		SparseVector& operator=(const SparseVector&) = default;
+		SparseVector& operator=(SparseVector&&) noexcept = default;
 
-	/**
-	 * @return Returns a read/write iterator that points to the first element in the %SparseVector.
-	 * Iteration is done in ordinary element order.
-	 */
-	iterator begin()
-	{
-		return _container.begin();
-	}
+		// STL Container Interface
+		size_type size() const;
+		[[nodiscard]] bool empty() const;
+		iterator begin();
+		iterator end();
+		const_iterator begin() const;
+		const_iterator end() const;
 
-	/**
-	 * @return Returns a read/write iterator that points one past the last element in the %SparseVector.
-	 * Iteration is done in ordinary element order.
-	 */
-	iterator end()
-	{
-		return _container.end();
-	}
+		/**
+		* @brief Subscript access to the data contained in the %SparseVector.
+		* @param index The index of the element for which data should be accessed.
+		* @return Returns a read/write reference to the element at specified location.
+		*/
+		reference_type operator[](size_type index);
 
-	/**
-	 * @return Returns a read-only (constant) iterator that points to the first element in the %SparseVector.
-	 * Iteration is done in ordinary element order.
-	 */
-	const_iterator begin() const
-	{
-		return _container.cbegin();
-	}
+		/**
+		* @brief Subscript access to the data contained in the %SparseVector.
+		* @param index The index of the element for which data should be accessed.
+		* @return Read-only (constant) reference to data.
+		*/
+		const_reference_type operator[](size_type index) const;
 
-	/**
-	 * @return Returns a read-only (constant) iterator that points one past the last element in the %SparseVector.
-	 * Iteration is done in ordinary element order.
-	 */
-	const_iterator end() const
-	{
-		return _container.cend();
-	}
+		/**
+		* @brief Attempts to build and insert an element into the %SparseVector.
+		* @param index The index of the element to be inserted.
+		* @param args Arguments used to construct the element.
+		* @return
+		*/
+		template<typename... Args>
+		reference_type Emplace(size_type index, Args&& ... args);
 
-	/**
-	 * @brief Subscript access to the data contained in the %SparseVector.
-	 * @param index The index of the element for which data should be accessed.
-	 * @return Returns a read/write reference to the element at specified location.
-	 */
-	reference_type operator[](size_type index)
-	{
-		CONCERTO_ASSERT(index >= _container.size() - 1)
-		if (!Has(index))
-			throw std::runtime_error("Index Has no value");
-		return _container[index].value();
-	}
+		/**
+		* @brief Removes the element at specified index from the %SparseVector.
+		* @param index The index of the element to be removed.
+		*/
+		void Erase(size_type index);
 
-	/**
-	 * @brief Subscript access to the data contained in the %SparseVector.
-	 * @param index The index of the element for which data should be accessed.
-	 * @return Read-only (constant) reference to data.
-	 */
-	const_reference_type operator[](size_type index) const
-	{
-		CONCERTO_ASSERT(index >= _container.size() - 1)
-		if (!Has(index))
-			throw std::runtime_error("Index Has no value");
-		return _container[index].value();
-	}
+		/**
+		* @param index The index of the element to be tested.
+		* @return Returns true if the element at specified location Has a value.
+		*/
+		bool Has(size_type index) const;
 
-	/**
-	 * @brief Attempts to build and insert an element into the %SparseVector.
-	 * @param index The index of the element to be inserted.
-	 * @param args Arguments used to construct the element.
-	 * @return
-	 */
-	template<typename... Args>
-	reference_type Emplace(size_type index, Args&& ... args)
-	{
-		if (index >= _container.size())
-			_container.resize(index + 1);
-		_container[index] = std::make_optional<value_type>((std::forward<Args>(args))...);
-		return _container.at(index).value();
-	}
+		/**
+		* @brief Removes all elements from the %SparseVector.
+		*/
+		void Clear();
+	private:
+		container_type _container;
+	};
+}
 
-	/**
-	 * @brief Removes the element at specified index from the %SparseVector.
-	 * @param index The index of the element to be removed.
-	 */
-	void Erase(size_type index)
-	{
-		CONCERTO_ASSERT(index >= _container.size() - 1 || !_container[index].has_value())
-		_container[index].reset();
-	}
-
-	/**
-	 * @param index The index of the element to be tested.
-	 * @return Returns true if the element at specified location Has a value.
-	 */
-	bool Has(size_type index) const
-	{
-		return index < _container.size() && _container[index].has_value();
-	}
-
-private:
-	container_type _container;
-};
-
-#endif // CONCERTO_SPARSEVECTOR_HPP
+#include "Concerto/Core/SparseVector.inl"
+#endif // CONCERTOCORE_SPARSEVECTOR_HPP
