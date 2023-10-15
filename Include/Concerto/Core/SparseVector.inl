@@ -33,7 +33,7 @@ namespace Concerto
 	{
 		return _container.begin();
 	}
-	
+
 	template<typename value_type, typename allocator>
 	SparseVector<value_type, allocator>::iterator SparseVector<value_type, allocator>::end()
 	{
@@ -55,18 +55,18 @@ namespace Concerto
 	template<typename value_type, typename allocator>
 	SparseVector<value_type, allocator>::reference_type SparseVector<value_type, allocator>::operator[](size_type index)
 	{
-		CONCERTO_ASSERT(index >= _container.size() - 1)
-			if (index >= _container.size())
-				throw std::out_of_range("Index out of range");
-			if (!Has(index))
-				throw std::runtime_error("Index Has no value");
-			return _container[index].value();
+		CONCERTO_ASSERT(!(index >= _container.size() - 1))
+		if (index >= _container.size())
+			throw std::out_of_range("Index out of range");
+		if (!Has(index))
+			throw std::runtime_error("Index Has no value");
+		return _container[index].value();
 	}
 
 	template<typename value_type, typename allocator>
 	SparseVector<value_type, allocator>::const_reference_type SparseVector<value_type, allocator>::operator[](size_type index) const
 	{
-		CONCERTO_ASSERT(index >= _container.size() - 1)
+		CONCERTO_ASSERT(!(index >= _container.size() - 1))
 		if (index >= _container.size())
 			throw std::out_of_range("Index out of range");
 		if (!Has(index))
