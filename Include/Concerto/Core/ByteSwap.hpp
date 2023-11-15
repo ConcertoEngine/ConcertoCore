@@ -2,8 +2,8 @@
 // Created by arthur on 29/05/2023.
 //
 
-#ifndef CONCERTOCORE_INCLUDE_CONCERTO_CORE_BYTESWAP_HPP_
-#define CONCERTOCORE_INCLUDE_CONCERTO_CORE_BYTESWAP_HPP_
+#ifndef CONCERTOCORE_BYTESWAP_HPP_
+#define CONCERTOCORE_BYTESWAP_HPP_
 #include <bit>
 #include "Concerto/Core/Types.hpp"
 
@@ -21,7 +21,7 @@ namespace Concerto
 	{
 		if constexpr (std::endian::native == std::endian::big)
 			return value;
-		Byte* bytes = reinterpret_cast<Byte*>(&value);
+		auto* bytes = reinterpret_cast<Byte*>(&value);
 		std::size_t i = 0;
 		std::size_t j = sizeof(T) - 1;
 
@@ -31,4 +31,4 @@ namespace Concerto
 	}
 }
 
-#endif //CONCERTOCORE_INCLUDE_CONCERTO_CORE_BYTESWAP_HPP_
+#endif //CONCERTOCORE_BYTESWAP_HPP_

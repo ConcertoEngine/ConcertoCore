@@ -61,7 +61,7 @@ namespace Concerto::Math
 		 * @brief Calculates the Magnitude of the quaternion
 		 * @return T The Magnitude
 		 */
-		T Magnitude() const
+		[[nodiscard]] T Magnitude() const
 		{
 			return _w * _w + _x * _x + _y * _y
 				+ _z * _z;
@@ -71,7 +71,7 @@ namespace Concerto::Math
 		 * @brief Calculates the length of the quaternion
 		 * @return T The length
 		 */
-		T Length() const
+		[[nodiscard]] T Length() const
 		{
 			return std::sqrt(Magnitude());
 		}
@@ -81,7 +81,7 @@ namespace Concerto::Math
 		 * @attention The quaternion must be normalized
 		 * @return Vector3<T> The euler angles
 		 */
-		EulerAngles<T> ToEulerAngles() const
+		[[nodiscard]] EulerAngles<T> ToEulerAngles() const
 		{
 			//According to http://www.euclideanspace.com/maths/geometry/rotations/conversions/quaternionToEuler/
 			T test = _x * _y + _z * _w;
@@ -141,7 +141,7 @@ namespace Concerto::Math
 		 * @brief Get the x axis
 		 * @return The x axis value
 		 */
-		constexpr T X() const noexcept
+		[[nodiscard]] constexpr T X() const noexcept
 		{
 			return _x;
 		}
@@ -150,7 +150,7 @@ namespace Concerto::Math
 		 * @brief Get the y axis
 		 * @return The y axis value
 		 */
-		constexpr T Y() const noexcept
+		[[nodiscard]] constexpr T Y() const noexcept
 		{
 			return _y;
 		}
@@ -159,7 +159,7 @@ namespace Concerto::Math
 		 * @brief Get the z axis
 		 * @return The z axis value
 		 */
-		constexpr T Z() const noexcept
+		[[nodiscard]] constexpr T Z() const noexcept
 		{
 			return _z;
 		}
@@ -168,7 +168,7 @@ namespace Concerto::Math
 		 * @brief Get the w scalar
 		 * @return The w scalar value
 		 */
-		constexpr T W() const noexcept
+		[[nodiscard]] constexpr T W() const noexcept
 		{
 			return _w;
 		}
@@ -197,7 +197,7 @@ namespace Concerto::Math
 		 * @brief Get the inverse of this quaternion
 		 * @return Quaternion The inverse of this quaternion
 		 */
-		Quaternion<T> Inverse() const noexcept
+		[[nodiscard]] Quaternion<T> Inverse() const noexcept
 		{
 			return Quaternion<T>(-_x, -_y, -_z, -_w);
 		}

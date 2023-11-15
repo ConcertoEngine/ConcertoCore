@@ -2,8 +2,8 @@
 // Created by arthur on 25/05/2023.
 //
 
-#ifndef CONCERTOCORE_INCLUDE_CONCERTO_CORE_NETWORK_IPADRESS_HPP_
-#define CONCERTOCORE_INCLUDE_CONCERTO_CORE_NETWORK_IPADRESS_HPP_
+#ifndef CONCERTOCORE_NETWORK_IPADRESS_HPP_
+#define CONCERTOCORE_NETWORK_IPADRESS_HPP_
 
 #include <array>
 #include <string_view>
@@ -14,8 +14,8 @@ namespace Concerto::Network
 	enum class IpProtocol
 	{
 		Error = -1,
-		IPV4,
-		IPV6
+		Ipv4,
+		Ipv6
 	};
 
 	class CONCERTO_PUBLIC_API IpAddress
@@ -44,7 +44,7 @@ namespace Concerto::Network
 		
 		static IpProtocol DetectProtocol(std::string_view ip);
 		
-		void SetPort(UInt16 i);
+		void SetPort(UInt16 port);
 
 		static const IpAddress AnyIPV4;
 	 private:
@@ -57,4 +57,4 @@ namespace Concerto::Network
 		UInt16 _port;
 	};
 }
-#endif //CONCERTOCORE_INCLUDE_CONCERTO_CORE_NETWORK_IPADRESS_HPP_
+#endif //CONCERTOCORE_NETWORK_IPADRESS_HPP_

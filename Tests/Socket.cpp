@@ -15,10 +15,10 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 	TEST(Socket, TcpServer)
 	{
 		Socket::Initialize();
-		Socket server(SocketType::TCP, IpProtocol::IPV4);
+		Socket server(SocketType::Tcp, IpProtocol::Ipv4);
 		server.SetBlocking(true);
 		server.Listen(IpAddress::AnyIPV4, 8080);
-		Socket client(SocketType::TCP, IpProtocol::IPV4);
+		Socket client(SocketType::Tcp, IpProtocol::Ipv4);
 		IpAddress ip(127, 0, 0, 1, 8080);
 		client.Connect(ip);
 		std::string helloWorld = "Hello World";
@@ -26,7 +26,7 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 		std::memcpy(buffer.GetRawData(), helloWorld.c_str(), 11);
 		client.Send(buffer);
 
-		Socket serverClient(SocketType::TCP, IpProtocol::IPV4);
+		Socket serverClient(SocketType::Tcp, IpProtocol::Ipv4);
 		serverClient.SetBlocking(true);
 		server.Accept(serverClient);
 
@@ -42,12 +42,12 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 	TEST(Socket, UdpServer)
 	{
 		Socket::Initialize();
-		Socket server(SocketType::UDP, IpProtocol::IPV4);
+		Socket server(SocketType::Udp, IpProtocol::Ipv4);
 		server.SetBlocking(true);
 		ASSERT_TRUE(server.Bind(IpAddress::AnyIPV4, 8080));
 
 		
-		Socket client(SocketType::UDP, IpProtocol::IPV4);
+		Socket client(SocketType::Udp, IpProtocol::Ipv4);
 		IpAddress ip(127, 0, 0, 1, 8080);
 		client.Connect(ip);
 		std::string helloWorld = "Hello World";

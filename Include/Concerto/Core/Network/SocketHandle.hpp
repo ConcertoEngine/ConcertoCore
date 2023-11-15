@@ -2,8 +2,8 @@
 // Created by arthur on 25/05/2023.
 //
 
-#ifndef CONCERTOCORE_INCLUDE_CONCERTO_CORE_NETWORK_SOCKETHANDLE_HPP_
-#define CONCERTOCORE_INCLUDE_CONCERTO_CORE_NETWORK_SOCKETHANDLE_HPP_
+#ifndef CONCERTOCORE_NETWORK_SOCKETHANDLE_HPP_
+#define CONCERTOCORE_NETWORK_SOCKETHANDLE_HPP_
 
 #include "Concerto/Core/Types.hpp"
 #ifdef CONCERTO_PLATFORM_WINDOWS
@@ -19,8 +19,8 @@ namespace Concerto::Network
 
 	enum class SocketType
 	{
-		TCP,
-		UDP
+		Tcp,
+		Udp
 	};
 
 	enum class SocketError
@@ -38,4 +38,4 @@ namespace Concerto::Network
 	};
 
 }
-#endif //CONCERTOCORE_INCLUDE_CONCERTO_CORE_NETWORK_SOCKETHANDLE_HPP_
+#endif //CONCERTOCORE_NETWORK_SOCKETHANDLE_HPP_

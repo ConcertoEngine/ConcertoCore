@@ -46,7 +46,7 @@ namespace Concerto
 				config.push_back({ key, std::make_shared<Config::Node>(value.get<std::string>()) });
 			else if (value.is_primitive())
 				config.push_back({ key, GetPrimitive(value) });
-			else throw std::logic_error("Unknow value type: " + value.dump());
+			else throw std::logic_error("Unknown value type: " + value.dump());
 		}
 		return config;
 	}
@@ -64,7 +64,7 @@ namespace Concerto
 				config.push_back(std::make_shared<Config::Node>(GetArray(value)));
 			else if (value.is_string())
 				config.push_back(std::make_shared<Config::Node>(value.get<std::string>()));
-			else throw std::logic_error("Unknow value type: " + value.dump());
+			else throw std::logic_error("Unknown value type: " + value.dump());
 		}
 		return config;
 	}

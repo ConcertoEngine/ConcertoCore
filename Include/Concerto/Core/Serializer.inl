@@ -2,8 +2,8 @@
 // Created by arthur on 29/05/2023.
 //
 
-#ifndef CONCERTOCORE_INCLUDE_CONCERTO_CORE_SERIALIZER_INL_
-#define CONCERTOCORE_INCLUDE_CONCERTO_CORE_SERIALIZER_INL_
+#ifndef CONCERTOCORE_SERIALIZER_INL_
+#define CONCERTOCORE_SERIALIZER_INL_
 #include "Concerto/Core/Serializer.hpp"
 #include "Concerto/Core/Stream.hpp"
 #include "Concerto/Core/ByteSwap.hpp"
@@ -41,4 +41,4 @@ namespace Concerto
 	}
 }
 
-#endif //CONCERTOCORE_INCLUDE_CONCERTO_CORE_SERIALIZER_INL_
+#endif //CONCERTOCORE_SERIALIZER_INL_

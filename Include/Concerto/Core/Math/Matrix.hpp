@@ -68,7 +68,7 @@ namespace Concerto::Math
 		 * @param column The column of the matrix.
 		 * @return Constant reference to the value of the matrix at the given position.
 		 */
-		constexpr const T& GetElement(std::size_t row, std::size_t column) const noexcept
+		[[nodiscard]] constexpr const T& GetElement(std::size_t row, std::size_t column) const noexcept
 		{
 			CONCERTO_ASSERT(row < Rows);
 			CONCERTO_ASSERT(column < Columns);
@@ -97,7 +97,7 @@ namespace Concerto::Math
 		 * @brief Inverse the matrix.
 		 * @return A new matrix that is the inverse of the matrix.
 		 */
-		constexpr Matrix<T, Rows, Columns> Inverse() const noexcept
+		[[nodiscard]] constexpr Matrix<T, Rows, Columns> Inverse() const noexcept
 		{
 			Matrix<T, Rows, Columns> result;
 			for (std::size_t i = 0; i < Rows; ++i)

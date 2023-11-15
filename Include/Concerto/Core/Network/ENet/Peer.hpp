@@ -18,15 +18,25 @@ namespace Concerto::Network
 	{
 	public:
 		using ENetPeerHandle = void*;
+		ENetPeer() = delete;
 		ENetPeer(ENetPeerHandle peer);
+		ENetPeer(const ENetPeer&) = default;
+		ENetPeer(ENetPeer&&) = default;
+		~ENetPeer() = default;
+
 		void Disconnect(UInt32 data = 0);
 		void DisconnectNow(UInt32 data = 0);
 		void DisconnectLater(UInt32 data = 0);
-		void SetTimeout(UInt32 timeoutLimit, UInt32 timeoutMinimum, UInt32 timeoutMaximum);
+
 		void Ping();
+
+		void SetTimeout(UInt32 timeoutLimit, UInt32 timeoutMinimum, UInt32 timeoutMaximum);
 		void SetPingInterval(UInt32 pingInterval);
 		bool SendPacket(const Packet& packet, UInt8 channel = 0, ENetPacket::Flag flags = ENetPacket::Flag::Reliable);
 		bool SendPacket(const void* data, std::size_t size, UInt8 channel = 0, ENetPacket::Flag flags = ENetPacket::Flag::Reliable);
+
+		ENetPeer& operator=(const ENetPeer&) = delete;
+		ENetPeer& operator=(ENetPeer&&) = default;
 	private:
 		ENetPeerHandle _peer;
 	};

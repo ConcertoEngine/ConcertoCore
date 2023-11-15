@@ -2,8 +2,8 @@
 // Created by arthur on 28/05/2023.
 //
 
-#ifndef CONCERTOCORE_INCLUDE_CONCERTO_CORE_NETWORK_PACKET_HPP_
-#define CONCERTOCORE_INCLUDE_CONCERTO_CORE_NETWORK_PACKET_HPP_
+#ifndef CONCERTOCORE_NETWORK_PACKET_HPP_
+#define CONCERTOCORE_NETWORK_PACKET_HPP_
 
 #include <cstddef>
 #include "Concerto/Core/Types.hpp"
@@ -17,7 +17,7 @@ namespace Concerto::Network
 	 public:
 		Packet();
 		Packet(UInt8 packetType, const void* data, std::size_t size);
-		Packet(UInt8 packetType, std::size_t capacity = 0);
+		explicit Packet(UInt8 packetType, std::size_t capacity = 0);
 
 		[[nodiscard]] UInt8 GetPacketType() const;
 		[[nodiscard]] const Byte* GetData() const;
@@ -47,4 +47,4 @@ namespace Concerto::Network
 	};
 }
 
-#endif //CONCERTOCORE_INCLUDE_CONCERTO_CORE_NETWORK_PACKET_HPP_
+#endif //CONCERTOCORE_NETWORK_PACKET_HPP_

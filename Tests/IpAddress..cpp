@@ -16,18 +16,18 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 	{
 		IpAddress ip(LocalHost, 2121);
 		EXPECT_EQ(ip.ToUInt32(), LocalHost);
-		EXPECT_EQ(ip.GetProtocol(), IpProtocol::IPV4);
+		EXPECT_EQ(ip.GetProtocol(), IpProtocol::Ipv4);
 		EXPECT_EQ(ip.GetIPv4(), LocalHostArray);
 
 		ip = IpAddress("127.0.0.1", 2121);
 		EXPECT_EQ(ip.ToUInt32(), LocalHost);
 		EXPECT_EQ(ip.GetIPv4(), LocalHostArray);
-		EXPECT_EQ(ip.GetProtocol(), IpProtocol::IPV4);
+		EXPECT_EQ(ip.GetProtocol(), IpProtocol::Ipv4);
 
 		ip = IpAddress(LocalHostArray, 2121);
 		EXPECT_EQ(ip.ToUInt32(), LocalHost);
 		EXPECT_EQ(ip.GetIPv4(), LocalHostArray);
-		EXPECT_EQ(ip.GetProtocol(), IpProtocol::IPV4);
+		EXPECT_EQ(ip.GetProtocol(), IpProtocol::Ipv4);
 
 		ip = IpAddress("xxx.x.x.x", 2121);
 		EXPECT_EQ(ip.GetProtocol(), IpProtocol::Error);

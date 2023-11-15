@@ -70,8 +70,8 @@ namespace Concerto
         template<typename T>
         static void Error(const T& message)
         {
+			CONCERTO_ASSERT_FALSE;
 			Log(message, LogLevel::Error);
-			throw std::runtime_error(message);
         }
 
         /**

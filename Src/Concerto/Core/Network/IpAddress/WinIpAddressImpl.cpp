@@ -25,7 +25,7 @@ namespace Concerto::Network
 
 	sockaddr_in IpAddressImpl::ToSockAddr(const IpAddress& address)
 	{
-		if (address.GetProtocol() != IpProtocol::IPV4)
+		if (address.GetProtocol() != IpProtocol::Ipv4)
 			throw std::runtime_error("Not implemented");
 		sockaddr_in addr = {};
 		const IpAddress::IPv4 ipv4 = address.GetIPv4();

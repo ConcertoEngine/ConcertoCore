@@ -15,18 +15,24 @@ namespace Concerto::Network
 	class CONCERTO_PUBLIC_API ENetHost
 	{
 	 public:
-		using ENetHostHandle = void*;
-		ENetHost(IpAddress* address = nullptr, std::size_t maxConnections = 1, std::size_t maxChannels = 2, UInt32 maxIncomingBandwidth = 0, UInt32 maxOutgoingBandwidth = 0);
+		using Handle = void*;
+		explicit ENetHost(IpAddress* address = nullptr, std::size_t maxConnections = 1, std::size_t maxChannels = 2, UInt32 maxIncomingBandwidth = 0, UInt32 maxOutgoingBandwidth = 0);
+		ENetHost(const ENetHost&) = delete;
+		ENetHost(ENetHost&&) = default;
 		virtual ~ENetHost();
+
 
 		virtual Int32 PollEvent(ENetEvent* event, UInt32 timeout = 0);
 		bool SendPacket(const void* data, std::size_t size, ENetPeer* peer, UInt8 channel = 0, ENetPacket::Flag flags = ENetPacket::Flag::Reliable);
 		bool SendPacket(const ENetPacket& packet, ENetPeer* peer, UInt8 channel = 0, ENetPacket::Flag flags = ENetPacket::Flag::Reliable);
 		void Flush();
+
+		ENetHost& operator=(const ENetHost&) = delete;
+		ENetHost& operator=(ENetHost&&) = default;
 	 protected:
 		bool CreateHost(IpAddress* address = nullptr);
 
-		ENetHostHandle _enetHost;
+		Handle _enetHost;
 		std::size_t _maxConnections;
 		std::size_t _maxChannels;
 		UInt32 _maxIncomingBandwidth;

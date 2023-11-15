@@ -8,7 +8,7 @@
 
 namespace Concerto::Network
 {
-	::ENetHost* ToENetHost(ENetHost::ENetHostHandle handle)
+	::ENetHost* ToENetHost(ENetHost::Handle handle)
 	{
 		return static_cast<::ENetHost*>(handle);
 	}

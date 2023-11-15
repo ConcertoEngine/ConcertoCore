@@ -15,19 +15,20 @@ namespace Concerto
 	/**
 	* @brief SparseVector
 	* A container which offers fixed time access to individual elements in any order, its indices can contain gaps.
-	* @tparam value_type Type of the elements
-	* @tparam allocator Allocator used to allocate the elements
+	* @tparam ValueType Type of the elements
+	* @tparam Allocator Allocator used to allocate the elements
 	*/
-	template<typename value_type, typename allocator = std::allocator<std::optional<value_type>>>
+	template<typename ValueType, typename Allocator = std::allocator<std::optional<ValueType>>>
 	class SparseVector
 	{
 	public:
-		using container_type = std::vector<std::optional<value_type>, allocator>;
-		using reference_type = value_type&;
-		using const_reference_type = const value_type&;
+		using container_type = std::vector<std::optional<ValueType>, Allocator>;
+		using reference_type = ValueType&;
+		using const_reference_type = const ValueType&;
 		using size_type = typename container_type::size_type;
 		using iterator = typename container_type::iterator;
 		using const_iterator = typename container_type::const_iterator;
+		using value_type = ValueType;
 
 		SparseVector() = default;
 		explicit SparseVector(size_type size);
@@ -38,12 +39,12 @@ namespace Concerto
 		SparseVector& operator=(SparseVector&&) noexcept = default;
 
 		// STL Container Interface
-		size_type size() const;
+		[[nodiscard]] size_type size() const;
 		[[nodiscard]] bool empty() const;
 		iterator begin();
 		iterator end();
-		const_iterator begin() const;
-		const_iterator end() const;
+		[[nodiscard]] const_iterator begin() const;
+		[[nodiscard]] const_iterator end() const;
 
 		/**
 		* @brief Subscript access to the data contained in the %SparseVector.
@@ -78,7 +79,7 @@ namespace Concerto
 		* @param index The index of the element to be tested.
 		* @return Returns true if the element at specified location Has a value.
 		*/
-		bool Has(size_type index) const;
+		[[nodiscard]] bool Has(size_type index) const;
 
 		/**
 		* @brief Removes all elements from the %SparseVector.

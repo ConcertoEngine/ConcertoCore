@@ -24,13 +24,14 @@ namespace Concerto::Network
 	}
 
 	Socket::Socket(Socket&& other) noexcept :
-		_handle(std::move(other._handle)),
-		_type(std::move(other._type)),
-		_lastError(std::move(other._lastError)),
-		_ipProtocol(std::move(other._ipProtocol)),
-		_blocking(std::move(other._blocking))
+		_handle(other._handle),
+		_type(other._type),
+		_lastError(other._lastError),
+		_ipProtocol(other._ipProtocol),
+		_blocking(other._blocking)
 	{
-
+		other._handle = SocketImpl::InvalidSocket;
+		other._lastError = SocketError::NoError;
 	}
 
 	Socket::~Socket()

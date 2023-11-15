@@ -2,8 +2,8 @@
 // Created by arthur on 25/05/2023.
 //
 
-#ifndef CONCERTOCORE_INCLUDE_CONCERTO_CORE_NETWORK_SOCKET_HPP_
-#define CONCERTOCORE_INCLUDE_CONCERTO_CORE_NETWORK_SOCKET_HPP_
+#ifndef CONCERTOCORE_NETWORK_SOCKET_HPP_
+#define CONCERTOCORE_NETWORK_SOCKET_HPP_
 
 #include <cstddef>
 
@@ -17,13 +17,14 @@ namespace Concerto
 
 namespace Concerto::Network
 {
-	class CONCERTO_PUBLIC_API Socket
+	class CONCERTO_PUBLIC_API Socket final
 	{
 	 public:
+		Socket() = delete;
 		Socket(SocketType socketType, IpProtocol ipProtocol);
 		Socket(const Socket&) = delete;
 		Socket(Socket&&) noexcept;
-		virtual ~Socket();
+		~Socket();
 
 		void Close();
 
@@ -54,4 +55,4 @@ namespace Concerto::Network
 	};
 }
 
-#endif //CONCERTOCORE_INCLUDE_CONCERTO_CORE_NETWORK_SOCKET_HPP_
+#endif //CONCERTOCORE_NETWORK_SOCKET_HPP_

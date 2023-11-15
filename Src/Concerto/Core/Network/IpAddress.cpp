@@ -17,14 +17,14 @@ namespace Concerto::Network
 
 	IpAddress::IpAddress(const IpAddress::IPv4& ip, UInt16 port) :
 		_ipv4(ip), 
-		_protocol(IpProtocol::IPV4), 
+		_protocol(IpProtocol::Ipv4), 
 		_port(port)
 	{
 
 	}
 	IpAddress::IpAddress(const IpAddress::IPv6& ip, UInt16 port) : 
 		_ipv6(ip), 
-		_protocol(IpProtocol::IPV6), 
+		_protocol(IpProtocol::Ipv6), 
 		_port(port)
 	{
 
@@ -32,7 +32,7 @@ namespace Concerto::Network
 
 	IpAddress::IpAddress(UInt8 a, UInt8 b, UInt8 c, UInt8 d, UInt16 port) :
 		_ipv4({ a, b, c, d }),
-		_protocol(IpProtocol::IPV4),
+		_protocol(IpProtocol::Ipv4),
 		_port(port)
 	{
 
@@ -43,7 +43,7 @@ namespace Concerto::Network
 				static_cast<UInt8>(address >> 16),
 				static_cast<UInt8>(address >> 8),
 				static_cast<UInt8>(address) }),
-		_protocol(IpProtocol::IPV4),
+		_protocol(IpProtocol::Ipv4),
 		_port(port)
 	{
 
@@ -59,7 +59,7 @@ namespace Concerto::Network
 			Logger::Error("Parsing IP address on POSIX systems is not yet supported");
 			CONCERTO_ASSERT_FALSE;
 #else
-			_protocol = IpProtocol::IPV4;
+			_protocol = IpProtocol::Ipv4;
 			auto segments = ip
 				| std::views::split('.')
 				| std::views::transform([](auto v) {
@@ -90,13 +90,13 @@ namespace Concerto::Network
 
 	const IpAddress::IPv4& IpAddress::GetIPv4() const
 	{
-		CONCERTO_ASSERT(_protocol == IpProtocol::IPV4);
+		CONCERTO_ASSERT(_protocol == IpProtocol::Ipv4);
 		return _ipv4;
 	}
 
 	const IpAddress::IPv6& IpAddress::GetIPv6() const
 	{
-		CONCERTO_ASSERT(_protocol == IpProtocol::IPV6);
+		CONCERTO_ASSERT(_protocol == IpProtocol::Ipv6);
 		return _ipv6;
 	}
 
@@ -112,18 +112,18 @@ namespace Concerto::Network
 
 	UInt32 IpAddress::ToUInt32() const
 	{
-		CONCERTO_ASSERT(_protocol == IpProtocol::IPV4);
+		CONCERTO_ASSERT(_protocol == IpProtocol::Ipv4);
 		return (_ipv4[0] << 24) | (_ipv4[1] << 16) | (_ipv4[2] << 8) | _ipv4[3];
 	}
 
 	std::string IpAddress::ToString() const
 	{
 		std::string ip;
-		if (_protocol == IpProtocol::IPV4)
+		if (_protocol == IpProtocol::Ipv4)
 		{
 			ip = std::to_string(_ipv4[0]) + "." + std::to_string(_ipv4[1]) + "." + std::to_string(_ipv4[2]) + "." + std::to_string(_ipv4[3]);
 		}
-		else if (_protocol == IpProtocol::IPV6)
+		else if (_protocol == IpProtocol::Ipv6)
 		{
 			CONCERTO_ASSERT_FALSE;
 		}
@@ -150,9 +150,9 @@ namespace Concerto::Network
 	IpProtocol IpAddress::DetectProtocol(std::string_view ip)
 	{
 		if (IsIpV4(ip))
-			return IpProtocol::IPV4;
+			return IpProtocol::Ipv4;
 		else if (IsIpV6(ip))
-			return IpProtocol::IPV6;
+			return IpProtocol::Ipv6;
 		return IpProtocol::Error;
 	}
 }

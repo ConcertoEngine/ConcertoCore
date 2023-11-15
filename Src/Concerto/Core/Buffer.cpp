@@ -13,7 +13,7 @@ namespace Concerto
 	}
 
 	Buffer::Buffer(const void* data, Buffer::size_type size) :
-		_data(static_cast<const_pointer>(data), static_cast<const_pointer>(data) + size)
+		_data(static_cast<const_pointer>(data),static_cast<const_pointer>(data) + size)
 	{
 
 	}

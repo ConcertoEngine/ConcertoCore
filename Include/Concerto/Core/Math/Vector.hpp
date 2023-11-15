@@ -123,7 +123,7 @@ namespace Concerto::Math
 		 * @param other The other vector
 		 * @return The dot product
 		 */
-		constexpr T Dot(const Vector& other) const noexcept
+		[[nodiscard]] constexpr T Dot(const Vector& other) const noexcept
 		{
 			T result = 0;
 			for (std::size_t i = 0; i < Size; ++i)
@@ -139,7 +139,7 @@ namespace Concerto::Math
 		 * @param other The other vector
 		 * @return A new vector that is the cross product of the two vectors
 		 */
-		constexpr Vector<T, Size> Cross(const Vector& other) const noexcept
+		[[nodiscard]] constexpr Vector<T, Size> Cross(const Vector& other) const noexcept
 		{
 			static_assert(Size == 3, "Error : Cross product require a vector of size 3");
 			Vector<T, Size> result;
@@ -153,7 +153,7 @@ namespace Concerto::Math
 		 * @brief Normalize the vector
 		 * @return A new vector that is the normalized version of the vector
 		 */
-		constexpr Vector<T, Size> Normalize() const noexcept
+		[[nodiscard]] constexpr Vector<T, Size> Normalize() const noexcept
 		{
 			return *this / Length();
 		}
@@ -162,12 +162,12 @@ namespace Concerto::Math
 		 * @brief Get the length of the vector
 		 * @return The length of the vector
 		 */
-		constexpr T Length() const noexcept
+		[[nodiscard]] constexpr T Length() const noexcept
 		{
 			return std::sqrt(Dot(*this));
 		}
 
-		constexpr Vector<T, Size> Reflect(const Vector& normal) const noexcept
+		[[nodiscard]] constexpr Vector<T, Size> Reflect(const Vector& normal) const noexcept
 		{
 			return *this - normal * 2 * Dot(normal);
 		}
