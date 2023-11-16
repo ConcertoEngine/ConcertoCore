@@ -2,8 +2,8 @@
 // Created by arthur on 14/03/2023.
 //
 
-#ifndef CONCERTOCORE_MATH_EULERANGLES_HPP_
-#define CONCERTOCORE_MATH_EULERANGLES_HPP_
+#ifndef CONCERTO_CORE_MATH_EULERANGLES_HPP_
+#define CONCERTO_CORE_MATH_EULERANGLES_HPP_
 
 #include "Concerto/Core/Math/Vector.hpp"
 #include "Concerto/Core/Stream.hpp"
@@ -108,4 +108,4 @@ namespace Concerto::Math
 }
 #include "EulerAngles.inl"
 
-#endif //CONCERTOCORE_MATH_EULERANGLES_HPP_
+#endif //CONCERTO_CORE_MATH_EULERANGLES_HPP_

@@ -2,8 +2,8 @@
 // Created by arthur on 29/05/2023.
 //
 
-#ifndef CONCERTOCORE_STREAM_HPP_
-#define CONCERTOCORE_STREAM_HPP_
+#ifndef CONCERTO_CORE_STREAM_HPP_
+#define CONCERTO_CORE_STREAM_HPP_
 
 #include <cstddef>
 #include <vector>
@@ -46,4 +46,4 @@ namespace Concerto
 
 #include "Stream.inl"
 
-#endif //CONCERTOCORE_STREAM_HPP_
+#endif //CONCERTO_CORE_STREAM_HPP_

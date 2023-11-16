@@ -2,8 +2,8 @@
 // Created by arthur on 27/05/2023.
 //
 
-#ifndef CONCERTOCORE_BUFFER_HPP_
-#define CONCERTOCORE_BUFFER_HPP_
+#ifndef CONCERTO_CORE_BUFFER_HPP_
+#define CONCERTO_CORE_BUFFER_HPP_
 #include <vector>
 #include "Concerto/Core/Types.hpp"
 
@@ -147,4 +147,4 @@ namespace Concerto
 		container_type _data;
 	};
 }
-#endif //CONCERTOCORE_BUFFER_HPP_
+#endif //CONCERTO_CORE_BUFFER_HPP_

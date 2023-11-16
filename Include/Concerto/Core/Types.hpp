@@ -2,8 +2,8 @@
 // Created by arthur on 22/02/2023.
 //
 
-#ifndef CONCERTOCORE_INCLUDE_TYPES_HPP_
-#define CONCERTOCORE_INCLUDE_TYPES_HPP_
+#ifndef CONCERTO_CORE_INCLUDE_TYPES_HPP_
+#define CONCERTO_CORE_INCLUDE_TYPES_HPP_
 
 #include <cstdint>
 
@@ -85,4 +85,4 @@ namespace Concerto
 	CONCERTO_PUBLIC_API bool IsDebuggerAttached();
 }; // namespace Concerto
 
-#endif //CONCERTOCORE_INCLUDE_TYPES_HPP_
+#endif //CONCERTO_CORE_INCLUDE_TYPES_HPP_

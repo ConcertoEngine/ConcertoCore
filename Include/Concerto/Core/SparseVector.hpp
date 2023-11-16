@@ -2,8 +2,8 @@
 // Created by arthur on 21/05/22.
 //
 
-#ifndef CONCERTOCORE_SPARSEVECTOR_HPP
-#define CONCERTOCORE_SPARSEVECTOR_HPP
+#ifndef CONCERTO_CORE_SPARSEVECTOR_HPP
+#define CONCERTO_CORE_SPARSEVECTOR_HPP
 
 #include <vector>
 #include <optional>
@@ -91,4 +91,4 @@ namespace Concerto
 }
 
 #include "Concerto/Core/SparseVector.inl"
-#endif // CONCERTOCORE_SPARSEVECTOR_HPP
+#endif // CONCERTO_CORE_SPARSEVECTOR_HPP

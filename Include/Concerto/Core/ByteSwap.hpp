@@ -2,8 +2,8 @@
 // Created by arthur on 29/05/2023.
 //
 
-#ifndef CONCERTOCORE_BYTESWAP_HPP_
-#define CONCERTOCORE_BYTESWAP_HPP_
+#ifndef CONCERTO_CORE_BYTESWAP_HPP_
+#define CONCERTO_CORE_BYTESWAP_HPP_
 #include <bit>
 #include "Concerto/Core/Types.hpp"
 
@@ -31,4 +31,4 @@ namespace Concerto
 	}
 }
 
-#endif //CONCERTOCORE_BYTESWAP_HPP_
+#endif //CONCERTO_CORE_BYTESWAP_HPP_
