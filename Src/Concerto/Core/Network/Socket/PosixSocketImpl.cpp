@@ -50,8 +50,8 @@ namespace Concerto::Network
 
 	SocketHandle SocketImpl::Create(SocketType socketType, IpProtocol protocol, SocketError* error)
 	{
-		SocketHandle handle = socket(protocol == IpProtocol::IPV4 ? AF_INET : AF_INET6,
-									 socketType == SocketType::TCP ? SOCK_STREAM : SOCK_DGRAM, 0);
+		SocketHandle handle = socket(protocol == IpProtocol::Ipv4 ? AF_INET : AF_INET6,
+									 socketType == SocketType::Tcp ? SOCK_STREAM : SOCK_DGRAM, 0);
 		if (handle == InvalidSocket)
 		{
 			if (error != nullptr)
