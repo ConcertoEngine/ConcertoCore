@@ -17,7 +17,7 @@ namespace Concerto
 	 * @brief A class that can store any type of data.
 	 * Use Any::Make to create an Any object.
 	 */
-	class Any
+	class CONCERTO_PUBLIC_API Any
 	{
 	 private:
 		explicit Any(std::size_t id, std::unique_ptr<void*> data);
