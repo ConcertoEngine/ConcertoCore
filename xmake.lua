@@ -1,18 +1,19 @@
 add_requires('gtest', 'nlohmann_json 3.11.2', 'enet')
-add_rules("mode.debug")
+add_rules("mode.debug", "mode.release")
 
 option("unitybuild", { description = "Build using unity build", default = false })
 
 target("ConcertoCore")
     set_kind("shared")
-    set_symbols("debug")
+    if (is_mode('debug')) then
+        set_symbols("debug")
     set_warnings("allextra")
     set_languages("cxx20")
 
     add_packages('nlohmann_json', {public = true})
     add_packages('enet', {public = false})
     add_files('Src/**.cpp')
-    add_defines("CONCERTO_BUILD")
+    add_defines("CONCERTO_CORE_BUILD")
 
     add_includedirs('Include',
                     'Include/Concerto',
