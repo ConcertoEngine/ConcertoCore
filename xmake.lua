@@ -7,6 +7,7 @@ target("ConcertoCore")
     set_kind("shared")
     if (is_mode('debug')) then
         set_symbols("debug")
+    end
     set_warnings("allextra")
     set_languages("cxx20")
 
