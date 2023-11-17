@@ -9,10 +9,12 @@
 
 namespace Concerto
 {
-	inline Any::Any(std::size_t id, std::unique_ptr<void*> data) :
+	Any::Any(std::size_t id, std::unique_ptr<void*> data) :
 		_id(id), _data(std::move(data))
 	{
 	}
+
+	Any::~Any() { }
 
 	template<typename T, typename ... Args>
 	Any& Any::operator=(Args&&... args)

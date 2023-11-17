@@ -20,11 +20,11 @@ namespace Concerto
 	class CONCERTO_PUBLIC_API Any
 	{
 	 private:
-		explicit Any(std::size_t id, std::unique_ptr<void*> data);
+		Any(std::size_t id, std::unique_ptr<void*> data);
 
 	 public:
 		Any() = delete;
-		~Any() = default;
+		~Any();
 		Any(const Any& other) = delete;
 		Any(Any&& other) noexcept = default;
 
