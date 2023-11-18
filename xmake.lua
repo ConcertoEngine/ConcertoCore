@@ -3,6 +3,10 @@ add_rules("mode.debug", "mode.release")
 
 option("unitybuild", { description = "Build using unity build", default = false })
 
+if is_plat("windows") then
+    set_runtimes(is_mode("debug") and "MDd" or "MD")
+end
+
 target("ConcertoCore")
     set_kind("shared")
     if (is_mode('debug')) then
