@@ -21,7 +21,6 @@ namespace Concerto
 	{
 	 private:
 		Any(std::size_t id, std::unique_ptr<void*> data);
-
 	 public:
 		Any() = delete;
 		~Any();
