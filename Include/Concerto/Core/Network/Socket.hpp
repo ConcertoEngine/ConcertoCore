@@ -21,10 +21,13 @@ namespace Concerto::Network
 	{
 	 public:
 		Socket() = delete;
+		~Socket();
 		Socket(SocketType socketType, IpProtocol ipProtocol);
 		Socket(const Socket&) = delete;
 		Socket(Socket&&) noexcept;
-		~Socket();
+
+		Socket& operator=(const Socket&) = delete;
+		Socket& operator=(Socket&&) noexcept;
 
 		void Close();
 

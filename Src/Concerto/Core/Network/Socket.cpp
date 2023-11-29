@@ -23,13 +23,15 @@ namespace Concerto::Network
 	{
 	}
 
-	Socket::Socket(Socket&& other) noexcept :
+  Socket::Socket(Socket&& other) noexcept :
 		_handle(other._handle),
 		_type(other._type),
 		_lastError(other._lastError),
 		_ipProtocol(other._ipProtocol),
 		_blocking(other._blocking)
 	{
+		_handle = other._handle;
+		_lastError = other._lastError;
 		other._handle = SocketImpl::InvalidSocket;
 		other._lastError = SocketError::NoError;
 	}
@@ -38,6 +40,15 @@ namespace Concerto::Network
 	{
 		Close();
 	}
+
+    Socket& Socket::operator=(Socket&& other) noexcept
+    {
+		_handle = other._handle;
+		_lastError = other._lastError;
+		other._handle = SocketImpl::InvalidSocket;
+		other._lastError = SocketError::NoError;
+		return *this;
+    }
 
 	void Socket::Close()
 	{
