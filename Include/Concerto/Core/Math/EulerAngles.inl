@@ -6,7 +6,7 @@
 #include "Concerto/Core/Math/Quaternion.hpp"
 #include "Concerto/Core/Serializer.hpp"
 
-namespace Concerto::Math
+namespace Concerto
 {
 	template<typename T>
 	EulerAngles<T>::EulerAngles(T pitch, T yaw, T roll) : _pitch(pitch), _yaw(yaw), _roll(roll)

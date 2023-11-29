@@ -13,7 +13,7 @@
 #include "Concerto/Core/Types.hpp"
 #include "Concerto/Core/Stream.hpp"
 
-namespace Concerto::Math
+namespace Concerto
 {
 	/**
 	 * @brief Vector class that represents a mathematical vector.

@@ -9,7 +9,7 @@
 #include "Concerto/Core/Math/Vector.hpp"
 #include "Concerto/Core/Math/Quaternion.hpp"
 
-namespace Concerto::Math
+namespace Concerto
 {
 	class CONCERTO_PUBLIC_API Transform
 	{

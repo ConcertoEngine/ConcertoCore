@@ -9,7 +9,7 @@
 #include <array>
 #include "Concerto/Core/Types.hpp"
 
-namespace Concerto::Math
+namespace Concerto
 {
 	template<typename T, std::size_t Rows, std::size_t Columns>
 	class Matrix

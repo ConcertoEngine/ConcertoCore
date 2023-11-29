@@ -10,7 +10,7 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 {
 	constexpr float near = 0.001f;
 	using namespace Concerto;
-	using namespace Concerto::Math;
+	using namespace Concerto;
 
 	TEST(Quaternion, Quaternion)
 	{

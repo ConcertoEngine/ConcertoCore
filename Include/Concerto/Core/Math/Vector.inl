@@ -6,7 +6,7 @@
 
 #include "Concerto/Core/Math/Vector.hpp"
 
-namespace Concerto::Math
+namespace Concerto
 {
 	template<typename T, std::size_t Size>
 	constexpr Vector<T, Size> Vector<T, Size>::operator+(const Vector& vector) const noexcept

@@ -13,7 +13,7 @@
 #include "Concerto/Core/Math/EulerAngles.hpp"
 #include "Concerto/Core/Math/Matrix.hpp"
 
-namespace Concerto::Math
+namespace Concerto
 {
 	template<typename T>
 	class Quaternion
@@ -86,9 +86,9 @@ namespace Concerto::Math
 			//According to http://www.euclideanspace.com/maths/geometry/rotations/conversions/quaternionToEuler/
 			T test = _x * _y + _z * _w;
 			if (test > T(0.499))
-				return EulerAngles<T>(T(Math::Pi<T>) / T(2), T(2) * std::atan2(_x, _w), T(0));
+				return EulerAngles<T>(T(Pi<T>) / T(2), T(2) * std::atan2(_x, _w), T(0));
 			if (test < T(-0.499))
-				return EulerAngles<T>(-T(Math::Pi<T>), T(-2) * std::atan2(_x, _w), T(0));
+				return EulerAngles<T>(-T(Pi<T>), T(-2) * std::atan2(_x, _w), T(0));
 			T sqx = _x * _x;
 			T sqy = _y * _y;
 			T sqz = _z * _z;
@@ -209,7 +209,9 @@ namespace Concerto::Math
 		Quaternion<T> Conjugate() const noexcept
 		{
 			Quaternion<T> q = *this;
-			q._vector = Vector3<T>(-q.X(), -q.Y(), -q.Z());
+			q._x = -q.X();
+			q._y = -q.Y();
+			q._z = -q.Z();
 			return q;
 		}
 
@@ -471,6 +473,6 @@ namespace Concerto::Math
 		Concerto::Deserialize(stream, _y);
 		Concerto::Deserialize(stream, _z);
 	}
-}// namespace Concerto::Math
+}// namespace Concerto
 
 #endif //CONCERTO_QUATERNION_H

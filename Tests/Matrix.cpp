@@ -8,7 +8,7 @@
 
 namespace CONCERTO_ANONYMOUS_NAMESPACE
 {
-	using namespace Concerto::Math;
+	using namespace Concerto;
 
 	TEST(Matrix, Constructor)
 	{
