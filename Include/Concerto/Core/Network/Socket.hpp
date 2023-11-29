@@ -17,7 +17,7 @@ namespace Concerto
 
 namespace Concerto::Network
 {
-	class CONCERTO_PUBLIC_API Socket final
+	class CONCERTO_CORE_PUBLIC_API Socket final
 	{
 	 public:
 		Socket() = delete;

@@ -21,9 +21,9 @@
 #endif
 
 #ifdef CONCERTO_CORE_BUILD
-	#define CONCERTO_PUBLIC_API CONCERTO_EXPORT
+	#define CONCERTO_CORE_PUBLIC_API CONCERTO_EXPORT
 #else
-	#define CONCERTO_PUBLIC_API CONCERTO_IMPORT
+	#define CONCERTO_CORE_PUBLIC_API CONCERTO_IMPORT
 #endif
 
 #if defined(_WIN32)
@@ -82,7 +82,7 @@ namespace Concerto
 	using Byte = std::int8_t;
 	using UByte = std::uint8_t;
 
-	CONCERTO_PUBLIC_API bool IsDebuggerAttached();
+	CONCERTO_CORE_PUBLIC_API bool IsDebuggerAttached();
 }; // namespace Concerto
 
 #endif //CONCERTO_CORE_INCLUDE_TYPES_HPP

@@ -17,7 +17,7 @@
 
 namespace Concerto
 {
-	class CONCERTO_PUBLIC_API StructuredData
+	class CONCERTO_CORE_PUBLIC_API StructuredData
 	{
 		using json = nlohmann::ordered_json;
 	public:

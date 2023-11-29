@@ -11,7 +11,7 @@
 
 namespace Concerto
 {
-	class CONCERTO_PUBLIC_API Transform
+	class CONCERTO_CORE_PUBLIC_API Transform
 	{
 	public:
 		Transform() = default;
