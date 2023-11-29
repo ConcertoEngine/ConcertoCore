@@ -2,8 +2,8 @@
 // Created by arthur on 29/05/2023.
 //
 
-#ifndef CONCERTO_CORE_SERIALIZER_HPP_
-#define CONCERTO_CORE_SERIALIZER_HPP_
+#ifndef CONCERTO_CORE_SERIALIZER_HPP
+#define CONCERTO_CORE_SERIALIZER_HPP
 
 #include <type_traits>
 
@@ -50,4 +50,4 @@ namespace Concerto
 	inline void CONCERTO_PUBLIC_API Deserialize(Stream& stream, T& value);
 }
 #include "Serializer.inl"
-#endif //CONCERTO_CORE_SERIALIZER_HPP_
+#endif //CONCERTO_CORE_SERIALIZER_HPP

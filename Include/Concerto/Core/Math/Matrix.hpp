@@ -2,8 +2,8 @@
 // Created by arthur on 22/08/2022.
 //
 
-#ifndef CONCERTO_MATRIX_HPP
-#define CONCERTO_MATRIX_HPP
+#ifndef CONCERTO_CORE_MATH_MATRIX_HPP
+#define CONCERTO_CORE_MATH_MATRIX_HPP
 
 #include <cassert>
 #include <array>
@@ -19,7 +19,7 @@ namespace Concerto
 		constexpr explicit Matrix(Args&& ... args)
 		{
 			static_assert(sizeof...(args) == Rows * Columns,
-					"Error : The number of arguments doesn't match the matrix size");
+				"Error : The number of arguments doesn't match the matrix size");
 			_data = { args... };
 		}
 
@@ -398,7 +398,7 @@ namespace Concerto
 		 * @param other The matrix to compare.
 		 * @return True if the current matrix is equal to the given matrix, false otherwise.
 		 */
-		constexpr bool operator==(const Matrix<T, Rows, Columns> &other) const
+		constexpr bool operator==(const Matrix<T, Rows, Columns>& other) const
 		{
 			for (std::size_t i = 0; i < Rows; ++i)
 			{
@@ -418,12 +418,12 @@ namespace Concerto
 		 * @param other The matrix to compare.
 		 * @return False if the current matrix is equal to the given matrix, true otherwise.
 		 */
-		constexpr bool operator!=(const Matrix<T, Rows, Columns> &other) const
+		constexpr bool operator!=(const Matrix<T, Rows, Columns>& other) const
 		{
 			return !(*this == other);
 		}
 	private:
-		std::array<T, Rows * Columns> _data;
+		std::array<T, Rows* Columns> _data;
 	};
 
 	// Aliases
@@ -447,4 +447,4 @@ namespace Concerto
 	using Matrix3i = Matrix<Int32, 3, 3>;
 	using Matrix2i = Matrix<Int32, 2, 2>;
 }
-#endif //CONCERTO_MATRIX_HPP
+#endif //CONCERTO_CORE_MATH_MATRIX_HPP

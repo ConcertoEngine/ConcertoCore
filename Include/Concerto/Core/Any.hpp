@@ -2,8 +2,8 @@
 // Created by arthur on 16/11/2023.
 //
 
-#ifndef CONCERTO_CORE_ANY_HPP_
-#define CONCERTO_CORE_ANY_HPP_
+#ifndef CONCERTO_CORE_ANY_HPP
+#define CONCERTO_CORE_ANY_HPP
 
 #include "Types.hpp"
 
@@ -117,4 +117,4 @@ namespace Concerto
 
 }
 #include "Concerto/Core/Any.inl"
-#endif //CONCERTO_CORE_ANY_HPP_
+#endif //CONCERTO_CORE_ANY_HPP

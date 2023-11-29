@@ -2,8 +2,8 @@
 // Created by arthur on 29/05/2023.
 //
 
-#ifndef CONCERTO_CORE_STREAM_INL_
-#define CONCERTO_CORE_STREAM_INL_
+#ifndef CONCERTO_CORE_STREAM_INL
+#define CONCERTO_CORE_STREAM_INL
 
 #include "Concerto/Core/Stream.hpp"
 #include "Concerto/Core/Serializer.hpp"
@@ -25,4 +25,4 @@ namespace Concerto
 	}
 }
 
-#endif //CONCERTO_CORE_STREAM_INL_
+#endif //CONCERTO_CORE_STREAM_INL

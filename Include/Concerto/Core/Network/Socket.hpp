@@ -2,8 +2,8 @@
 // Created by arthur on 25/05/2023.
 //
 
-#ifndef CONCERTO_CORE_NETWORK_SOCKET_HPP_
-#define CONCERTO_CORE_NETWORK_SOCKET_HPP_
+#ifndef CONCERTO_CORE_NETWORK_SOCKET_HPP
+#define CONCERTO_CORE_NETWORK_SOCKET_HPP
 
 #include <cstddef>
 
@@ -55,4 +55,4 @@ namespace Concerto::Network
 	};
 }
 
-#endif //CONCERTO_CORE_NETWORK_SOCKET_HPP_
+#endif //CONCERTO_CORE_NETWORK_SOCKET_HPP

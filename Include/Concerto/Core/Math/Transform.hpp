@@ -2,8 +2,8 @@
 // Created by arthur on 22/05/22.
 //
 
-#ifndef CONCERTO_TRANSFORM_HPP
-#define CONCERTO_TRANSFORM_HPP
+#ifndef CONCERTO_CORE__MATH_TRANSFORM_HPP
+#define CONCERTO_CORE_MATH_TRANSFOR_HPP
 
 #include "Concerto/Core/Types.hpp"
 #include "Concerto/Core/Math/Vector.hpp"
@@ -13,7 +13,7 @@ namespace Concerto
 {
 	class CONCERTO_PUBLIC_API Transform
 	{
-	 public:
+	public:
 		Transform() = default;
 		/**
 		 * @brief Construct a new Transform object
@@ -77,11 +77,11 @@ namespace Concerto
 
 		void Serialize(Stream& stream) const;
 		void Deserialize(Stream& stream);
-		
-	 private:
+
+	private:
 		Vector3f _location;
 		Quaternionf _rotation;
 		Vector3f _scale;
 	};
 }
-#endif //CONCERTO_TRANSFORM_HPP
+#endif //CONCERTO_CORE_MATH_TRANSFORM_HPP

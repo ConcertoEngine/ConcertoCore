@@ -2,8 +2,8 @@
 // Created by arthur on 22/05/22.
 //
 
-#ifndef CONCERTO_VECTOR_HPP
-#define CONCERTO_VECTOR_HPP
+#ifndef CONCERTO_CORE_MATH_VECTOR_HPP
+#define CONCERTO_CORE_MATH_VECTOR_HPP
 
 #include <array>
 #include <iostream>
@@ -28,8 +28,8 @@ namespace Concerto
 		Vector() = default;
 
 		template<typename... Args,
-				typename = std::enable_if_t<sizeof...(Args) == Size>>
-		explicit Vector(Args&& ... args) : _data{ static_cast<T>(args)... }
+			typename = std::enable_if_t<sizeof...(Args) == Size>>
+			explicit Vector(Args&& ... args) : _data{ static_cast<T>(args)... }
 		{
 		}
 
@@ -383,4 +383,4 @@ namespace Concerto
 
 #include "Vector.inl"
 
-#endif //CONCERTO_VECTOR_HPP
+#endif //CONCERTO_CORE_MATH_VECTOR_HPP

@@ -2,8 +2,8 @@
 // Created by arthur on 01/08/2022.
 //
 
-#ifndef CONCERTO_CONFIG_HPP
-#define CONCERTO_CONFIG_HPP
+#ifndef CONCERTO_CORE_CONFIG_HPP
+#define CONCERTO_CORE_CONFIG_HPP
 
 #include <algorithm>
 #include <cstdint>
@@ -137,4 +137,4 @@ namespace Concerto::Config {
 		Variant _variant;
 	};
 } // namespace Config
-#endif //CONCERTO_CONFIG_HPP
+#endif //CONCERTO_CORE_CONFIG_HPP

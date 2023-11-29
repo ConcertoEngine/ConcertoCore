@@ -2,8 +2,8 @@
 // Created by arthur on 04/09/2022.
 //
 
-#ifndef CONCERTO_ALGORITHM_HPP
-#define CONCERTO_ALGORITHM_HPP
+#ifndef CONCERTO_CORE_MATH_ALGORITHM_HPP
+#define CONCERTO_CORE_MATH_ALGORITHM_HPP
 
 namespace Concerto
 {
@@ -38,4 +38,4 @@ namespace Concerto
 	}
 
 }
-#endif //CONCERTO_ALGORITHM_HPP
+#endif //CONCERTO_CORE_MATH_ALGORITHM_HPP

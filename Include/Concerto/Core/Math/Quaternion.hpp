@@ -2,8 +2,8 @@
 // Created by arthur on 03/09/2022.
 //
 
-#ifndef CONCERTO_QUATERNION_H
-#define CONCERTO_QUATERNION_H
+#ifndef CONCERTO_CORE_MATH_QUATERNION_H
+#define CONCERTO_CORE_MATH_QUATERNION_H
 
 #include <iostream>
 #include <cmath>
@@ -18,7 +18,7 @@ namespace Concerto
 	template<typename T>
 	class Quaternion
 	{
-	 public:
+	public:
 		Quaternion() = default;
 
 		/**
@@ -29,7 +29,7 @@ namespace Concerto
 		 * @param z The z axis
 		 * @param w The w scalar
 		 */
-		constexpr Quaternion(T x, T y, T z, T w) noexcept: _w(w), _x(x), _y(y), _z(z)
+		constexpr Quaternion(T x, T y, T z, T w) noexcept : _w(w), _x(x), _y(y), _z(z)
 		{
 
 		}
@@ -38,7 +38,7 @@ namespace Concerto
 		 * @brief Construct a new Quaternion object from euler angles
 		 * @param eulerAngles The euler angles
 		 */
-		explicit constexpr Quaternion(const EulerAngles<T>& eulerAngles) noexcept: _w(0), _x(0), _y(0), _z(0)
+		explicit constexpr Quaternion(const EulerAngles<T>& eulerAngles) noexcept : _w(0), _x(0), _y(0), _z(0)
 		{
 			Set(eulerAngles.Pitch(), eulerAngles.Yaw(), eulerAngles.Roll());
 		}
@@ -278,16 +278,16 @@ namespace Concerto
 			Quaternion<T> result;
 			result._x =
 				_w * other._x + other._w * _x + _y * other._z -
-					_z * other._y;
+				_z * other._y;
 			result._y =
 				_w * other._y + other._w * _y + _z * other._x -
-					_x * other._z;
+				_x * other._z;
 			result._z =
 				_w * other._z + other._w * _z + _x * other._y -
-					_y * other._x;
+				_y * other._x;
 			result._w =
 				_w * other._w - _x * other._x - _y * other._y -
-					_z * other._z;
+				_z * other._z;
 			return result;
 		}
 
@@ -437,7 +437,7 @@ namespace Concerto
 		void Serialize(Stream& stream) const;
 		void Deserialize(Stream& stream);
 
-	 private:
+	private:
 		T _w;
 		T _x;
 		T _y;
@@ -452,10 +452,10 @@ namespace Concerto
 	std::ostream& operator<<(std::ostream& stream, const Quaternion<T>& quaternion) noexcept
 	{
 		stream << "Quaternion(X: " << quaternion.X() << ", Y: " << quaternion.Y() << ", Z: " << quaternion.Z()
-			   << ", W: " << quaternion.W() << ")";
+			<< ", W: " << quaternion.W() << ")";
 		return stream;
 	}
-	
+
 	template<typename T>
 	inline void Quaternion<T>::Serialize(Stream& stream) const
 	{
@@ -475,4 +475,4 @@ namespace Concerto
 	}
 }// namespace Concerto
 
-#endif //CONCERTO_QUATERNION_H
+#endif //CONCERTO_CORE_MATH_QUATERNION_H

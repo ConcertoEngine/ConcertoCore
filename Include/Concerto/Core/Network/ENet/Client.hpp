@@ -2,8 +2,8 @@
 // Created by arthur on 12/08/2023.
 //
 
-#ifndef CONCERTO_CORE_NETWORK_ENET_CLIENT_HPP_
-#define CONCERTO_CORE_NETWORK_ENET_CLIENT_HPP_
+#ifndef CONCERTO_CORE_NETWORK_ENET_CLIENT_HPP
+#define CONCERTO_CORE_NETWORK_ENET_CLIENT_HPP
 
 #include <functional>
 #include <memory>
@@ -25,4 +25,4 @@ namespace Concerto::Network
 	};
 }
 
-#endif//CONCERTO_CORE_NETWORK_ENET_CLIENT_HPP_
+#endif//CONCERTO_CORE_NETWORK_ENET_CLIENT_HPP

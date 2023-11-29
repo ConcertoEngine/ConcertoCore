@@ -2,8 +2,8 @@
 // Created by arthur on 25/05/2023.
 //
 
-#ifndef CONCERTO_CORE_NETWORK_IPADRESS_HPP_
-#define CONCERTO_CORE_NETWORK_IPADRESS_HPP_
+#ifndef CONCERTO_CORE_NETWORK_IPADRESS_HPP
+#define CONCERTO_CORE_NETWORK_IPADRESS_HPP
 
 #include <array>
 #include <string_view>
@@ -57,4 +57,4 @@ namespace Concerto::Network
 		UInt16 _port;
 	};
 }
-#endif //CONCERTO_CORE_NETWORK_IPADRESS_HPP_
+#endif //CONCERTO_CORE_NETWORK_IPADRESS_HPP
