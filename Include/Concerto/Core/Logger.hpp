@@ -6,8 +6,6 @@
 #define CONCERTO_CORE_LOGGER_HPP
 
 #include <iostream>
-#include <version>
-#include <stdexcept>
 #include <source_location>
 
 #include "Concerto/Core/Types.hpp"
@@ -23,7 +21,7 @@ namespace Concerto
     static constexpr auto MAGENTA = "\x1B[35m";
     static constexpr auto CYAN = "\x1B[36m";
   }// namespace Terminal::Color
-  class CONCERTO_PUBLIC_API Logger
+  class CONCERTO_CORE_PUBLIC_API Logger
   {
   public:
     enum class LogLevel {

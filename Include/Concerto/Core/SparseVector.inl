@@ -5,6 +5,7 @@
 #ifndef CONCERTO_CORE_SPARSEVECTOR_INL
 #define CONCERTO_CORE_SPARSEVECTOR_INL
 
+#include "Concerto/Core/Types.hpp"
 #include "Concerto/Core/SparseVector.hpp"
 
 namespace Concerto

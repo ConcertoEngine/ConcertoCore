@@ -5,7 +5,6 @@
 #ifndef CONCERTO_CORE_MATH_QUATERNION_H
 #define CONCERTO_CORE_MATH_QUATERNION_H
 
-#include <iostream>
 #include <cmath>
 
 #include "Concerto/Core/Math/Algorithm.hpp"

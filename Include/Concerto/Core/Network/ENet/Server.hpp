@@ -12,7 +12,7 @@
 
 namespace Concerto::Network
 {
-	class CONCERTO_PUBLIC_API EnetServer : public ENetHost
+	class CONCERTO_CORE_PUBLIC_API EnetServer : public ENetHost
 	{
 	 public:
 		EnetServer() = delete;

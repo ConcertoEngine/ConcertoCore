@@ -9,7 +9,7 @@
 
 namespace Concerto::Network
 {
-	class CONCERTO_PUBLIC_API ENet
+	class CONCERTO_CORE_PUBLIC_API ENet
 	{
 	 public:
 		static void Initialize();

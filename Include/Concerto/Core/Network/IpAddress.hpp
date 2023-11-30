@@ -18,7 +18,7 @@ namespace Concerto::Network
 		Ipv6
 	};
 
-	class CONCERTO_PUBLIC_API IpAddress
+	class CONCERTO_CORE_PUBLIC_API IpAddress
 	{
 	 public:
 		using IPv4 = std::array<UInt8, 4>;

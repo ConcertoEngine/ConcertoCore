@@ -10,7 +10,7 @@
 
 namespace Concerto::Network
 {
-	class CONCERTO_PUBLIC_API ENetPacket : public Stream
+	class CONCERTO_CORE_PUBLIC_API ENetPacket : public Stream
 	{
 	public:
 		enum Flag

@@ -13,9 +13,9 @@ namespace Concerto
 {
 	class Buffer;
 
-	class CONCERTO_PUBLIC_API Stream
+	class CONCERTO_CORE_PUBLIC_API Stream
 	{
-	 public:
+	public:
 		explicit Stream(std::size_t capacity = 0xFFF);
 		Stream(const Stream&) = delete;
 		Stream(Stream&&) noexcept = default;

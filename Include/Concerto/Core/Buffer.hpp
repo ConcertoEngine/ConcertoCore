@@ -9,7 +9,7 @@
 
 namespace Concerto
 {
-	class CONCERTO_PUBLIC_API Buffer
+	class CONCERTO_CORE_PUBLIC_API Buffer
 	{
 	 public:
 		using container_type = std::vector<Byte>;

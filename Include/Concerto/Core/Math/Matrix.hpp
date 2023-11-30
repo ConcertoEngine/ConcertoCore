@@ -5,7 +5,6 @@
 #ifndef CONCERTO_CORE_MATH_MATRIX_HPP
 #define CONCERTO_CORE_MATH_MATRIX_HPP
 
-#include <cassert>
 #include <array>
 #include "Concerto/Core/Types.hpp"
 

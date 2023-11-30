@@ -19,7 +19,7 @@ namespace Concerto::Network
 	public:
 		using ENetPeerHandle = void*;
 		ENetPeer() = delete;
-		ENetPeer(ENetPeerHandle peer);
+		explicit ENetPeer(ENetPeerHandle peer);
 		ENetPeer(const ENetPeer&) = default;
 		ENetPeer(ENetPeer&&) = default;
 		~ENetPeer() = default;

@@ -3,7 +3,7 @@
 //
 
 #ifndef CONCERTO_CORE__MATH_TRANSFORM_HPP
-#define CONCERTO_CORE_MATH_TRANSFOR_HPP
+#define CONCERTO_CORE__MATH_TRANSFORM_HPP
 
 #include "Concerto/Core/Types.hpp"
 #include "Concerto/Core/Math/Vector.hpp"
@@ -83,5 +83,5 @@ namespace Concerto
 		Quaternionf _rotation;
 		Vector3f _scale;
 	};
-}
-#endif //CONCERTO_CORE_MATH_TRANSFORM_HPP
+}// namespace Concerto
+#endif//CONCERTO_CORE__MATH_TRANSFORM_HPP

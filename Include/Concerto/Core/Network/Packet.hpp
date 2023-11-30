@@ -12,7 +12,7 @@
 
 namespace Concerto::Network
 {
-	class CONCERTO_PUBLIC_API Packet : public Stream
+	class CONCERTO_CORE_PUBLIC_API Packet : public Stream
 	{
 	 public:
 		Packet();

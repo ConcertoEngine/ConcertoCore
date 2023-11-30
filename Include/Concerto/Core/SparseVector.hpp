@@ -7,8 +7,6 @@
 
 #include <vector>
 #include <optional>
-#include <stdexcept>
-#include "Concerto/Core/Types.hpp"
 
 namespace Concerto
 {

@@ -11,7 +11,7 @@
 
 namespace Concerto::Network
 {
-	struct CONCERTO_PUBLIC_API ENetEvent
+	struct CONCERTO_CORE_PUBLIC_API ENetEvent
 	{
 		enum Type 
 		{
