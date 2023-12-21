@@ -5,6 +5,7 @@
 #include <enet/enet.h>
 
 #include "Concerto/Core/Logger.hpp"
+#include "Concerto/Core/Assert.hpp"
 #include "Concerto/Core/Network/ENet/ENet.hpp"
 
 namespace Concerto::Network
@@ -14,7 +15,7 @@ namespace Concerto::Network
 		if (enet_initialize() == 0)
 			return;
 		CONCERTO_ASSERT_FALSE;
-		Logger::Error("An error occured while initializing Enet");
+		Logger::Error("An error occurred while initializing Enet");
 	}
 	
 	void ENet::Deinitialize()

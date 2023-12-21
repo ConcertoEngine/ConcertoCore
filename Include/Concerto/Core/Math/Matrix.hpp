@@ -7,6 +7,7 @@
 
 #include <array>
 #include "Concerto/Core/Types.hpp"
+#include "Concerto/Core/Assert.hpp"
 
 namespace Concerto
 {

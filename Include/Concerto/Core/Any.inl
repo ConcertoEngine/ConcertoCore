@@ -5,6 +5,7 @@
 #ifndef CONCERTO_CORE_ANY_INL
 #define CONCERTO_CORE_ANY_INL
 
+#include "Concerto/Core/Assert.hpp"
 #include "Concerto/Core/Any.hpp"
 
 namespace Concerto

@@ -4,7 +4,7 @@
 
 #include "Concerto/Core/Network/ENet/Client.hpp"
 #include "Concerto/Core/Logger.hpp"
-
+#include "Concerto/Core/Assert.hpp"
 #include <enet/enet.h>
 
 namespace Concerto::Network

@@ -13,6 +13,7 @@
 #include <variant>
 #include <vector>
 #include "Concerto/Core/Types.hpp"
+#include "Concerto/Core/Assert.hpp"
 
 namespace Concerto::Config {
 	struct nullNode {};

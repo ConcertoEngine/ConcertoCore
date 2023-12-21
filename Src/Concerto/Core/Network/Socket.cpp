@@ -2,7 +2,7 @@
 // Created by arthur on 25/05/2023.
 //
 
-#include <cassert>
+#include "Concerto/Core/Assert.hpp"
 #include "Concerto/Core/Network/Socket.hpp"
 #include "Concerto/Core/Buffer.hpp"
 #ifdef CONCERTO_PLATFORM_WINDOWS

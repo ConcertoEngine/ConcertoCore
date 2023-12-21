@@ -4,9 +4,12 @@
 
 #include "Types.hpp"
 #ifdef CONCERTO_PLATFORM_WINDOWS
+
 #include <string>
 #include <cassert>
-#include "Logger.hpp"
+
+#include "Concerto/Core/Assert.hpp"
+#include "Concerto/Core/Logger.hpp"
 #include "WinSocketImpl.hpp"
 #include "WinIpAddressImpl.hpp"
 

@@ -1,7 +1,10 @@
 build
 .xmake
 .idea
+.cache
+.vscode
 CMakeLists.txt
+vsxmake2022
 # Prerequisites
 *.d
 

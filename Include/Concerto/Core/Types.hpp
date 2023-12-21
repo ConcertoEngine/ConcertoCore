@@ -2,8 +2,8 @@
 // Created by arthur on 22/02/2023.
 //
 
-#ifndef CONCERTO_CORE_INCLUDE_TYPES_HPP
-#define CONCERTO_CORE_INCLUDE_TYPES_HPP
+#ifndef CONCERTO_CORE_TYPES_HPP
+#define CONCERTO_CORE_TYPES_HPP
 
 #include <cstdint>
 #include "Concerto/Core/Types.hpp"
@@ -48,20 +48,13 @@
 
 
 #if defined(CONCERTO_PLATFORM_WINDOWS)
-#define CONCERTO_BREAK_IN_DEBUGGER __debugbreak();
+#define CONCERTO_BREAK_IN_DEBUGGER __debugbreak()
 #elif defined(CONCERTO_PLATFORM_POSIX)
 #define CONCERTO_BREAK_IN_DEBUGGER asm ("int $3");
 #else
 #define CONCERTO_BREAK_IN_DEBUGGER {}
 #endif
 
-#if defined(CONCERTO_DEBUG)
-#define CONCERTO_ASSERT(expression)  { if (Concerto::IsDebuggerAttached() && !(expression)) { CONCERTO_BREAK_IN_DEBUGGER; } }
-#else
-#define CONCERTO_ASSERT(expression) {}
-#endif
-
-#define CONCERTO_ASSERT_FALSE CONCERTO_ASSERT(false)
 
 #ifdef CONCERTO_UNITY_BUILD_ID
 #define CONCERTO_ANONYMOUS_NAMESPACE CONCERTO_UNITY_BUILD_ID
@@ -87,4 +80,4 @@ namespace Concerto
 	CONCERTO_CORE_PUBLIC_API bool IsDebuggerAttached();
 }; // namespace Concerto
 
-#endif //CONCERTO_CORE_INCLUDE_TYPES_HPP
+#endif //CONCERTO_CORE_TYPES_HPP
