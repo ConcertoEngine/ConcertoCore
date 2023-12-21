@@ -55,25 +55,23 @@ namespace Concerto::Network
 	{
 		if (IsIpV4(ip))
 		{
-#ifdef CONCERTO_PLATFORM_POSIX
-			Logger::Error("Parsing IP address on POSIX systems is not yet supported");
-			CONCERTO_ASSERT_FALSE;
-#else
 			_protocol = IpProtocol::Ipv4;
-			auto segments = ip
-				| std::views::split('.')
-				| std::views::transform([](auto v) {
-					UInt8 i = 0;
-					std::from_chars(v.data(), v.data() + v.size(), i);
-					return i;
-				});
+			const auto segments = ip
+				| std::ranges::views::split('.')
+				| std::ranges::views::transform([](auto&& rng) {
+								return std::string_view(&*rng.begin(), std::ranges::distance(rng));
+						});
 			UInt8 i = 0;
-			for (const UInt8& segment : segments)
+			for (auto segment : segments)
 			{
-				_ipv4[i++] = segment;
+				const auto result = std::from_chars(segment.data(), segment.data() + segment.size(), _ipv4[i++]);
+				if (result.ec == std::errc::invalid_argument || result.ec == std::errc::result_out_of_range)
+				{
+					Logger::Error("Cannot convert part '" + std::string(segment) + "' of Ip address '" + std::string(ip) + "'");
+					CONCERTO_ASSERT_FALSE;
+				}
 			}
 			return;
-#endif
 		}
 		else if (IsIpV6(ip))
 		{
