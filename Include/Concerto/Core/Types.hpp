@@ -6,25 +6,7 @@
 #define CONCERTO_CORE_INCLUDE_TYPES_HPP
 
 #include <cstdint>
-
-#ifndef LIB_STATIC
-	#ifdef _WIN32
-		#define CONCERTO_EXPORT __declspec(dllexport)
-		#define CONCERTO_IMPORT __declspec(dllimport)
-	#else
-		#define CONCERTO_EXPORT [[gnu::visibility("default")]]
-		#define CONCERTO_IMPORT [[gnu::visibility("default")]]
-	#endif
-#else
-	#define CONCERTO_EXPORT
-	#define CONCERTO_IMPORT
-#endif
-
-#ifdef CONCERTO_CORE_BUILD
-	#define CONCERTO_CORE_PUBLIC_API CONCERTO_EXPORT
-#else
-	#define CONCERTO_CORE_PUBLIC_API CONCERTO_IMPORT
-#endif
+#include "Concerto/Core/Types.hpp"
 
 #if defined(_WIN32)
 #define CONCERTO_PLATFORM_WINDOWS
@@ -44,6 +26,26 @@
 #else
 #define CONCERTO_DEBUG
 #endif
+
+#ifndef LIB_STATIC
+	#ifdef CONCERTO_PLATFORM_WINDOWS
+		#define CONCERTO_EXPORT __declspec(dllexport)
+		#define CONCERTO_IMPORT __declspec(dllimport)
+	#else
+		#define CONCERTO_EXPORT __attribute__((visibility("default")))
+		#define CONCERTO_IMPORT __attribute__((visibility("default")))
+	#endif
+#else
+	#define CONCERTO_EXPORT
+	#define CONCERTO_IMPORT
+#endif
+
+#ifdef CONCERTO_CORE_BUILD
+	#define CONCERTO_CORE_PUBLIC_API CONCERTO_EXPORT
+#else
+	#define CONCERTO_CORE_PUBLIC_API CONCERTO_IMPORT
+#endif
+
 
 #if defined(CONCERTO_PLATFORM_WINDOWS)
 #define CONCERTO_BREAK_IN_DEBUGGER __debugbreak();
