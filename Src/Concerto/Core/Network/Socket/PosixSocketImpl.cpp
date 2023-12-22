@@ -3,7 +3,6 @@
 //
 #include "Types.hpp"
 #ifdef CONCERTO_PLATFORM_POSIX
-#include <cassert>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
@@ -11,6 +10,7 @@
 #include <fcntl.h>
 #include <sys/ioctl.h>
 #include <errno.h>
+#include "Concerto/Core/Assert.hpp"
 #include "PosixSocketImpl.hpp"
 #include "PosixIpAddressImpl.hpp"
 
