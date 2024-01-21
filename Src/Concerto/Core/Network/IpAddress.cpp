@@ -75,7 +75,7 @@ namespace Concerto::Network
 				const auto result = std::from_chars(segment.data(), segment.data() + segment.size(), _ipv4[i++]);
 				if (result.ec == std::errc::invalid_argument || result.ec == std::errc::result_out_of_range)
 				{
-					Logger::Error("Cannot convert part '" + std::string(segment) + "' of Ip address '" + std::string(ip) + "'");
+					Logger::Error("Cannot convert part '{}' of Ip address '{}'", segment, ip);
 					CONCERTO_ASSERT_FALSE;
 				}
 			}

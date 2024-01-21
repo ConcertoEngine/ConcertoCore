@@ -207,7 +207,7 @@ namespace Concerto::Network
 			return SocketError::TimedOut;
 		default:
 		{
-			Logger::Warning("Unknown socket error: " + ::std::to_string(error));
+			Logger::Warning("Unknown socket error: {}", error);
 			return SocketError::Unknown;
 		}
 		}

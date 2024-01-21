@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <source_location>
+#include <format>
 
 #include "Concerto/Core/Types.hpp"
 
@@ -34,51 +35,55 @@ namespace Concerto
 		};
 
 		/**
-    * @brief Log a message with the DEBUG level = INFO
-    * @param message The message to Log
-    */
-		template<typename T>
-		static void Info(const T& message)
+	    * @brief Log a message with the DEBUG level = INFO
+	    * @param fmt The format of the message to Log
+	    * @param args The arguments of the message to Log
+	    */
+		template<typename ...Types>
+		static void Info(const std::format_string<Types...> fmt, Types&& ...args)
 		{
-			Log(message, LogLevel::Info);
+			Log(std::format(std::move(fmt), std::forward<Types>(args)...), LogLevel::Info);
 		}
 
 		/**
-    * @brief Log a message with the DEBUG level = DEBUG
-    * @param message The message to Log
-    */
-		template<typename T>
-		static void Debug(const T& message, const std::source_location& location = std::source_location::current())
+	    * @brief Log a message with the DEBUG level = DEBUG
+	    * @param fmt The format of the message to Log
+	    * @param args The arguments of the message to Log
+	    */
+		template<typename... Types>
+		static void Debug(const std::format_string<Types...> fmt, Types&&... args, const std::source_location& location = std::source_location::current())
 		{
-			Log(message, LogLevel::Debug, location);
+			Log(std::format(std::move(fmt), std::forward<Types>(args)...), LogLevel::Debug, location);
 		}
 
 		/**
-    * @brief Log a message with the DEBUG level = WARNING
-    * @param message The message to Log
-    */
-		template<typename T>
-		static void Warning(const T& message)
+	    * @brief Log a message with the DEBUG level = WARNING
+	    * @param fmt The format of the message to Log
+	    * @param args The arguments of the message to Log
+	    */
+		template<typename... Types>
+		static void Warning(const std::format_string<Types...> fmt, Types&&... args)
 		{
-			Log(message, LogLevel::Warning);
+			Log(std::format(std::move(fmt), std::forward<Types>(args)...), LogLevel::Warning);
 		}
 
 		/**
-    * @brief Log a message with the DEBUG level = ERROR
-    * @param message The message to Log
-    */
-		template<typename T>
-		static void Error(const T& message)
+	    * @brief Log a message with the DEBUG level = ERROR
+		* @param fmt The format of the message to Log
+	    * @param args The arguments of the message to Log
+	    */
+		template<typename... Types>
+		static void Error(const std::format_string<Types...> fmt, Types&&... args)
 		{
-			Log(message, LogLevel::Error);
+			Log(std::format(std::move(fmt), std::forward<Types>(args)...), LogLevel::Error);
 		}
 
 		/**
-    * @brief Log a message
-    * @param level The level of the message
-    * @param message The message to Log
-    * @param location The location of the message
-    */
+	    * @brief Log a message
+	    * @param level The level of the message
+	    * @param message The message to Log
+	    * @param location The location of the message
+	    */
 		template<typename T>
 		static void Log(const T& message, LogLevel level, const std::source_location& location = std::source_location::current())
 		{

@@ -9,22 +9,22 @@
 #include "Concerto/Core/Types.hpp"
 
 #if defined(_WIN32)
-#define CONCERTO_PLATFORM_WINDOWS
+	#define CONCERTO_PLATFORM_WINDOWS
 #elif defined(__linux__)
-#define CONCERTO_PLATFORM_LINUX
-#define CONCERTO_PLATFORM_POSIX
+	#define CONCERTO_PLATFORM_LINUX
+	#define CONCERTO_PLATFORM_POSIX
 #elif defined(__FreeBSD__)
-#define CONCERTO_PLATFORM_FREEBSD
-#define CONCERTO_PLATFORM_POSIX
+	#define CONCERTO_PLATFORM_FREEBSD
+	#define CONCERTO_PLATFORM_POSIX
 #elif defined(__APPLE__)
-#define CONCERTO_PLATFORM_MACOS
-#define CONCERTO_PLATFORM_POSIX
+	#define CONCERTO_PLATFORM_MACOS
+	#define CONCERTO_PLATFORM_POSIX
 #endif
 
 #if defined(NDEBUG)
-#define CONCERTO_RELEASE
+	#define CONCERTO_RELEASE
 #else
-#define CONCERTO_DEBUG
+	#define CONCERTO_DEBUG
 #endif
 
 #ifndef LIB_STATIC
@@ -48,18 +48,34 @@
 
 
 #if defined(CONCERTO_PLATFORM_WINDOWS)
-#define CONCERTO_BREAK_IN_DEBUGGER __debugbreak()
+	#define CONCERTO_BREAK_IN_DEBUGGER __debugbreak()
 #elif defined(CONCERTO_PLATFORM_POSIX)
-#define CONCERTO_BREAK_IN_DEBUGGER asm ("int $3");
+	#define CONCERTO_BREAK_IN_DEBUGGER asm ("int $3");
 #else
-#define CONCERTO_BREAK_IN_DEBUGGER {}
+	#define CONCERTO_BREAK_IN_DEBUGGER {}
 #endif
 
 
 #ifdef CONCERTO_UNITY_BUILD_ID
-#define CONCERTO_ANONYMOUS_NAMESPACE CONCERTO_UNITY_BUILD_ID
+	#define CONCERTO_ANONYMOUS_NAMESPACE CONCERTO_UNITY_BUILD_ID
 #else
-#define CONCERTO_ANONYMOUS_NAMESPACE
+	#define CONCERTO_ANONYMOUS_NAMESPACE
+#endif
+
+#if defined(__clang__)
+	#define CONCERTO_COMPILER_CLANG
+	#define CONCERTO_FUNCTION_SIGNATURE __PRETTY_FUNCTION__
+#elif defined(__GNUC__)
+	#define CONCERTO_COMPILER_GCC
+	#define CONCERTO_FUNCTION_SIGNATURE __PRETTY_FUNCTION__
+#elif defined(__MINGW32__)
+	#define CONCERTO_COMPILER_MINGW
+	#define CONCERTO_FUNCTION_SIGNATURE __PRETTY_FUNCTION__
+#elif defined(_MSC_VER)
+	#define CONCERTO_COMPILER_MSVC
+	#define CONCERTO_FUNCTION_SIGNATURE __FUNCSIG__
+#else
+	#pragma message("Unsuported compiler")
 #endif
 
 namespace Concerto
