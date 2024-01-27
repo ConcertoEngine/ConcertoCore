@@ -6,6 +6,7 @@
 #define CONCERTO_CORE_TYPE_HPP
 
 #include <string_view>
+#include <functional>
 
 #include "Concerto/Core/Types.hpp"
 
@@ -46,14 +47,18 @@ namespace Concerto
 		}
 #endif
 		return typeName;
-
 	}
 
+	/**
+	 * @brief Compute the hash of a type (using cyclic redundancy check)
+	 * @tparam T Type to hash
+	 * @return Hash of the type
+	 */
 	template<typename T>
 	constexpr UInt64 TypeId()
 	{
 		constexpr std::string_view typeName = TypeName<T>();
-		return 0ui64;
+		return std::hash<std::string_view>{}(typeName); //FIXME: Use constexpr CRC32/64
 	}
 }
 
