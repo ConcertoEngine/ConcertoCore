@@ -5,6 +5,8 @@
 #ifndef CONCERTO_CORE_ANY_INL
 #define CONCERTO_CORE_ANY_INL
 
+#include <Concerto/Core/TypeInfo.hpp>
+
 #include "Concerto/Core/Assert.hpp"
 #include "Concerto/Core/Any.hpp"
 
@@ -31,19 +33,19 @@ namespace Concerto
 	template<typename T>
 	bool Any::Is() const
 	{
-		return _id == IdHelper::GetId<T>();
+		return _id == TypeId<T>();
 	}
 
 	template<typename T>
 	T Any::As()
 	{
 		using RawType = std::remove_reference_t<std::remove_pointer_t<T>>;
-		if (_id != IdHelper::GetId<std::remove_const_t<RawType>>())
+		if (_id != TypeId<std::remove_const_t<RawType>>())
 		{
 			CONCERTO_ASSERT_FALSE; // Trying to cast to a wrong type
 			throw std::bad_cast();
 		}
-		auto* any = static_cast<AnyImpl<RawType>*>(*_data.get());
+		auto* any = static_cast<AnyImpl<RawType>*>(*_data);
 		RawType* data = any->operator->();
 		return static_cast<T>(*data);
 	}
@@ -53,7 +55,7 @@ namespace Concerto
 	{
 		using RawType = std::remove_reference_t<std::remove_pointer_t<T>>;
 		auto data = std::make_unique<void*>(new AnyImpl<T>(std::forward<Args>(args)...));
-		return Any(IdHelper::GetId<std::remove_const_t<RawType>>(), std::move(data));
+		return Any(TypeId<RawType>(), std::move(data));
 	}
 
 	template<typename T>

@@ -71,21 +71,6 @@ namespace Concerto
 		std::size_t _id;
 		std::unique_ptr<void*> _data;
 
-		class IdHelper
-		{
-		 public:
-			using Id = std::size_t;
-
-			template<typename T>
-			static Id GetId()
-			{
-				static const Id id = nextId++;
-				return id;
-			}
-
-			static inline int nextId;
-		};
-
 		template<typename T>
 		class AnyImpl
 		{
