@@ -23,6 +23,8 @@ jobs:
     - name: Update clang to 16
       run: brew install llvm@16
 
+    - name: debug
+      run: ls /usr/local/opt/llvm@16/bin
     - name: Get current date as package key
       id: cache_key
       run: echo "key=$(date +'%W')" >> $GITHUB_OUTPUT
