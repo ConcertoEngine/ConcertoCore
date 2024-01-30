@@ -54,7 +54,7 @@ jobs:
         key: macOS-${{ matrix.arch }}-${{ matrix.confs.mode }}-${{ steps.dep_hash.outputs.hash }}-W${{ steps.cache_key.outputs.key }}
 
     - name: Configure xmake and install dependencies
-      run: xmake config --arch=${{ matrix.arch }} --mode=${{ matrix.confs.mode }} ${{ matrix.confs.config }} --yes --cc=clang --cxx=clang++
+      run: xmake config --arch=${{ matrix.arch }} --mode=${{ matrix.confs.mode }} ${{ matrix.confs.config }} --yes --cc=clang16 --cxx=clang++16
 
     - name: Save cached xmake dependencies
       if: ${{ !steps.restore-depcache.outputs.cache-hit }}
@@ -64,7 +64,7 @@ jobs:
         key: ${{ steps.restore-depcache.outputs.cache-primary-key }}
 
     - name: Build
-      run: xmake --yes -v --cc=clang --cxx=clang++
+      run: xmake --yes -v
 
     - name: Run unit tests
       run: xmake run ConcertoCoreTests
