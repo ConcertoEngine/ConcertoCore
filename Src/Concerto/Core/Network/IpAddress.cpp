@@ -56,7 +56,7 @@ namespace Concerto::Network
 		{
 			_protocol = IpProtocol::Ipv4;
 #ifdef CONCERTO_PLATFORM_POSIX
-			auto split = ip
+			auto segments = ip
 			| std::ranges::views::split('.')
 			| std::ranges::views::transform([](auto&& str) { return std::string_view(&*str.begin(), std::ranges::distance(str)); });
 
