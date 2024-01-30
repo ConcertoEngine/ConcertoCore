@@ -1,3 +1,4 @@
+#from https://github.com/NazaraEngine/NazaraEngine/blob/main/.github/workflows/windows-build.yml
 name: Ubuntu build
 
 on:
@@ -24,14 +25,14 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Set gcc/g++ to 13
-        run: | 
+        run: |
           ln -s /usr/bin/g++-13 /usr/local/bin/g++
           ln -s /usr/bin/gcc-13 /usr/local/bin/gcc
 
       - name: Get current date as package key
         id: cache_key
         run: echo "key=$(date +'%W')" >> $GITHUB_OUTPUT
-      
+
       - name: Set xmake env
         run: echo "XMAKE_GLOBALDIR=${{ runner.workspace }}/xmake-global" >> $GITHUB_ENV
 
@@ -40,7 +41,7 @@ jobs:
         with:
           xmake-version: branch@dev
           actions-cache-folder: .xmake-cache-W${{ steps.cache_key.outputs.key }}
-      
+
       - name: Update xmake repo
         run: xmake repo --update
 
@@ -57,14 +58,13 @@ jobs:
 
       - name: Configure xmake and install dependencies
         run: xmake config --arch=${{ matrix.arch }} --mode=${{ matrix.confs.mode }} ${{ matrix.confs.config }} --ccache=n --yes
-    
+
       - name: Save cached xmake dependencies
         if: ${{ !steps.restore-depcache.outputs.cache-hit }}
         uses: actions/cache/save@v4
         with:
           path: ${{ env.XMAKE_GLOBALDIR }}/.xmake/packages
           key: ${{ steps.restore-depcache.outputs.cache-primary-key }}
-
 
       - name: Build
         run: xmake --yes -v
