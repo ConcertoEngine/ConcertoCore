@@ -24,7 +24,7 @@ namespace Concerto
 		constexpr auto suffix = ">"sv;
 #else
 		constexpr auto prefix = "T = "sv;
-		constexpr auto suffix = ";"sv;
+		constexpr auto suffix = ";]"sv;
 #endif
 		constexpr auto prefixStartPos = functionSignature.find(prefix);
 		static_assert(prefixStartPos != std::string_view::npos);
