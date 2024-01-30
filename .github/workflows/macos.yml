@@ -20,6 +20,9 @@ jobs:
         - { mode: releasedbg }
 
     steps:
+    - name: Update clang to 16
+      run: brew install llvm@16
+
     - name: Get current date as package key
       id: cache_key
       run: echo "key=$(date +'%W')" >> $GITHUB_OUTPUT
@@ -51,7 +54,7 @@ jobs:
         key: macOS-${{ matrix.arch }}-${{ matrix.confs.mode }}-${{ steps.dep_hash.outputs.hash }}-W${{ steps.cache_key.outputs.key }}
 
     - name: Configure xmake and install dependencies
-      run: xmake config --arch=${{ matrix.arch }} --mode=${{ matrix.confs.mode }} ${{ matrix.confs.config }} --yes
+      run: xmake config --arch=${{ matrix.arch }} --mode=${{ matrix.confs.mode }} ${{ matrix.confs.config }} --yes --cc=clang --cxx=clang++
 
     - name: Save cached xmake dependencies
       if: ${{ !steps.restore-depcache.outputs.cache-hit }}
@@ -61,7 +64,7 @@ jobs:
         key: ${{ steps.restore-depcache.outputs.cache-primary-key }}
 
     - name: Build
-      run: xmake --yes -v
+      run: xmake --yes -v --cc=clang --cxx=clang++
 
     - name: Run unit tests
       run: xmake run ConcertoCoreTests
