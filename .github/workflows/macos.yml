@@ -23,8 +23,6 @@ jobs:
     - name: Update clang to 16
       run: brew install llvm@16
 
-    - name: debug
-      run: ls /usr/local/opt/llvm@16/bin
     - name: Get current date as package key
       id: cache_key
       run: echo "key=$(date +'%W')" >> $GITHUB_OUTPUT
@@ -56,7 +54,7 @@ jobs:
         key: macOS-${{ matrix.arch }}-${{ matrix.confs.mode }}-${{ steps.dep_hash.outputs.hash }}-W${{ steps.cache_key.outputs.key }}
 
     - name: Configure xmake and install dependencies
-      run: xmake config --arch=${{ matrix.arch }} --mode=${{ matrix.confs.mode }} ${{ matrix.confs.config }} --yes --cc=/usr/local/opt/llvm/bin/clang --cxx=/usr/local/opt/llvm/bin/clang++
+      run: xmake config --arch=${{ matrix.arch }} --mode=${{ matrix.confs.mode }} ${{ matrix.confs.config }} --yes --cc=/usr/local/opt/llvm@16/bin/clang --cxx=/usr/local/opt/llvm@16/bin/clang++
 
     - name: Save cached xmake dependencies
       if: ${{ !steps.restore-depcache.outputs.cache-hit }}
