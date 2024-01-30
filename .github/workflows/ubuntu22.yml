@@ -67,7 +67,7 @@ jobs:
 
 
       - name: Build
-        run: xmake --yes
+        run: xmake --yes -v
 
       - name: Run unit tests
         run: xmake run ConcertoCoreTests
