@@ -70,7 +70,7 @@ namespace Concerto::Network
 #endif
 
 			UInt8 i = 0;
-			for (const auto segment : segments)
+			for (const auto& segment : segments)
 			{
 				const auto result = std::from_chars(segment.data(), segment.data() + segment.size(), _ipv4[i++]);
 				if (result.ec == std::errc::invalid_argument || result.ec == std::errc::result_out_of_range)
