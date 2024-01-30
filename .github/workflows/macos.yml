@@ -4,6 +4,9 @@ name: macOS build
 on:
   pull_request:
   push:
+    paths-ignore:
+        - '.github/workflows/ubuntu22.yml'
+        - '.github/workflows/windows.yml'
     branches: [ "main" ]
 
 jobs:
@@ -20,8 +23,8 @@ jobs:
         - { mode: releasedbg }
 
     steps:
-    - name: Update clang to 16
-      run: brew install llvm@16
+    - name: Update clang to 17
+      run: brew install llvm@17
 
     - name: Get current date as package key
       id: cache_key
@@ -54,7 +57,7 @@ jobs:
         key: macOS-${{ matrix.arch }}-${{ matrix.confs.mode }}-${{ steps.dep_hash.outputs.hash }}-W${{ steps.cache_key.outputs.key }}
 
     - name: Configure xmake and install dependencies
-      run: xmake config --arch=${{ matrix.arch }} --mode=${{ matrix.confs.mode }} ${{ matrix.confs.config }} --yes --cc=/usr/local/opt/llvm@16/bin/clang --cxx=/usr/local/opt/llvm@16/bin/clang++
+      run: xmake config --arch=${{ matrix.arch }} --mode=${{ matrix.confs.mode }} ${{ matrix.confs.config }} --yes --cc=/usr/local/opt/llvm@17/bin/clang --cxx=/usr/local/opt/llvm@17/bin/clang++
 
     - name: Save cached xmake dependencies
       if: ${{ !steps.restore-depcache.outputs.cache-hit }}
