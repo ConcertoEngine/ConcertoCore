@@ -15,14 +15,20 @@ namespace Concerto
 	{
 		std::ifstream i(file);
 		if (!i.good())
+		{
 			Logger::Error("StructuredData: file is not good");
+			throw std::runtime_error("Cannot open file " + file);
+		}
 		_config = GetObject(json::parse(i));
 	}
 
 	StructuredData::StructuredData(std::istream& stream)
 	{
 		if (!stream.good())
+		{
 			Logger::Error("StructuredData: stream is not good");
+			throw std::runtime_error("Error: stream is not valid");
+		}
 		_config = GetObject(json::parse(stream));
 	}
 

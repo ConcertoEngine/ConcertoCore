@@ -55,14 +55,6 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 
 	TEST(StructuredData, BadConstructor)
 	{
-		try
-		{
-			StructuredData data("./badConfig.json");
-			FAIL() << "Should have thrown an exception";
-		}
-		catch (const std::exception& e)
-		{
-			SUCCEED();
-		}
+		ASSERT_THROW(StructuredData data("./badConfig.json"), std::runtime_error);
 	}
 }// namespace CONCERTO_ANONYMOUS_NAMESPACE
