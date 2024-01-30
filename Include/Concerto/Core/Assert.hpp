@@ -10,7 +10,7 @@
 #if defined(CONCERTO_DEBUG)
 #define CONCERTO_ASSERT(expression)                                                            \
 	{                                                                                          \
-		if (Concerto::IsDebuggerAttached() && !(expression)) CONCERTO_BREAK_IN_DEBUGGER;       \
+		if (Concerto::IsDebuggerAttached() && !(expression)) { CONCERTO_BREAK_IN_DEBUGGER; }   \
 		else if (!(expression)) { Concerto::Logger::Debug("Assertion failed: " #expression); } \
 	}
 #else

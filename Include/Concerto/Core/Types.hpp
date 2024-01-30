@@ -6,7 +6,6 @@
 #define CONCERTO_CORE_TYPES_HPP
 
 #include <cstdint>
-#include "Concerto/Core/Types.hpp"
 
 #if defined(_WIN32)
 	#define CONCERTO_PLATFORM_WINDOWS
