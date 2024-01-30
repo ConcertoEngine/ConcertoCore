@@ -18,8 +18,9 @@ jobs:
         os: [ubuntu-latest]
         arch: [x86_64]
         confs:
-        - { mode: debug, archive: yes }
-        - { mode: releasedbg, archive: yes }
+        - { mode: debug }
+        - { mode: release }
+        - { mode: releasedbg }
 
     steps:
       - uses: actions/checkout@v4
