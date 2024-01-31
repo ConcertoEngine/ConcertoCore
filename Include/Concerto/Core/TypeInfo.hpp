@@ -22,7 +22,10 @@ namespace Concerto
 #ifdef CONCERTO_COMPILER_MSVC
 		constexpr auto prefix = "Concerto::TypeName<"sv;
 		constexpr auto suffix = ">"sv;
-#else
+#elif defined(CONCERTO_COMPILER_GCC)
+		constexpr auto prefix = "T = "sv;
+		constexpr auto suffix = ";"sv;
+#elif defined(CONCERTO_COMPILER_CLANG)
 		constexpr auto prefix = "T = "sv;
 		constexpr auto suffix = ";]"sv;
 #endif
