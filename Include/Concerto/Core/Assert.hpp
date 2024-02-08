@@ -8,10 +8,17 @@
 #include "Concerto/Core/Logger.hpp"
 
 #if defined(CONCERTO_DEBUG)
-#define CONCERTO_ASSERT(expression)                                                            \
-	{                                                                                          \
-		if (Concerto::IsDebuggerAttached() && !(expression)) { CONCERTO_BREAK_IN_DEBUGGER; }   \
-		else if (!(expression)) { Concerto::Logger::Debug("Assertion failed: " #expression); } \
+#define CONCERTO_ASSERT(expression)									    \
+	{																	\
+		if (Concerto::IsDebuggerAttached())								\
+		{																\
+			if (!(expression))											\
+				CONCERTO_BREAK_IN_DEBUGGER;								\
+		}																\
+		else if (!(expression))											\
+		{																\
+			Concerto::Logger::Debug("Assertion failed: " #expression);	\
+		}																\
 	}
 #else
 #include <cassert>
