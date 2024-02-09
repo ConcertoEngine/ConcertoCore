@@ -143,6 +143,18 @@ namespace Concerto
 		return _data == other.GetData();
 	}
 
+	template<typename T>
+	constexpr Vector3<T> operator*(T scale, const Vector3<T>& vec)
+	{
+		return Vector3<T>(scale * vec.x, scale * vec.y, scale * vec.z);
+	}
+
+	template<typename T>
+	constexpr Vector3<T> operator/(T scale, const Vector3<T>& vec)
+	{
+		return Vector3<T>(scale / vec.x, scale / vec.y, scale / vec.z);
+	}
+
 	template<typename T, std::size_t Size>
 	inline void Vector<T, Size>::Serialize(Stream& stream) const
 	{
