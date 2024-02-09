@@ -146,13 +146,13 @@ namespace Concerto
 	template<typename T>
 	constexpr Vector3<T> operator*(T scale, const Vector3<T>& vec)
 	{
-		return Vector3<T>(scale * vec.x, scale * vec.y, scale * vec.z);
+		return Vector3<T>(scale * vec.X(), scale * vec.Y(), scale * vec.Z());
 	}
 
 	template<typename T>
 	constexpr Vector3<T> operator/(T scale, const Vector3<T>& vec)
 	{
-		return Vector3<T>(scale / vec.x, scale / vec.y, scale / vec.z);
+		return Vector3<T>(scale / vec.X(), scale / vec.Y(), scale / vec.Z());
 	}
 
 	template<typename T, std::size_t Size>
