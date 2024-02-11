@@ -329,4 +329,18 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 		ASSERT_EQ(4.f, m1.GetElement(2, 1));
 		ASSERT_EQ(4.5f, m1.GetElement(2, 2));
 	}
+
+	//TEST(Matrix, Translate)
+	//{
+	//	Matrix4f matrix = Matrix4f::Identity();
+	//	matrix.Translate(Vector3f(1.0f, 2.0f, 3.0f));
+
+	//	constexpr Matrix4f expected(
+	//		1.0f, 0.0f, 0.0f, 1.0f,
+	//		0.0f, 1.0f, 0.0f, 2.0f,
+	//		0.0f, 0.0f, 1.0f, 3.0f,
+	//		0.0f, 0.0f, 0.0f, 1.0f);
+
+	//	ASSERT_EQ(matrix, expected);
+	//}
 }// namespace CONCERTO_ANONYMOUS_NAMESPACE

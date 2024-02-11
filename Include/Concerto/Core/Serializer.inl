@@ -19,7 +19,7 @@ namespace Concerto
 
 	template<typename T>
 	requires ((std::is_integral_v<T> || std::is_floating_point_v<T>) && !std::is_same_v<T, bool>)
-	void Concerto::Serialize(Stream& stream, T value)
+	void Serialize(Stream& stream, T value)
 	{
 		value = ByteSwap(value);
 		stream.Write(&value, sizeof(T));
@@ -35,7 +35,7 @@ namespace Concerto
 
 	template<typename T>
 	requires(std::is_same_v<T, bool>)
-	void Concerto::Deserialize(Stream& stream, T& value)
+	void Deserialize(Stream& stream, T& value)
 	{
 		stream.Read(&value, sizeof(T));
 	}

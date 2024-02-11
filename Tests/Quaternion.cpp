@@ -8,7 +8,8 @@
 
 namespace CONCERTO_ANONYMOUS_NAMESPACE
 {
-	constexpr float near = 0.001f;
+	// results are from https://www.redcrab-software.com/en/Calculator/Quaternion-Calculator
+	constexpr float near = 1e-05f;
 	using namespace Concerto;
 	using namespace Concerto;
 
@@ -66,14 +67,13 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 
 	TEST(Quaternion, operatorDiv)
 	{
-		EulerAnglesf eulerAngles(1, 2, 3);
-		Quaternionf quaternion1(eulerAngles);
-		Quaternionf quaternion2(eulerAngles);
+		Quaternionf quaternion1(0.4431357f, 0.2080396f, -0.4884507f, 0.7223339f);
+		Quaternionf quaternion2(0.4431357f, 0.2080396f, -0.4884507f, 0.7223339f);
 		Quaternionf quaternion3 = quaternion1 / quaternion2;
-		EXPECT_NEAR(quaternion3.X(), -0.0183483884f, near);
-		EXPECT_NEAR(quaternion3.Y(), -0.0344165042, near);
-		EXPECT_NEAR(quaternion3.Z(), -0.0520119108, near);
-		EXPECT_NEAR(quaternion3.W(), -0.997884572, near);
+		EXPECT_NEAR(quaternion3.X(), 0.f, near);
+		EXPECT_NEAR(quaternion3.Y(), 0.f, near);
+		EXPECT_NEAR(quaternion3.Z(), 0.f, near);
+		EXPECT_NEAR(quaternion3.W(), 1.f, near);
 	}
 
 	TEST(Quaternion, operatorAddEqual)
@@ -100,26 +100,24 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 
 	TEST(Quaternion, operatorMulEqual)
 	{
-		EulerAnglesf eulerAngles(1, 2, 3);
-		Quaternionf quaternion1(eulerAngles);
-		Quaternionf quaternion2(eulerAngles);
+		Quaternionf quaternion1(0.4431357f, 0.2080396f, -0.4884507f, 0.7223339f);
+		Quaternionf quaternion2(0.4431357f, 0.2080396f, -0.4884507f, 0.7223339f);
 		quaternion1 *= quaternion2;
-		EXPECT_NEAR(quaternion1.X(), 0.0183483884f, near);
-		EXPECT_NEAR(quaternion1.Y(), 0.0344165042, near);
-		EXPECT_NEAR(quaternion1.Z(), 0.0520119108, near);
-		EXPECT_NEAR(quaternion1.W(), 0.997884572, near);
+		EXPECT_NEAR(quaternion1.X(), 0.6401839f, near);
+		EXPECT_NEAR(quaternion1.Y(), 0.3005481f, near);
+		EXPECT_NEAR(quaternion1.Z(), -0.705649f, near);
+		EXPECT_NEAR(quaternion1.W(), 0.04353243, near);
 	}
 
 	TEST(Quaternion, operatorDivEqual)
 	{
-		EulerAnglesf eulerAngles(1, 2, 3);
-		Quaternionf quaternion1(eulerAngles);
-		Quaternionf quaternion2(eulerAngles);
+		Quaternionf quaternion1(0.4431357f, 0.2080396f, -0.4884507f, 0.7223339f);
+		Quaternionf quaternion2(0.4431357f, 0.2080396f, -0.4884507f, 0.7223339f);
 		quaternion1 /= quaternion2;
-		EXPECT_NEAR(quaternion1.X(), -0.0183483884f, near);
-		EXPECT_NEAR(quaternion1.Y(), -0.0344165042, near);
-		EXPECT_NEAR(quaternion1.Z(), -0.0520119108, near);
-		EXPECT_NEAR(quaternion1.W(), -0.997884572, near);
+		EXPECT_NEAR(quaternion1.X(), 0.f, near);
+		EXPECT_NEAR(quaternion1.Y(), 0.f, near);
+		EXPECT_NEAR(quaternion1.Z(), 0.f, near);
+		EXPECT_NEAR(quaternion1.W(), 1.f, near);
 	}
 
 	TEST(Quaternion, operatorEqual)
@@ -205,5 +203,25 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 		EXPECT_NEAR(angles2.Pitch(), 30.f, near);
 		EXPECT_NEAR(angles2.Yaw(), 25.f, near);
 		EXPECT_NEAR(angles2.Roll(), 68.f, near);
+	}
+
+	TEST(Quaternion, ToRotationMatrix)
+	{
+		//results calculated from https://www.andre-gaschler.com/rotationconverter/
+		//Angles are expressed in radians
+		auto matrix1 = Quaternionf(-0.122257f, 0.4018732f, -0.9020968f, -0.0988561f).ToRotationMatrix<Matrix4f>();
+		constexpr Matrix4f expected(
+			-0.9505614f, -0.2766193f, 0.1411200f, 0.f,
+			0.0800920f, -0.6574507f, -0.7492288f, 0.f,
+			0.3000306f, -0.7008854f, 0.6471023f, 0.f,
+			 0.f, 0.f, 0.f, 1.f
+		);
+
+		const auto* matData= matrix1.Data();
+		const auto* expectData = expected.Data();
+		for (std::size_t i = 0; i < matrix1.GetSize(); ++i)
+		{
+			EXPECT_NEAR(matData[i], expectData[i], near);
+		}
 	}
 }// namespace CONCERTO_ANONYMOUS_NAMESPACE

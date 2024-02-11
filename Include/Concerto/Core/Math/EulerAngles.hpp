@@ -12,6 +12,7 @@ namespace Concerto
 {
 	template<typename T>
 	class Quaternion;
+
 	/**
 	 * @brief A class representing Euler angles
 	 * @tparam T The type of the angles
@@ -27,71 +28,71 @@ namespace Concerto
 		 * @param yaw The Y axis
 		 * @param roll The Z axis
 		 */
-		EulerAngles(T pitch, T yaw, T roll);
+		constexpr EulerAngles(T pitch, T yaw, T roll);
 
 		/**
 		 * @brief Get the pitch
 		 * @return T A reference to pitch
 		 */
-		[[nodiscard]] T& Pitch();
+		constexpr [[nodiscard]] T& Pitch();
 		/**
 		 * @brief Get the yaw
 		 * @return T A reference to yaw
 		 */
-		[[nodiscard]] T& Yaw();
+		constexpr [[nodiscard]] T& Yaw();
 
 		/**
 		 * @brief Get the roll
 		 * @return T A reference to roll
 		 */
-		[[nodiscard]] T& Roll();
+		constexpr [[nodiscard]] T& Roll();
 
 		/**
 		 * @brief Get the pitch
 		 * @return T The pitch
 		 */
-		[[nodiscard]] T Pitch() const;
+		constexpr [[nodiscard]] T Pitch() const;
 		/**
 		 * @brief Get the yaw
 		 * @return T The yaw
 		 */
-		[[nodiscard]] T Yaw() const;
+		constexpr [[nodiscard]] T Yaw() const;
 
 		/**
 		 * @brief Get the roll
 		 * @return T The roll
 		 */
-		[[nodiscard]] T Roll() const;
+		constexpr [[nodiscard]] T Roll() const;
 
 		/**
 		 * @brief Convert the Euler angles to a quaternion
 		 * @return Quaternion<T> The quaternion
 		 */
-		[[nodiscard]] Quaternion<T> ToQuaternion() const;
+		constexpr [[nodiscard]] Quaternion<T> ToQuaternion() const;
 
-		EulerAngles<T> operator+(const EulerAngles<T>& other) const;
-		EulerAngles<T> operator-(const EulerAngles<T>& other) const;
-		EulerAngles<T> operator*(const EulerAngles<T>& other) const;
-		EulerAngles<T> operator/(const EulerAngles<T>& other) const;
-		EulerAngles<T>& operator+=(const EulerAngles<T>& other);
-		EulerAngles<T>& operator-=(const EulerAngles<T>& other);
-		EulerAngles<T>& operator*=(const EulerAngles<T>& other);
-		EulerAngles<T>& operator/=(const EulerAngles<T>& other);
+		constexpr EulerAngles<T> operator+(const EulerAngles<T>& other) const;
+		constexpr EulerAngles<T> operator-(const EulerAngles<T>& other) const;
+		constexpr EulerAngles<T> operator*(const EulerAngles<T>& other) const;
+		constexpr EulerAngles<T> operator/(const EulerAngles<T>& other) const;
+		constexpr EulerAngles<T>& operator+=(const EulerAngles<T>& other);
+		constexpr EulerAngles<T>& operator-=(const EulerAngles<T>& other);
+		constexpr EulerAngles<T>& operator*=(const EulerAngles<T>& other);
+		constexpr EulerAngles<T>& operator/=(const EulerAngles<T>& other);
 
-		EulerAngles<T> operator+(const Vector<T, 3>& other) const;
-		EulerAngles<T> operator-(const Vector<T, 3>& other) const;
-		EulerAngles<T> operator*(const Vector<T, 3>& other) const;
-		EulerAngles<T> operator/(const Vector<T, 3>& other) const;
-		EulerAngles<T>& operator+=(const Vector<T, 3>& other);
-		EulerAngles<T>& operator-=(const Vector<T, 3>& other);
-		EulerAngles<T>& operator*=(const Vector<T, 3>& other);
-		EulerAngles<T>& operator/=(const Vector<T, 3>& other);
+		constexpr EulerAngles<T> operator+(const Vector<T, 3>& other) const;
+		constexpr EulerAngles<T> operator-(const Vector<T, 3>& other) const;
+		constexpr EulerAngles<T> operator*(const Vector<T, 3>& other) const;
+		constexpr EulerAngles<T> operator/(const Vector<T, 3>& other) const;
+		constexpr EulerAngles<T>& operator+=(const Vector<T, 3>& other);
+		constexpr EulerAngles<T>& operator-=(const Vector<T, 3>& other);
+		constexpr EulerAngles<T>& operator*=(const Vector<T, 3>& other);
+		constexpr EulerAngles<T>& operator/=(const Vector<T, 3>& other);
 
 		/**
 		 * @brief Get the zero Euler angles
 		 * @return EulerAngles<T> The zero Euler angles
 		 */
-		[[nodiscard]] static EulerAngles<T> Zero();
+		constexpr [[nodiscard]] static EulerAngles<T> Zero();
 
 		void Serialize(Stream& stream) const;
 		void Deserialize(Stream& stream);

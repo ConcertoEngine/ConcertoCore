@@ -5,6 +5,8 @@
 #ifndef CONCERTO_CORE_MATH_VECTOR_HPP
 #define CONCERTO_CORE_MATH_VECTOR_HPP
 
+#include "Matrix.hpp"
+
 #include <array>
 #include <iostream>
 #include <type_traits>
@@ -53,7 +55,7 @@ namespace Concerto
 		 * @brief Get the size of the vector
 		 * @return The size of the vector
 		 */
-		[[nodiscard]] constexpr std::size_t GetSize() const
+		[[nodiscard]] static constexpr std::size_t GetSize()
 		{
 			return Size;
 		}
@@ -117,6 +119,18 @@ namespace Concerto
 			static_assert(Size >= 3, "Error : Getting the Z value require the vector size 3 or more");
 			return _data[2];
 		}
+
+		/**
+		 * @brief Create a translation matrix from the vector
+		 * @return A translation matrix
+		 */
+		Matrix4<T> ToTranslationMatrix() const noexcept;
+
+		/**
+		 * @brief Create a scaling matrix from the vector
+		 * @return A scaling matrix
+		 */
+		Matrix4<T> ToScalingMatrix() const noexcept requires(Size == 3 || Size == 4);
 
 		/**
 		 * @brief Computes the dot product of two vectors

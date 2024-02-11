@@ -174,4 +174,23 @@ namespace Concerto
 	{
 		return _data;
 	}
+
+	template<typename T, std::size_t Size>
+	Matrix4<T> Vector<T, Size>::ToTranslationMatrix() const noexcept
+	{
+		Matrix4<T> res = Matrix4<T>::Identity();
+		res.GetElement(0, 3) += X();
+		res.GetElement(1, 3) += Y();
+		res.GetElement(2, 3) += Z();
+		return res;
+	}
+
+	template<typename T, std::size_t Size>
+	Matrix4<T> Vector<T, Size>::ToScalingMatrix() const noexcept requires(Size == 3 || Size == 4)
+	{
+		Matrix4<T> res = Matrix4<T>::Identity();
+		for (std::size_t i = 0; i < Size - 1; ++i)
+			res.GetElement(i, i) = _data[i];
+		return res;
+	}
 }
