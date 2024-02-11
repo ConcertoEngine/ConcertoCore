@@ -34,41 +34,41 @@ namespace Concerto
 		 * @brief Get the pitch
 		 * @return T A reference to pitch
 		 */
-		constexpr [[nodiscard]] T& Pitch();
+		[[nodiscard]] constexpr T& Pitch();
 		/**
 		 * @brief Get the yaw
 		 * @return T A reference to yaw
 		 */
-		constexpr [[nodiscard]] T& Yaw();
+		[[nodiscard]] constexpr T& Yaw();
 
 		/**
 		 * @brief Get the roll
 		 * @return T A reference to roll
 		 */
-		constexpr [[nodiscard]] T& Roll();
+		[[nodiscard]] constexpr T& Roll();
 
 		/**
 		 * @brief Get the pitch
 		 * @return T The pitch
 		 */
-		constexpr [[nodiscard]] T Pitch() const;
+		[[nodiscard]] constexpr T Pitch() const;
 		/**
 		 * @brief Get the yaw
 		 * @return T The yaw
 		 */
-		constexpr [[nodiscard]] T Yaw() const;
+		[[nodiscard]] constexpr T Yaw() const;
 
 		/**
 		 * @brief Get the roll
 		 * @return T The roll
 		 */
-		constexpr [[nodiscard]] T Roll() const;
+		[[nodiscard]] constexpr T Roll() const;
 
 		/**
 		 * @brief Convert the Euler angles to a quaternion
 		 * @return Quaternion<T> The quaternion
 		 */
-		constexpr [[nodiscard]] Quaternion<T> ToQuaternion() const;
+		[[nodiscard]] constexpr Quaternion<T> ToQuaternion() const;
 
 		constexpr EulerAngles<T> operator+(const EulerAngles<T>& other) const;
 		constexpr EulerAngles<T> operator-(const EulerAngles<T>& other) const;
@@ -92,7 +92,7 @@ namespace Concerto
 		 * @brief Get the zero Euler angles
 		 * @return EulerAngles<T> The zero Euler angles
 		 */
-		constexpr [[nodiscard]] static EulerAngles<T> Zero();
+		[[nodiscard]] constexpr static EulerAngles<T> Zero();
 
 		void Serialize(Stream& stream) const;
 		void Deserialize(Stream& stream);
