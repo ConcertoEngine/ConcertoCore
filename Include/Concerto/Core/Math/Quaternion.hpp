@@ -42,20 +42,20 @@ namespace Concerto
 		 * @brief Calculates the Magnitude of the quaternion
 		 * @return T The Magnitude
 		 */
-		constexpr [[nodiscard]] T Magnitude() const;
+		[[nodiscard]] constexpr T Magnitude() const;
 
 		/**
 		 * @brief Calculates the length of the quaternion
 		 * @return T The length
 		 */
-		constexpr [[nodiscard]] T Length() const;
+		[[nodiscard]] constexpr T Length() const;
 
 		/**
 		 * @brief Convert a quaternion to euler angles
 		 * @attention The quaternion must be normalized
 		 * @return Vector3<T> The euler angles
 		 */
-		constexpr [[nodiscard]] EulerAngles<T> ToEulerAngles() const;
+		[[nodiscard]] constexpr EulerAngles<T> ToEulerAngles() const;
 
 		/**
 		 * @brief Assign a new value to this quaternion
