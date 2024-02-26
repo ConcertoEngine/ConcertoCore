@@ -5,9 +5,9 @@
 #ifndef CONCERTO_CORE_LOGGER_HPP
 #define CONCERTO_CORE_LOGGER_HPP
 
+#include <format>
 #include <iostream>
 #include <source_location>
-#include <format>
 
 #include "Concerto/Core/Types.hpp"
 
@@ -39,8 +39,8 @@ namespace Concerto
 	    * @param fmt The format of the message to Log
 	    * @param args The arguments of the message to Log
 	    */
-		template<typename ...Types>
-		static void Info(const std::format_string<Types...> fmt, Types&& ...args)
+		template<typename... Types>
+		static void Info(const std::format_string<Types...> fmt, Types&&... args)
 		{
 			Log(std::format(std::move(fmt), std::forward<Types>(args)...), LogLevel::Info);
 		}
@@ -90,16 +90,16 @@ namespace Concerto
 			switch (level)
 			{
 			case LogLevel::Debug:
-				std::cout << Terminal::Color::CYAN << "[D] " << location.function_name() << ":" << location.line() << " message: " << message << Terminal::Color::DEFAULT << std::endl;
+				std::cout << Terminal::Color::CYAN << location.function_name() << ":" << location.line() << " message: " << message << Terminal::Color::DEFAULT << std::endl;
 				break;
 			case LogLevel::Info:
-				std::cout << Terminal::Color::GREEN << "[i] " << message << Terminal::Color::DEFAULT << std::endl;
+				std::cout << Terminal::Color::GREEN << message << Terminal::Color::DEFAULT << std::endl;
 				break;
 			case LogLevel::Warning:
-				std::cout << Terminal::Color::YELLOW << "[!] " << message << Terminal::Color::DEFAULT << std::endl;
+				std::cout << Terminal::Color::YELLOW << message << Terminal::Color::DEFAULT << std::endl;
 				break;
 			case LogLevel::Error:
-				std::cerr << Terminal::Color::RED << "[X] " << message << Terminal::Color::DEFAULT << std::endl;
+				std::cerr << Terminal::Color::RED << message << Terminal::Color::DEFAULT << std::endl;
 				break;
 			}
 		}
