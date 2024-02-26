@@ -12,6 +12,13 @@
 
 namespace Concerto
 {
+	/**
+	 * @brief A template class representing a mathematical matrix.
+	 * @attention The elements of the matrix are stored in column-major order.
+	 * @tparam T The type of elements in the matrix.
+	 * @tparam Rows The number of rows in the matrix.
+	 * @tparam Columns The number of columns in the matrix.
+	 */
 	template<typename T, std::size_t Rows, std::size_t Columns>
 	class Matrix
 	{

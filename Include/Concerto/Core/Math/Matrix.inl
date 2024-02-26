@@ -60,8 +60,7 @@ namespace Concerto
 	{
 		CONCERTO_ASSERT(row < Rows);
 		CONCERTO_ASSERT(column < Columns);
-		return
-		_data[row * Columns + column];
+		return _data[column * Rows + row];
 	}
 
 	template<typename T, std::size_t Rows, std::size_t Columns>
