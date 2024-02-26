@@ -16,7 +16,14 @@ namespace Concerto
 	{
 		static_assert(sizeof...(args) == Rows * Columns,
 					  "Error : The number of arguments doesn't match the matrix size");
-		_data = {args...};
+		T data[Rows][Columns] = {std::forward<Args>(args)...};
+		for (std::size_t i = 0; i < Rows; ++i)
+		{
+			for (std::size_t j = 0; j < Columns; ++j)
+			{
+				_data[j * Rows + i] = data[i][j];
+			}
+		}
 	}
 
 	template<typename T, std::size_t Rows, std::size_t Columns>
@@ -68,7 +75,7 @@ namespace Concerto
 	{
 		CONCERTO_ASSERT(row < Rows);
 		CONCERTO_ASSERT(column < Columns);
-		return _data[row * Columns + column];
+		return _data[column * Rows + row];
 	}
 
 	template<typename T, std::size_t Rows, std::size_t Columns>
@@ -107,7 +114,7 @@ namespace Concerto
 		{
 			for (std::size_t j = 0; j < Columns; ++j)
 			{
-				result.GetElement(i, j) = GetElement(i, j) + other.GetElement(i, j);
+				result(i, j) = (*this)(i, j) + other(i, j);
 			}
 		}
 		return result;
