@@ -5,10 +5,8 @@
 #ifndef CONCERTO_CORE_ANY_HPP
 #define CONCERTO_CORE_ANY_HPP
 
-#include "Types.hpp"
+#include "Concerto/Core/Types.hpp"
 
-#include <typeinfo>
-#include <utility>
 #include <memory>
 
 namespace Concerto
