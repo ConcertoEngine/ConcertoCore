@@ -29,7 +29,7 @@ namespace Concerto
 		template<typename... T>
 		struct Debug
 		{
-			Debug(const std::format_string<T...> fmt, T&&... args, std::source_location loc = std::source_location::current())
+			explicit Debug(const std::format_string<T&&...> fmt, T&&... args, std::source_location loc = std::source_location::current())
 			{
 				Log(std::format(std::move(fmt), std::forward<T>(args)...), LogLevel::Debug, loc);
 			}

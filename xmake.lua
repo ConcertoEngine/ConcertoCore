@@ -43,6 +43,7 @@ target("ConcertoCore")
 
     if is_plat("windows") then
         add_syslinks("ws2_32")
+        add_cxxflags("/Zc:preprocessor")
     end
 
     if has_config("unitybuild") then
