@@ -30,4 +30,4 @@
 
 #define CONCERTO_ASSERT_FALSE(fmt, ...) CONCERTO_ASSERT(false, fmt __VA_OPT__(,) __VA_ARGS__)
 
-#endif//CONCERTO_CORE_ASSERT_HPP
+#endif //CONCERTO_CORE_ASSERT_HPP
