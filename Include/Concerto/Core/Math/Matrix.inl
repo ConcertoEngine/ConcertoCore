@@ -65,16 +65,16 @@ namespace Concerto
 	template<typename T, std::size_t Rows, std::size_t Columns>
 	constexpr T& Matrix<T, Rows, Columns>::GetElement(std::size_t row, std::size_t column) noexcept
 	{
-		CONCERTO_ASSERT(row < Rows);
-		CONCERTO_ASSERT(column < Columns);
+		CONCERTO_ASSERT(row < Rows, "Invalid size");
+		CONCERTO_ASSERT(column < Columns, "Invalid size");
 		return _data[column * Rows + row];
 	}
 
 	template<typename T, std::size_t Rows, std::size_t Columns>
 	constexpr const T& Matrix<T, Rows, Columns>::GetElement(std::size_t row, std::size_t column) const noexcept
 	{
-		CONCERTO_ASSERT(row < Rows);
-		CONCERTO_ASSERT(column < Columns);
+		CONCERTO_ASSERT(row < Rows, "Invalid size");
+		CONCERTO_ASSERT(column < Columns, "Invalid size");
 		return _data[column * Rows + row];
 	}
 

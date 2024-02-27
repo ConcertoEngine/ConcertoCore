@@ -42,7 +42,7 @@ namespace Concerto
 		using RawType = std::remove_reference_t<std::remove_pointer_t<T>>;
 		if (_id != TypeId<std::remove_const_t<RawType>>())
 		{
-			CONCERTO_ASSERT_FALSE; // Trying to cast to a wrong type
+			CONCERTO_ASSERT_FALSE("Trying to cast to a wrong type");
 			throw std::bad_cast();
 		}
 		auto* any = static_cast<AnyImpl<RawType>*>(*_data);

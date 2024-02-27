@@ -22,10 +22,8 @@ namespace Concerto::Network
 		_maxIncomingBandwidth(maxIncomingBandwidth),
 		_maxOutgoingBandwidth(maxOutgoingBandwidth)
 	{
-		bool ret = CreateHost(address);
-		CONCERTO_ASSERT(ret);
-		if (!ret)
-			Logger::Error("An error occurred while trying to create an ENetHost");
+		const bool ret = CreateHost(address);
+		CONCERTO_ASSERT(ret, "An error occurred while trying to create an ENetHost");
 	}
 	
 	ENetHost::~ENetHost()
@@ -35,7 +33,7 @@ namespace Concerto::Network
 
 	Int32 ENetHost::PollEvent(ENetEvent* event, UInt32 timeout)
 	{
-		CONCERTO_ASSERT(_enetHost != nullptr);
+		CONCERTO_ASSERT(_enetHost != nullptr, "Invalid host");
 		::ENetEvent enetEvent;
 		Int32 ret = enet_host_service(ToENetHost(_enetHost), &enetEvent, timeout);
 		if (ret <= 0)
@@ -87,7 +85,7 @@ namespace Concerto::Network
 
 	bool ENetHost::SendPacket(const void* data, std::size_t size, ENetPeer* peer, UInt8 channel, ENetPacket::Flag flags)
 	{
-		CONCERTO_ASSERT(peer != nullptr);
+		CONCERTO_ASSERT(peer != nullptr, "Invalid peer");
 		return peer->SendPacket(data, size, channel, flags);
 	}
 

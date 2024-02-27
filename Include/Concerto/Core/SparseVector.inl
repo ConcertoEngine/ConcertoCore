@@ -59,7 +59,7 @@ namespace Concerto
 	{
 		if (index >= _container.size())
 		{
-			CONCERTO_ASSERT_FALSE;
+			CONCERTO_ASSERT_FALSE("Index out of range");
 			throw std::out_of_range("Index out of range");
 		}
 		if (!Has(index))
@@ -72,12 +72,12 @@ namespace Concerto
 	{
 		if (index >= _container.size())
 		{
-			CONCERTO_ASSERT_FALSE;
+			CONCERTO_ASSERT_FALSE("Index out of range");
 			throw std::out_of_range("Index out of range");
 		}
 		if (!Has(index))
 		{
-			CONCERTO_ASSERT_FALSE;
+			CONCERTO_ASSERT_FALSE("Index out of range");
 			throw std::runtime_error("Index Has no value");
 		}
 		return _container[index].value();
@@ -96,7 +96,7 @@ namespace Concerto
     template<typename ValueType, typename Allocator>
     void SparseVector<ValueType, Allocator>::Erase(SparseVector::size_type index)
     {
-        CONCERTO_ASSERT(index >= _container.size() - 1 || !_container[index].has_value());
+        CONCERTO_ASSERT(index >= _container.size() - 1 || !_container[index].has_value(), "Invalid index");
         _container[index].reset();
     }
 

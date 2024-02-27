@@ -29,8 +29,7 @@ namespace Concerto::Network
 		auto peer = enet_host_connect(static_cast<::ENetHost*>(_enetHost), &enetAddress, _maxChannels, 0);
 		if (peer == nullptr)
 		{
-			CONCERTO_ASSERT_FALSE;
-			Logger::Error("Cannot create an Enet connection");
+			CONCERTO_ASSERT_FALSE("Cannot create an Enet connection");
 			return;
 		}
 		_peer = std::make_unique<ENetPeer>(peer);
@@ -38,7 +37,7 @@ namespace Concerto::Network
 
 	void EnetClient::Disconnect()
 	{
-		CONCERTO_ASSERT(_peer);
+		CONCERTO_ASSERT(_peer, "Invalid peer");
 		_peer->Disconnect();
 	}
 

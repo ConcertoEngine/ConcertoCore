@@ -26,6 +26,14 @@ namespace Concerto
 	class CONCERTO_CORE_PUBLIC_API Logger
 	{
 	 public:
+		template<typename... T>
+		struct Debug
+		{
+			Debug(const std::format_string<T...> fmt, T&&... args, std::source_location loc = std::source_location::current())
+			{
+				Log(std::format(std::move(fmt), std::forward<T>(args)...), LogLevel::Debug, loc);
+			}
+		};
 		enum class LogLevel
 		{
 			Debug,
@@ -49,12 +57,10 @@ namespace Concerto
 	    * @brief Log a message with the DEBUG level = DEBUG
 	    * @param fmt The format of the message to Log
 	    * @param args The arguments of the message to Log
+	    * @attention see https://cor3ntin.github.io/posts/variadic/
 	    */
 		template<typename... Types>
-		static void Debug(const std::format_string<Types...> fmt, Types&&... args, const std::source_location& location = std::source_location::current())
-		{
-			Log(std::format(std::move(fmt), std::forward<Types>(args)...), LogLevel::Debug, location);
-		}
+		Debug(std::format_string<Types...>, Types&&...) -> Debug<Types...>;
 
 		/**
 	    * @brief Log a message with the DEBUG level = WARNING

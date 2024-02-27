@@ -14,8 +14,7 @@ namespace Concerto::Network
 	{
 		if (enet_initialize() == 0)
 			return;
-		CONCERTO_ASSERT_FALSE;
-		Logger::Error("An error occurred while initializing Enet");
+		CONCERTO_ASSERT_FALSE("An error occurred while initializing Enet");
 	}
 	
 	void ENet::Deinitialize()
