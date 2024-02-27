@@ -19,6 +19,7 @@ target("ConcertoCore")
     add_packages('enet', {public = false})
     add_files('Src/**.cpp')
     add_defines("CONCERTO_CORE_BUILD")
+    add_cxxflags("cl::/Zc:preprocessor", { public = true })
 
     add_includedirs('Include',
                     'Include/Concerto',
@@ -43,7 +44,6 @@ target("ConcertoCore")
 
     if is_plat("windows") then
         add_syslinks("ws2_32")
-        add_cxxflags("/Zc:preprocessor")
     end
 
     if has_config("unitybuild") then
@@ -64,10 +64,6 @@ target("ConcertoCoreTests")
 
     if has_config("unitybuild") then
         add_rules("c++.unity_build", {batchsize = 12, uniqueid = "CONCERTO_UNITY_BUILD_ID"})
-    end
-
-    if is_plat("windows") then
-        add_cxxflags("/Zc:preprocessor")
     end
 
     after_build(function(target)
