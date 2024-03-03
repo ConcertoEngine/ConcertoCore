@@ -29,9 +29,9 @@ namespace Concerto
 		template<typename... T>
 		struct Debug
 		{
-			explicit Debug(const std::format_string<T&&...> fmt, T&&... args, std::source_location loc = std::source_location::current())
+			explicit Debug(const std::format_string<T...> fmt, T&&... args, std::source_location loc = std::source_location::current())
 			{
-				Log(std::format(std::move(fmt), std::forward<T>(args)...), LogLevel::Debug, loc);
+				Log(std::vformat(fmt.get(), std::make_format_args(args...)), LogLevel::Debug, loc);
 			}
 		};
 		enum class LogLevel
@@ -96,16 +96,16 @@ namespace Concerto
 			switch (level)
 			{
 			case LogLevel::Debug:
-				std::cout << Terminal::Color::CYAN << location.function_name() << ":" << location.line() << " message: " << message << Terminal::Color::DEFAULT << std::endl;
+				std::cout << Terminal::Color::CYAN << location.function_name() << ":" << location.line() << " message: " << message << Terminal::Color::DEFAULT << '\n';
 				break;
 			case LogLevel::Info:
-				std::cout << Terminal::Color::GREEN << message << Terminal::Color::DEFAULT << std::endl;
+				std::cout << Terminal::Color::GREEN << message << Terminal::Color::DEFAULT << '\n';
 				break;
 			case LogLevel::Warning:
-				std::cout << Terminal::Color::YELLOW << message << Terminal::Color::DEFAULT << std::endl;
+				std::cout << Terminal::Color::YELLOW << message << Terminal::Color::DEFAULT << '\n';
 				break;
 			case LogLevel::Error:
-				std::cerr << Terminal::Color::RED << message << Terminal::Color::DEFAULT << std::endl;
+				std::cerr << Terminal::Color::RED << message << Terminal::Color::DEFAULT << '\n';
 				break;
 			}
 		}
