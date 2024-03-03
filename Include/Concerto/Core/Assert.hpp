@@ -11,17 +11,13 @@
 #define CONCERTO_ASSERT(expression, fmt, ...)						    \
 	do																	\
 	{																	\
-		if (Concerto::IsDebuggerAttached())								\
-		{																\
-			if (!(expression))											\
-			{															\
-				Concerto::Logger::Debug(fmt __VA_OPT__(,) __VA_ARGS__); \
-				CONCERTO_BREAK_IN_DEBUGGER;								\
-			}															\
-		}																\
-		else if (!(expression))											\
+		if (!(expression))												\
 		{																\
 			Concerto::Logger::Debug(fmt __VA_OPT__(,) __VA_ARGS__);		\
+			if (Concerto::IsDebuggerAttached())							\
+			{															\
+				CONCERTO_BREAK_IN_DEBUGGER;								\
+			}															\
 		}																\
 	} while (false)
 #else
