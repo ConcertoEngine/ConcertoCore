@@ -50,7 +50,7 @@ namespace Concerto
 		template<typename... Types>
 		static void Info(const std::format_string<Types...> fmt, Types&&... args)
 		{
-			Log(std::format(std::move(fmt), std::forward<Types>(args)...), LogLevel::Info);
+			Log(std::vformat(fmt.get(), std::make_format_args(args...)), LogLevel::Info);
 		}
 
 		/**
@@ -70,7 +70,7 @@ namespace Concerto
 		template<typename... Types>
 		static void Warning(const std::format_string<Types...> fmt, Types&&... args)
 		{
-			Log(std::format(std::move(fmt), std::forward<Types>(args)...), LogLevel::Warning);
+			Log(std::vformat(fmt.get(), std::make_format_args(args...)), LogLevel::Warning);
 		}
 
 		/**
@@ -81,7 +81,7 @@ namespace Concerto
 		template<typename... Types>
 		static void Error(const std::format_string<Types...> fmt, Types&&... args)
 		{
-			Log(std::format(std::move(fmt), std::forward<Types>(args)...), LogLevel::Error);
+			Log(std::vformat(fmt.get(), std::make_format_args(args...)), LogLevel::Error);
 		}
 
 		/**
@@ -96,7 +96,8 @@ namespace Concerto
 			switch (level)
 			{
 			case LogLevel::Debug:
-				std::cout << Terminal::Color::CYAN << location.function_name() << ":" << location.line() << " message: " << message << Terminal::Color::DEFAULT << '\n';
+				std::cout << Terminal::Color::CYAN << location.file_name() << ": " << location.line() << " " <<
+				location.function_name() << " message: " << message << Terminal::Color::DEFAULT << '\n';
 				break;
 			case LogLevel::Info:
 				std::cout << Terminal::Color::GREEN << message << Terminal::Color::DEFAULT << '\n';
