@@ -82,10 +82,9 @@ namespace Concerto::Network
 		SocketImpl::SetBlocking(_handle, blocking, &_lastError);
 	}
 
-	void Socket::Listen(IpAddress address, UInt16 port, int backlog)
+	void Socket::Listen(const IpAddress& address, int backlog)
 	{
-		address.SetPort(port);
-		SocketHandle handle = SocketImpl::Create(_type, _ipProtocol, &_lastError);
+		const SocketHandle handle = SocketImpl::Create(_type, _ipProtocol, &_lastError);
 		if (handle == SocketImpl::InvalidSocket)
 			return;
 		if (!SocketImpl::Listen(handle, address, backlog, &_lastError))
@@ -93,10 +92,9 @@ namespace Concerto::Network
 		_handle = handle;
 	}
 
-	bool Socket::Bind(IpAddress address, UInt16 port)
+	bool Socket::Bind(const IpAddress& address)
 	{
-		address.SetPort(port);
-		SocketHandle handle = SocketImpl::Create(_type, _ipProtocol, &_lastError);
+		const SocketHandle handle = SocketImpl::Create(_type, _ipProtocol, &_lastError);
 		if (handle == SocketImpl::InvalidSocket)
 			return false;
 		if (!SocketImpl::Bind(handle, address, &_lastError))

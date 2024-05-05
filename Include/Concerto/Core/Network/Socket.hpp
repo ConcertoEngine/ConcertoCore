@@ -37,8 +37,8 @@ namespace Concerto::Network
 
 		void SetBlocking(bool blocking);
 
-		void Listen(IpAddress address, UInt16 port, int backlog = 5);
-		bool Bind(IpAddress address, UInt16 port);
+		void Listen(const IpAddress& address, int backlog = 5);
+		bool Bind(const IpAddress& address);
 		void Accept(Socket& socket);
 		void Connect(IpAddress address);
 		std::size_t Receive(Buffer& buffer);

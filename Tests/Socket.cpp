@@ -44,7 +44,9 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 		Socket::Initialize();
 		Socket server(SocketType::Udp, IpProtocol::Ipv4);
 		server.SetBlocking(true);
-		ASSERT_TRUE(server.Bind(IpAddress::AnyIPV4, 8080));
+		auto ipAddress = IpAddress::AnyIPV4;
+		ipAddress.SetPort(8080);
+		ASSERT_TRUE(server.Bind(ipAddress));
 
 		
 		Socket client(SocketType::Udp, IpProtocol::Ipv4);
