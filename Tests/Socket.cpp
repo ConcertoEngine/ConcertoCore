@@ -15,13 +15,13 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 	TEST(Socket, TcpServer)
 	{
 		Socket::Initialize();
+		const IpAddress ipAddress(127, 0, 0, 1, 8080);
 		Socket server(SocketType::Tcp, IpProtocol::Ipv4);
 		server.SetBlocking(true);
-		server.Listen(IpAddress::AnyIPV4, 8080);
+		server.Listen(ipAddress);
 		Socket client(SocketType::Tcp, IpProtocol::Ipv4);
-		IpAddress ip(127, 0, 0, 1, 8080);
-		client.Connect(ip);
-		std::string helloWorld = "Hello World";
+		client.Connect(ipAddress);
+		const std::string helloWorld = "Hello World";
 		Buffer buffer(11);
 		std::memcpy(buffer.GetRawData(), helloWorld.c_str(), 11);
 		client.Send(buffer);
@@ -31,9 +31,9 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 		server.Accept(serverClient);
 
 		Buffer buffer2(1024);
-		std::size_t availableBytes = serverClient.GetAvailableBytes();
+		const std::size_t availableBytes = serverClient.GetAvailableBytes();
 		ASSERT_EQ(availableBytes, 11);
-		std::size_t receivedSize = serverClient.Receive(buffer2);
+		const std::size_t receivedSize = serverClient.Receive(buffer2);
 		buffer2.Resize(receivedSize);
 		ASSERT_EQ(buffer2, buffer);
 		Socket::UnInitialize();
