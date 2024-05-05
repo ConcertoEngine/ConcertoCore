@@ -15,7 +15,8 @@ namespace Concerto::Network
 	{
 		Error = -1,
 		Ipv4,
-		Ipv6
+		Ipv6,
+		Any = Ipv4 //Fixme
 	};
 
 	class CONCERTO_CORE_PUBLIC_API IpAddress
