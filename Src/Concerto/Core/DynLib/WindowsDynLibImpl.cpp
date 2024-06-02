@@ -1,0 +1,53 @@
+//
+// Created by arthur on 02/06/2024.
+//
+
+#include "Concerto/Core/Assert.hpp"
+#include "Concerto/Core/Error.hpp"
+
+#ifdef CONCERTO_PLATFORM_WINDOWS
+#include "WindowsDynLibImpl.hpp"
+
+namespace Concerto
+{
+	bool DynLibImpl::Load(const std::filesystem::path& path, std::string* error)
+	{
+		_module = LoadLibraryW(path.c_str());
+		if (_module == nullptr)
+		{
+			if (error)
+				*error = Error::GetLastSystemErrorString();
+			CONCERTO_ASSERT_FALSE("ConcertoCore: Couldn't load library '{}'", path.string());
+			return false;
+		}
+		return true;
+	}
+
+	bool DynLibImpl::Unload(std::string* error)
+	{
+		if (_module == nullptr)
+			return true;
+		const BOOL res = FreeLibrary(_module);
+		if (!res)
+		{
+			if (error)
+				*error = Error::GetLastSystemErrorString();
+			CONCERTO_ASSERT(_module, "ConcertoCore: Couldn't free library");
+			return false;
+		}
+		_module = nullptr;
+		return true;
+	}
+
+	void* DynLibImpl::GetSymbol(const std::string& symbol, std::string* error) const
+	{
+		void* symbolPtr = GetProcAddress(_module, symbol.c_str());
+		if (symbolPtr == nullptr)
+		{
+			if (error)
+				*error = Error::GetLastSystemErrorString();
+		}
+		return symbolPtr;
+	}
+}// namespace Concerto
+#endif

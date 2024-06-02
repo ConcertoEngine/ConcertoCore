@@ -20,7 +20,7 @@ namespace Concerto
 	 private:
 		Any(std::size_t id, std::unique_ptr<void*> data);
 	 public:
-		Any() = delete;
+		Any();
 		~Any();
 		Any(const Any& other) = delete;
 		Any(Any&& other) noexcept = default;
@@ -64,6 +64,10 @@ namespace Concerto
 		 */
 		template<typename T, class... Args>
 		static inline Any Make(Args&&... args);
+
+		void Reset();
+
+		inline bool HasValue() const;
 
 	 private:
 		std::size_t _id;

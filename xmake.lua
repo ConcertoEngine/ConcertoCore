@@ -43,14 +43,40 @@ target("ConcertoCore")
                     'Include/(Concerto/Core/Network/ENet/*.inl)')
 
     if is_plat("windows") then
-        add_syslinks("ws2_32")
+        add_syslinks("ws2_32", "Kernel32")
     end
 
     if has_config("unitybuild") then
         add_rules("c++.unity_build", {batchsize = 12, uniqueid = "CONCERTO_UNITY_BUILD_ID"})
     end
 
+target("ConcertoCoreTestsDummyLib")
+    set_kind("shared")
+    set_languages("cxx20")
+    add_files("dummy.cpp")
+    set_warnings("none")
+    before_build(function(target)
+        if is_host("windows") then
+            io.writefile("dummy.cpp", [[
+            extern "C" {
+                __declspec(dllexport) void __cdecl Dummy() {}
+                __declspec(dllexport) int __cdecl DummyInt() { return 42;}
+                __declspec(dllexport) int __cdecl GlobalInt = 42;
+            }
+            ]])
+        elseif is_host("linux") or  is_host("macos") then
+            io.writefile("dummy.cpp", [[
+            extern "C" {
+                void Dummy() {}
+                int DummyInt() { return 42;}
+                int GlobalInt = 42;
+            }
+            ]])
+        end
+    end)
+
 target("ConcertoCoreTests")
+    add_deps("ConcertoCoreTestsDummyLib")
     set_kind("binary")
     if (is_mode('debug')) then
         set_symbols("debug")

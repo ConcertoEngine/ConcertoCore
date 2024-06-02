@@ -11,5 +11,20 @@ namespace Concerto
     {
     }
 
-    Any::~Any() { }
+    Any::Any() : _id(0), _data(nullptr)
+    {
+    }
+
+    Any::~Any() = default;
+
+    void Any::Reset()
+    {
+        _data = nullptr;
+		_id = 0;
+    }
+
+    bool Any::HasValue() const
+    {
+		return _data != nullptr && _id != 0;
+    }
 }
