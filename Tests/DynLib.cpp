@@ -4,7 +4,6 @@
 
 #include <gtest/gtest.h>
 #include <Concerto/Core/DynLib.hpp>
-#include <Concerto/Core/Logger.hpp>
 
 #ifdef CONCERTO_PLATFORM_POSIX
 #define PREFIX "lib"
