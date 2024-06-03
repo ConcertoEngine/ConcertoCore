@@ -11,25 +11,28 @@
 #define PREFIX ""
 #endif
 
-TEST(DynLib, Load)
+namespace CONCERTO_ANONYMOUS_NAMESPACE
 {
-	Concerto::DynLib lib;
-	bool res = lib.Load(PREFIX"ConcertoCoreTestsDummyLib");
-	ASSERT_TRUE(res);
+	TEST(DynLib, Load)
+	{
+		Concerto::DynLib lib;
+		bool res = lib.Load(PREFIX"ConcertoCoreTestsDummyLib");
+		ASSERT_TRUE(res);
 
-	lib.Invoke<void>("Dummy");
-	const int value = lib.Invoke<int>("DummyInt");
-	ASSERT_EQ(value, 42);
+		lib.Invoke<void>("Dummy");
+		const int value = lib.Invoke<int>("DummyInt");
+		ASSERT_EQ(value, 42);
 
-	const int* globalValue = lib.GetValue<int>("GlobalInt");
-	if (globalValue == nullptr)
-		FAIL();
-	ASSERT_TRUE(globalValue != nullptr);
-	ASSERT_EQ(*globalValue, 42);
+		const int* globalValue = lib.GetValue<int>("GlobalInt");
+		if (globalValue == nullptr)
+			FAIL();
+		ASSERT_TRUE(globalValue != nullptr);
+		ASSERT_EQ(*globalValue, 42);
 
-	const int* notExisting = lib.GetValue<int>("NotExisting");
-	ASSERT_EQ(notExisting, nullptr);
+		const int* notExisting = lib.GetValue<int>("NotExisting");
+		ASSERT_EQ(notExisting, nullptr);
 
-	res = lib.Unload();
-	ASSERT_EQ(res, true);
-}
+		res = lib.Unload();
+		ASSERT_EQ(res, true);
+	}
+} // namespace CONCERTO_ANONYMOUS_NAMESPACE
