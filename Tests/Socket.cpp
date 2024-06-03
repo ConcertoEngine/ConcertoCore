@@ -31,6 +31,8 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 		server.Accept(serverClient);
 
 		Buffer buffer2(1024);
+		using namespace std::chrono_literals;
+		std::this_thread::sleep_for(500ms);
 		const std::size_t availableBytes = serverClient.GetAvailableBytes();
 		ASSERT_EQ(availableBytes, 11);
 		const std::size_t receivedSize = serverClient.Receive(buffer2);
