@@ -3,7 +3,7 @@
 //
 
 #include <cstring>
-
+#include <thread>
 #ifdef CONCERTO_PLATFORM_MACOS // because the CI is failing in release mode
 #include <thread>
 #endif
