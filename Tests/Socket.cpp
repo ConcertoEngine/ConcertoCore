@@ -3,6 +3,11 @@
 //
 
 #include <cstring>
+
+#ifdef CONCERTO_PLATFORM_MACOS // because the CI is failing in release mode
+#include <thread>
+#endif
+
 #include <gtest/gtest.h>
 #include "Concerto/Core/Network/Socket.hpp"
 #include "Concerto/Core/Buffer.hpp"

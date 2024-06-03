@@ -96,6 +96,10 @@ target("ConcertoCoreTests")
         add_rules("c++.unity_build", {batchsize = 12, uniqueid = "CONCERTO_UNITY_BUILD_ID"})
     end
 
+     if is_plat("linux") then
+        add_syslinks("dl")
+    end
+
     after_build(function(target)
         print("Copying resources...")
         local binaryPath = "$(buildir)/$(plat)/$(arch)/$(mode)"
