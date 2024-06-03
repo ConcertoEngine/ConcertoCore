@@ -36,7 +36,7 @@ namespace Concerto
 		DynLib& operator=(const DynLib&) = delete;
 		DynLib& operator=(DynLib&&) = default;
 
-		inline bool IsLoaded() const;
+		bool IsLoaded() const;
 		bool Load(const std::filesystem::path& path);
 		bool Unload();
 		void* GetSymbol(const std::string& symbol) const;
@@ -56,11 +56,11 @@ namespace Concerto
 			if constexpr (std::is_void_v<ReturnValue>)
 			{
 				using Func = void (*)(Args...);
-				static_cast<Func>(symbol)(args...);
+				reinterpret_cast<Func>(symbol)(args...);
 				return;
 			}
 			using Func = ReturnValue (*)(Args...);
-			return static_cast<Func>(symbol)(args...);
+			return reinterpret_cast<Func>(symbol)(args...);
 		}
 
 
@@ -81,13 +81,13 @@ namespace Concerto
 			requires(std::is_invocable_v<ReturnValue (*)(Args...)>)
 		{
 			if constexpr (std::is_void_v<ReturnValue>)
-				Invoke<ReturnValue, Args...>(functionName, args);
-			return Invoke<ReturnValue, Args...>(functionName, args);
+				Invoke<ReturnValue, Args...>(functionName, args...);
+			return Invoke<ReturnValue, Args...>(functionName, args...);
 		}
 
 	 private:
 		struct ImplDeleter {
-			void operator()(void* b) const;
+			void operator()(void* impl) const;
 		};
 		std::unique_ptr<void, ImplDeleter> _impl;
 		mutable std::string _lastError;

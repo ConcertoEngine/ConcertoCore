@@ -17,7 +17,7 @@ namespace Concerto
 		{
 			if (error)
 				*error = Error::GetLastSystemErrorString();
-			CONCERTO_ASSERT_FALSE("ConcertoCore: Couldn't load library '{}'", path.string());
+			CONCERTO_ASSERT_FALSE("ConcertoCore: Couldn't load library '{}' error: {}", path.string(), Error::GetLastSystemErrorString());
 			return false;
 		}
 		return true;

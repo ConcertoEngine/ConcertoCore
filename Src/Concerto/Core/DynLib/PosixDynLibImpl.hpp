@@ -20,6 +20,7 @@ namespace Concerto
 
 		bool Load(const std::filesystem::path& path, std::string* error = nullptr);
 		bool Unload(std::string* error = nullptr);
+		void* GetSymbol(const std::string& symbol, std::string* error = nullptr) const;
 
 	 private:
 		void* _module = {};

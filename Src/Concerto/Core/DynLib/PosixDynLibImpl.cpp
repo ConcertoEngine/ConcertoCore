@@ -11,12 +11,12 @@ namespace Concerto
 {
 	bool DynLibImpl::Load(const std::filesystem::path& path, std::string* error)
 	{
-		_module = dlopen(path.c_str());
+		_module = dlopen(std::filesystem::canonical(path).c_str(), RTLD_LAZY | RTLD_GLOBAL);
 		if (_module == nullptr)
 		{
 			if (error)
 				*error = Error::GetLastSystemErrorString();
-			CONCERTO_ASSERT_FALSE("ConcertoCore: Couldn't load library '{}'", path);
+			CONCERTO_ASSERT_FALSE("ConcertoCore: Couldn't load library '{}' error: {}", path.string(), dlerror());
 			return false;
 		}
 		return true;
@@ -24,17 +24,33 @@ namespace Concerto
 
 	bool DynLibImpl::Unload(std::string* error)
 	{
-		CONCERTO_ASSERT(_module, "ConcertoCore: Library handle must be valid");
+		if (_module == nullptr)
+		{
+			CONCERTO_ASSERT_FALSE("ConcertoCore: Library handle must be valid");
+			return false;
+		}
+
 		const int res = dlclose(_module);
-		if (!res)
+		if (res != 0)
 		{
 			if (error)
 				*error = dlerror();
-			CONCERTO_ASSERT(_module, "ConcertoCore: Couldn't free library");
+			CONCERTO_ASSERT(_module, "ConcertoCore: Couldn't free library '{}'", dlerror());
 			return false;
 		}
 		_module = nullptr;
 		return true;
+	}
+
+	void* DynLibImpl::GetSymbol(const std::string& symbol, std::string* error) const
+	{
+		void* symbolPtr = dlsym(_module, symbol.c_str());
+		if (symbolPtr == nullptr)
+		{
+			if (error)
+				*error = dlerror();
+		}
+		return symbolPtr;
 	}
 }// namespace Concerto
 #endif

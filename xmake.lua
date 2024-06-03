@@ -46,6 +46,10 @@ target("ConcertoCore")
         add_syslinks("ws2_32", "Kernel32")
     end
 
+    if is_plat("linux") then
+        add_syslinks("dl")
+    end
+
     if has_config("unitybuild") then
         add_rules("c++.unity_build", {batchsize = 12, uniqueid = "CONCERTO_UNITY_BUILD_ID"})
     end

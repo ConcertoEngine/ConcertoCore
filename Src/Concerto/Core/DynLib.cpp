@@ -24,7 +24,7 @@ namespace Concerto
 		_impl = nullptr;
 	}
 
-	inline bool DynLib::IsLoaded() const
+	bool DynLib::IsLoaded() const
 	{
 		return _impl != nullptr;
 	}
@@ -53,7 +53,7 @@ namespace Concerto
 
 	void* DynLib::GetSymbol(const std::string& symbol) const
 	{
-		void* res =  TO_DYNLIB_IMPL->GetSymbol(symbol, &_lastError);
+		void* res = TO_DYNLIB_IMPL->GetSymbol(symbol, &_lastError);
 		return res;
 	}
 
@@ -61,7 +61,6 @@ namespace Concerto
 	{
 		if (!impl)
 			return;
-		static_cast<DynLibImpl*>(impl)->Unload();
 		std::default_delete<DynLibImpl>()(static_cast<DynLibImpl*>(impl));
 	}
 }// namespace Concerto

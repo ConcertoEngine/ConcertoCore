@@ -4,11 +4,18 @@
 
 #include <gtest/gtest.h>
 #include <Concerto/Core/DynLib.hpp>
+#include <Concerto/Core/Logger.hpp>
+
+#ifdef CONCERTO_PLATFORM_POSIX
+#define PREFIX "lib"
+#else
+#define PREFIX ""
+#endif
 
 TEST(DynLib, Load)
 {
 	Concerto::DynLib lib;
-	bool res = lib.Load("ConcertoCoreTestsDummyLib");
+	bool res = lib.Load(PREFIX"ConcertoCoreTestsDummyLib");
 	ASSERT_TRUE(res);
 
 	lib.Invoke<void>("Dummy");
@@ -16,6 +23,8 @@ TEST(DynLib, Load)
 	ASSERT_EQ(value, 42);
 
 	const int* globalValue = lib.GetValue<int>("GlobalInt");
+	if (globalValue == nullptr)
+		FAIL();
 	ASSERT_TRUE(globalValue != nullptr);
 	ASSERT_EQ(*globalValue, 42);
 
@@ -23,5 +32,5 @@ TEST(DynLib, Load)
 	ASSERT_EQ(notExisting, nullptr);
 
 	res = lib.Unload();
-	ASSERT_TRUE(res);
+	ASSERT_EQ(res, true);
 }

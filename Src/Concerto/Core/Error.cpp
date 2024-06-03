@@ -14,7 +14,6 @@
 #error Unsupported platform
 #endif
 
-
 namespace Concerto
 {
 	std::string Error::GetLastSystemErrorString()
@@ -40,6 +39,7 @@ namespace Concerto
 		return std::strerror(errno);
 #else
 #error Unsupported platform
+		return "Not supported";
 #endif
 	}
 }
