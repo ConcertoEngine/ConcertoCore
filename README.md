@@ -8,7 +8,7 @@ It is essentially developed for learning purposes.
 | Platform | Status                                                                                                                                                                                          |
 |----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Windows  | [![Windows build status](https://github.com/ConcertoEngine/ConcertoCore/actions/workflows/windows.yml/badge.svg)](https://github.com/ConcertoEngine/ConcertoCore/actions/workflows/windows.yml) |
-| Linux    | [![Linux build status](https://github.com/ConcertoEngine/ConcertoCore/actions/workflows/ubuntu22.yml/badge.svg)](https://github.com/ConcertoEngine/ConcertoCore/actions/workflows/ubuntu22.yml) |
+| Linux    | [![Linux build status](https://github.com/ConcertoEngine/ConcertoCore/actions/workflows/ubuntu24.yml/badge.svg)](https://github.com/ConcertoEngine/ConcertoCore/actions/workflows/ubuntu22.yml) |
 | MacOS    | [![macOS build status](https://github.com/ConcertoEngine/ConcertoCore/actions/workflows/macos.yml/badge.svg)](https://github.com/ConcertoEngine/ConcertoCore/actions/workflows/macos.yml)       |
 
 ## Installation
