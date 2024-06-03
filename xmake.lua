@@ -55,7 +55,7 @@ target("ConcertoCoreTestsDummyLib")
     set_languages("cxx20")
     add_files("dummy.cpp")
     set_warnings("none")
-    before_build(function(target)
+    on_load(function(target)
         if is_host("windows") then
             io.writefile("dummy.cpp", [[
             extern "C" {
