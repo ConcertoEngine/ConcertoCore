@@ -23,8 +23,8 @@ jobs:
         - { mode: releasedbg }
 
     steps:
-    - name: Update clang to 17
-      run: brew install llvm@17
+    - name: Update clang to 18
+      run: brew install llvm@18
 
     - name: Get current date as package key
       id: cache_key
