@@ -20,7 +20,8 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 		ASSERT_TRUE(res);
 
 		lib.Invoke<void>("Dummy");
-
+		const Concerto::FunctionRef func = lib.GetFunction<void>("Dummy");
+		ASSERT_TRUE(func);
 		{
 			const int value = lib.Invoke<int>("DummyInt");
 			ASSERT_EQ(value, 42);

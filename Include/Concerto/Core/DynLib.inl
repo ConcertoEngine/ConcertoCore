@@ -12,22 +12,25 @@ namespace Concerto
 	template <typename ReturnValue, typename ... Args>
 	ReturnValue DynLib::Invoke(const std::string& functionName, Args&&... args)
 	{
+		if constexpr (std::is_void_v<ReturnValue>)
+		{
+			GetFunction<ReturnValue, Args...>(std::forward<Args>(args)...)();
+			return;
+		}
+		return GetFunction<ReturnValue, Args...>(std::forward<Args>(args)...)();
+	}
+
+	template <typename ReturnValue, typename ... Args>
+	FunctionRef<ReturnValue(Args...)> DynLib::GetFunction(const std::string& functionName, Args&&... args)
+	{
 		void* symbol = GetSymbol(functionName);
 		if (symbol == nullptr)
 		{
 			CONCERTO_ASSERT_FALSE("ConcertoCore: Invalid symbol pointer '{}'", functionName);
-			if constexpr (std::is_void_v<ReturnValue>)
-				return;
-			else return ReturnValue();
-		}
-		if constexpr (std::is_void_v<ReturnValue>)
-		{
-			using Func = void (*)(Args...);
-			reinterpret_cast<Func>(symbol)(args...);
-			return;
+			return FunctionRef<ReturnValue(Args...)>();
 		}
 		using Func = ReturnValue(*)(Args...);
-		return reinterpret_cast<Func>(symbol)(args...);
+		return FunctionRef<ReturnValue(Args...)>(reinterpret_cast<Func>(symbol)(args...));
 	}
 
 	template <typename T>

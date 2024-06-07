@@ -12,7 +12,7 @@
 #include <type_traits>
 
 #include "Concerto/Core/Types.hpp"
-//#include "Concerto/Core/FunctionRef.hpp"
+#include "Concerto/Core/FunctionRef.hpp"
 
 #ifdef CONCERTO_PLATFORM_WINDOWS
 #define CONCERTO_DYNLIB_EXTENSION ".dll"
@@ -45,8 +45,8 @@ namespace Concerto
 		template<typename ReturnValue, typename... Args>
 		ReturnValue Invoke(const std::string& functionName, Args&&... args);
 
-		//template<typename ReturnValue, typename... Args>
-		//FunctionRef<ReturnValue, Args...> GetFunction(const std::string& functionName, Args&&... args);
+		template<typename ReturnValue, typename... Args>
+		FunctionRef<ReturnValue(Args...)> GetFunction(const std::string& functionName, Args&&... args);
 
 		template<typename T>
 		T* GetValue(const std::string& valueName);
