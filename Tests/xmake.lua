@@ -14,7 +14,7 @@ target("ConcertoCoreTestsDummyLib")
             }
             ]])
         elseif is_host("linux") or  is_host("macos") then
-            io.writefile("dummy.cpp", [[
+            io.writefile("$(buildir)/$(plat)/$(arch)/dummy.cpp", [[
             extern "C" {
                 void Dummy() {}
                 int DummyInt() { return 42;}
