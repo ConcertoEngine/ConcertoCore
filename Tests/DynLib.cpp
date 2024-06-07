@@ -17,11 +17,11 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 	{
 		Concerto::DynLib lib;
 		bool res = lib.Load(PREFIX"ConcertoCoreTestsDummyLib");
-		ASSERT_TRUE(res);
+		ASSERT_EQ(res, true);
 
 		lib.Invoke<void>("Dummy");
 		const Concerto::FunctionRef func = lib.GetFunction<void>("Dummy");
-		ASSERT_TRUE(func);
+		ASSERT_EQ(func.operator bool(), true);
 		{
 			const int value = lib.Invoke<int>("DummyInt");
 			ASSERT_EQ(value, 42);
