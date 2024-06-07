@@ -5,7 +5,7 @@
 #ifndef CONCERTO_CORE_FUNCTIONREF_INL
 #define CONCERTO_CORE_FUNCTIONREF_INL
 
-#include <stdexcept>
+#include <functional>
 
 #include "Concerto/Core/Assert.hpp"
 #include "Concerto/Core/FunctionRef.hpp"
