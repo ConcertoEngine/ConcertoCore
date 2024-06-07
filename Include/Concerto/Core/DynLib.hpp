@@ -46,7 +46,7 @@ namespace Concerto
 		ReturnValue Invoke(const std::string& functionName, Args&&... args);
 
 		template<typename ReturnValue, typename... Args>
-		FunctionRef<ReturnValue(Args...)> GetFunction(const std::string& functionName, Args&&... args);
+		FunctionRef<ReturnValue(Args...)> GetFunction(const std::string& functionName);
 
 		template<typename T>
 		T* GetValue(const std::string& valueName);

@@ -14,14 +14,14 @@ namespace Concerto
 	{
 		if constexpr (std::is_void_v<ReturnValue>)
 		{
-			GetFunction<ReturnValue, Args...>(std::forward<Args>(args)...)();
+			GetFunction<ReturnValue, Args...>(functionName)(std::forward<Args>(args)...);
 			return;
 		}
-		return GetFunction<ReturnValue, Args...>(std::forward<Args>(args)...)();
+		return GetFunction<ReturnValue, Args...>(functionName)(std::forward<Args>(args)...);
 	}
 
 	template <typename ReturnValue, typename ... Args>
-	FunctionRef<ReturnValue(Args...)> DynLib::GetFunction(const std::string& functionName, Args&&... args)
+	FunctionRef<ReturnValue(Args...)> DynLib::GetFunction(const std::string& functionName)
 	{
 		void* symbol = GetSymbol(functionName);
 		if (symbol == nullptr)
@@ -30,7 +30,7 @@ namespace Concerto
 			return FunctionRef<ReturnValue(Args...)>();
 		}
 		using Func = ReturnValue(*)(Args...);
-		return FunctionRef<ReturnValue(Args...)>(reinterpret_cast<Func>(symbol)(args...));
+		return FunctionRef<ReturnValue(Args...)>(reinterpret_cast<Func>(symbol));
 	}
 
 	template <typename T>
