@@ -30,7 +30,7 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 			const int* globalValue = lib.GetValue<int>("GlobalInt");
 			if (globalValue == nullptr)
 				FAIL();
-			ASSERT_TRUE(globalValue != nullptr);
+			ASSERT_EQ(globalValue != nullptr, true);
 			ASSERT_EQ(*globalValue, 42);
 		}
 		{
