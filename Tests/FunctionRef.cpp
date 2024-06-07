@@ -13,10 +13,10 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 	TEST(FunctionRef, HasValue)
 	{
 		Concerto::FunctionRef<void()> func;
-		ASSERT_FALSE(func);
+		ASSERT_EQ(func, false);
 		auto lambda = []() {};
 		func = lambda;
-		ASSERT_TRUE(func);
+		ASSERT_EQ(func, true);
 	}
 
 	TEST(FunctionRef, Lambda)
