@@ -12,6 +12,7 @@
 #include <type_traits>
 
 #include "Concerto/Core/Types.hpp"
+#include "Concerto/Core/FunctionRef.hpp"
 
 #ifdef CONCERTO_PLATFORM_WINDOWS
 #define CONCERTO_DYNLIB_EXTENSION ".dll"
@@ -42,56 +43,24 @@ namespace Concerto
 		void* GetSymbol(const std::string& symbol) const;
 
 		template<typename ReturnValue, typename... Args>
-		ReturnValue Invoke(const std::string& functionName, Args&&... args)
-			requires(std::is_invocable_v<ReturnValue (*)(Args...)>)
-		{
-			void* symbol = GetSymbol(functionName);
-			if (symbol == nullptr)
-			{
-				CONCERTO_ASSERT_FALSE("ConcertoCore: Invalid symbol pointer '{}'", functionName);
-				if constexpr (std::is_void_v<ReturnValue>)
-					return;
-				else return ReturnValue();
-			}
-			if constexpr (std::is_void_v<ReturnValue>)
-			{
-				using Func = void (*)(Args...);
-				reinterpret_cast<Func>(symbol)(args...);
-				return;
-			}
-			using Func = ReturnValue (*)(Args...);
-			return reinterpret_cast<Func>(symbol)(args...);
-		}
-
-
-		template<typename T>
-		T* GetValue(const std::string& valueName)
-		{
-			void* symbol = GetSymbol(valueName);
-			if (symbol == nullptr)
-			{
-				CONCERTO_ASSERT_FALSE("ConcertoCore: Invalid symbol pointer '{}'", valueName);
-				return nullptr;
-			}
-			return static_cast<T*>(symbol);
-		}
+		ReturnValue Invoke(const std::string& functionName, Args&&... args);
 
 		template<typename ReturnValue, typename... Args>
-		ReturnValue operator()(std::string_view functionName, Args&& ...args)
-			requires(std::is_invocable_v<ReturnValue (*)(Args...)>)
-		{
-			if constexpr (std::is_void_v<ReturnValue>)
-				Invoke<ReturnValue, Args...>(functionName, args...);
-			return Invoke<ReturnValue, Args...>(functionName, args...);
-		}
+		FunctionRef<ReturnValue(Args...)> GetFunction(const std::string& functionName);
 
-	 private:
+		template<typename T>
+		T* GetValue(const std::string& valueName);
+
+	private:
 		struct ImplDeleter {
 			void operator()(void* impl) const;
 		};
 		std::unique_ptr<void, ImplDeleter> _impl;
 		mutable std::string _lastError;
 	};
+
 }// namespace Concerto
+
+#include "Concerto/Core/DynLib.inl"
 
 #endif//CONCERTO_CORE_DYNLIB_HPP
