@@ -30,7 +30,7 @@ namespace Concerto
 			return FunctionRef<ReturnValue(Args...)>();
 		}
 		using Func = ReturnValue(*)(Args...);
-		return FunctionRef<ReturnValue(Args...)>(reinterpret_cast<Func>(symbol));
+		return FunctionRef<ReturnValue(Args...)>(*reinterpret_cast<Func>(symbol));
 	}
 
 	template <typename T>
