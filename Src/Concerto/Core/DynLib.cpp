@@ -31,7 +31,7 @@ namespace Concerto
 
 	bool DynLib::Load(const std::filesystem::path& path)
 	{
-		CONCERTO_ASSERT(IsLoaded() == true, "ConcertoCore: A DynLib is already loaded, please call DynLib::Unload before.");
+		CONCERTO_ASSERT(_impl, "ConcertoCore: A DynLib is already loaded, please call DynLib::Unload before.");
 		_impl = std::unique_ptr<void, ImplDeleter>(new DynLibImpl, ImplDeleter());
 		bool res = false;
 		if (path.extension() != CONCERTO_DYNLIB_EXTENSION)
