@@ -41,7 +41,7 @@ target("ConcertoCore")
                     'Include/(Concerto/Core/Math/*.inl)',
                     'Include/(Concerto/Core/Network/*.inl)',
                     'Include/(Concerto/Core/Network/ENet/*.inl)')
-
+    add_cxxflags("cl::/wd4251")
     if is_plat("windows") then
         add_syslinks("ws2_32", "Kernel32")
     end

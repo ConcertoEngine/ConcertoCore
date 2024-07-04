@@ -106,7 +106,7 @@ namespace Concerto::Network
 	void Socket::Accept(Socket& socket)
 	{
 		CONCERTO_ASSERT(_handle != SocketImpl::InvalidSocket, "Invalid socket handle");
-		SocketHandle handle = SocketImpl::Accept(_handle, nullptr, &_lastError);
+		const SocketHandle handle = SocketImpl::Accept(_handle, nullptr, &_lastError);
 		if (handle == SocketImpl::InvalidSocket)
 			return;
 		socket.Close();
@@ -116,7 +116,7 @@ namespace Concerto::Network
 	void Socket::Connect(IpAddress address)
 	{
 		Close();
-		SocketHandle handle = SocketImpl::Create(_type, _ipProtocol, &_lastError);
+		const SocketHandle handle = SocketImpl::Create(_type, _ipProtocol, &_lastError);
 		if (handle == SocketImpl::InvalidSocket)
 			return;
 		if (!SocketImpl::Connect(handle, address, &_lastError))

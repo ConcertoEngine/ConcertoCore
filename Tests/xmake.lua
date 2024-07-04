@@ -52,3 +52,4 @@ target("ConcertoCoreTests")
         os.cp("./goodConfig.json", binaryPath .. "/goodConfig.json")
         print("Copying resources... Done !")
     end)
+   add_cxxflags("cl::/wd4251") -- needs to have dll-interface to be used by clients of

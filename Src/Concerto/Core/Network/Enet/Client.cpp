@@ -20,10 +20,10 @@ namespace Concerto::Network
 		return ENetHost::SendPacket(packet, _peer.get(), channel, flags);
 	}
 	
-	void EnetClient::Connect(IpAddress address)
+	void EnetClient::Connect(const IpAddress& address)
 	{
 		ENetAddress enetAddress = {};
-		std::string addressStr = address.ToString();
+		const std::string addressStr = address.ToString();
 		enet_address_set_host(&enetAddress, addressStr.c_str());
 		enetAddress.port = address.GetPort();
 		auto peer = enet_host_connect(static_cast<::ENetHost*>(_enetHost), &enetAddress, _maxChannels, 0);
@@ -35,7 +35,7 @@ namespace Concerto::Network
 		_peer = std::make_unique<ENetPeer>(peer);
 	}
 
-	void EnetClient::Disconnect()
+	void EnetClient::Disconnect() const
 	{
 		CONCERTO_ASSERT(_peer, "Invalid peer");
 		_peer->Disconnect();
