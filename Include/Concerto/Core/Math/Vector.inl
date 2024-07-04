@@ -75,7 +75,7 @@ namespace Concerto
 	template<typename T, std::size_t Size>
 	constexpr Vector<T, Size>& Vector<T, Size>::operator+=(const Vector& vector) noexcept
 	{
-		for (int i = 0; i < std::min(Size, vector.GetSize()); ++i)
+		for (std::size_t i = 0; i < std::min(Size, vector.GetSize()); ++i)
 			_data[i] += vector[i];
 		return *this;
 	}

@@ -19,7 +19,7 @@ namespace Concerto::Network
 	{
 		return ENetHost::SendPacket(packet, _peer.get(), channel, flags);
 	}
-	
+
 	void EnetClient::Connect(const IpAddress& address)
 	{
 		ENetAddress enetAddress = {};
