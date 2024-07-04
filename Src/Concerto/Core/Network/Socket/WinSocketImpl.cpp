@@ -21,8 +21,8 @@ namespace Concerto::Network
 		CONCERTO_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
 		sockaddr addr = {};
 		int addrSize = sizeof(sockaddr);
-		SocketHandle newSocket = accept(socket, &addr, &addrSize);
-		if (newSocket == SocketImpl::InvalidSocket)
+		const SocketHandle newSocket = accept(socket, &addr, &addrSize);
+		if (newSocket == InvalidSocket)
 		{
 			if (error != nullptr)
 				*error = GetSocketError(WSAGetLastError());
@@ -40,9 +40,9 @@ namespace Concerto::Network
 		CONCERTO_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
 		if (error != nullptr)
 			*error = SocketError::NoError;
-		sockaddr_in addr = IpAddressImpl::ToSockAddr(address);
+		const sockaddr_in addr = IpAddressImpl::ToSockAddr(address);
 
-		if (connect(socket, reinterpret_cast<sockaddr*>(&addr), sizeof(sockaddr)) == SOCKET_ERROR)
+		if (connect(socket, reinterpret_cast<const sockaddr*>(&addr), sizeof(sockaddr)) == SOCKET_ERROR)
 		{
 			if (error != nullptr)
 				*error = GetSocketError(WSAGetLastError());
@@ -55,9 +55,9 @@ namespace Concerto::Network
 	{
 		if (error != nullptr)
 			*error = SocketError::NoError;
-		SocketHandle socket = ::socket(protocol == IpProtocol::Ipv4 ? AF_INET : AF_INET6,
+		const SocketHandle socket = ::socket(protocol == IpProtocol::Ipv4 ? AF_INET : AF_INET6,
 			socketType == SocketType::Tcp ? SOCK_STREAM : SOCK_DGRAM, 0);
-		if (socket == SocketImpl::InvalidSocket)
+		if (socket == InvalidSocket)
 		{
 			if (error != nullptr)
 				*error = GetSocketError(WSAGetLastError());
@@ -70,8 +70,8 @@ namespace Concerto::Network
 		CONCERTO_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
 		if (error != nullptr)
 			*error = SocketError::NoError;
-		sockaddr_in addr = IpAddressImpl::ToSockAddr(address);
-		if (bind(socket, reinterpret_cast<sockaddr*>(&addr), sizeof(sockaddr)) == SOCKET_ERROR)
+		const sockaddr_in addr = IpAddressImpl::ToSockAddr(address);
+		if (bind(socket, reinterpret_cast<const sockaddr*>(&addr), sizeof(sockaddr)) == SOCKET_ERROR)
 		{
 			if (error != nullptr)
 				*error = GetSocketError(WSAGetLastError());
@@ -134,7 +134,7 @@ namespace Concerto::Network
 		CONCERTO_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
 		if (error != nullptr)
 			*error = SocketError::NoError;
-		int result = recv(socket, reinterpret_cast<char*>(buffer), size, 0);
+		const int result = recv(socket, static_cast<char*>(buffer), static_cast<Int32>(size), 0);
 		if (result == SOCKET_ERROR)
 		{
 			if (error != nullptr)
@@ -146,16 +146,12 @@ namespace Concerto::Network
 		return true;
 	}
 
-	bool SocketImpl::Send(SocketHandle socket,
-		const void* buffer,
-		std::size_t size,
-		std::size_t* sent,
-		SocketError* error)
+	bool SocketImpl::Send(SocketHandle socket, const void* buffer, std::size_t size, std::size_t* sent, SocketError* error)
 	{
 		CONCERTO_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
 		if (error != nullptr)
 			*error = SocketError::NoError;
-		int result = send(socket, reinterpret_cast<const char*>(buffer), size, 0);
+		const int result = send(socket, static_cast<const char*>(buffer), static_cast<Int32>(size), 0);
 		if (result == SOCKET_ERROR)
 		{
 			if (error != nullptr)
@@ -182,34 +178,34 @@ namespace Concerto::Network
 	{
 		switch (error)
 		{
-		case 0:
-			return SocketError::NoError;
-		case WSAECONNREFUSED:
-			return SocketError::ConnectionRefused;
-		case WSAECONNRESET:
-		case WSAECONNABORTED:
-		case WSAENOTCONN:
-		case WSAESHUTDOWN:
-			return SocketError::ConnectionClosed;
-		case WSAEADDRINUSE:
-		case WSAEADDRNOTAVAIL:
-			return SocketError::AddressNotAvailable;
-		case WSAEACCES:
-		case WSAEFAULT:
-		case WSAEBADF:
-		case WSAENOTSOCK:
-		case WSAEALREADY:
-		case WSAEISCONN:
-			return SocketError::InternError;
-		case WSANOTINITIALISED:
-			return SocketError::NotInitialized;
-		case WSAETIMEDOUT:
-			return SocketError::TimedOut;
-		default:
-		{
-			Logger::Warning("Unknown socket error: {}", error);
-			return SocketError::Unknown;
-		}
+			case 0:
+				return SocketError::NoError;
+			case WSAECONNREFUSED:
+				return SocketError::ConnectionRefused;
+			case WSAECONNRESET:
+			case WSAECONNABORTED:
+			case WSAENOTCONN:
+			case WSAESHUTDOWN:
+				return SocketError::ConnectionClosed;
+			case WSAEADDRINUSE:
+			case WSAEADDRNOTAVAIL:
+				return SocketError::AddressNotAvailable;
+			case WSAEACCES:
+			case WSAEFAULT:
+			case WSAEBADF:
+			case WSAENOTSOCK:
+			case WSAEALREADY:
+			case WSAEISCONN:
+				return SocketError::InternError;
+			case WSANOTINITIALISED:
+				return SocketError::NotInitialized;
+			case WSAETIMEDOUT:
+				return SocketError::TimedOut;
+			default:
+			{
+				Logger::Warning("Unknown socket error: {}", error);
+				return SocketError::Unknown;
+			}
 		}
 	}
 
@@ -219,7 +215,8 @@ namespace Concerto::Network
 		int statusSize = sizeof(status);
 		if (getsockopt(socket, SOL_SOCKET, SO_ERROR, reinterpret_cast<char*>(&status), &statusSize) == SOCKET_ERROR)
 		{
-			std::cerr << "Failed to retrieve socket options." << std::endl;
+			if (error)
+				*error = GetSocketError(WSAGetLastError());
 			closesocket(socket);
 			WSACleanup();
 			return 1;

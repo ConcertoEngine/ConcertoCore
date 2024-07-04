@@ -13,7 +13,7 @@ namespace Concerto::Network
 	{
 	}
 
-	Packet::Packet(UInt8 packetType, const void* data, std::size_t size) :
+	Packet::Packet(UInt8 packetType, const void* data, UInt32 size) :
 		Stream(HeaderSize + size), _size(size), _packetType(packetType), _validHeader(true)
 	{
 		_buffer.resize(HeaderSize + size);
@@ -73,7 +73,7 @@ namespace Concerto::Network
 	{
 		if (_buffer.size() < HeaderSize)
 			return false;
-		const UInt32 size = _buffer.size() - HeaderSize;
+		const UInt32 size = static_cast<UInt32>(_buffer.size()) - HeaderSize;
 		Stream headerStream(HeaderSize);
 		headerStream << _packetType << size;
 		headerStream.SetCursorPos(0);

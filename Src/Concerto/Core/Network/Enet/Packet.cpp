@@ -14,7 +14,7 @@ namespace Concerto::Network
 
 	ENetPacket::ENetPacket(const void* data, std::size_t size) : Stream(size)
 	{
-		std::memcpy(_buffer.data(), &size, sizeof(UInt32));
+		std::memcpy(_buffer.data(), data, size);
 		_cursorPos = size;
 	}
 

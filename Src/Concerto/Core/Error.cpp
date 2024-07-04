@@ -22,9 +22,9 @@ namespace Concerto
 		const DWORD error = GetLastError();
 #ifdef CONCERTO_DEBUG // This may help for debug
 		const auto hResult = HRESULT_FROM_WIN32(error);
-		const auto facility = HRESULT_FACILITY(hResult);
-		const auto severity = HRESULT_SEVERITY(hResult);
-		const auto code = HRESULT_CODE(hResult);
+		[[maybe_unused]] const auto facility = HRESULT_FACILITY(hResult);
+		[[maybe_unused]] const auto severity = HRESULT_SEVERITY(hResult);
+		[[maybe_unused]] const auto code = HRESULT_CODE(hResult);
 #endif
 		LPSTR messageBuffer = nullptr;
 

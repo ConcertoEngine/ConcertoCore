@@ -7,7 +7,6 @@
 
 #include <cstddef>
 #include "Concerto/Core/Types.hpp"
-#include "Concerto/Core/Buffer.hpp"
 #include "Concerto/Core/Stream.hpp"
 
 namespace Concerto::Network
@@ -16,7 +15,7 @@ namespace Concerto::Network
 	{
 	 public:
 		Packet();
-		Packet(UInt8 packetType, const void* data, std::size_t size);
+		Packet(UInt8 packetType, const void* data, UInt32 size);
 		explicit Packet(UInt8 packetType, std::size_t capacity = 0);
 
 		[[nodiscard]] UInt8 GetPacketType() const;
@@ -39,7 +38,7 @@ namespace Concerto::Network
 			return *this;
 		}
 
-		static constexpr std::size_t HeaderSize = sizeof(UInt8) + sizeof(UInt32);
+		static constexpr UInt32 HeaderSize = sizeof(UInt8) + sizeof(UInt32);
 	 private:
 		UInt32 _size;
 		UInt8 _packetType;

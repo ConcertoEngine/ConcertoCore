@@ -35,7 +35,7 @@ namespace Concerto::Network
 	{
 		CONCERTO_ASSERT(_enetHost != nullptr, "Invalid host");
 		::ENetEvent enetEvent;
-		Int32 ret = enet_host_service(ToENetHost(_enetHost), &enetEvent, timeout);
+		const Int32 ret = enet_host_service(ToENetHost(_enetHost), &enetEvent, timeout);
 		if (ret <= 0)
 		{
 			event->eventType = ENetEvent::Type::None;

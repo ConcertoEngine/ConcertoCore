@@ -125,20 +125,20 @@ namespace Concerto
 		void ShrinkToFit();
 
 		//STL functions
-		[[nodiscard]] iterator begin() noexcept;
-		[[nodiscard]] const_iterator begin() const noexcept;
-		[[nodiscard]] const_iterator cbegin() const noexcept;
-		[[nodiscard]] reverse_iterator rbegin() noexcept;
-		[[nodiscard]] const_reverse_iterator crbegin() const noexcept;
-		[[nodiscard]] const_reverse_iterator rbegin() const noexcept;
-		[[nodiscard]] iterator end() noexcept;
-		[[nodiscard]] const_iterator end() const noexcept;
-		[[nodiscard]] const_iterator cend() const noexcept;
-		[[nodiscard]] reverse_iterator rend() noexcept;
-		[[nodiscard]] const_reverse_iterator rend() const noexcept;
-		[[nodiscard]] const_reverse_iterator crend() const noexcept;
-		[[nodiscard]] bool empty() const noexcept;
-		[[nodiscard]] size_type size() const noexcept;
+		[[nodiscard]] inline iterator begin() noexcept;
+		[[nodiscard]] inline const_iterator begin() const noexcept;
+		[[nodiscard]] inline const_iterator cbegin() const noexcept;
+		[[nodiscard]] inline reverse_iterator rbegin() noexcept;
+		[[nodiscard]] inline const_reverse_iterator crbegin() const noexcept;
+		[[nodiscard]] inline const_reverse_iterator rbegin() const noexcept;
+		[[nodiscard]] inline iterator end() noexcept;
+		[[nodiscard]] inline const_iterator end() const noexcept;
+		[[nodiscard]] inline const_iterator cend() const noexcept;
+		[[nodiscard]] inline reverse_iterator rend() noexcept;
+		[[nodiscard]] inline const_reverse_iterator rend() const noexcept;
+		[[nodiscard]] inline const_reverse_iterator crend() const noexcept;
+		[[nodiscard]] inline bool empty() const noexcept;
+		[[nodiscard]] inline size_type size() const noexcept;
 
 		bool operator==(const Buffer& rhs) const;
 		bool operator!=(const Buffer& rhs) const;

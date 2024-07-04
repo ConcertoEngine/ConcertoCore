@@ -12,9 +12,10 @@ namespace Concerto::Network
 {
 	void ENet::Initialize()
 	{
-		if (enet_initialize() == 0)
+		const auto res = enet_initialize();
+		if (res == 0)
 			return;
-		CONCERTO_ASSERT_FALSE("An error occurred while initializing Enet");
+		CONCERTO_ASSERT_FALSE("An error occurred while initializing Enet: {}", res);
 	}
 	
 	void ENet::Deinitialize()
