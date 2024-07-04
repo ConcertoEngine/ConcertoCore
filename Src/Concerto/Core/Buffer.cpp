@@ -88,72 +88,72 @@ namespace Concerto
 		_data.shrink_to_fit();
 	}
 
-	inline Buffer::iterator Buffer::begin() noexcept
+	Buffer::iterator Buffer::begin() noexcept
 	{
 		return _data.begin();
 	}
 
-	inline Buffer::const_iterator Buffer::begin() const noexcept
+	Buffer::const_iterator Buffer::begin() const noexcept
 	{
 		return _data.begin();
 	}
 
-	inline Buffer::const_iterator Buffer::cbegin() const noexcept
+	Buffer::const_iterator Buffer::cbegin() const noexcept
 	{
 		return _data.cbegin();
 	}
 
-	inline Buffer::reverse_iterator Buffer::rbegin() noexcept
+	Buffer::reverse_iterator Buffer::rbegin() noexcept
 	{
 		return _data.rbegin();
 	}
 
-	inline Buffer::const_reverse_iterator Buffer::crbegin() const noexcept
+	Buffer::const_reverse_iterator Buffer::crbegin() const noexcept
 	{
 		return _data.crbegin();
 	}
 
-	inline Buffer::const_reverse_iterator Buffer::rbegin() const noexcept
+	Buffer::const_reverse_iterator Buffer::rbegin() const noexcept
 	{
 		return _data.rbegin();
 	}
 
-	inline Buffer::iterator Buffer::end() noexcept
+	Buffer::iterator Buffer::end() noexcept
 	{
 		return _data.end();
 	}
 
-	inline Buffer::const_iterator Buffer::end() const noexcept
+	Buffer::const_iterator Buffer::end() const noexcept
 	{
 		return _data.end();
 	}
 
-	inline Buffer::const_iterator Buffer::cend() const noexcept
+	Buffer::const_iterator Buffer::cend() const noexcept
 	{
 		return _data.cend();
 	}
 
-	inline Buffer::reverse_iterator Buffer::rend() noexcept
+	Buffer::reverse_iterator Buffer::rend() noexcept
 	{
 		return _data.rend();
 	}
 
-	inline Buffer::const_reverse_iterator Buffer::rend() const noexcept
+	Buffer::const_reverse_iterator Buffer::rend() const noexcept
 	{
 		return _data.rend();
 	}
 
-	inline Buffer::const_reverse_iterator Buffer::crend() const noexcept
+	Buffer::const_reverse_iterator Buffer::crend() const noexcept
 	{
 		return _data.crend();
 	}
 
-	inline bool Buffer::empty() const noexcept
+	bool Buffer::empty() const noexcept
 	{
 		return _data.empty();
 	}
 
-	inline Buffer::size_type Buffer::size() const noexcept
+	Buffer::size_type Buffer::size() const noexcept
 	{
 		return _data.size();
 	}
