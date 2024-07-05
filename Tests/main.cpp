@@ -11,7 +11,19 @@ int main(int argc, char** argv)
 	::testing::InitGoogleTest(&argc, argv);
 	Concerto::Logger::Info("End InitGoogleTest");
 	Concerto::Logger::Info("Begin RUN_ALL_TESTS");
-	const auto ret = RUN_ALL_TESTS();
-	Concerto::Logger::Info("End RUN_ALL_TESTS returned: {}", ret);
-	return ret;
+	try
+	{
+		const auto ret = RUN_ALL_TESTS();
+		Concerto::Logger::Info("End RUN_ALL_TESTS returned: {}", ret);
+		return ret;
+	}
+	catch (const std::exception& e)
+	{
+		Concerto::Logger::Info("End RUN_ALL_TESTS throwed: {}", e.what());
+	}
+	catch (...)
+	{
+		Concerto::Logger::Info("End RUN_ALL_TESTS throwed unknown exception");
+	}
+	return 254;
 }
