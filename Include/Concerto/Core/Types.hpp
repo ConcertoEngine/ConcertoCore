@@ -20,6 +20,17 @@
 	#define CONCERTO_PLATFORM_POSIX
 #endif
 
+//from https://sourceforge.net/p/predef/wiki/Architectures/
+#if defined(__arm__) || defined(__thumb__) || defined(_M_ARM) || defined(__arm)
+	#define CONCERTO_ARCH_ARM
+#elif defined(_M_ARM64) || defined(__aarch64__)
+	#define CONCERTO_ARCH_ARM64
+#elif defined(__amd64__) || defined(__amd64) || defined(__x86_64__) || defined(__x86_64) || defined(__x86_64) || defined(_M_AMD64) || defined(_M_X64)
+	#define NAZARA_ARCH_X86_64
+#elif defined(i386) || defined(__i386) || defined(_M_IX86)
+	#define CONCERTO_ARCH_X86
+#endif
+
 #if defined(NDEBUG)
 	#define CONCERTO_RELEASE
 #else
@@ -49,7 +60,11 @@
 #if defined(CONCERTO_PLATFORM_WINDOWS)
 	#define CONCERTO_BREAK_IN_DEBUGGER __debugbreak()
 #elif defined(CONCERTO_PLATFORM_POSIX)
-	#define CONCERTO_BREAK_IN_DEBUGGER asm ("int $3");
+	#if defined(CONCERTO_ARCH_ARM64) || CONCERTO_ARCH_ARM
+		#define CONCERTO_BREAK_IN_DEBUGGER __asm__("BKPT");
+	#else
+		#define CONCERTO_BREAK_IN_DEBUGGER asm("int $3");
+	#endif
 #else
 	#define CONCERTO_BREAK_IN_DEBUGGER {}
 #endif
