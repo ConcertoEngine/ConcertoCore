@@ -15,11 +15,15 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-13, macos-14]
+        include:
+          - os: macos-13
+            arch: x86_64
+          - os: macos-14
+            arch: arm64
         confs:
-        - { mode: debug }
-        - { mode: release }
-        - { mode: releasedbg }
+          - mode: debug
+          - mode: release
+          - mode: releasedbg
 
     steps:
     - name: Update clang to 18
