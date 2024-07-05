@@ -1,5 +1,5 @@
 #from https://github.com/NazaraEngine/NazaraEngine/blob/main/.github/workflows/windows-build.yml
-name: Ubuntu build
+name: FreeBSD build
 
 on:
   push:
