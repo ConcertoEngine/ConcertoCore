@@ -60,7 +60,7 @@
 #if defined(CONCERTO_PLATFORM_WINDOWS)
 	#define CONCERTO_BREAK_IN_DEBUGGER __debugbreak()
 #elif defined(CONCERTO_PLATFORM_POSIX)
-	#if defined(CONCERTO_ARCH_ARM64) || CONCERTO_ARCH_ARM
+	#if defined(CONCERTO_ARCH_ARM64) || defined(CONCERTO_ARCH_ARM)
 		#define CONCERTO_BREAK_IN_DEBUGGER __builtin_trap();
 	#else
 		#define CONCERTO_BREAK_IN_DEBUGGER asm("int $3");
