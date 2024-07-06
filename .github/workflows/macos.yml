@@ -24,10 +24,7 @@ jobs:
 
     steps:
     - name: Update clang to 18
-      run: |
-        brew install llvm@18
-        $(brew --prefix llvm@18)/bin/clang-18 --version
-        $(brew --prefix llvm@18)/bin/clang++ --version
+      run: brew install llvm@18
 
     - name: Get current date as package key
       id: cache_key
@@ -60,7 +57,7 @@ jobs:
         key: macOS-${{ matrix.arch }}-${{ matrix.confs.mode }}-${{ steps.dep_hash.outputs.hash }}-W${{ steps.cache_key.outputs.key }}
 
     - name: Configure xmake and install dependencies
-      run: xmake config --arch=${{ matrix.arch }} --mode=${{ matrix.confs.mode }} ${{ matrix.confs.config }} --yes -vD
+      run: xmake config --arch=${{ matrix.arch }} --mode=${{ matrix.confs.mode }} ${{ matrix.confs.config }} --yes --cc=$(brew --prefix llvm@18)/bin/clang-18 --cxx=$(brew --prefix llvm@18)/bin/clang++
 
     - name: Save cached xmake dependencies
       if: ${{ !steps.restore-depcache.outputs.cache-hit }}
