@@ -15,8 +15,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-13]
-        arch: [x86_64]
+        os: [macos-14]
+        arch: [x86_64, arm64]
         confs:
         - { mode: debug }
         - { mode: release }
@@ -39,7 +39,7 @@ jobs:
     - name: Setup xmake
       uses: xmake-io/github-action-setup-xmake@v1
       with:
-        xmake-version: branch@dev
+        xmake-version: latest
         actions-cache-folder: .xmake-cache-W${{ steps.cache_key.outputs.key }}
 
     - name: Update xmake repository
@@ -57,7 +57,7 @@ jobs:
         key: macOS-${{ matrix.arch }}-${{ matrix.confs.mode }}-${{ steps.dep_hash.outputs.hash }}-W${{ steps.cache_key.outputs.key }}
 
     - name: Configure xmake and install dependencies
-      run: xmake config --arch=${{ matrix.arch }} --mode=${{ matrix.confs.mode }} ${{ matrix.confs.config }} --yes --cc=/usr/local/opt/llvm@18/bin/clang --cxx=/usr/local/opt/llvm@18/bin/clang++
+      run: xmake config --arch=${{ matrix.arch }} --mode=${{ matrix.confs.mode }} ${{ matrix.confs.config }} --yes --cc=$(brew --prefix llvm@18)/bin/clang-18 --cxx=$(brew --prefix llvm@18)/bin/clang++
 
     - name: Save cached xmake dependencies
       if: ${{ !steps.restore-depcache.outputs.cache-hit }}

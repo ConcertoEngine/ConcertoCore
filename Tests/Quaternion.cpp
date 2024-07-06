@@ -9,7 +9,7 @@
 namespace CONCERTO_ANONYMOUS_NAMESPACE
 {
 	// results are from https://www.redcrab-software.com/en/Calculator/Quaternion-Calculator
-	constexpr float near = 1e-05f;
+	constexpr float near = 1.2e-05f;
 	using namespace Concerto;
 	using namespace Concerto;
 
