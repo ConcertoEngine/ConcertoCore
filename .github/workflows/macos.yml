@@ -26,7 +26,7 @@ jobs:
     - name: Update clang to 18
       run: |
         brew install llvm@18
-        ls -r $(brew --prefix llvm@18)
+        ls -r $(brew --prefix llvm@18)/bin
 
     - name: Get current date as package key
       id: cache_key
