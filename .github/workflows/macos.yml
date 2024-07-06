@@ -26,8 +26,7 @@ jobs:
     - name: Update clang to 18
       run: |
         brew install llvm@18
-        brew unlink llvm
-        brew link --force --overwrite llvm@18
+        brew --prefix llvm@18
         ln -s /usr/local/opt/llvm@18/bin/clang /usr/local/bin/clang
         ln -s /usr/local/opt/llvm@18/bin/clang++ /usr/local/bin/clang++
 
