@@ -60,7 +60,7 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 		ipAddress.SetPort(8080);
 		ASSERT_TRUE(server.Bind(ipAddress));
 
-		
+
 		Socket client(SocketType::Udp, IpProtocol::Ipv4);
 		IpAddress ip(127, 0, 0, 1, 8080);
 		client.Connect(ip);
@@ -73,7 +73,7 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 		std::size_t receivedSize = server.Receive(receivedBuffer);
 		receivedBuffer.Resize(receivedSize);
 		ASSERT_EQ(receivedBuffer, buffer);
-		
+
 		Socket::UnInitialize();
 	}
 }// namespace CONCERTO_ANONYMOUS_NAMESPACE

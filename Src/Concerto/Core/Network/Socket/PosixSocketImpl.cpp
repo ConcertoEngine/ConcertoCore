@@ -250,12 +250,15 @@ namespace Concerto::Network
 		}
 	}
 
-	std::size_t SocketImpl::GetAvailableBytes(SocketHandle handle)
+	std::size_t SocketImpl::GetAvailableBytes(SocketHandle handle, , SocketError* error = nullptr)
 	{
 		CONCERTO_ASSERT(handle != SocketImpl::InvalidSocket, "Invalid socket handle");
 		std::size_t available = 0;
 		if (ioctl(handle, FIONREAD, &available) == -1)
-			return 0;
+		{
+			if (error != nullptr)
+				*error = GetSocketError(errno);
+		}
 		return available;
 	}
 }// namespace Concerto::Network

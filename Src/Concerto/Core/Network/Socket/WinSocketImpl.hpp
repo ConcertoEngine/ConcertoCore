@@ -2,8 +2,8 @@
 // Created by arthur on 25/05/2023.
 //
 
-#ifndef CONCERTO_CORE_SRC_CONCERTO_CORE_NETWORK_SOCKET_WINSOCKETIMPL_HPP_
-#define CONCERTO_CORE_SRC_CONCERTO_CORE_NETWORK_SOCKET_WINSOCKETIMPL_HPP_
+#ifndef CONCERTO_CORE_NETWORK_SOCKET_WINSOCKETIMPL_HPP
+#define CONCERTO_CORE_NETWORK_SOCKET_WINSOCKETIMPL_HPP
 
 #include "Types.hpp"
 #include "Network/SocketHandle.hpp"
@@ -30,8 +30,8 @@ namespace Concerto::Network
 		static bool Initialize();
 		static bool UnInitialize();
 		static SocketError GetSocketError(int error);
-		static std::size_t GetAvailableBytes(SocketHandle handle);
+		static std::size_t GetAvailableBytes(SocketHandle handle, SocketError* error = nullptr);
 		static const SocketHandle InvalidSocket;
 	};
 }// namespace Concerto::Network
-#endif //CONCERTO_CORE_SRC_CONCERTO_CORE_NETWORK_SOCKET_WINSOCKETIMPL_HPP_
+#endif //CONCERTO_CORE_NETWORK_SOCKET_WINSOCKETIMPL_HPP

@@ -72,7 +72,11 @@ namespace Concerto::Network
 	{
 		if (_handle == SocketImpl::InvalidSocket)
 			return 0;
-		return SocketImpl::GetAvailableBytes(_handle);
+		SocketError error = {};
+		const std::size_t availableBytes =  SocketImpl::GetAvailableBytes(_handle, &error);
+		if (error != SocketError::NoError)
+			CONCERTO_ASSERT_FALSE("ConcertoCore: GetAvailableBytes returned error: {}", static_cast<int>(error));
+		return availableBytes;
 	}
 
 	void Socket::SetBlocking(bool blocking)

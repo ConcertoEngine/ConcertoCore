@@ -224,12 +224,16 @@ namespace Concerto::Network
 		return 0;
 	}
 
-	std::size_t SocketImpl::GetAvailableBytes(SocketHandle handle)
+	std::size_t SocketImpl::GetAvailableBytes(SocketHandle handle, SocketError* error)
 	{
 		CONCERTO_ASSERT(handle != SocketImpl::InvalidSocket, "Invalid socket handle");
 		u_long available = 0;
 		if (ioctlsocket(handle, FIONREAD, &available) == SOCKET_ERROR)
+		{
+			if (error)
+				*error = GetSocketError(WSAGetLastError());
 			return 0;
+		}
 		return static_cast<std::size_t>(available);
 	}
 }
