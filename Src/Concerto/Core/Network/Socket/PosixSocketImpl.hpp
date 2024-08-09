@@ -30,7 +30,7 @@ namespace Concerto::Network
 		static bool Initialize();
 		static bool UnInitialize();
 		static SocketError GetSocketError(int error);
-		static std::size_t GetAvailableBytes(SocketHandle handle);
+		static std::size_t GetAvailableBytes(SocketHandle handle, SocketError* error = nullptr);
 		static const SocketHandle InvalidSocket;
 	};
 }// namespace Concerto::Network

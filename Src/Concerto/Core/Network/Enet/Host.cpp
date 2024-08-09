@@ -22,10 +22,10 @@ namespace Concerto::Network
 		_maxIncomingBandwidth(maxIncomingBandwidth),
 		_maxOutgoingBandwidth(maxOutgoingBandwidth)
 	{
-		const bool ret = CreateHost(address);
+		[[maybe_unused]]const bool ret = CreateHost(address);
 		CONCERTO_ASSERT(ret, "An error occurred while trying to create an ENetHost");
 	}
-	
+
 	ENetHost::~ENetHost()
 	{
 		enet_host_destroy(ToENetHost(_enetHost));

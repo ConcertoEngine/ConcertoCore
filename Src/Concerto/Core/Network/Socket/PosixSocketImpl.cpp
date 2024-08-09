@@ -17,7 +17,7 @@
 
 namespace Concerto::Network
 {
-	SocketHandle const SocketImpl::InvalidSocket = -1;
+	SocketHandle constexpr SocketImpl::InvalidSocket = -1;
 
 	SocketHandle SocketImpl::Accept(SocketHandle socket, IpAddress* address, SocketError* error)
 	{
@@ -250,7 +250,7 @@ namespace Concerto::Network
 		}
 	}
 
-	std::size_t SocketImpl::GetAvailableBytes(SocketHandle handle, , SocketError* error = nullptr)
+	std::size_t SocketImpl::GetAvailableBytes(SocketHandle handle, SocketError* error)
 	{
 		CONCERTO_ASSERT(handle != SocketImpl::InvalidSocket, "Invalid socket handle");
 		std::size_t available = 0;
