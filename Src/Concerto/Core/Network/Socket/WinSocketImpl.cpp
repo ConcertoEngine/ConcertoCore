@@ -15,7 +15,8 @@
 
 namespace Concerto::Network
 {
-	SocketHandle constexpr SocketImpl::InvalidSocket = INVALID_SOCKET;
+	SocketHandle const SocketImpl::InvalidSocket = INVALID_SOCKET;
+
 	SocketHandle SocketImpl::Accept(SocketHandle socket, IpAddress* address, SocketError* error)
 	{
 		CONCERTO_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
