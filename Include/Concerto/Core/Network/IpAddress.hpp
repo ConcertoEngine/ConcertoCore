@@ -7,6 +7,7 @@
 
 #include <array>
 #include <string_view>
+#include <string>
 #include "Concerto/Core/Types.hpp"
 
 namespace Concerto::Network
@@ -42,9 +43,9 @@ namespace Concerto::Network
 
 		static bool IsIpV4(std::string_view ip);
 		static bool IsIpV6(std::string_view ip);
-		
+
 		static IpProtocol DetectProtocol(std::string_view ip);
-		
+
 		void SetPort(UInt16 port);
 
 		static const IpAddress AnyIPV4;
