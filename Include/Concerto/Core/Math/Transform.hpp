@@ -9,7 +9,7 @@
 #include "Concerto/Core/Math/Vector.hpp"
 #include "Concerto/Core/Math/Quaternion.hpp"
 
-namespace Concerto
+namespace cct
 {
 	class CONCERTO_CORE_PUBLIC_API Transform
 	{
@@ -83,5 +83,5 @@ namespace Concerto
 		Quaternionf _rotation;
 		Vector3f _scale;
 	};
-}// namespace Concerto
+}// namespace cct
 #endif//CONCERTO_CORE__MATH_TRANSFORM_HPP

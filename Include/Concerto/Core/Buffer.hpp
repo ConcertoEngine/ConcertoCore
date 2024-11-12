@@ -9,7 +9,7 @@
 
 #include "Concerto/Core/Types.hpp"
 
-namespace Concerto
+namespace cct
 {
 	class CONCERTO_CORE_PUBLIC_API Buffer
 	{

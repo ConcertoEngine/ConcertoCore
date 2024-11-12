@@ -10,7 +10,7 @@
 #include "Concerto/Core/Assert.hpp"
 #include "Concerto/Core/FunctionRef.hpp"
 
-namespace Concerto
+namespace cct
 {
 
 	template <typename ReturnValue, typename ... Args>

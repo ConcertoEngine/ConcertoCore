@@ -5,11 +5,11 @@
 #ifndef CONCERTO_CORE_NETWORK_SOCKET_WINSOCKETIMPL_HPP
 #define CONCERTO_CORE_NETWORK_SOCKET_WINSOCKETIMPL_HPP
 
-#include "Types.hpp"
-#include "Network/SocketHandle.hpp"
-#include "Network/IpAddress.hpp"
+#include "Concerto/Core/Types.hpp"
+#include "Concerto/Core/Network/SocketHandle.hpp"
+#include "Concerto/Core/Network/IpAddress.hpp"
 
-namespace Concerto::Network
+namespace cct::Network
 {
 	class SocketImpl
 	{
@@ -33,5 +33,5 @@ namespace Concerto::Network
 		static std::size_t GetAvailableBytes(SocketHandle handle, SocketError* error = nullptr);
 		static const SocketHandle InvalidSocket;
 	};
-}// namespace Concerto::Network
+}// namespace cct::Network
 #endif //CONCERTO_CORE_NETWORK_SOCKET_WINSOCKETIMPL_HPP

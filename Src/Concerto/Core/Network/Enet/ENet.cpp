@@ -8,7 +8,7 @@
 #include "Concerto/Core/Assert.hpp"
 #include "Concerto/Core/Network/ENet/ENet.hpp"
 
-namespace Concerto::Network
+namespace cct::Network
 {
 	void ENet::Initialize()
 	{
@@ -22,4 +22,4 @@ namespace Concerto::Network
 	{
 		enet_deinitialize();		
 	}
-}// namespace Concerto::Network
+}// namespace cct::Network

@@ -10,12 +10,12 @@
 #include "Concerto/Core/Network/SocketHandle.hpp"
 #include "Concerto/Core/Network/IpAddress.hpp"
 
-namespace Concerto
+namespace cct
 {
 	class Buffer;
 }
 
-namespace Concerto::Network
+namespace cct::Network
 {
 	class CONCERTO_CORE_PUBLIC_API Socket final
 	{

@@ -9,7 +9,7 @@
 #include "Concerto/Core/Math/Quaternion.hpp"
 #include "Concerto/Core/Serializer.hpp"
 
-namespace Concerto
+namespace cct
 {
 	template<typename T>
 	constexpr EulerAngles<T>::EulerAngles(T pitch, T yaw, T roll)
@@ -213,17 +213,17 @@ namespace Concerto
 	template<typename T>
 	void EulerAngles<T>::Serialize(Stream& stream) const
 	{
-		Concerto::Serialize(stream, _pitch);
-		Concerto::Serialize(stream, _yaw);
-		Concerto::Serialize(stream, _roll);
+		cct::Serialize(stream, _pitch);
+		cct::Serialize(stream, _yaw);
+		cct::Serialize(stream, _roll);
 	}
 
 	template<typename T>
 	void EulerAngles<T>::Deserialize(Stream& stream)
 	{
-		Concerto::Deserialize(stream, _pitch);
-		Concerto::Deserialize(stream, _yaw);
-		Concerto::Deserialize(stream, _roll);
+		cct::Deserialize(stream, _pitch);
+		cct::Deserialize(stream, _yaw);
+		cct::Deserialize(stream, _roll);
 	}
 }
 

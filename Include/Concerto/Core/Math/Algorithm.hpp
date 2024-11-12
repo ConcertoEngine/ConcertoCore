@@ -5,7 +5,7 @@
 #ifndef CONCERTO_CORE_MATH_ALGORITHM_HPP
 #define CONCERTO_CORE_MATH_ALGORITHM_HPP
 
-namespace Concerto
+namespace cct
 {
 	/**
 	 * @brief The Pi constant

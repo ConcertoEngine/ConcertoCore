@@ -10,7 +10,7 @@
 
 #include "Concerto/Core/Types.hpp"
 
-namespace Concerto
+namespace cct
 {
 	template<typename T>
 	constexpr std::string_view TypeName()
@@ -20,7 +20,7 @@ namespace Concerto
 
 		constexpr std::string_view functionSignature = CONCERTO_FUNCTION_SIGNATURE;
 #ifdef CONCERTO_COMPILER_MSVC
-		constexpr auto prefix = "Concerto::TypeName<"sv;
+		constexpr auto prefix = "cct::TypeName<"sv;
 		constexpr auto suffix = ">"sv;
 #elif defined(CONCERTO_COMPILER_GCC)
 		constexpr auto prefix = "T = "sv;

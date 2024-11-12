@@ -10,7 +10,7 @@
 
 #include "Concerto/Core/Types.hpp"
 
-namespace Concerto
+namespace cct
 {
 	/**
 	 * @brief A template class representing a mathematical matrix.
@@ -260,7 +260,7 @@ namespace Concerto
 
 	template<typename M>
 	concept Matrix3x4 = std::same_as<Matrix<typename M::Type, 3, 4>, M>;
-}// namespace Concerto
+}// namespace cct
 
 #include "Concerto/Core/Math/Matrix.inl"
 

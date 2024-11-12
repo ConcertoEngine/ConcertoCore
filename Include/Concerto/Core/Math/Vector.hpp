@@ -15,7 +15,7 @@
 #include "Concerto/Core/Types.hpp"
 #include "Concerto/Core/Stream.hpp"
 
-namespace Concerto
+namespace cct
 {
 	/**
 	 * @brief Vector class that represents a mathematical vector.

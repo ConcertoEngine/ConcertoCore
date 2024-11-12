@@ -12,7 +12,7 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 
 	TEST(FunctionRef, HasValue)
 	{
-		Concerto::FunctionRef<void()> func;
+		cct::FunctionRef<void()> func;
 		ASSERT_EQ(func.operator bool(), false);
 		auto lambda = []() {};
 		func = lambda;
@@ -23,14 +23,14 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 	{
 		int value = 0;
 		auto lambda = [&value]() {value = 42;};
-		Concerto::FunctionRef<void()> func = lambda;
+		cct::FunctionRef<void()> func = lambda;
 		func();
 		ASSERT_EQ(value, 42);
 	}
 
 	TEST(FunctionRef, Function)
 	{
-		Concerto::FunctionRef<void(int&)> func = foo;
+		cct::FunctionRef<void(int&)> func = foo;
 		int value = 0;
 		func(value);
 		ASSERT_EQ(value, 42);
@@ -39,7 +39,7 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 	TEST(FunctionRef, Args)
 	{
 		auto lambda = [](std::size_t& value, const std::string& str) {value = str.size();};
-		Concerto::FunctionRef<void(std::size_t&, const std::string&)> func = lambda;
+		cct::FunctionRef<void(std::size_t&, const std::string&)> func = lambda;
 		std::size_t value = 0;
 		std::string str = "Hello";
 		func(value, str);

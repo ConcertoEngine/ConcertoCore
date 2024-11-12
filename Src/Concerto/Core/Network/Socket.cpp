@@ -12,7 +12,7 @@
 #include "Socket/PosixSocketImpl.hpp"
 #endif//CONCERTO_PLATFORM_POSIX
 
-namespace Concerto::Network
+namespace cct::Network
 {
 	Socket::Socket(SocketType socketType, IpProtocol ipProtocol) :
 		_handle(SocketImpl::InvalidSocket), 

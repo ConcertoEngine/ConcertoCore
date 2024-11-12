@@ -15,7 +15,7 @@
 #include "Concerto/Core/Types.hpp"
 #include "Concerto/Core/Assert.hpp"
 
-namespace Concerto::Config {
+namespace cct::Config {
 	struct nullNode {};
 	class Node;
 

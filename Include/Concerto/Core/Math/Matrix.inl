@@ -8,7 +8,7 @@
 #include "Concerto/Core/Assert.hpp"
 #include "Concerto/Core/Math/Matrix.hpp"
 
-namespace Concerto
+namespace cct
 {
 	template<typename T, std::size_t Rows, std::size_t Columns>
 	template<typename... Args>
@@ -358,5 +358,5 @@ namespace Concerto
 	{
 		return GetElement(row, column);
 	}
-}// namespace Concerto
+}// namespace cct
 #endif//CONCERTO_CORE_MATH_MATRIX_INL

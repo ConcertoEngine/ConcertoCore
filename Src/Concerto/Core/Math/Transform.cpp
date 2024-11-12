@@ -4,7 +4,7 @@
 
 #include "Concerto/Core/Math/Transform.hpp"
 
-namespace Concerto
+namespace cct
 {
 
 	Transform::Transform(const Vector3f& location, const Quaternionf& rotation, const Vector3f& scale) :

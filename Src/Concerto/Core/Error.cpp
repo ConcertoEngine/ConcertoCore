@@ -14,7 +14,7 @@
 #error Unsupported platform
 #endif
 
-namespace Concerto
+namespace cct
 {
 	std::string Error::GetLastSystemErrorString()
 	{

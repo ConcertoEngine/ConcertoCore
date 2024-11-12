@@ -4,7 +4,7 @@
 
 #include "Concerto/Core/Any.hpp"
 
-namespace Concerto
+namespace cct
 {
     Any::Any(std::size_t id, std::unique_ptr<void*> data) :
         _id(id), _data(std::move(data))

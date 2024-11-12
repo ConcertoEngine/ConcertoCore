@@ -8,7 +8,7 @@
 
 namespace CONCERTO_ANONYMOUS_NAMESPACE
 {
-	using namespace Concerto;
+	using namespace cct;
 
 	TEST(Matrix, Constructor)
 	{
@@ -19,7 +19,7 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 
 	TEST(Matrix, GetElement)
 	{
-		Matrix<float, 3, 3> m(1.f, 2.f, 3.f,
+		Matrix<float, 3, 3> m(1.f, 5.f, 3.f,
 							  4.f, 5.f, 6.f,
 							  7.f, 8.f, 9.f);
 		ASSERT_EQ(1.f, m.GetElement(0, 0));
@@ -35,7 +35,7 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 
 	TEST(Matrix, operaorAdd)
 	{
-		Matrix<float, 3, 3> m1(1.f, 2.f, 3.f,
+		Matrix<float, 3, 3> m1(1.f, 6.f, 3.f,
 							   4.f, 5.f, 6.f,
 							   7.f, 8.f, 9.f);
 		Matrix<float, 3, 3> m2(1.f, 2.f, 3.f,

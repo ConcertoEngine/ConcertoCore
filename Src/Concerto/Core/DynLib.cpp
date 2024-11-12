@@ -4,7 +4,7 @@
 
 #include "Concerto/Core/DynLib.hpp"
 
-#include "Assert.hpp"
+#include "Concerto/Core/Assert.hpp"
 #ifdef CONCERTO_PLATFORM_WINDOWS
 #include "DynLib/WindowsDynLibImpl.hpp"
 #elif defined(CONCERTO_PLATFORM_POSIX)
@@ -15,7 +15,7 @@
 
 #define TO_DYNLIB_IMPL static_cast<DynLibImpl*>(_impl.get())
 
-namespace Concerto
+namespace cct
 {
 	DynLib::~DynLib()
 	{
@@ -63,4 +63,4 @@ namespace Concerto
 			return;
 		std::default_delete<DynLibImpl>()(static_cast<DynLibImpl*>(impl));
 	}
-}// namespace Concerto
+}// namespace cct

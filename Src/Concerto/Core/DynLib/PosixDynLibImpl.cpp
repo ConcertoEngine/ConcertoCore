@@ -7,7 +7,7 @@
 #ifdef CONCERTO_PLATFORM_POSIX
 #include "PosixDynLibImpl.hpp"
 
-namespace Concerto
+namespace cct
 {
 	bool DynLibImpl::Load(const std::filesystem::path& path, std::string* error)
 	{
@@ -52,5 +52,5 @@ namespace Concerto
 		}
 		return symbolPtr;
 	}
-}// namespace Concerto
+}// namespace cct
 #endif

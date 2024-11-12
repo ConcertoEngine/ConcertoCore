@@ -2,7 +2,7 @@
 // Created by arthur on 25/05/2023.
 //
 
-#include "Types.hpp"
+#include "Concerto/Core/Types.hpp"
 #ifdef CONCERTO_PLATFORM_WINDOWS
 
 #include <string>
@@ -11,9 +11,9 @@
 #include "Concerto/Core/Assert.hpp"
 #include "Concerto/Core/Logger.hpp"
 #include "WinSocketImpl.hpp"
-#include "WinIpAddressImpl.hpp"
+#include "Concerto/Core/Network/IpAddress/WinIpAddressImpl.hpp"
 
-namespace Concerto::Network
+namespace cct::Network
 {
 	SocketHandle const SocketImpl::InvalidSocket = INVALID_SOCKET;
 

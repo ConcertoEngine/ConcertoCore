@@ -7,7 +7,7 @@
 
 #include "Concerto/Core/DynLib.hpp"
 
-namespace Concerto
+namespace cct
 {
 	template <typename ReturnValue, typename ... Args>
 	ReturnValue DynLib::Invoke(const std::string& functionName, Args&&... args)
@@ -44,6 +44,6 @@ namespace Concerto
 		}
 		return static_cast<T*>(symbol);
 	}
-}// namespace Concerto
+}// namespace cct
 
 #endif//CONCERTO_CORE_DYNLIB_INL

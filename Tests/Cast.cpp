@@ -10,7 +10,7 @@
 
 namespace CONCERTO_ANONYMOUS_NAMESPACE
 {
-	using namespace Concerto;
+	using namespace cct;
 
 	constexpr std::string_view BaseStr = "Base";
 	constexpr std::string_view DerivedStr = "Derived";

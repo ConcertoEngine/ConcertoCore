@@ -22,7 +22,7 @@
 #define CONCERTO_DYNLIB_EXTENSION ".dylib"
 #endif
 
-namespace Concerto
+namespace cct
 {
 	class DynLibImpl;
 
@@ -59,7 +59,7 @@ namespace Concerto
 		mutable std::string _lastError;
 	};
 
-}// namespace Concerto
+}// namespace cct
 
 #include "Concerto/Core/DynLib.inl"
 

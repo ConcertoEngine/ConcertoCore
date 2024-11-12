@@ -7,7 +7,7 @@
 #include <bit>
 #include "Concerto/Core/Types.hpp"
 
-namespace Concerto
+namespace cct
 {
 	/**
 	 * @brief Performs a byte swap on the given value

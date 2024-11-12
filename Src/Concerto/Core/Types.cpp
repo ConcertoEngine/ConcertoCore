@@ -6,7 +6,7 @@
 
 #if defined(CONCERTO_PLATFORM_WINDOWS)
 #include <windows.h>
-namespace Concerto
+namespace cct
 {
 	inline bool IsDebuggerAttached()
 	{
@@ -15,7 +15,7 @@ namespace Concerto
 }
 #elif defined(CONCERTO_PLATFORM_POSIX)
 #include <fstream>
-namespace Concerto
+namespace cct
 {
 	bool IsDebuggerAttached()
 	{
@@ -33,7 +33,7 @@ namespace Concerto
 	}
 }
 #else
-namespace Concerto
+namespace cct
 {
 	inline bool IsDebuggerAttached()
 	{

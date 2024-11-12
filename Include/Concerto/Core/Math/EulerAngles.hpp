@@ -8,7 +8,7 @@
 #include "Concerto/Core/Math/Vector.hpp"
 #include "Concerto/Core/Stream.hpp"
 
-namespace Concerto
+namespace cct
 {
 	template<typename T>
 	class Quaternion;

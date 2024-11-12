@@ -1,7 +1,7 @@
 //
 // Created by arthur on 28/05/2023.
 //
-#include "Types.hpp"
+#include "Concerto/Core/Types.hpp"
 #ifdef CONCERTO_PLATFORM_POSIX
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -12,10 +12,9 @@
 #include <errno.h>
 
 #include "Concerto/Core/Assert.hpp"
-#include "PosixSocketImpl.hpp"
-#include "PosixIpAddressImpl.hpp"
+#include "Concerto/Core/Network/Socket/PosixSocketImpl.hpp"
 
-namespace Concerto::Network
+namespace cct::Network
 {
 	SocketHandle constexpr SocketImpl::InvalidSocket = -1;
 
@@ -261,5 +260,5 @@ namespace Concerto::Network
 		}
 		return available;
 	}
-}// namespace Concerto::Network
+}// namespace cct::Network
 #endif// CONCERTO_PLATFORM_LINUX

@@ -13,8 +13,8 @@
 	{																	\
 		if (!(expression))												\
 		{																\
-			Concerto::Logger::Debug(fmt __VA_OPT__(,) __VA_ARGS__);		\
-			if (Concerto::IsDebuggerAttached())							\
+			cct::Logger::Debug(fmt __VA_OPT__(,) __VA_ARGS__);		\
+			if (cct::IsDebuggerAttached())							\
 			{															\
 				CONCERTO_BREAK_IN_DEBUGGER;								\
 			}															\

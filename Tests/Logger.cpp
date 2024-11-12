@@ -6,7 +6,7 @@
 
 #include <Concerto/Core/Logger.hpp>
 
-using namespace Concerto;
+using namespace cct;
 
 namespace CONCERTO_ANONYMOUS_NAMESPACE
 {

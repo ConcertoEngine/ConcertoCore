@@ -7,8 +7,8 @@
 
 namespace CONCERTO_ANONYMOUS_NAMESPACE
 {
-	using namespace Concerto;
-	using namespace Concerto;
+	using namespace cct;
+	using namespace cct;
 
 	TEST(Serialize, Basics)
 	{

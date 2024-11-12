@@ -7,7 +7,7 @@
 #include "Concerto/Core/Assert.hpp"
 #include <enet/enet.h>
 
-namespace Concerto::Network
+namespace cct::Network
 {
 	EnetClient::EnetClient(UInt32 maxIncomingBandwidth, UInt32 maxOutgoingBandwidth) : 
 		ENetHost(nullptr, 1, 2, maxIncomingBandwidth, maxOutgoingBandwidth),
@@ -41,4 +41,4 @@ namespace Concerto::Network
 		_peer->Disconnect();
 	}
 
-}// namespace Concerto::Network
+}// namespace cct::Network

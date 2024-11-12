@@ -10,7 +10,7 @@
 #include <string>
 #include <dlfcn.h>
 
-namespace Concerto
+namespace cct
 {
 	class DynLibImpl
 	{
@@ -25,6 +25,6 @@ namespace Concerto
 	 private:
 		void* _module = {};
 	};
-}// namespace Concerto
+}// namespace cct
 #endif //CONCERTO_PLATFORM_POSIX
 #endif //CONCERTO_CORE_POSIX_DYNLIBIMPL_HPP

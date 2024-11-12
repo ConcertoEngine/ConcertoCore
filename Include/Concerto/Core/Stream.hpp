@@ -9,7 +9,7 @@
 #include <vector>
 #include "Concerto/Core/Types.hpp"
 
-namespace Concerto
+namespace cct
 {
 	class Buffer;
 

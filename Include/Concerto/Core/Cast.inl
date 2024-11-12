@@ -7,7 +7,7 @@
 
 #include <utility>
 
-namespace Concerto
+namespace cct
 {
 	template<typename To, typename From>
 		requires(std::is_base_of_v<std::remove_cvref_t<From>, std::remove_cvref_t<To>> ||

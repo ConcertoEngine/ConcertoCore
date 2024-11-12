@@ -9,7 +9,7 @@
 
 #include <memory>
 
-namespace Concerto
+namespace cct
 {
 	/**
 	 * @brief A class that can store any type of data.

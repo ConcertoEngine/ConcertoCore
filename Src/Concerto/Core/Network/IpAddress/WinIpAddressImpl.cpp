@@ -2,14 +2,14 @@
 // Created by arthur on 26/05/2023.
 //
 
-#include "Types.hpp"
+#include "Concerto/Core/Types.hpp"
 #ifdef CONCERTO_PLATFORM_WINDOWS
 #include <stdexcept>
-#include "WinIpAddressImpl.hpp"
+#include "Concerto/Core/Network/IpAddress/WinIpAddressImpl.hpp"
 
-namespace Concerto::Network
+namespace cct::Network
 {
-	IpAddress Concerto::Network::IpAddressImpl::FromSockAddr(const sockaddr* addr)
+	IpAddress cct::Network::IpAddressImpl::FromSockAddr(const sockaddr* addr)
 	{
 		if (addr->sa_family == AF_INET)
 		{

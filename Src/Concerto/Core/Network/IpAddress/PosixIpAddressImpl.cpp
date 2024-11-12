@@ -1,14 +1,14 @@
 //
 // Created by arthur on 28/05/2023.
 //
-#include "Types.hpp"
+#include "Concerto/Core/Types.hpp"
 #ifdef CONCERTO_PLATFORM_POSIX
 #include <stdexcept>
-#include "PosixIpAddressImpl.hpp"
+#include "Concerto/Core/Network/IpAddress/PosixIpAddressImpl.hpp"
 
-namespace Concerto::Network
+namespace cct::Network
 {
-	IpAddress Concerto::Network::IpAddressImpl::FromSockAddr(const sockaddr* addr)
+	IpAddress cct::Network::IpAddressImpl::FromSockAddr(const sockaddr* addr)
 	{
 		if (addr->sa_family == AF_INET)
 		{

@@ -10,7 +10,7 @@
 #include "Concerto/Core/Assert.hpp"
 #include "Concerto/Core/Any.hpp"
 
-namespace Concerto
+namespace cct
 {
 	template<typename T, typename ... Args>
 	Any& Any::operator=(Args&&... args)

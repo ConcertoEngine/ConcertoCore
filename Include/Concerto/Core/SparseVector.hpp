@@ -8,7 +8,7 @@
 #include <vector>
 #include <optional>
 
-namespace Concerto
+namespace cct
 {
 	/**
 	* @brief SparseVector

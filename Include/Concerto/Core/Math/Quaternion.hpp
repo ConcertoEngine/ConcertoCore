@@ -9,7 +9,7 @@
 #include "Concerto/Core/Math/EulerAngles.hpp"
 #include "Concerto/Core/Math/Matrix.hpp"
 
-namespace Concerto
+namespace cct
 {
 	template<typename T>
 	class Quaternion
@@ -260,7 +260,7 @@ namespace Concerto
 	template<typename T>
 	std::ostream& operator<<(std::ostream& stream, const Quaternion<T>& quaternion) noexcept;
 
-}// namespace Concerto
+}// namespace cct
 
 #include "Concerto/Core/Math/Quaternion.inl"
 

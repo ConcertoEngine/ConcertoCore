@@ -5,12 +5,12 @@
 
 #ifndef CONCERTO_CORE_SRC_CONCERTO_CORE_NETWORK_IPADDRESS_POSIXIPADDRESSIMPL_HPP_
 #define CONCERTO_CORE_SRC_CONCERTO_CORE_NETWORK_IPADDRESS_POSIXIPADDRESSIMPL_HPP_
-#include "Types.hpp"
+#include "Concerto/Core/Types.hpp"
 #ifdef CONCERTO_PLATFORM_POSIX
 #include "IpAddress.hpp"
 #include <netdb.h>
 #include <netinet/in.h>
-namespace Concerto::Network
+namespace cct::Network
 {
 	class IpAddressImpl
 	{

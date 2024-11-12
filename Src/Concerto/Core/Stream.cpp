@@ -7,7 +7,7 @@
 #include "Concerto/Core/Stream.hpp"
 #include "Concerto/Core/Buffer.hpp"
 
-namespace Concerto
+namespace cct
 {
 	Stream::Stream(std::size_t capacity) : _cursorPos(0)
 	{

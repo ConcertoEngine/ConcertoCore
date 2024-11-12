@@ -5,9 +5,8 @@
 #include <cstring>
 
 #include "Concerto/Core/Network/Packet.hpp"
-#include "Packet.hpp"
 
-namespace Concerto::Network
+namespace cct::Network
 {
 	Packet::Packet() : Stream(HeaderSize), _size(0), _packetType(0), _validHeader(false)
 	{
@@ -98,4 +97,4 @@ namespace Concerto::Network
 	{
 		return !operator==(value);
 	}
-}// namespace Concerto::Network
+}// namespace cct::Network

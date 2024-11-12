@@ -9,7 +9,7 @@
 #include "Concerto/Core/Assert.hpp"
 #include "Concerto/Core/SparseVector.hpp"
 
-namespace Concerto
+namespace cct
 {
     template<typename ValueType, typename Allocator>
     SparseVector<ValueType, Allocator>::SparseVector(SparseVector::size_type size) :

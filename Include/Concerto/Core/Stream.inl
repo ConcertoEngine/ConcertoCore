@@ -8,19 +8,19 @@
 #include "Concerto/Core/Stream.hpp"
 #include "Concerto/Core/Serializer.hpp"
 
-namespace Concerto
+namespace cct
 {
 	template<typename T>
 	Stream& Stream::operator<<(const T& data)
 	{
-		Concerto::Serialize(*this, data);
+		cct::Serialize(*this, data);
 		return *this;
 	}
 
 	template<typename T>
 	Stream& Stream::operator>>(T& data)
 	{
-		Concerto::Deserialize(*this, data);
+		cct::Deserialize(*this, data);
 		return *this;
 	}
 }

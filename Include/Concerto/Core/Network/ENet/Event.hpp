@@ -9,7 +9,7 @@
 #include "Concerto/Core/Network/ENet/Packet.hpp"
 #include "Concerto/Core/Network/ENet/Peer.hpp"
 
-namespace Concerto::Network
+namespace cct::Network
 {
 	struct CONCERTO_CORE_PUBLIC_API ENetEvent
 	{

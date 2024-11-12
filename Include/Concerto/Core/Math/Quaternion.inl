@@ -10,7 +10,7 @@
 #include "Concerto/Core/Math/Algorithm.hpp"
 #include "Concerto/Core/Math/Quaternion.hpp"
 
-namespace Concerto
+namespace cct
 {
 	template<typename T>
 	constexpr Quaternion<T>::Quaternion(T x, T y, T z, T w) noexcept
@@ -314,19 +314,19 @@ namespace Concerto
 		template<typename T>
 	inline void Quaternion<T>::Serialize(Stream& stream) const
 	{
-		Concerto::Serialize(stream, _w);
-		Concerto::Serialize(stream, _x);
-		Concerto::Serialize(stream, _y);
-		Concerto::Serialize(stream, _z);
+		cct::Serialize(stream, _w);
+		cct::Serialize(stream, _x);
+		cct::Serialize(stream, _y);
+		cct::Serialize(stream, _z);
 	}
 
 	template<typename T>
 	inline void Quaternion<T>::Deserialize(Stream& stream)
 	{
-		Concerto::Deserialize(stream, _w);
-		Concerto::Deserialize(stream, _x);
-		Concerto::Deserialize(stream, _y);
-		Concerto::Deserialize(stream, _z);
+		cct::Deserialize(stream, _w);
+		cct::Deserialize(stream, _x);
+		cct::Deserialize(stream, _y);
+		cct::Deserialize(stream, _z);
 	}
 
 	template<typename T>
@@ -336,6 +336,6 @@ namespace Concerto
 			<< ", W: " << quaternion.W() << ")";
 		return stream;
 	}
-}// namespace Concerto
+}// namespace cct
 
 #endif//CONCERTO_CORE_MATH_QUATERNION_INL

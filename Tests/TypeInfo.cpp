@@ -15,27 +15,27 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 	TEST(TypeInfo, TypeName)
 	{
 		{
-			constexpr auto typeName = Concerto::TypeName<int>();
+			constexpr auto typeName = cct::TypeName<int>();
 			ASSERT_EQ(typeName, "int");
 		}
 		{
-			constexpr auto typeName = Concerto::TypeName<std::shared_ptr<float>>();
+			constexpr auto typeName = cct::TypeName<std::shared_ptr<float>>();
 			ASSERT_EQ(typeName, "std::shared_ptr<float>");
 		}
 		{
-			constexpr auto typeName  = Concerto::TypeName<EnumClass>();
+			constexpr auto typeName  = cct::TypeName<EnumClass>();
 			ASSERT_EQ(typeName, "EnumClass");
 		}
 		{
-			constexpr auto typeName = Concerto::TypeName<EnumStruct>();
+			constexpr auto typeName = cct::TypeName<EnumStruct>();
 			ASSERT_EQ(typeName, "EnumStruct");
 		}
 		{
-			constexpr auto typeName = Concerto::TypeName<Class>();
+			constexpr auto typeName = cct::TypeName<Class>();
 			ASSERT_EQ(typeName, "Class");
 		}
 		{
-			constexpr auto typeName = Concerto::TypeName<Struct>();
+			constexpr auto typeName = cct::TypeName<Struct>();
 			ASSERT_EQ(typeName, "Struct");
 		}
 	}

@@ -7,23 +7,23 @@
 
 int main(int argc, char** argv)
 {
-	Concerto::Logger::Info("Begin InitGoogleTest");
+	cct::Logger::Info("Begin InitGoogleTest");
 	::testing::InitGoogleTest(&argc, argv);
-	Concerto::Logger::Info("End InitGoogleTest");
-	Concerto::Logger::Info("Begin RUN_ALL_TESTS");
+	cct::Logger::Info("End InitGoogleTest");
+	cct::Logger::Info("Begin RUN_ALL_TESTS");
 	try
 	{
 		const auto ret = RUN_ALL_TESTS();
-		Concerto::Logger::Info("End RUN_ALL_TESTS returned: {}", ret);
+		cct::Logger::Info("End RUN_ALL_TESTS returned: {}", ret);
 		return ret;
 	}
 	catch (const std::exception& e)
 	{
-		Concerto::Logger::Info("End RUN_ALL_TESTS throwed: {}", e.what());
+		cct::Logger::Info("End RUN_ALL_TESTS throwed: {}", e.what());
 	}
 	catch (...)
 	{
-		Concerto::Logger::Info("End RUN_ALL_TESTS throwed unknown exception");
+		cct::Logger::Info("End RUN_ALL_TESTS throwed unknown exception");
 	}
 	return 254;
 }

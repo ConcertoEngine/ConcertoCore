@@ -10,7 +10,7 @@
 #include <string>
 #include "Concerto/Core/Types.hpp"
 
-namespace Concerto::Network
+namespace cct::Network
 {
 	enum class IpProtocol
 	{

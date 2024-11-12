@@ -79,6 +79,7 @@
 #if defined(__clang__)
 	#define CONCERTO_COMPILER_CLANG
 	#define CONCERTO_FUNCTION_SIGNATURE __PRETTY_FUNCTION__
+#define CONCERTO_FILE
 #elif defined(__GNUC__)
 	#define CONCERTO_COMPILER_GCC
 	#define CONCERTO_FUNCTION_SIGNATURE __PRETTY_FUNCTION__
@@ -92,7 +93,7 @@
 	#pragma message("Unsuported compiler")
 #endif
 
-namespace Concerto
+namespace cct
 {
 	using Int8 = std::int8_t;
 	using Int16 = std::int16_t;
@@ -108,6 +109,6 @@ namespace Concerto
 	using UByte = std::uint8_t;
 
 	CONCERTO_CORE_PUBLIC_API bool IsDebuggerAttached();
-}; // namespace Concerto
+}; // namespace cct
 
 #endif //CONCERTO_CORE_TYPES_HPP

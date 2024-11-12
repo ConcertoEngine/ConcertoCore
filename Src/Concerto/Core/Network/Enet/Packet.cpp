@@ -6,7 +6,7 @@
 
 #include "Concerto/Core/Network/ENet/Packet.hpp"
 
-namespace Concerto::Network
+namespace cct::Network
 {
 	ENetPacket::ENetPacket() : Stream()
 	{

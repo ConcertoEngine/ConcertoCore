@@ -4,7 +4,7 @@
 
 #include "Concerto/Core/Buffer.hpp"
 
-namespace Concerto
+namespace cct
 {
 
 	Buffer::Buffer(size_type size) : _data(size)

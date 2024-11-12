@@ -10,7 +10,7 @@
 #include <string>
 #include <string_view>
 
-namespace Concerto
+namespace cct
 {
 	class DynLibImpl
 	{
@@ -25,5 +25,5 @@ namespace Concerto
 	 private:
 		HMODULE _module = {};
 	};
-}// namespace Concerto
+}// namespace cct
 #endif//CONCERTO_CORE_WINDOWS_DYNLIBIMPL_HPP

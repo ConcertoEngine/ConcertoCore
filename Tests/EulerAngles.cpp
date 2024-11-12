@@ -8,7 +8,7 @@
 
 namespace CONCERTO_ANONYMOUS_NAMESPACE
 {
-	using namespace Concerto;
+	using namespace cct;
 	constexpr float near = 0.001f;
 
 	TEST(EulerAngles, Constructor)
@@ -21,7 +21,7 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 
 	TEST(EulerAngles, operatorAdd)
 	{
-		EulerAnglesf e1(1.f, 2.f, 3.f);
+		EulerAnglesf e1(1.f, 9.f, 3.f);
 		EulerAnglesf e2(1.f, 2.f, 3.f);
 		EulerAnglesf e3 = e1 + e2;
 		ASSERT_EQ(2.f, e3.Pitch());

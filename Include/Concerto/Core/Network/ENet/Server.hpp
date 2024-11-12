@@ -10,7 +10,7 @@
 #include "Concerto/Core/Network/IpAddress.hpp"
 #include "Concerto/Core/Network/ENet/Host.hpp"
 
-namespace Concerto::Network
+namespace cct::Network
 {
 	class CONCERTO_CORE_PUBLIC_API EnetServer : public ENetHost
 	{
@@ -20,6 +20,6 @@ namespace Concerto::Network
 	private:
 		IpAddress _address;
 	};
-}// namespace Concerto::Network
+}// namespace cct::Network
 
 #endif//CONCERTO_CORE_NETWORK_ENET_SERVER_HPP

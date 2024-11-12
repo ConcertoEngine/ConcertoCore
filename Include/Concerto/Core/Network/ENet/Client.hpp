@@ -10,7 +10,7 @@
 
 #include "Concerto/Core/Network/ENet/Host.hpp"
 
-namespace Concerto::Network
+namespace cct::Network
 {
 	class CONCERTO_CORE_PUBLIC_API EnetClient : public ENetHost
 	{

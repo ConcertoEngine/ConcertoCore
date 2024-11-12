@@ -11,7 +11,7 @@
 
 #include "Concerto/Core/Types.hpp"
 
-namespace Concerto
+namespace cct
 {
 	namespace Terminal::Color
 	{
@@ -111,5 +111,5 @@ namespace Concerto
 			}
 		}
 	};
-}// namespace Concerto
+}// namespace cct
 #endif//CONCERTO_CORE_LOGGER_HPP

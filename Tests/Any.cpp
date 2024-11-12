@@ -11,7 +11,7 @@
 
 namespace CONCERTO_ANONYMOUS_NAMESPACE
 {
-	using namespace Concerto;
+	using namespace cct;
 
 	TEST(Any, MakeAnyFunc)
 	{

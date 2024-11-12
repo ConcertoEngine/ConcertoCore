@@ -6,7 +6,7 @@
 
 #include "Concerto/Core/Math/Vector.hpp"
 
-namespace Concerto
+namespace cct
 {
 	template<typename T, std::size_t Size>
 	constexpr Vector<T, Size> Vector<T, Size>::operator+(const Vector& vector) const noexcept
@@ -159,14 +159,14 @@ namespace Concerto
 	inline void Vector<T, Size>::Serialize(Stream& stream) const
 	{
 		for (const T& x : _data)
-			Concerto::Serialize(stream, x);
+			cct::Serialize(stream, x);
 	}
 
 	template<typename T, std::size_t Size>
 	inline void Vector<T, Size>::Deserialize(Stream& stream)
 	{
 		for (T& x : _data)
-			Concerto::Deserialize(stream, x);
+			cct::Deserialize(stream, x);
 	}
 
 	template<typename T, std::size_t Size>

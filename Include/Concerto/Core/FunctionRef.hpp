@@ -7,7 +7,7 @@
 
 #include <type_traits>
 
-namespace Concerto
+namespace cct
 {
 	template<typename T>
 	class FunctionRef;

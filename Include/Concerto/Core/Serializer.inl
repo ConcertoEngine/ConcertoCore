@@ -8,7 +8,7 @@
 #include "Concerto/Core/Stream.hpp"
 #include "Concerto/Core/ByteSwap.hpp"
 
-namespace Concerto
+namespace cct
 {
 	template<typename T>
 	requires(std::is_same_v<T, bool>)

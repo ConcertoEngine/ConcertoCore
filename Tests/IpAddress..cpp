@@ -7,8 +7,8 @@
 
 namespace CONCERTO_ANONYMOUS_NAMESPACE
 {
-	using namespace Concerto;
-	using namespace Concerto::Network;
+	using namespace cct;
+	using namespace cct::Network;
 	static constexpr UInt32 LocalHost = 2130706433;
 	static constexpr IpAddress::IPv4 LocalHostArray = {127, 0, 0, 1};
 
