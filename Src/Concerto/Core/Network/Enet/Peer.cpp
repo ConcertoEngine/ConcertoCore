@@ -6,7 +6,7 @@
 #include "Concerto/Core/Network/Packet.hpp"
 #include <enet/enet.h>
 
-namespace cct::Network
+namespace cct::net
 {
 	ENetPeer::ENetPeer(ENetPeerHandle peer)
 		: _peer(peer)

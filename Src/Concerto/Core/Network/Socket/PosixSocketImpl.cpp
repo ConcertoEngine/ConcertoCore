@@ -15,7 +15,7 @@
 #include "Concerto/Core/Network/IpAddress/PosixIpAddressImpl.hpp"
 #include "Concerto/Core/Network/Socket/PosixSocketImpl.hpp"
 
-namespace cct::Network
+namespace cct::net
 {
 	SocketHandle constexpr SocketImpl::InvalidSocket = -1;
 
@@ -261,5 +261,5 @@ namespace cct::Network
 		}
 		return available;
 	}
-}// namespace cct::Network
+}// namespace cct::net
 #endif// CONCERTO_PLATFORM_LINUX

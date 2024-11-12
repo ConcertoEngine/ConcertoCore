@@ -10,7 +10,7 @@
 #include "Concerto/Core/Network/ENet/Event.hpp"
 #include "Concerto/Core/Network/ENet/Packet.hpp"
 
-namespace cct::Network
+namespace cct::net
 {
 	class CONCERTO_CORE_PUBLIC_API ENetHost
 	{
@@ -38,6 +38,6 @@ namespace cct::Network
 		UInt32 _maxIncomingBandwidth;
 		UInt32 _maxOutgoingBandwidth;
 	};
-}// namespace cct::Network
+}// namespace cct::net
 
 #endif//CONCERTO_CORE_NETWORK_HOST_CLIENT_HPP

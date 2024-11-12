@@ -7,7 +7,7 @@
 #include "Concerto/Core/Logger.hpp"
 #include "Concerto/Core/Assert.hpp"
 
-namespace cct::Network
+namespace cct::net
 {
 	::ENetHost* ToENetHost(ENetHost::Handle handle)
 	{

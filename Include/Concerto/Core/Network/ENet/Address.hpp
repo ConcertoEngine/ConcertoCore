@@ -5,7 +5,7 @@
 #ifndef CONCERTO_CORE_NETWORK_ENET_ADDRESS_HPP
 #define CONCERTO_CORE_NETWORK_ENET_ADDRESS_HPP
 
-namespace cct::Network
+namespace cct::net
 {
 
 }

@@ -6,7 +6,7 @@
 
 #include "Concerto/Core/Network/Packet.hpp"
 
-namespace cct::Network
+namespace cct::net
 {
 	Packet::Packet() : Stream(HeaderSize), _size(0), _packetType(0), _validHeader(false)
 	{
@@ -97,4 +97,4 @@ namespace cct::Network
 	{
 		return !operator==(value);
 	}
-}// namespace cct::Network
+}// namespace cct::net

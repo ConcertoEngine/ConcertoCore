@@ -10,7 +10,7 @@
 #include "Concerto/Core/Network/IpAddress.hpp"
 #include <netdb.h>
 #include <netinet/in.h>
-namespace cct::Network
+namespace cct::net
 {
 	class IpAddressImpl
 	{

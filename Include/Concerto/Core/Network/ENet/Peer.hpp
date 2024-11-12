@@ -9,7 +9,7 @@
 #include "Concerto/Core/Types.hpp"
 #include "Concerto/Core/Network/ENet/Packet.hpp"
 
-namespace cct::Network
+namespace cct::net
 {
 	class Packet;
 	class ENetHost;

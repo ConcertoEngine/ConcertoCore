@@ -8,7 +8,7 @@
 #include "Concerto/Core/Types.hpp"
 #include "Concerto/Core/Stream.hpp"
 
-namespace cct::Network
+namespace cct::net
 {
 	class CONCERTO_CORE_PUBLIC_API ENetPacket : public Stream
 	{
@@ -31,6 +31,6 @@ namespace cct::Network
 	   bool operator==(const ENetPacket&) const;
 	   bool operator!=(const ENetPacket&) const;
 	};
-}// namespace cct::Network::ENetPacket
+}// namespace cct::net::ENetPacket
 
 #endif//CONCERTO_CORE_NETWORK_ENET_PACKET_HPP

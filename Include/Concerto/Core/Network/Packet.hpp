@@ -9,7 +9,7 @@
 #include "Concerto/Core/Types.hpp"
 #include "Concerto/Core/Stream.hpp"
 
-namespace cct::Network
+namespace cct::net
 {
 	class CONCERTO_CORE_PUBLIC_API Packet : public Stream
 	{

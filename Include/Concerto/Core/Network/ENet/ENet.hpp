@@ -7,7 +7,7 @@
 
 #include "Concerto/Core/Types.hpp"
 
-namespace cct::Network
+namespace cct::net
 {
 	class CONCERTO_CORE_PUBLIC_API ENet
 	{
@@ -15,6 +15,6 @@ namespace cct::Network
 		static void Initialize();
 		static void Deinitialize();
 	};
-}// namespace cct::Network
+}// namespace cct::net
 
 #endif//CONCERTO_CORE_NETWORK_ENET_HPP

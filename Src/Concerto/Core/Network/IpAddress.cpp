@@ -10,7 +10,7 @@
 #include "Concerto/Core/Network/IpAddress.hpp"
 #include "Concerto/Core/Logger.hpp"
 
-namespace cct::Network
+namespace cct::net
 {
 	const IpAddress IpAddress::AnyIPV4 = IpAddress(0, 0, 0, 0, 0);
 

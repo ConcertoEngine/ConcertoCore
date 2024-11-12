@@ -9,7 +9,7 @@
 #include "Concerto/Core/Network/SocketHandle.hpp"
 #include "Concerto/Core/Network/IpAddress.hpp"
 
-namespace cct::Network
+namespace cct::net
 {
 	class SocketImpl
 	{
@@ -33,5 +33,5 @@ namespace cct::Network
 		static std::size_t GetAvailableBytes(SocketHandle handle, SocketError* error = nullptr);
 		static const SocketHandle InvalidSocket;
 	};
-}// namespace cct::Network
+}// namespace cct::net
 #endif //CONCERTO_CORE_NETWORK_SOCKET_WINSOCKETIMPL_HPP

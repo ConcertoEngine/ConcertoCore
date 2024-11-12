@@ -9,7 +9,7 @@
 namespace CONCERTO_ANONYMOUS_NAMESPACE
 {
 	using namespace cct;
-	using namespace cct::Network;
+	using namespace cct::net;
 
 	constexpr UInt8 PacketType = 0xF;
 	const UInt8 ByteSwappedPacketType = ByteSwap(PacketType);

@@ -6,9 +6,9 @@
 #include <stdexcept>
 #include "Concerto/Core/Network/IpAddress/PosixIpAddressImpl.hpp"
 
-namespace cct::Network
+namespace cct::net
 {
-	IpAddress cct::Network::IpAddressImpl::FromSockAddr(const sockaddr* addr)
+	IpAddress cct::net::IpAddressImpl::FromSockAddr(const sockaddr* addr)
 	{
 		if (addr->sa_family == AF_INET)
 		{

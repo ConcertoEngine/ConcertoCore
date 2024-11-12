@@ -15,7 +15,7 @@
 namespace CONCERTO_ANONYMOUS_NAMESPACE
 {
 	using namespace cct;
-	using namespace cct::Network;
+	using namespace cct::net;
 
 	TEST(Enet, BasicConnection)
 	{

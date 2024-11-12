@@ -4,7 +4,7 @@
 
 #include "Concerto/Core/Network/ENet/Address.hpp"
 
-namespace cct::Network
+namespace cct::net
 {
 
 }

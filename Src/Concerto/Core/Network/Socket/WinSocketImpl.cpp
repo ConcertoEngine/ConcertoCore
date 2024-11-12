@@ -13,7 +13,7 @@
 #include "WinSocketImpl.hpp"
 #include "Concerto/Core/Network/IpAddress/WinIpAddressImpl.hpp"
 
-namespace cct::Network
+namespace cct::net
 {
 	SocketHandle const SocketImpl::InvalidSocket = INVALID_SOCKET;
 

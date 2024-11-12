@@ -9,7 +9,7 @@
 #include <WinSock2.h>
 #include "Concerto/Core/Network/IpAddress.hpp"
 
-namespace cct::Network
+namespace cct::net
 {
 	class IpAddressImpl
 	{

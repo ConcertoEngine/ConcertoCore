@@ -15,7 +15,7 @@ namespace cct
 	class Buffer;
 }
 
-namespace cct::Network
+namespace cct::net
 {
 	class CONCERTO_CORE_PUBLIC_API Socket final
 	{

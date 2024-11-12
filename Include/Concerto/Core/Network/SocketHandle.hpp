@@ -9,7 +9,7 @@
 #ifdef CONCERTO_PLATFORM_WINDOWS
 #include <basetsd.h>
 #endif
-namespace cct::Network
+namespace cct::net
 {
 #ifdef CONCERTO_PLATFORM_WINDOWS
 	using SocketHandle = UINT_PTR;
