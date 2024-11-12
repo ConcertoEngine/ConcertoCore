@@ -6,8 +6,8 @@
 #define CONCERTO_CORE_SRC_CONCERTO_CORE_NETWORK_SOCKET_POSIXSOCKETIMPL_HPP_
 
 #include "Concerto/Core/Types.hpp"
-#include "Network/SocketHandle.hpp"
-#include "Network/IpAddress.hpp"
+#include "Concerto/Core/Network/SocketHandle.hpp"
+#include "Concerto/Core/Network/IpAddress.hpp"
 
 namespace cct::Network
 {

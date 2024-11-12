@@ -12,6 +12,7 @@
 #include <errno.h>
 
 #include "Concerto/Core/Assert.hpp"
+#include "Concerto/Core/Network/IpAddress/PosixIpAddressImpl.hpp"
 #include "Concerto/Core/Network/Socket/PosixSocketImpl.hpp"
 
 namespace cct::Network

@@ -28,6 +28,10 @@ target("ConcertoCore")
                     "Include/(Concerto/Core/Network/ENet/*.hpp)",
                     "Include/(Concerto/Core/Profiler/*.hpp)")
 
+    add_headerfiles("Src/(Concerto/Core/Network/IpAddress/*.hpp)",
+                    "Src/(Concerto/Core/Network/Socket/*.hpp)",
+                    {install = false})
+
     add_headerfiles("Include/(Concerto/Core/*.inl)",
                     "Include/(Concerto/Core/Math/*.inl)",
                     "Include/(Concerto/Core/Network/*.inl)",

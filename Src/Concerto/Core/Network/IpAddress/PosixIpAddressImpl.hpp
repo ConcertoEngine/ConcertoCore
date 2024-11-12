@@ -7,7 +7,7 @@
 #define CONCERTO_CORE_SRC_CONCERTO_CORE_NETWORK_IPADDRESS_POSIXIPADDRESSIMPL_HPP_
 #include "Concerto/Core/Types.hpp"
 #ifdef CONCERTO_PLATFORM_POSIX
-#include "IpAddress.hpp"
+#include "Concerto/Core/Network/IpAddress.hpp"
 #include <netdb.h>
 #include <netinet/in.h>
 namespace cct::Network
