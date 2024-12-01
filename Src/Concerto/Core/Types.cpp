@@ -4,7 +4,7 @@
 
 #include "Concerto/Core/Types.hpp"
 
-#if defined(CONCERTO_PLATFORM_WINDOWS)
+#if defined(CCT_PLATFORM_WINDOWS)
 #include <windows.h>
 namespace cct
 {
@@ -13,7 +13,7 @@ namespace cct
 		return IsDebuggerPresent() != 0;
 	}
 }
-#elif defined(CONCERTO_PLATFORM_POSIX)
+#elif defined(CCT_PLATFORM_POSIX)
 #include <fstream>
 namespace cct
 {

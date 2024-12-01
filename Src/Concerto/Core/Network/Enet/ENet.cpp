@@ -15,7 +15,7 @@ namespace cct::net
 		const auto res = enet_initialize();
 		if (res == 0)
 			return;
-		CONCERTO_ASSERT_FALSE("An error occurred while initializing Enet: {}", res);
+		CCT_ASSERT_FALSE("An error occurred while initializing Enet: {}", res);
 	}
 	
 	void ENet::Deinitialize()

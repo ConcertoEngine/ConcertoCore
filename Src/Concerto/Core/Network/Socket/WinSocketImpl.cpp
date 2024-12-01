@@ -3,7 +3,7 @@
 //
 
 #include "Concerto/Core/Types.hpp"
-#ifdef CONCERTO_PLATFORM_WINDOWS
+#ifdef CCT_PLATFORM_WINDOWS
 
 #include <string>
 #include <cassert>
@@ -19,7 +19,7 @@ namespace cct::net
 
 	SocketHandle SocketImpl::Accept(SocketHandle socket, IpAddress* address, SocketError* error)
 	{
-		CONCERTO_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
+		CCT_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
 		sockaddr addr = {};
 		int addrSize = sizeof(sockaddr);
 		const SocketHandle newSocket = accept(socket, &addr, &addrSize);
@@ -38,7 +38,7 @@ namespace cct::net
 
 	bool SocketImpl::Connect(SocketHandle socket, const IpAddress& address, SocketError* error)
 	{
-		CONCERTO_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
+		CCT_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
 		if (error != nullptr)
 			*error = SocketError::NoError;
 		const sockaddr_in addr = IpAddressImpl::ToSockAddr(address);
@@ -68,7 +68,7 @@ namespace cct::net
 
 	bool SocketImpl::Bind(SocketHandle socket, const IpAddress& address, SocketError* error)
 	{
-		CONCERTO_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
+		CCT_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
 		if (error != nullptr)
 			*error = SocketError::NoError;
 		const sockaddr_in addr = IpAddressImpl::ToSockAddr(address);
@@ -83,7 +83,7 @@ namespace cct::net
 
 	bool SocketImpl::Listen(SocketHandle socket, const IpAddress& address, int backlog, SocketError* error)
 	{
-		CONCERTO_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
+		CCT_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
 		if (error != nullptr)
 			*error = SocketError::NoError;
 		if (!Bind(socket, address, error))
@@ -99,7 +99,7 @@ namespace cct::net
 
 	bool SocketImpl::Close(SocketHandle socket, SocketError* error)
 	{
-		CONCERTO_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
+		CCT_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
 		if (error != nullptr)
 			*error = SocketError::NoError;
 		if (closesocket(socket) == SOCKET_ERROR)
@@ -113,7 +113,7 @@ namespace cct::net
 
 	bool SocketImpl::SetBlocking(SocketHandle socket, bool blocking, SocketError* error)
 	{
-		CONCERTO_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
+		CCT_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
 		if (error != nullptr)
 			*error = SocketError::NoError;
 		u_long mode = blocking ? 0 : 1;
@@ -132,7 +132,7 @@ namespace cct::net
 		std::size_t* received,
 		SocketError* error)
 	{
-		CONCERTO_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
+		CCT_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
 		if (error != nullptr)
 			*error = SocketError::NoError;
 		const int result = recv(socket, static_cast<char*>(buffer), static_cast<Int32>(size), 0);
@@ -149,7 +149,7 @@ namespace cct::net
 
 	bool SocketImpl::Send(SocketHandle socket, const void* buffer, std::size_t size, std::size_t* sent, SocketError* error)
 	{
-		CONCERTO_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
+		CCT_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
 		if (error != nullptr)
 			*error = SocketError::NoError;
 		const int result = send(socket, static_cast<const char*>(buffer), static_cast<Int32>(size), 0);
@@ -227,7 +227,7 @@ namespace cct::net
 
 	std::size_t SocketImpl::GetAvailableBytes(SocketHandle handle, SocketError* error)
 	{
-		CONCERTO_ASSERT(handle != SocketImpl::InvalidSocket, "Invalid socket handle");
+		CCT_ASSERT(handle != SocketImpl::InvalidSocket, "Invalid socket handle");
 		u_long available = 0;
 		if (ioctlsocket(handle, FIONREAD, &available) == SOCKET_ERROR)
 		{

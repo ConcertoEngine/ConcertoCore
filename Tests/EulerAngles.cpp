@@ -6,7 +6,7 @@
 
 #include "Concerto/Core/Math/EulerAngles.hpp"
 
-namespace CONCERTO_ANONYMOUS_NAMESPACE
+namespace CCT_ANONYMOUS_NAMESPACE
 {
 	using namespace cct;
 	constexpr float near = 0.001f;
@@ -104,4 +104,4 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 		EXPECT_NEAR(e1.Roll(), e2.Roll(), near);
 		EXPECT_NEAR(e1.Yaw(), e2.Yaw(), near);
 	}
-}// namespace CONCERTO_ANONYMOUS_NAMESPACE
+}// namespace CCT_ANONYMOUS_NAMESPACE

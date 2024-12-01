@@ -11,7 +11,7 @@
 
 namespace cct::net
 {
-	struct CONCERTO_CORE_PUBLIC_API ENetEvent
+	struct CCT_CORE_PUBLIC_API ENetEvent
 	{
 		enum Type 
 		{

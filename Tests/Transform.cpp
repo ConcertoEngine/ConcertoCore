@@ -5,7 +5,7 @@
 #include <gtest/gtest.h>
 #include "Concerto/Core/Math/Transform.hpp"
 
-namespace CONCERTO_ANONYMOUS_NAMESPACE
+namespace CCT_ANONYMOUS_NAMESPACE
 {
 	using namespace cct;
 
@@ -16,4 +16,4 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 		ASSERT_EQ(transform.GetRotation(), Quaternionf(0.f, 0.f, 0.f, 0.f));
 		ASSERT_EQ(transform.GetScale(), Vector3f(0.f, 0.f, 0.f));
 	}
-}// namespace CONCERTO_ANONYMOUS_NAMESPACE
+}// namespace CCT_ANONYMOUS_NAMESPACE

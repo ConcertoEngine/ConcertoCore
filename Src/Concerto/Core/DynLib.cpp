@@ -5,9 +5,9 @@
 #include "Concerto/Core/DynLib.hpp"
 
 #include "Concerto/Core/Assert.hpp"
-#ifdef CONCERTO_PLATFORM_WINDOWS
+#ifdef CCT_PLATFORM_WINDOWS
 #include "DynLib/WindowsDynLibImpl.hpp"
-#elif defined(CONCERTO_PLATFORM_POSIX)
+#elif defined(CCT_PLATFORM_POSIX)
 #include "DynLib/PosixDynLibImpl.hpp"
 #else
 #error Current platform is not supported
@@ -31,7 +31,7 @@ namespace cct
 
 	bool DynLib::Load(const std::filesystem::path& path)
 	{
-		CONCERTO_ASSERT(_impl != nullptr, "ConcertoCore: A DynLib is already loaded, please call DynLib::Unload before.");
+		CCT_ASSERT(_impl != nullptr, "ConcertoCore: A DynLib is already loaded, please call DynLib::Unload before.");
 		_impl = std::unique_ptr<void, ImplDeleter>(new DynLibImpl, ImplDeleter());
 		bool res = false;
 		if (path.extension() != CONCERTO_DYNLIB_EXTENSION)

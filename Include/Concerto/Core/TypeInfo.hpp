@@ -18,14 +18,14 @@ namespace cct
 		//from https://github.com/NazaraEngine/NazaraUtils/blob/main/include/NazaraUtils/TypeName.inl
 		using namespace std::string_view_literals;
 
-		constexpr std::string_view functionSignature = CONCERTO_FUNCTION_SIGNATURE;
-#ifdef CONCERTO_COMPILER_MSVC
+		constexpr std::string_view functionSignature = CCT_FUNCTION_SIGNATURE;
+#ifdef CCT_COMPILER_MSVC
 		constexpr auto prefix = "cct::TypeName<"sv;
 		constexpr auto suffix = ">"sv;
-#elif defined(CONCERTO_COMPILER_GCC)
+#elif defined(CCT_COMPILER_GCC)
 		constexpr auto prefix = "T = "sv;
 		constexpr auto suffix = ";"sv;
-#elif defined(CONCERTO_COMPILER_CLANG)
+#elif defined(CCT_COMPILER_CLANG)
 		constexpr auto prefix = "T = "sv;
 		constexpr auto suffix = ";]"sv;
 #endif
@@ -39,7 +39,7 @@ namespace cct
 
 		constexpr auto typeName = functionSignature.substr(prefixEndPos, suffixPos - prefix.size());
 
-#ifdef CONCERTO_COMPILER_MSVC
+#ifdef CCT_COMPILER_MSVC
 
 		for (std::string_view p : {"class "sv, "struct "sv, "enum class "sv, "enum struct "sv, "enum "sv})
 		{

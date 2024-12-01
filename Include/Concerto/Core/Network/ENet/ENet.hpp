@@ -9,7 +9,7 @@
 
 namespace cct::net
 {
-	class CONCERTO_CORE_PUBLIC_API ENet
+	class CCT_CORE_PUBLIC_API ENet
 	{
 	 public:
 		static void Initialize();

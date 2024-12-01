@@ -5,7 +5,7 @@
 #ifndef CONCERTO_CORE_SRC_CONCERTO_CORE_NETWORK_IPADRESS_IPADRESS_HPP_
 #define CONCERTO_CORE_SRC_CONCERTO_CORE_NETWORK_IPADRESS_IPADRESS_HPP_
 #include "Concerto/Core/Types.hpp"
-#ifdef CONCERTO_PLATFORM_WINDOWS
+#ifdef CCT_PLATFORM_WINDOWS
 #include <WinSock2.h>
 #include "Concerto/Core/Network/IpAddress.hpp"
 

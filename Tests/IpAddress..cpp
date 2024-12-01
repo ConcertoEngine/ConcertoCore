@@ -5,7 +5,7 @@
 #include <gtest/gtest.h>
 #include "Concerto/Core/Network/IpAddress.hpp"
 
-namespace CONCERTO_ANONYMOUS_NAMESPACE
+namespace CCT_ANONYMOUS_NAMESPACE
 {
 	using namespace cct;
 	using namespace cct::net;
@@ -60,4 +60,4 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 		EXPECT_FALSE(IpAddress::IsIpV6("2001:0db8:85a3:0000:0000:8a2e:0370:7334:1234"));
 		EXPECT_FALSE(IpAddress::IsIpV6("fe80:::1"));
 	}
-}// namespace CONCERTO_ANONYMOUS_NAMESPACE
+}// namespace CCT_ANONYMOUS_NAMESPACE

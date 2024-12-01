@@ -9,7 +9,7 @@
 
 #include <Concerto/Core/Any.hpp>
 
-namespace CONCERTO_ANONYMOUS_NAMESPACE
+namespace CCT_ANONYMOUS_NAMESPACE
 {
 	using namespace cct;
 
@@ -30,4 +30,4 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 		auto& value2 = erasedType2.As<const Pointer&>();
 		EXPECT_EQ(*value2, str);
 	}
-} // namespace CONCERTO_ANONYMOUS_NAMESPACE
+} // namespace CCT_ANONYMOUS_NAMESPACE

@@ -11,7 +11,7 @@
 
 namespace cct::net
 {
-	class CONCERTO_CORE_PUBLIC_API Packet : public Stream
+	class CCT_CORE_PUBLIC_API Packet : public Stream
 	{
 	 public:
 		Packet();

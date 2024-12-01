@@ -55,7 +55,7 @@ namespace cct::net
 		if (IsIpV4(ip))
 		{
 			_protocol = IpProtocol::Ipv4;
-#ifdef CONCERTO_PLATFORM_POSIX
+#ifdef CCT_PLATFORM_POSIX
 			auto segments = ip
 			| std::ranges::views::split('.')
 			| std::ranges::views::transform([](auto&& str) { return std::string_view(&*str.begin(), std::ranges::distance(str)); });
@@ -74,14 +74,14 @@ namespace cct::net
 				const auto result = std::from_chars(segment.data(), segment.data() + segment.size(), _ipv4[i++]);
 				if (result.ec == std::errc::invalid_argument || result.ec == std::errc::result_out_of_range)
 				{
-					CONCERTO_ASSERT_FALSE("Cannot convert part '{}' of Ip address '{}'", segment, ip);
+					CCT_ASSERT_FALSE("Cannot convert part '{}' of Ip address '{}'", segment, ip);
 				}
 			}
 			return;
 		}
 		else if (IsIpV6(ip))
 		{
-			CONCERTO_ASSERT_FALSE("Not implemented");
+			CCT_ASSERT_FALSE("Not implemented");
 			return;
 		}
 		_protocol = IpProtocol::Error;
@@ -94,13 +94,13 @@ namespace cct::net
 
 	const IpAddress::IPv4& IpAddress::GetIPv4() const
 	{
-		CONCERTO_ASSERT(_protocol == IpProtocol::Ipv4, "Invalid Ip protocol");
+		CCT_ASSERT(_protocol == IpProtocol::Ipv4, "Invalid Ip protocol");
 		return _ipv4;
 	}
 
 	const IpAddress::IPv6& IpAddress::GetIPv6() const
 	{
-		CONCERTO_ASSERT(_protocol == IpProtocol::Ipv6, "Invalid Ip protocol");
+		CCT_ASSERT(_protocol == IpProtocol::Ipv6, "Invalid Ip protocol");
 		return _ipv6;
 	}
 
@@ -116,7 +116,7 @@ namespace cct::net
 
 	UInt32 IpAddress::ToUInt32() const
 	{
-		CONCERTO_ASSERT(_protocol == IpProtocol::Ipv4, "Invalid Ip protocol");
+		CCT_ASSERT(_protocol == IpProtocol::Ipv4, "Invalid Ip protocol");
 		return (_ipv4[0] << 24) | (_ipv4[1] << 16) | (_ipv4[2] << 8) | _ipv4[3];
 	}
 
@@ -129,11 +129,11 @@ namespace cct::net
 		}
 		else if (_protocol == IpProtocol::Ipv6)
 		{
-			CONCERTO_ASSERT_FALSE("Not implemented");
+			CCT_ASSERT_FALSE("Not implemented");
 		}
 		else
 		{
-			CONCERTO_ASSERT_FALSE("Invalid Ip protocol");
+			CCT_ASSERT_FALSE("Invalid Ip protocol");
 		}
 		return ip;
 	}

@@ -2,7 +2,7 @@
 // Created by arthur on 28/05/2023.
 //
 #include "Concerto/Core/Types.hpp"
-#ifdef CONCERTO_PLATFORM_POSIX
+#ifdef CCT_PLATFORM_POSIX
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
@@ -21,7 +21,7 @@ namespace cct::net
 
 	SocketHandle SocketImpl::Accept(SocketHandle socket, IpAddress* address, SocketError* error)
 	{
-		CONCERTO_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
+		CCT_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
 		sockaddr_in addr;
 		socklen_t len = sizeof(addr);
 		SocketHandle handle = accept(socket, reinterpret_cast<sockaddr*>(&addr), &len);
@@ -38,7 +38,7 @@ namespace cct::net
 
 	bool SocketImpl::Connect(SocketHandle socket, const IpAddress& address, SocketError* error)
 	{
-		CONCERTO_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
+		CCT_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
 		sockaddr_in addr = IpAddressImpl::ToSockAddr(address);
 		if (connect(socket, reinterpret_cast<sockaddr*>(&addr), sizeof(sockaddr)) == -1)
 		{
@@ -64,7 +64,7 @@ namespace cct::net
 
 	bool SocketImpl::Bind(SocketHandle socket, const IpAddress& address, SocketError* error)
 	{
-		CONCERTO_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
+		CCT_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
 		sockaddr_in addr = IpAddressImpl::ToSockAddr(address);
 		if (bind(socket, reinterpret_cast<sockaddr*>(&addr), sizeof(sockaddr)) == -1)
 		{
@@ -77,7 +77,7 @@ namespace cct::net
 
 	bool SocketImpl::Listen(SocketHandle socket, const IpAddress& address, int backlog, SocketError* error)
 	{
-		CONCERTO_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
+		CCT_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
 		if (error != nullptr)
 			*error = SocketError::NoError;
 		if (!Bind(socket, address, error))
@@ -93,7 +93,7 @@ namespace cct::net
 
 	bool SocketImpl::Close(SocketHandle socket, SocketError* error)
 	{
-		CONCERTO_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
+		CCT_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
 		if (error != nullptr)
 			*error = SocketError::NoError;
 		if (close(socket) == -1)
@@ -107,7 +107,7 @@ namespace cct::net
 
 	bool SocketImpl::SetBlocking(SocketHandle socket, bool blocking, SocketError* error)
 	{
-		CONCERTO_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
+		CCT_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
 		if (error != nullptr)
 			*error = SocketError::NoError;
 		int flags = fcntl(socket, F_GETFL, 0);
@@ -136,7 +136,7 @@ namespace cct::net
 							 std::size_t* received,
 							 SocketError* error)
 	{
-		CONCERTO_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
+		CCT_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
 		if (error != nullptr)
 			*error = SocketError::NoError;
 		auto ret = recv(socket, buffer, size, 0);
@@ -169,7 +169,7 @@ namespace cct::net
 						  std::size_t* sent,
 						  SocketError* error)
 	{
-		CONCERTO_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
+		CCT_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
 		if (error != nullptr)
 			*error = SocketError::NoError;
 		auto ret = send(socket, buffer, size, 0);
@@ -193,7 +193,7 @@ namespace cct::net
 
 	int SocketImpl::GetSocketState(SocketHandle socket, SocketError* error)
 	{
-		CONCERTO_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
+		CCT_ASSERT(socket != SocketImpl::InvalidSocket, "Invalid socket handle");
 		if (error != nullptr)
 			*error = SocketError::NoError;
 		int state = 0;
@@ -252,7 +252,7 @@ namespace cct::net
 
 	std::size_t SocketImpl::GetAvailableBytes(SocketHandle handle, SocketError* error)
 	{
-		CONCERTO_ASSERT(handle != SocketImpl::InvalidSocket, "Invalid socket handle");
+		CCT_ASSERT(handle != SocketImpl::InvalidSocket, "Invalid socket handle");
 		std::size_t available = 0;
 		if (ioctl(handle, FIONREAD, &available) == -1)
 		{
@@ -262,4 +262,4 @@ namespace cct::net
 		return available;
 	}
 }// namespace cct::net
-#endif// CONCERTO_PLATFORM_LINUX
+#endif// CCT_PLATFORM_LINUX

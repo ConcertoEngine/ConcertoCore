@@ -4,7 +4,7 @@
 #include "Concerto/Core/Assert.hpp"
 #include "Concerto/Core/Error.hpp"
 
-#ifdef CONCERTO_PLATFORM_POSIX
+#ifdef CCT_PLATFORM_POSIX
 #include "PosixDynLibImpl.hpp"
 
 namespace cct
@@ -16,7 +16,7 @@ namespace cct
 		{
 			if (error)
 				*error = Error::GetLastSystemErrorString();
-			CONCERTO_ASSERT_FALSE("ConcertoCore: Couldn't load library '{}' error: {}", path.string(), dlerror());
+			CCT_ASSERT_FALSE("ConcertoCore: Couldn't load library '{}' error: {}", path.string(), dlerror());
 			return false;
 		}
 		return true;
@@ -26,7 +26,7 @@ namespace cct
 	{
 		if (_module == nullptr)
 		{
-			CONCERTO_ASSERT_FALSE("ConcertoCore: Library handle must be valid");
+			CCT_ASSERT_FALSE("ConcertoCore: Library handle must be valid");
 			return false;
 		}
 
@@ -35,7 +35,7 @@ namespace cct
 		{
 			if (error)
 				*error = dlerror();
-			CONCERTO_ASSERT(_module, "ConcertoCore: Couldn't free library '{}'", dlerror());
+			CCT_ASSERT(_module, "ConcertoCore: Couldn't free library '{}'", dlerror());
 			return false;
 		}
 		_module = nullptr;

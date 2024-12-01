@@ -17,7 +17,7 @@ namespace cct
 
 namespace cct::net
 {
-	class CONCERTO_CORE_PUBLIC_API Socket final
+	class CCT_CORE_PUBLIC_API Socket final
 	{
 	 public:
 		Socket() = delete;

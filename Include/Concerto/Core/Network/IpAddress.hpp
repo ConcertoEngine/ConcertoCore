@@ -20,7 +20,7 @@ namespace cct::net
 		Any = Ipv4 //Fixme
 	};
 
-	class CONCERTO_CORE_PUBLIC_API IpAddress
+	class CCT_CORE_PUBLIC_API IpAddress
 	{
 	 public:
 		using IPv4 = std::array<UInt8, 4>;

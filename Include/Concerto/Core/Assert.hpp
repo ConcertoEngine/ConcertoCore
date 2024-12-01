@@ -7,23 +7,23 @@
 
 #include "Concerto/Core/Logger.hpp"
 
-#if defined(CONCERTO_DEBUG)
-#define CONCERTO_ASSERT(expression, fmt, ...)						    \
-	do																	\
-	{																	\
-		if (!(expression))												\
-		{																\
-			cct::Logger::Debug(fmt __VA_OPT__(,) __VA_ARGS__);		\
-			if (cct::IsDebuggerAttached())							\
-			{															\
-				CONCERTO_BREAK_IN_DEBUGGER;								\
-			}															\
-		}																\
+#if defined(CCT_DEBUG)
+#define CCT_ASSERT(expression, fmt, ...)						\
+	do															\
+	{															\
+		if (!(expression))										\
+		{														\
+			cct::Logger::Debug(fmt __VA_OPT__(,) __VA_ARGS__);	\
+			if (cct::IsDebuggerAttached())						\
+			{													\
+				CCT_BREAK_IN_DEBUGGER;						\
+			}													\
+		}														\
 	} while (false)
 #else
-#define CONCERTO_ASSERT(expression, fmt, ...) ((void)0)
+#define CCT_ASSERT(expression, fmt, ...) ((void)0)
 #endif
 
-#define CONCERTO_ASSERT_FALSE(fmt, ...) CONCERTO_ASSERT(false, fmt __VA_OPT__(,) __VA_ARGS__)
+#define CCT_ASSERT_FALSE(fmt, ...) CCT_ASSERT(false, fmt __VA_OPT__(,) __VA_ARGS__)
 
 #endif //CONCERTO_CORE_ASSERT_HPP

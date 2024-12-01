@@ -5,7 +5,7 @@
 #ifndef CONCERTO_CORE_POSIX_DYNLIBIMPL_HPP
 #define CONCERTO_CORE_POSIX_DYNLIBIMPL_HPP
 #include "Concerto/Core/Types.hpp"
-#ifdef CONCERTO_PLATFORM_POSIX
+#ifdef CCT_PLATFORM_POSIX
 #include <filesystem>
 #include <string>
 #include <dlfcn.h>
@@ -26,5 +26,5 @@ namespace cct
 		void* _module = {};
 	};
 }// namespace cct
-#endif //CONCERTO_PLATFORM_POSIX
+#endif //CCT_PLATFORM_POSIX
 #endif //CONCERTO_CORE_POSIX_DYNLIBIMPL_HPP

@@ -29,7 +29,7 @@ namespace cct::net
 		auto peer = enet_host_connect(static_cast<::ENetHost*>(_enetHost), &enetAddress, _maxChannels, 0);
 		if (peer == nullptr)
 		{
-			CONCERTO_ASSERT_FALSE("Cannot create an Enet connection");
+			CCT_ASSERT_FALSE("Cannot create an Enet connection");
 			return;
 		}
 		_peer = std::make_unique<ENetPeer>(peer);
@@ -37,7 +37,7 @@ namespace cct::net
 
 	void EnetClient::Disconnect() const
 	{
-		CONCERTO_ASSERT(_peer, "Invalid peer");
+		CCT_ASSERT(_peer, "Invalid peer");
 		_peer->Disconnect();
 	}
 

@@ -6,7 +6,7 @@
 #include <array>
 #include "Concerto/Core/Network/Packet.hpp"
 
-namespace CONCERTO_ANONYMOUS_NAMESPACE
+namespace CCT_ANONYMOUS_NAMESPACE
 {
 	using namespace cct;
 	using namespace cct::net;
@@ -80,4 +80,4 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 		EXPECT_EQ(a, 12);
 		EXPECT_EQ(b, 13);
 	}
-} // namespace CONCERTO_ANONYMOUS_NAMESPACE
+} // namespace CCT_ANONYMOUS_NAMESPACE

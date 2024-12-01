@@ -11,7 +11,7 @@
 
 namespace cct
 {
-	class CONCERTO_CORE_PUBLIC_API Transform
+	class CCT_CORE_PUBLIC_API Transform
 	{
 	public:
 		Transform() = default;

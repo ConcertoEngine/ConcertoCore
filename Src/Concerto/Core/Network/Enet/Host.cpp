@@ -23,7 +23,7 @@ namespace cct::net
 		_maxOutgoingBandwidth(maxOutgoingBandwidth)
 	{
 		[[maybe_unused]]const bool ret = CreateHost(address);
-		CONCERTO_ASSERT(ret, "An error occurred while trying to create an ENetHost");
+		CCT_ASSERT(ret, "An error occurred while trying to create an ENetHost");
 	}
 
 	ENetHost::~ENetHost()
@@ -33,7 +33,7 @@ namespace cct::net
 
 	Int32 ENetHost::PollEvent(ENetEvent* event, UInt32 timeout)
 	{
-		CONCERTO_ASSERT(_enetHost != nullptr, "Invalid host");
+		CCT_ASSERT(_enetHost != nullptr, "Invalid host");
 		::ENetEvent enetEvent;
 		const Int32 ret = enet_host_service(ToENetHost(_enetHost), &enetEvent, timeout);
 		if (ret <= 0)
@@ -85,7 +85,7 @@ namespace cct::net
 
 	bool ENetHost::SendPacket(const void* data, std::size_t size, ENetPeer* peer, UInt8 channel, ENetPacket::Flag flags)
 	{
-		CONCERTO_ASSERT(peer != nullptr, "Invalid peer");
+		CCT_ASSERT(peer != nullptr, "Invalid peer");
 		return peer->SendPacket(data, size, channel, flags);
 	}
 

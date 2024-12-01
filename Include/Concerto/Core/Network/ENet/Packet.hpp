@@ -10,7 +10,7 @@
 
 namespace cct::net
 {
-	class CONCERTO_CORE_PUBLIC_API ENetPacket : public Stream
+	class CCT_CORE_PUBLIC_API ENetPacket : public Stream
 	{
 	public:
 		enum Flag

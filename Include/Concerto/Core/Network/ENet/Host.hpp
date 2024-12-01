@@ -12,7 +12,7 @@
 
 namespace cct::net
 {
-	class CONCERTO_CORE_PUBLIC_API ENetHost
+	class CCT_CORE_PUBLIC_API ENetHost
 	{
 	 public:
 		using Handle = void*;

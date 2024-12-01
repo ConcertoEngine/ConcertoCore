@@ -18,7 +18,7 @@ namespace cct
 	 */
 	template<typename T>
 	requires(std::is_same_v<T, bool>)
-	inline void CONCERTO_CORE_PUBLIC_API Serialize(Stream& stream, T value);
+	inline void CCT_CORE_PUBLIC_API Serialize(Stream& stream, T value);
 
 	/**
 	 * @brief Serialize an arithmetic value into a stream
@@ -28,7 +28,7 @@ namespace cct
 	 */
 	template<typename T>
 		requires((std::is_integral_v<T> || std::is_floating_point_v<T>) && !std::is_same_v<T, bool>)
-	inline void CONCERTO_CORE_PUBLIC_API Serialize(Stream& stream, T value);
+	inline void CCT_CORE_PUBLIC_API Serialize(Stream& stream, T value);
 
 	/**
 	 * @brief Deserialize a boolean value from a stream
@@ -37,7 +37,7 @@ namespace cct
 	 */
 	template<typename T>
 		requires(std::is_same_v<T, bool>)
-	inline void CONCERTO_CORE_PUBLIC_API Deserialize(Stream& stream, T& value);
+	inline void CCT_CORE_PUBLIC_API Deserialize(Stream& stream, T& value);
 
 	/**
 	 * @brief Deserialize an arithmetic value from a stream
@@ -47,7 +47,7 @@ namespace cct
 	 */
 	template<typename T>
 		requires((std::is_integral_v<T> || std::is_floating_point_v<T>) && !std::is_same_v<T, bool>)
-	inline void CONCERTO_CORE_PUBLIC_API Deserialize(Stream& stream, T& value);
+	inline void CCT_CORE_PUBLIC_API Deserialize(Stream& stream, T& value);
 }
 #include "Serializer.inl"
 #endif //CONCERTO_CORE_SERIALIZER_HPP

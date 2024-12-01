@@ -8,7 +8,7 @@
 
 using namespace cct;
 
-namespace CONCERTO_ANONYMOUS_NAMESPACE
+namespace CCT_ANONYMOUS_NAMESPACE
 {
 	class ScoppedCoutRedirector
 	{

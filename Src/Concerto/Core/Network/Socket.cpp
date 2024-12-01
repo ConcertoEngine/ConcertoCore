@@ -5,12 +5,12 @@
 #include "Concerto/Core/Assert.hpp"
 #include "Concerto/Core/Network/Socket.hpp"
 #include "Concerto/Core/Buffer.hpp"
-#ifdef CONCERTO_PLATFORM_WINDOWS
+#ifdef CCT_PLATFORM_WINDOWS
 #include "Socket/WinSocketImpl.hpp"
-#endif// CONCERTO_PLATFORM_WINDOWS
-#ifdef CONCERTO_PLATFORM_POSIX
+#endif// CCT_PLATFORM_WINDOWS
+#ifdef CCT_PLATFORM_POSIX
 #include "Socket/PosixSocketImpl.hpp"
-#endif//CONCERTO_PLATFORM_POSIX
+#endif//CCT_PLATFORM_POSIX
 
 namespace cct::net
 {
@@ -75,7 +75,7 @@ namespace cct::net
 		SocketError error = {};
 		const std::size_t availableBytes =  SocketImpl::GetAvailableBytes(_handle, &error);
 		if (error != SocketError::NoError)
-			CONCERTO_ASSERT_FALSE("ConcertoCore: GetAvailableBytes returned error: {}", static_cast<int>(error));
+			CCT_ASSERT_FALSE("ConcertoCore: GetAvailableBytes returned error: {}", static_cast<int>(error));
 		return availableBytes;
 	}
 
@@ -109,7 +109,7 @@ namespace cct::net
 
 	void Socket::Accept(Socket& socket)
 	{
-		CONCERTO_ASSERT(_handle != SocketImpl::InvalidSocket, "Invalid socket handle");
+		CCT_ASSERT(_handle != SocketImpl::InvalidSocket, "Invalid socket handle");
 		const SocketHandle handle = SocketImpl::Accept(_handle, nullptr, &_lastError);
 		if (handle == SocketImpl::InvalidSocket)
 			return;
@@ -135,7 +135,7 @@ namespace cct::net
 
 	std::size_t Socket::Receive(void* buffer, std::size_t size)
 	{
-		CONCERTO_ASSERT(_handle != SocketImpl::InvalidSocket, "Invalid socket handle");
+		CCT_ASSERT(_handle != SocketImpl::InvalidSocket, "Invalid socket handle");
 		std::size_t received = 0;
 		SocketImpl::Receive(_handle, buffer, size, &received, &_lastError);
 		return received;
@@ -148,7 +148,7 @@ namespace cct::net
 
 	std::size_t Socket::Send(const void* buffer, std::size_t size)
 	{
-		CONCERTO_ASSERT(_handle != SocketImpl::InvalidSocket, "Invalid socket handle");
+		CCT_ASSERT(_handle != SocketImpl::InvalidSocket, "Invalid socket handle");
 		std::size_t sent = 0;
 		SocketImpl::Send(_handle, buffer, size, &sent, &_lastError);
 		return sent;

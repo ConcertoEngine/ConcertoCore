@@ -2,7 +2,7 @@
 // Created by arthur on 28/05/2023.
 //
 #include "Concerto/Core/Types.hpp"
-#ifdef CONCERTO_PLATFORM_POSIX
+#ifdef CCT_PLATFORM_POSIX
 #include <stdexcept>
 #include "Concerto/Core/Network/IpAddress/PosixIpAddressImpl.hpp"
 

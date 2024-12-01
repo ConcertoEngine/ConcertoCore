@@ -6,7 +6,7 @@
 
 #include "Concerto/Core/Math/Matrix.hpp"
 
-namespace CONCERTO_ANONYMOUS_NAMESPACE
+namespace CCT_ANONYMOUS_NAMESPACE
 {
 	using namespace cct;
 
@@ -344,4 +344,4 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 
 	//	ASSERT_EQ(matrix, expected);
 	//}
-}// namespace CONCERTO_ANONYMOUS_NAMESPACE
+}// namespace CCT_ANONYMOUS_NAMESPACE

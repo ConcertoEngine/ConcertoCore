@@ -6,7 +6,7 @@
 #include <string>
 #include <Concerto/Core/FunctionRef.hpp>
 
-namespace CONCERTO_ANONYMOUS_NAMESPACE
+namespace CCT_ANONYMOUS_NAMESPACE
 {
 	void foo(int& value) { value = 42;}
 
@@ -45,4 +45,4 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 		func(value, str);
 		ASSERT_EQ(value, str.size());
 	}
-} // namespace CONCERTO_ANONYMOUS_NAMESPACE
+} // namespace CCT_ANONYMOUS_NAMESPACE

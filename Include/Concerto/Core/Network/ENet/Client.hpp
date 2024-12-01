@@ -12,7 +12,7 @@
 
 namespace cct::net
 {
-	class CONCERTO_CORE_PUBLIC_API EnetClient : public ENetHost
+	class CCT_CORE_PUBLIC_API EnetClient : public ENetHost
 	{
 	 public:
 		EnetClient(UInt32 maxIncomingBandwidth = 0, UInt32 maxOutgoingBandwidth = 0);

@@ -3,7 +3,7 @@
 //
 
 #include "Concerto/Core/Types.hpp"
-#ifdef CONCERTO_PLATFORM_WINDOWS
+#ifdef CCT_PLATFORM_WINDOWS
 #include <stdexcept>
 #include "Concerto/Core/Network/IpAddress/WinIpAddressImpl.hpp"
 

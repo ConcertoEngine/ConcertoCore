@@ -9,12 +9,12 @@
 #include "Concerto/Core/Network/Socket.hpp"
 #include "Concerto/Core/Buffer.hpp"
 
-#ifdef CONCERTO_PLATFORM_MACOS // because the CI is failing in release mode
+#ifdef CCT_PLATFORM_MACOS // because the CI is failing in release mode
 #include <thread>
 #endif
 
 
-namespace CONCERTO_ANONYMOUS_NAMESPACE
+namespace CCT_ANONYMOUS_NAMESPACE
 {
 	using namespace cct;
 	using namespace cct::net;
@@ -39,7 +39,7 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 
 		Buffer buffer2(1024);
 
-#ifdef CONCERTO_PLATFORM_MACOS // because the CI is failing in release mode
+#ifdef CCT_PLATFORM_MACOS // because the CI is failing in release mode
 		std::this_thread::sleep_for(std::chrono::milliseconds(100));
 #endif
 
@@ -76,4 +76,4 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 
 		Socket::UnInitialize();
 	}
-}// namespace CONCERTO_ANONYMOUS_NAMESPACE
+}// namespace CCT_ANONYMOUS_NAMESPACE

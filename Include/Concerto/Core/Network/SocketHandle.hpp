@@ -6,12 +6,12 @@
 #define CONCERTO_CORE_NETWORK_SOCKETHANDLE_HPP
 
 #include "Concerto/Core/Types.hpp"
-#ifdef CONCERTO_PLATFORM_WINDOWS
+#ifdef CCT_PLATFORM_WINDOWS
 #include <basetsd.h>
 #endif
 namespace cct::net
 {
-#ifdef CONCERTO_PLATFORM_WINDOWS
+#ifdef CCT_PLATFORM_WINDOWS
 	using SocketHandle = UINT_PTR;
 #else
 	using SocketHandle = int;

@@ -130,7 +130,7 @@ namespace cct::Config {
 		Node &operator[](std::size_t index) const
 		{
 			auto array = AsArray();
-			CONCERTO_ASSERT(index < array.size(), "Index out of range");
+			CCT_ASSERT(index < array.size(), "Index out of range");
 			return *array[index];
 		}
 

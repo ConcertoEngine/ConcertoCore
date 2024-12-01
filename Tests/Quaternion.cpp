@@ -6,7 +6,7 @@
 
 #include "Concerto/Core/Math/Quaternion.hpp"
 
-namespace CONCERTO_ANONYMOUS_NAMESPACE
+namespace CCT_ANONYMOUS_NAMESPACE
 {
 	// results are from https://www.redcrab-software.com/en/Calculator/Quaternion-Calculator
 	constexpr float near = 1.2e-05f;
@@ -224,4 +224,4 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 			EXPECT_NEAR(matData[i], expectData[i], near);
 		}
 	}
-}// namespace CONCERTO_ANONYMOUS_NAMESPACE
+}// namespace CCT_ANONYMOUS_NAMESPACE

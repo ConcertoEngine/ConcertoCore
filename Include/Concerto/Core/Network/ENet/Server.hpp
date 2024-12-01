@@ -12,7 +12,7 @@
 
 namespace cct::net
 {
-	class CONCERTO_CORE_PUBLIC_API EnetServer : public ENetHost
+	class CCT_CORE_PUBLIC_API EnetServer : public ENetHost
 	{
 	 public:
 		EnetServer() = delete;

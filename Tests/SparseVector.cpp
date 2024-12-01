@@ -6,7 +6,7 @@
 #include <gtest/gtest.h>
 #include <Concerto/Core/SparseVector.hpp>
 
-namespace CONCERTO_ANONYMOUS_NAMESPACE
+namespace CCT_ANONYMOUS_NAMESPACE
 {
 	using namespace cct;
 

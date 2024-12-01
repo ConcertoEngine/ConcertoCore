@@ -13,7 +13,7 @@ namespace cct
 {
 	class Buffer;
 
-	class CONCERTO_CORE_PUBLIC_API Stream
+	class CCT_CORE_PUBLIC_API Stream
 	{
 	public:
 		explicit Stream(std::size_t capacity = 0xFFF);

@@ -12,7 +12,7 @@
 #include <Concerto/Core/Network/ENet/Server.hpp>
 #include <Concerto/Core/Network/ENet/Client.hpp>
 
-namespace CONCERTO_ANONYMOUS_NAMESPACE
+namespace CCT_ANONYMOUS_NAMESPACE
 {
 	using namespace cct;
 	using namespace cct::net;
@@ -112,4 +112,4 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 		serverThread.join();
 		ENet::Deinitialize();
 	}
-}// namespace CONCERTO_ANONYMOUS_NAMESPACE
+}// namespace CCT_ANONYMOUS_NAMESPACE

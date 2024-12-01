@@ -14,11 +14,11 @@
 #include "Concerto/Core/Types.hpp"
 #include "Concerto/Core/FunctionRef.hpp"
 
-#ifdef CONCERTO_PLATFORM_WINDOWS
+#ifdef CCT_PLATFORM_WINDOWS
 #define CONCERTO_DYNLIB_EXTENSION ".dll"
-#elif defined(CONCERTO_PLATFORM_LINUX)
+#elif defined(CCT_PLATFORM_LINUX)
 #define CONCERTO_DYNLIB_EXTENSION ".so"
-#elif defined(CONCERTO_PLATFORM_MACOS)
+#elif defined(CCT_PLATFORM_MACOS)
 #define CONCERTO_DYNLIB_EXTENSION ".dylib"
 #endif
 
@@ -26,7 +26,7 @@ namespace cct
 {
 	class DynLibImpl;
 
-	class CONCERTO_CORE_PUBLIC_API DynLib
+	class CCT_CORE_PUBLIC_API DynLib
 	{
 	 public:
 		DynLib() = default;

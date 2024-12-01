@@ -26,7 +26,7 @@ namespace cct
 		void* symbol = GetSymbol(functionName);
 		if (symbol == nullptr)
 		{
-			CONCERTO_ASSERT_FALSE("ConcertoCore: Invalid symbol pointer '{}'", functionName);
+			CCT_ASSERT_FALSE("ConcertoCore: Invalid symbol pointer '{}'", functionName);
 			return FunctionRef<ReturnValue(Args...)>();
 		}
 		using Func = ReturnValue(*)(Args...);
@@ -39,7 +39,7 @@ namespace cct
 		void* symbol = GetSymbol(valueName);
 		if (symbol == nullptr)
 		{
-			CONCERTO_ASSERT_FALSE("ConcertoCore: Invalid symbol pointer '{}'", valueName);
+			CCT_ASSERT_FALSE("ConcertoCore: Invalid symbol pointer '{}'", valueName);
 			return nullptr;
 		}
 		return static_cast<T*>(symbol);

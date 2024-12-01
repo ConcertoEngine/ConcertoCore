@@ -10,7 +10,7 @@
 
 namespace cct
 {
-	class CONCERTO_CORE_PUBLIC_API Error
+	class CCT_CORE_PUBLIC_API Error
 	{
 	public:
 		static std::string GetLastSystemErrorString();

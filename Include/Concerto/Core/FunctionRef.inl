@@ -42,7 +42,7 @@ namespace cct
 	{
 		if (this->operator bool() == false)
 		{
-			CONCERTO_ASSERT_FALSE("ConcertoCore: Invalid function pointer");
+			CCT_ASSERT_FALSE("ConcertoCore: Invalid function pointer");
 			throw std::bad_function_call();
 		}
 		return _callback(_functionPointer, std::forward<FunctorArgs>(args)...);

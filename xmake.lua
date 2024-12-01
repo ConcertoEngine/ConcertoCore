@@ -16,7 +16,7 @@ target("ConcertoCore")
     set_languages("cxx20")
     add_packages("enet", {public = false})
     add_files("Src/**.cpp")
-    add_defines("CONCERTO_CORE_BUILD")
+    add_defines("CCT_CORE_BUILD")
     add_cxxflags("cl::/Zc:preprocessor", { public = true })
 
     add_includedirs("Include", {public = true})
@@ -47,7 +47,7 @@ target("ConcertoCore")
     end
 
     if has_config("unitybuild") then
-        add_rules("c++.unity_build", {batchsize = 12, uniqueid = "CONCERTO_UNITY_BUILD_ID"})
+        add_rules("c++.unity_build", {batchsize = 12, uniqueid = "CCT_UNITY_BUILD_ID"})
     end
 
 includes("Tests/xmake.lua")

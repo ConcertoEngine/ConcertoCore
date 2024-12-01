@@ -10,7 +10,7 @@ enum class EnumClass{};
 enum struct EnumStruct{};
 class Class{};
 struct Struct{};
-namespace CONCERTO_ANONYMOUS_NAMESPACE
+namespace CCT_ANONYMOUS_NAMESPACE
 {
 	TEST(TypeInfo, TypeName)
 	{
@@ -39,4 +39,4 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 			ASSERT_EQ(typeName, "Struct");
 		}
 	}
-}// namespace CONCERTO_ANONYMOUS_NAMESPACE
+}// namespace CCT_ANONYMOUS_NAMESPACE

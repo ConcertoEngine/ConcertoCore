@@ -11,7 +11,7 @@
 
 namespace cct
 {
-	class CONCERTO_CORE_PUBLIC_API Buffer
+	class CCT_CORE_PUBLIC_API Buffer
 	{
 	 public:
 		using container_type = std::vector<Byte>;

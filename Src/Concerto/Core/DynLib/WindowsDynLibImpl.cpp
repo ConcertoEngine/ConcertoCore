@@ -5,7 +5,7 @@
 #include "Concerto/Core/Assert.hpp"
 #include "Concerto/Core/Error.hpp"
 
-#ifdef CONCERTO_PLATFORM_WINDOWS
+#ifdef CCT_PLATFORM_WINDOWS
 #include "WindowsDynLibImpl.hpp"
 
 namespace cct
@@ -17,7 +17,7 @@ namespace cct
 		{
 			if (error)
 				*error = Error::GetLastSystemErrorString();
-			CONCERTO_ASSERT_FALSE("ConcertoCore: Couldn't load library '{}' error: {}", path.string(), Error::GetLastSystemErrorString());
+			CCT_ASSERT_FALSE("ConcertoCore: Couldn't load library '{}' error: {}", path.string(), Error::GetLastSystemErrorString());
 			return false;
 		}
 		return true;
@@ -32,7 +32,7 @@ namespace cct
 		{
 			if (error)
 				*error = Error::GetLastSystemErrorString();
-			CONCERTO_ASSERT(_module, "ConcertoCore: Couldn't free library");
+			CCT_ASSERT(_module, "ConcertoCore: Couldn't free library");
 			return false;
 		}
 		_module = nullptr;

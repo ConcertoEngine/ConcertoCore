@@ -23,7 +23,7 @@ namespace cct
 		static constexpr auto MAGENTA = "\x1B[35m";
 		static constexpr auto CYAN = "\x1B[36m";
 	}// namespace Terminal::Color
-	class CONCERTO_CORE_PUBLIC_API Logger
+	class CCT_CORE_PUBLIC_API Logger
 	{
 	 public:
 		template<typename... T>

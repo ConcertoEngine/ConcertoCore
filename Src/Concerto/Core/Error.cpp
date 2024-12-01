@@ -5,9 +5,9 @@
 
 #include "Concerto/Core/Error.hpp"
 
-#ifdef CONCERTO_PLATFORM_WINDOWS
+#ifdef CCT_PLATFORM_WINDOWS
 #include <windows.h>
-#elif defined(CONCERTO_PLATFORM_POSIX)
+#elif defined(CCT_PLATFORM_POSIX)
 #include <cstring>
 #include <errno.h>
 #else
@@ -18,9 +18,9 @@ namespace cct
 {
 	std::string Error::GetLastSystemErrorString()
 	{
-#ifdef CONCERTO_PLATFORM_WINDOWS
+#ifdef CCT_PLATFORM_WINDOWS
 		const DWORD error = GetLastError();
-#ifdef CONCERTO_DEBUG // This may help for debug
+#ifdef CCT_DEBUG // This may help for debug
 		const auto hResult = HRESULT_FROM_WIN32(error);
 		[[maybe_unused]] const auto facility = HRESULT_FACILITY(hResult);
 		[[maybe_unused]] const auto severity = HRESULT_SEVERITY(hResult);
@@ -35,7 +35,7 @@ namespace cct
 		LocalFree(messageBuffer);
 
 		return message;
-#elif defined(CONCERTO_PLATFORM_POSIX)
+#elif defined(CCT_PLATFORM_POSIX)
 		return std::strerror(errno);
 #else
 #error Unsupported platform

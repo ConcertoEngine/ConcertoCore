@@ -5,13 +5,13 @@
 #include <gtest/gtest.h>
 #include <Concerto/Core/DynLib.hpp>
 
-#ifdef CONCERTO_PLATFORM_POSIX
+#ifdef CCT_PLATFORM_POSIX
 #define PREFIX "lib"
 #else
 #define PREFIX ""
 #endif
 
-namespace CONCERTO_ANONYMOUS_NAMESPACE
+namespace CCT_ANONYMOUS_NAMESPACE
 {
 	TEST(DynLib, Load)
 	{
@@ -45,4 +45,4 @@ namespace CONCERTO_ANONYMOUS_NAMESPACE
 		res = lib.Unload();
 		ASSERT_EQ(res, true);
 	}
-} // namespace CONCERTO_ANONYMOUS_NAMESPACE
+} // namespace CCT_ANONYMOUS_NAMESPACE
