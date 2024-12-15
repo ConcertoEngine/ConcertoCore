@@ -11,7 +11,11 @@ namespace cct
 {
 	bool DynLibImpl::Load(const std::filesystem::path& path, std::string* error)
 	{
-		_module = dlopen(std::filesystem::canonical(path).c_str(), RTLD_LAZY | RTLD_GLOBAL);
+		std::error_code ec = {};
+		auto fullPath = std::filesystem::canonical(path, ec);
+		if (ec)
+			return false;
+		_module = dlopen(fullPath.c_str(), RTLD_LAZY | RTLD_GLOBAL);
 		if (_module == nullptr)
 		{
 			if (error)
