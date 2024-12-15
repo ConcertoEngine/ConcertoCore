@@ -35,7 +35,7 @@ namespace CCT_ANONYMOUS_NAMESPACE
 
 		Socket serverClient(SocketType::Tcp, IpProtocol::Ipv4);
 		serverClient.SetBlocking(true);
-		server.Accept(serverClient);
+		EXPECT_TRUE(server.Accept(serverClient));
 
 		Buffer buffer2(1024);
 
@@ -74,6 +74,16 @@ namespace CCT_ANONYMOUS_NAMESPACE
 		receivedBuffer.Resize(receivedSize);
 		ASSERT_EQ(receivedBuffer, buffer);
 
+		Socket::UnInitialize();
+	}
+
+	TEST(Socket, Errors)
+	{
+		Socket::Initialize();
+		Socket server(SocketType::Tcp, IpProtocol::Ipv4);
+		Socket client(SocketType::Udp, IpProtocol::Ipv4);
+		EXPECT_FALSE(server.Accept(client));
+		
 		Socket::UnInitialize();
 	}
 }// namespace CCT_ANONYMOUS_NAMESPACE

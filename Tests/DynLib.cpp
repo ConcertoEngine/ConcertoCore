@@ -13,11 +13,11 @@
 
 namespace CCT_ANONYMOUS_NAMESPACE
 {
-	TEST(DynLib, Load)
+	TEST(DynLib, Invoke)
 	{
 		cct::DynLib lib;
 		bool res = lib.Load(PREFIX"concerto-core-dummy");
-		ASSERT_EQ(res, true);
+		EXPECT_TRUE(res);
 
 		lib.Invoke<void>("Dummy");
 		const cct::FunctionRef func = lib.GetFunction<void>("Dummy");
@@ -44,5 +44,17 @@ namespace CCT_ANONYMOUS_NAMESPACE
 
 		res = lib.Unload();
 		ASSERT_EQ(res, true);
+	}
+
+	TEST(DynLib, Loading)
+	{
+		cct::DynLib lib;
+		EXPECT_FALSE(lib.Unload());
+		bool res = lib.Load(PREFIX"not-exist");
+		EXPECT_FALSE(res);
+		EXPECT_EQ(lib.GetSymbol("foo"), nullptr);
+
+		res = lib.Load(PREFIX"concerto-core-dummy");
+		EXPECT_TRUE(res);
 	}
 } // namespace CCT_ANONYMOUS_NAMESPACE

@@ -39,7 +39,7 @@ namespace cct::net
 
 		void Listen(const IpAddress& address, int backlog = 5);
 		bool Bind(const IpAddress& address);
-		void Accept(Socket& socket);
+		bool Accept(Socket& socket);
 		void Connect(IpAddress address);
 		std::size_t Receive(Buffer& buffer);
 		std::size_t Receive(void* buffer, std::size_t size);

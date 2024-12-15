@@ -31,7 +31,7 @@ namespace cct
 
 	bool DynLib::Load(const std::filesystem::path& path)
 	{
-		CCT_ASSERT(_impl != nullptr, "ConcertoCore: A DynLib is already loaded, please call DynLib::Unload before.");
+		CCT_ASSERT(_impl == nullptr, "ConcertoCore: A DynLib is already loaded, please call DynLib::Unload before.");
 		_impl = std::unique_ptr<void, ImplDeleter>(new DynLibImpl, ImplDeleter());
 		bool res = false;
 		if (path.extension() != CONCERTO_DYNLIB_EXTENSION)
@@ -46,6 +46,8 @@ namespace cct
 
 	bool DynLib::Unload()
 	{
+		if (_impl == nullptr)
+			return false;
 		const bool res = TO_DYNLIB_IMPL->Unload(&_lastError);
 		_impl = nullptr;
 		return res;
@@ -53,6 +55,8 @@ namespace cct
 
 	void* DynLib::GetSymbol(const std::string& symbol) const
 	{
+		if (_impl == nullptr)
+			return nullptr;
 		void* res = TO_DYNLIB_IMPL->GetSymbol(symbol, &_lastError);
 		return res;
 	}

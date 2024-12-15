@@ -36,6 +36,11 @@ namespace cct
 		return _id == TypeId<T>();
 	}
 
+	inline bool Any::HasValue() const
+	{
+		return _data != nullptr && _id != 0;
+	}
+
 	template<typename T>
 	T Any::As()
 	{

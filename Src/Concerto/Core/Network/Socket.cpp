@@ -107,14 +107,15 @@ namespace cct::net
 		return true;
 	}
 
-	void Socket::Accept(Socket& socket)
+	bool Socket::Accept(Socket& socket)
 	{
 		CCT_ASSERT(_handle != SocketImpl::InvalidSocket, "Invalid socket handle");
 		const SocketHandle handle = SocketImpl::Accept(_handle, nullptr, &_lastError);
 		if (handle == SocketImpl::InvalidSocket)
-			return;
+			return false;
 		socket.Close();
 		socket._handle = handle;
+		return true;
 	}
 
 	void Socket::Connect(IpAddress address)
