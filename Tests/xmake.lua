@@ -1,4 +1,4 @@
-target("ConcertoCoreTestsDummyLib")
+target("concerto-core-dummy")
     set_kind("shared")
     set_languages("cxx20")
     add_files("$(buildir)/$(plat)/$(arch)/dummy.cpp")
@@ -25,8 +25,8 @@ target("ConcertoCoreTestsDummyLib")
         end
     end)
 
-target("ConcertoCoreTests")
-    add_deps("ConcertoCoreTestsDummyLib")
+target("concerto-core-tests")
+    add_deps("concerto-core-dummy")
     set_kind("binary")
     if (is_mode('debug')) then
         set_symbols("debug")

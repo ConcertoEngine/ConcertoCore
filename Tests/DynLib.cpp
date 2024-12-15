@@ -16,7 +16,7 @@ namespace CCT_ANONYMOUS_NAMESPACE
 	TEST(DynLib, Load)
 	{
 		cct::DynLib lib;
-		bool res = lib.Load(PREFIX"ConcertoCoreTestsDummyLib");
+		bool res = lib.Load(PREFIX"concerto-core-dummy");
 		ASSERT_EQ(res, true);
 
 		lib.Invoke<void>("Dummy");

@@ -73,4 +73,4 @@ jobs:
         run: xmake --yes -v
 
       - name: Run unit tests
-        run: xmake run ConcertoCoreTests
+        run: xmake run concerto-core-tests
