@@ -1,4 +1,5 @@
-add_rules("mode.debug", "mode.release")
+add_rules("mode.debug", "mode.release", "mode.coverage")
+add_rules("plugin.vsxmake.autoupdate")
 add_requires("gtest", "enet")
 
 option("unitybuild", { description = "Build using unity build", default = false })
@@ -6,6 +7,14 @@ option("unitybuild", { description = "Build using unity build", default = false 
 if is_plat("windows") then
     set_runtimes(is_mode("debug") and "MDd" or "MD")
 end
+
+if is_mode("coverage") then
+	if not is_plat("windows") then
+		add_links("gcov")
+	end
+end
+
+option("tests", { default = false, description = "Enable unit tests"})
 
 target("ConcertoCore")
     set_kind("shared")
@@ -50,4 +59,6 @@ target("ConcertoCore")
         add_rules("c++.unity_build", {batchsize = 12, uniqueid = "CCT_UNITY_BUILD_ID"})
     end
 
-includes("Tests/xmake.lua")
+if has_config("tests") then
+    includes("Tests/xmake.lua")
+end
