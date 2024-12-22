@@ -36,6 +36,12 @@ namespace cct
 		return _id == TypeId<T>();
 	}
 
+	inline void Any::Reset()
+	{
+		_data = nullptr;
+		_id = 0;
+	}
+
 	inline bool Any::HasValue() const
 	{
 		return _data != nullptr && _id != 0;
@@ -44,8 +50,13 @@ namespace cct
 	template<typename T>
 	T Any::As()
 	{
-		using RawType = std::remove_reference_t<std::remove_pointer_t<T>>;
-		if (_id != TypeId<std::remove_const_t<RawType>>())
+		using RawType = std::remove_reference_t<T>;
+		using RealType = std::conditional_t<std::is_pointer_v<T>,
+				std::add_pointer_t<std::remove_const_t<std::remove_pointer_t<RawType>>>,
+				std::remove_const_t<std::remove_pointer_t<RawType>>>;
+
+		constexpr auto type = TypeName<RealType>();
+		if (_id != TypeId<RealType>())
 		{
 			CCT_ASSERT_FALSE("Trying to cast to a wrong type");
 			throw std::bad_cast();
@@ -56,11 +67,11 @@ namespace cct
 	}
 
 	template<typename T, class ... Args>
+	requires(!std::is_reference_v<T> && !std::is_const_v<T>)
 	Any Any::Make(Args&&... args)
 	{
-		using RawType = std::remove_reference_t<std::remove_pointer_t<T>>;
 		auto data = std::make_unique<void*>(new AnyImpl<T>(std::forward<Args>(args)...));
-		return Any(TypeId<RawType>(), std::move(data));
+		return Any(TypeId<T>(), std::move(data));
 	}
 
 	template<typename T>

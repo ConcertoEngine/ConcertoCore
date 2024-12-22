@@ -21,7 +21,7 @@ namespace cct
 		Any(std::size_t id, std::unique_ptr<void*> data);
 	 public:
 		Any();
-		~Any();
+		~Any() = default;
 		Any(const Any& other) = delete;
 		Any(Any&& other) noexcept = default;
 
@@ -63,9 +63,10 @@ namespace cct
 		 * @return An Any object containing the created object.
 		 */
 		template<typename T, class... Args>
+		requires(!std::is_reference_v<T> && !std::is_const_v<T>)
 		static inline Any Make(Args&&... args);
 
-		void Reset();
+		inline void Reset();
 
 		inline bool HasValue() const;
 
