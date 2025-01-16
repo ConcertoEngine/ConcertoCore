@@ -9,7 +9,6 @@
 
 #include <filesystem>
 #include <memory>
-#include <type_traits>
 
 #include "Concerto/Core/Types.hpp"
 #include "Concerto/Core/FunctionRef.hpp"

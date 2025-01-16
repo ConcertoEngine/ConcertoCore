@@ -41,6 +41,9 @@ namespace CCT_ANONYMOUS_NAMESPACE
 			const int value = lib.Invoke<int>("Increment", 5);
 			ASSERT_EQ(value, 5 + 1);
 		}
+		{
+			ASSERT_THROW(lib.Invoke<int>("NotExisting", 5), std::runtime_error);
+		}
 
 		res = lib.Unload();
 		ASSERT_EQ(res, true);

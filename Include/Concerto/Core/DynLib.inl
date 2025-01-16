@@ -5,6 +5,8 @@
 #ifndef CONCERTO_CORE_DYNLIB_INL
 #define CONCERTO_CORE_DYNLIB_INL
 
+#include <stdexcept>
+
 #include "Concerto/Core/DynLib.hpp"
 
 namespace cct
@@ -12,12 +14,13 @@ namespace cct
 	template <typename ReturnValue, typename ... Args>
 	ReturnValue DynLib::Invoke(const std::string& functionName, Args&&... args)
 	{
-		if constexpr (std::is_void_v<ReturnValue>)
+		auto func = GetFunction<ReturnValue, Args...>(functionName);
+		if (!func)
 		{
-			GetFunction<ReturnValue, Args...>(functionName)(std::forward<Args>(args)...);
-			return;
+			CCT_ASSERT_FALSE("Invalid function pointer");
+			throw std::runtime_error("Invalid function pointer");
 		}
-		return GetFunction<ReturnValue, Args...>(functionName)(std::forward<Args>(args)...);
+		return func(std::forward<Args>(args)...);
 	}
 
 	template <typename ReturnValue, typename ... Args>
