@@ -28,24 +28,23 @@ target("concerto-core-dummy")
     end)
 
 target("concerto-core-tests")
-    add_deps("concerto-core-dummy")
+    add_deps("concerto-core-dummy", "concerto-core")
     set_kind("binary")
-    if (is_mode('debug')) then
+    if (is_mode("debug")) then
         set_symbols("debug")
     end
     set_warnings("allextra")
     set_languages("cxx20")
 
-    add_files('*.cpp')
-    add_packages('gtest')
-    add_deps('ConcertoCore')
+    add_files("*.cpp")
+    add_packages("gtest")
 
     if has_config("unitybuild") then
         add_rules("c++.unity_build", {batchsize = 12, uniqueid = "CONCERTO_UNITY_BUILD_ID"})
     end
 
-     if is_plat("linux") then
+    if is_plat("linux") then
         add_syslinks("dl")
     end
 
-   add_cxxflags("cl::/wd4251") -- needs to have dll-interface to be used by clients of
+    add_cxxflags("cl::/wd4251") -- needs to have dll-interface to be used by clients of

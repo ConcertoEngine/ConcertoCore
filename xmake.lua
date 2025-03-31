@@ -21,7 +21,7 @@ else
     add_requires("enet", {configs = {shared = true}})
 end
 
-target("ConcertoCore")
+target("concerto-core")
     if has_config("static") then
         set_kind("static")
         add_defines("CCT_LIB_STATIC", {public = true})
@@ -35,7 +35,7 @@ target("ConcertoCore")
 
     set_warnings("allextra")
     set_languages("cxx20")
-    add_packages("enet", {public = false})
+    add_packages("enet", {public = true})
     add_files("Src/**.cpp")
     add_defines("CCT_CORE_BUILD")
     add_cxxflags("cl::/Zc:preprocessor", { public = true })
@@ -59,6 +59,7 @@ target("ConcertoCore")
                     "Include/(Concerto/Core/Network/ENet/*.inl)",
                     "Include/(Concerto/Core/Profiler/*.inl)")
     add_cxxflags("cl::/wd4251")
+
     if is_plat("windows") then
         add_syslinks("ws2_32", "Kernel32")
     end
