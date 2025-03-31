@@ -1,8 +1,9 @@
 add_rules("mode.debug", "mode.release", "mode.coverage")
 add_rules("plugin.vsxmake.autoupdate")
-add_requires("gtest", "enet")
 
 option("unitybuild", { description = "Build using unity build", default = false })
+option("tests", { description = "Enable unit tests", default = false})
+option("static", { description = "Build static library", default = false })
 
 if is_plat("windows") then
     set_runtimes(is_mode("debug") and "MDd" or "MD")
@@ -14,13 +15,24 @@ if is_mode("coverage") then
 	end
 end
 
-option("tests", { default = false, description = "Enable unit tests"})
+if has_config("static") then
+    add_requires("enet", {configs = {shared = false}})
+else
+    add_requires("enet", {configs = {shared = true}})
+end
 
 target("ConcertoCore")
-    set_kind("shared")
-    if (is_mode("debug")) then
+    if has_config("static") then
+        set_kind("static")
+        add_defines("CCT_LIB_STATIC", {public = true})
+    else
+        set_kind("shared")
+    end
+
+    if is_mode("debug") then
         set_symbols("debug")
     end
+
     set_warnings("allextra")
     set_languages("cxx20")
     add_packages("enet", {public = false})

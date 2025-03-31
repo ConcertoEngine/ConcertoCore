@@ -37,7 +37,7 @@
 	#define CCT_DEBUG
 #endif
 
-#ifndef LIB_STATIC
+#ifndef CCT_LIB_STATIC
 	#ifdef CCT_PLATFORM_WINDOWS
 		#define CCT_EXPORT __declspec(dllexport)
 		#define CCT_IMPORT __declspec(dllimport)
@@ -45,16 +45,17 @@
 		#define CCT_EXPORT __attribute__((visibility("default")))
 		#define CCT_IMPORT __attribute__((visibility("default")))
 	#endif
+	#ifdef CCT_CORE_BUILD
+		#define CCT_CORE_PUBLIC_API CCT_EXPORT
+	#else
+		#define CCT_CORE_PUBLIC_API CCT_IMPORT
+	#endif
 #else
+	#define CCT_CORE_PUBLIC_API
 	#define CCT_EXPORT
 	#define CCT_IMPORT
 #endif
 
-#ifdef CCT_CORE_BUILD
-	#define CCT_CORE_PUBLIC_API CCT_EXPORT
-#else
-	#define CCT_CORE_PUBLIC_API CCT_IMPORT
-#endif
 
 
 #if defined(CCT_PLATFORM_WINDOWS)

@@ -8,7 +8,7 @@
 #include <windows.h>
 namespace cct
 {
-	inline bool IsDebuggerAttached()
+	bool IsDebuggerAttached()
 	{
 		return IsDebuggerPresent() != 0;
 	}
@@ -35,7 +35,7 @@ namespace cct
 #else
 namespace cct
 {
-	inline bool IsDebuggerAttached()
+	bool IsDebuggerAttached()
 	{
 		return false;
 	}

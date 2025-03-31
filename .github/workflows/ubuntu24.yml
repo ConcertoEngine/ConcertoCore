@@ -19,11 +19,8 @@ jobs:
       matrix:
         os: [ubuntu-24.04]
         arch: [x86_64, arm64]
-        confs:
-        - { mode: debug }
-        - { mode: release }
-        - { mode: releasedbg }
-
+        mode: [debug, release, releasedbg]
+        kind: [static, shared]
     steps:
       - uses: actions/checkout@v4
 
@@ -57,10 +54,10 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: ${{ env.XMAKE_GLOBALDIR }}/.xmake/packages
-          key: Linux-${{ matrix.arch }}-${{ matrix.confs.mode }}-${{ steps.dep_hash.outputs.hash }}-W${{ steps.cache_key.outputs.key }}
+          key: Linux-${{ matrix.arch }}-${{ matrix.mode }}-${{ matrix.kind }}-${{ steps.dep_hash.outputs.hash }}-W${{ steps.cache_key.outputs.key }}
 
       - name: Configure xmake and install dependencies
-        run: xmake config --arch=${{ matrix.arch }} --mode=${{ matrix.confs.mode }} ${{ matrix.confs.config }} --yes --tests=y
+        run: xmake config --arch=${{ matrix.arch }} --mode=${{ matrix.mode }} --static=${{ matrix.kind == 'static' && 'yes' || 'no' }} --yes --tests=y
 
       - name: Save cached xmake dependencies
         if: ${{ !steps.restore-depcache.outputs.cache-hit }}

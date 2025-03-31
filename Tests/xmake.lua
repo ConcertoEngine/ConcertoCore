@@ -1,3 +1,5 @@
+add_requires("gtest")
+
 target("concerto-core-dummy")
     set_kind("shared")
     set_languages("cxx20")

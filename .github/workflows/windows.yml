@@ -17,6 +17,7 @@ jobs:
         os: [windows-latest]
         arch: [x64]
         mode: [debug, release, releasedbg]
+        kind: [static, shared]
 
     steps:
     - name: Get current date as package key
@@ -48,10 +49,10 @@ jobs:
       uses: actions/cache/restore@v4
       with:
         path: ${{ env.XMAKE_GLOBALDIR }}\.xmake\packages
-        key: MSVC-${{ matrix.arch }}-${{ matrix.mode }}-${{ steps.dep_hash.outputs.hash }}-W${{ steps.cache_key.outputs.key }}
+        key: MSVC-${{ matrix.arch }}-${{ matrix.mode }}-${{ matrix.kind }}-${{ steps.dep_hash.outputs.hash }}-W${{ steps.cache_key.outputs.key }}
 
     - name: Configure xmake and install dependencies
-      run: xmake config --arch=${{ matrix.arch }} --mode=${{ matrix.mode }} --yes --tests=y
+      run: xmake config --arch=${{ matrix.arch }} --mode=${{ matrix.mode }} --static=${{ matrix.kind == 'static' && 'yes' || 'no' }} --yes --tests=y
 
     - name: Save cached xmake dependencies
       if: ${{ !steps.restore-depcache.outputs.cache-hit }}
