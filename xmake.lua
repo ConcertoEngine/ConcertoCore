@@ -16,11 +16,7 @@ if is_mode("coverage") then
 	end
 end
 
-if has_config("static") then
-    add_requires("enet", {configs = {shared = false}})
-else
-    add_requires("enet", {configs = {shared = true}})
-end
+add_requires("enet", {configs = {shared = false}})
 
 target("concerto-core")
     if has_config("static") then
