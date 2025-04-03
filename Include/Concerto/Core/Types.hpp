@@ -37,26 +37,27 @@
 	#define CCT_DEBUG
 #endif
 
-#ifndef CCT_LIB_STATIC
-	#ifdef CCT_PLATFORM_WINDOWS
-		#define CCT_EXPORT __declspec(dllexport)
-		#define CCT_IMPORT __declspec(dllimport)
+#ifdef CCT_PLATFORM_WINDOWS
+	#define CCT_EXPORT __declspec(dllexport)
+	#define CCT_IMPORT __declspec(dllimport)
+#else
+	#define CCT_EXPORT __attribute__((visibility("default")))
+	#define CCT_IMPORT __attribute__((visibility("default")))
+#endif
+
+#ifdef CCT_CORE_BUILD
+	#ifdef CCT_CORE_LIB_STATIC
+		#define CCT_CORE_PUBLIC_API
 	#else
-		#define CCT_EXPORT __attribute__((visibility("default")))
-		#define CCT_IMPORT __attribute__((visibility("default")))
-	#endif
-	#ifdef CCT_CORE_BUILD
 		#define CCT_CORE_PUBLIC_API CCT_EXPORT
+	#endif
+#else
+	#ifdef CCT_CORE_LIB_STATIC
+		#define CCT_CORE_PUBLIC_API
 	#else
 		#define CCT_CORE_PUBLIC_API CCT_IMPORT
 	#endif
-#else
-	#define CCT_CORE_PUBLIC_API
-	#define CCT_EXPORT
-	#define CCT_IMPORT
 #endif
-
-
 
 #if defined(CCT_PLATFORM_WINDOWS)
 	#define CCT_BREAK_IN_DEBUGGER __debugbreak()
@@ -106,6 +107,9 @@ namespace cct
 	using UInt32 = std::uint32_t;
 	using UInt64 = std::uint64_t;
 
+	using Float32 = float;
+	using Float64 = double;
+	
 	using Byte = std::int8_t;
 	using UByte = std::uint8_t;
 

@@ -21,7 +21,7 @@ add_requires("enet", {configs = {shared = false}})
 target("concerto-core")
     if has_config("static") then
         set_kind("static")
-        add_defines("CCT_LIB_STATIC", {public = true})
+        add_defines("CCT_CORE_LIB_STATIC", {public = true})
     else
         set_kind("shared")
     end
