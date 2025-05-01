@@ -4,8 +4,9 @@ add_rules("plugin.vsxmake.autoupdate")
 option("unitybuild", { description = "Build using unity build", default = false })
 option("tests", { description = "Enable unit tests", default = false})
 option("static", { description = "Build static library", default = false })
+option("override_runtime", { description = "Override vs runtime to MD in release and MDd in debug", default = true })
 
-if is_plat("windows") then
+if is_plat("windows") and has_config("override_runtime") then
     set_runtimes(is_mode("debug") and "MDd" or "MD")
 end
 
@@ -15,16 +16,12 @@ if is_mode("coverage") then
 	end
 end
 
-if has_config("static") then
-    add_requires("enet", {configs = {shared = false}})
-else
-    add_requires("enet", {configs = {shared = true}})
-end
+add_requires("enet", {configs = {shared = false}})
 
 target("concerto-core")
     if has_config("static") then
         set_kind("static")
-        add_defines("CCT_LIB_STATIC", {public = true})
+        add_defines("CCT_CORE_LIB_STATIC", {public = true})
     else
         set_kind("shared")
     end
