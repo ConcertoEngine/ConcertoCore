@@ -5,7 +5,17 @@
 #ifndef CONCERTO_CORE_TYPES_HPP
 #define CONCERTO_CORE_TYPES_HPP
 
+#ifdef __cplusplus
+	#define CCT_LANGUAGE_CPP
+#else
+	#define CCT_LANGUAGE_C
+#endif
+
+#ifdef CCT_LANGUAGE_CPP
 #include <cstdint>
+#else
+#include <stdint.h>
+#endif
 
 #if defined(_WIN32)
 	#define CCT_PLATFORM_WINDOWS
@@ -40,9 +50,13 @@
 #ifdef CCT_PLATFORM_WINDOWS
 	#define CCT_EXPORT __declspec(dllexport)
 	#define CCT_IMPORT __declspec(dllimport)
+	#define CCT_CALL __stdcall
+	#define CCT_NO_INLINE __declspec(noinline)
 #else
 	#define CCT_EXPORT __attribute__((visibility("default")))
 	#define CCT_IMPORT __attribute__((visibility("default")))
+	#define CCT_CALL
+	#define CCT_NO_INLINE __attribute__((noinline))
 #endif
 
 #ifdef CCT_CORE_BUILD
@@ -95,6 +109,7 @@
 	#pragma message("Unsuported compiler")
 #endif
 
+#ifdef CCT_LANGUAGE_CPP
 namespace cct
 {
 	using Int8 = std::int8_t;
@@ -112,8 +127,25 @@ namespace cct
 	
 	using Byte = std::int8_t;
 	using UByte = std::uint8_t;
-
 	CCT_CORE_PUBLIC_API bool IsDebuggerAttached();
 }; // namespace cct
+#else
+typedef int8_t Int8;
+typedef int16_t Int16;
+typedef int32_t Int32;
+typedef int64_t Int64;
 
+typedef uint8_t UInt8;
+typedef uint16_t UInt16;
+typedef uint32_t UInt32;
+typedef uint64_t UInt64;
+
+typedef float Float32;
+typedef double Float64;
+
+typedef int8_t Byte;
+typedef uint8_t UByte;
+
+extern "C" CCT_CORE_PUBLIC_API bool IsDebuggerAttached();
+#endif
 #endif //CONCERTO_CORE_TYPES_HPP
