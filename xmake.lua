@@ -3,6 +3,7 @@ add_rules("plugin.vsxmake.autoupdate")
 
 option("unitybuild", { description = "Build using unity build", default = false })
 option("tests", { description = "Enable unit tests", default = false})
+option("examples", { description = "Enable examples", default = false})
 option("static", { description = "Build static library", default = false })
 option("override_runtime", { description = "Override vs runtime to MD in release and MDd in debug", default = true })
 
@@ -44,7 +45,7 @@ target("concerto-core")
                     "Include/(Concerto/Core/Math/*.hpp)",
                     "Include/(Concerto/Core/Network/*.hpp)",
                     "Include/(Concerto/Core/Network/ENet/*.hpp)",
-                    "Include/(Concerto/Core/Profiler/*.hpp)")
+                    "Include/(Concerto/Core/*.h)")
 
     add_headerfiles("Src/(Concerto/Core/Network/IpAddress/*.hpp)",
                     "Src/(Concerto/Core/Network/Socket/*.hpp)",
@@ -68,6 +69,10 @@ target("concerto-core")
     if has_config("unitybuild") then
         add_rules("c++.unity_build", {batchsize = 12, uniqueid = "CCT_UNITY_BUILD_ID"})
     end
+
+if has_config("tests") then
+    includes("Examples/xmake.lua")
+end
 
 if has_config("tests") then
     includes("Tests/xmake.lua")

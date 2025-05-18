@@ -96,8 +96,7 @@ namespace cct
 			switch (level)
 			{
 			case LogLevel::Debug:
-				std::cout << Terminal::Color::CYAN << location.file_name() << ": " << location.line() << " " <<
-				location.function_name() << " message: " << message << Terminal::Color::DEFAULT << '\n';
+				std::cout << Terminal::Color::CYAN << location.file_name() << ": " << location.line() << ": " << message << Terminal::Color::DEFAULT << '\n';
 				break;
 			case LogLevel::Info:
 				std::cout << Terminal::Color::GREEN << message << Terminal::Color::DEFAULT << '\n';
