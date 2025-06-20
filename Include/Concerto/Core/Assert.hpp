@@ -7,7 +7,7 @@
 
 #include "Concerto/Core/Logger.hpp"
 
-#if defined(CCT_DEBUG)
+#if defined(CCT_ENABLE_ASSERTS)
 #define CCT_ASSERT(expression, fmt, ...)						\
 	do															\
 	{															\
@@ -16,12 +16,12 @@
 			cct::Logger::Debug(fmt __VA_OPT__(,) __VA_ARGS__);	\
 			if (cct::IsDebuggerAttached())						\
 			{													\
-				CCT_BREAK_IN_DEBUGGER;						\
+				CCT_BREAK_IN_DEBUGGER;							\
 			}													\
 		}														\
 	} while (false)
 #else
-#define CCT_ASSERT(expression, fmt, ...) ((void)0)
+#define CCT_ASSERT(expression, fmt, ...)
 #endif
 
 #define CCT_ASSERT_FALSE(fmt, ...) CCT_ASSERT(false, fmt __VA_OPT__(,) __VA_ARGS__)

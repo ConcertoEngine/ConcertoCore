@@ -6,6 +6,7 @@ option("tests", { description = "Enable unit tests", default = false})
 option("examples", { description = "Enable examples", default = false})
 option("static", { description = "Build static library", default = false })
 option("override_runtime", { description = "Override vs runtime to MD in release and MDd in debug", default = true })
+option("asserts", { description = "Enable asserts", default = false })
 
 if is_plat("windows") and has_config("override_runtime") then
     set_runtimes(is_mode("debug") and "MDd" or "MD")
@@ -68,6 +69,10 @@ target("concerto-core")
 
     if has_config("unitybuild") then
         add_rules("c++.unity_build", {batchsize = 12, uniqueid = "CCT_UNITY_BUILD_ID"})
+    end
+
+    if has_config("asserts") then
+        add_defines("CCT_ENABLE_ASSERTS")
     end
 
 if has_config("tests") then
