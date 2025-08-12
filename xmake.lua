@@ -7,6 +7,7 @@ option("examples", { description = "Enable examples", default = false})
 option("static", { description = "Build static library", default = false })
 option("override_runtime", { description = "Override vs runtime to MD in release and MDd in debug", default = true })
 option("asserts", { description = "Enable asserts", default = false })
+option("enet", { description = "Enable ENet support", default = true })
 
 if is_plat("windows") and has_config("override_runtime") then
     set_runtimes(is_mode("debug") and "MDd" or "MD")
@@ -18,7 +19,9 @@ if is_mode("coverage") then
 	end
 end
 
-add_requires("enet", {configs = {shared = false}})
+if has_config("enet") then
+    add_requires("enet", {configs = {shared = false}})
+end
 
 target("concerto-core")
     if has_config("static") then
@@ -34,7 +37,10 @@ target("concerto-core")
 
     set_warnings("allextra")
     set_languages("cxx20")
-    add_packages("enet", {public = true})
+    if has_config("enet") then
+        add_packages("enet", {public = true})
+        add_defines("CCT_ENABLE_ENET")
+    end
     add_files("Src/**.cpp")
     add_defines("CCT_CORE_BUILD")
     add_cxxflags("cl::/Zc:preprocessor", { public = true })

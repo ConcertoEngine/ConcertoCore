@@ -2,6 +2,8 @@
 // Created by arthur on 14/08/2023.
 //
 
+#ifdef CCT_ENABLE_ENET
+
 #include "Concerto/Core/Network/ENet/Peer.hpp"
 #include "Concerto/Core/Network/Packet.hpp"
 #include <enet/enet.h>
@@ -54,3 +56,5 @@ namespace cct::net
 		return enet_peer_send(static_cast<::ENetPeer*>(_peer), channel, enetPacket) == 0;
 	}
 }
+
+#endif // CCT_ENABLE_ENET

@@ -2,6 +2,8 @@
 // Created by arthur on 14/08/2023.
 //
 
+#ifdef CCT_ENABLE_ENET
+
 #include <cstring>
 
 #include "Concerto/Core/Network/ENet/Packet.hpp"
@@ -40,3 +42,5 @@ namespace cct::net
 		return !operator==(value);
 	}
 }
+
+#endif // CCT_ENABLE_ENET

@@ -2,6 +2,8 @@
 // Created by arthur on 12/08/2023.
 //
 
+#ifdef CCT_ENABLE_ENET
+
 #include <enet/enet.h>
 #include "Concerto/Core/Network/ENet/Host.hpp"
 #include "Concerto/Core/Logger.hpp"
@@ -115,3 +117,5 @@ namespace cct::net
 		return _enetHost != nullptr;
 	}
 }
+
+#endif // CCT_ENABLE_ENET

@@ -2,6 +2,8 @@
 // Created by arthur on 12/08/2023.
 //
 
+#ifdef CCT_ENABLE_ENET
+
 #ifndef CONCERTO_CORE_NETWORK_ENET_HOST_HPP
 #define CONCERTO_CORE_NETWORK_ENET_HOST_HPP
 
@@ -41,3 +43,5 @@ namespace cct::net
 }// namespace cct::net
 
 #endif//CONCERTO_CORE_NETWORK_HOST_CLIENT_HPP
+
+#endif // CCT_ENABLE_ENET

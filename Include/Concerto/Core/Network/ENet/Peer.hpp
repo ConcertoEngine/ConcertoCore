@@ -2,6 +2,8 @@
 // Created by arthur on 12/08/2023.
 //
 
+#ifdef CCT_ENABLE_ENET
+
 #ifndef CONCERTO_CORE_NETWORK_ENET_PEER_HPP
 #define CONCERTO_CORE_NETWORK_ENET_PEER_HPP
 
@@ -42,4 +44,6 @@ namespace cct::net
 	};
 }
 
-#endif//CONCERTO_CORE_NETWORK_ENET_PEER_HPP
+#endif // CONCERTO_CORE_NETWORK_ENET_PEER_HPP
+
+#endif // CCT_ENABLE_ENET

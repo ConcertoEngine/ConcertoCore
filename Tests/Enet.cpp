@@ -2,6 +2,8 @@
 // Created by arthur on 13/08/2023.
 //
 
+#ifdef CCT_ENABLE_ENET
+
 #include <thread>
 #include <chrono>
 #include <span>
@@ -112,4 +114,6 @@ namespace CCT_ANONYMOUS_NAMESPACE
 		serverThread.join();
 		ENet::Deinitialize();
 	}
-}// namespace CCT_ANONYMOUS_NAMESPACE
+} // namespace CCT_ANONYMOUS_NAMESPACE
+
+#endif // CCT_ENABLE_ENET

@@ -2,6 +2,8 @@
 // Created by arthur on 12/08/2023.
 //
 
+#ifdef CCT_ENABLE_ENET
+
 #include "Concerto/Core/Network/ENet/Client.hpp"
 #include "Concerto/Core/Logger.hpp"
 #include "Concerto/Core/Assert.hpp"
@@ -42,3 +44,5 @@ namespace cct::net
 	}
 
 }// namespace cct::net
+
+#endif // CCT_ENABLE_ENET
