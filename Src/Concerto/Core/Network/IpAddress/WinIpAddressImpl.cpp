@@ -4,7 +4,10 @@
 
 #include "Concerto/Core/Types.hpp"
 #ifdef CCT_PLATFORM_WINDOWS
+
 #include <stdexcept>
+#include <cstring>
+
 #include "Concerto/Core/Network/IpAddress/WinIpAddressImpl.hpp"
 
 namespace cct::net
