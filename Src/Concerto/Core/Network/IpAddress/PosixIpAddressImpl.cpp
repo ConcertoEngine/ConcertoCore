@@ -3,7 +3,10 @@
 //
 #include "Concerto/Core/Types.hpp"
 #ifdef CCT_PLATFORM_POSIX
+
+#include <sys/socket.h>
 #include <stdexcept>
+
 #include "Concerto/Core/Network/IpAddress/PosixIpAddressImpl.hpp"
 
 namespace cct::net
