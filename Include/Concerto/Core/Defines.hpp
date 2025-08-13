@@ -30,6 +30,9 @@
 #elif defined(__APPLE__)
 #define CCT_PLATFORM_MACOS
 #define CCT_PLATFORM_POSIX
+#elif defined(__EMSCRIPTEN__)
+#define CCT_PLATFORM_WEB
+#define CCT_PLATFORM_POSIX
 #endif
 
 //from https://sourceforge.net/p/predef/wiki/Architectures/
@@ -41,6 +44,10 @@
 #define CCT_ARCH_X86_64
 #elif defined(i386) || defined(__i386) || defined(_M_IX86)
 #define CCT_ARCH_X86
+#elif defined(__wasm32__)
+#define CCT_ARCH_WASM32
+#elif defined(__wasm64__)
+#define CCT_ARCH_WASM64
 #endif
 
 #if defined(NDEBUG)
