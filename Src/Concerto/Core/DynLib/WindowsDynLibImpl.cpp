@@ -41,7 +41,7 @@ namespace cct
 
 	void* DynLibImpl::GetSymbol(const std::string& symbol, std::string* error) const
 	{
-		void* symbolPtr = static_cast<void*>(GetProcAddress(_module, symbol.c_str()));
+		void* symbolPtr = reinterpret_cast<void*>(GetProcAddress(_module, symbol.c_str()));
 		if (symbolPtr == nullptr)
 		{
 			if (error)
