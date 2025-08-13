@@ -65,7 +65,7 @@ target("concerto-core")
                     "Include/(Concerto/Core/Profiler/*.inl)")
     add_cxxflags("cl::/wd4251")
 
-    if is_plat("windows") then
+    if is_plat("windows", "mingw") then
         add_syslinks("ws2_32", "Kernel32")
     end
 
