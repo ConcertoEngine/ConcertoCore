@@ -32,6 +32,9 @@ namespace cct
 			explicit Debug(const std::format_string<T...> fmt, T&&... args, std::source_location loc = std::source_location::current())
 			{
 				Log(std::vformat(fmt.get(), std::make_format_args(args...)), LogLevel::Debug, loc);
+#ifdef CCT_PLATFORM_WINDOWS
+				OutputDebugString(std::vformat(fmt.get(), std::make_format_args(args...)));
+#endif
 			}
 		};
 		enum class LogLevel
@@ -96,7 +99,7 @@ namespace cct
 			switch (level)
 			{
 			case LogLevel::Debug:
-				std::cout << Terminal::Color::CYAN << location.file_name() << ": " << location.line() << ": " << message << Terminal::Color::DEFAULT << '\n';
+				std::cerr << Terminal::Color::CYAN << location.file_name() << ": " << location.line() << ": " << message << Terminal::Color::DEFAULT << '\n';
 				break;
 			case LogLevel::Info:
 				std::cout << Terminal::Color::GREEN << message << Terminal::Color::DEFAULT << '\n';
@@ -109,6 +112,8 @@ namespace cct
 				break;
 			}
 		}
+
+		static void OutputDebugString(std::string_view string);
 	};
 }// namespace cct
 #endif//CONCERTO_CORE_LOGGER_HPP
