@@ -24,11 +24,10 @@ if has_config("enet") then
 end
 
 target("concerto-core")
-    if has_config("static") then
-        set_kind("static")
+    set_kind("$(kind)")
+
+    if is_kind("static") then
         add_defines("CCT_CORE_LIB_STATIC", {public = true})
-    else
-        set_kind("shared")
     end
 
     if is_mode("debug") then
