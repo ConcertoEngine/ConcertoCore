@@ -7,7 +7,7 @@ target("concerto-core-dummy")
     set_warnings("none")
     on_load(function(target)
         if is_host("windows") then
-            io.writefile("$(buildir)/$(plat)/$(arch)/dummy.cpp", [[
+            io.writefile("$(builddir)/$(plat)/$(arch)/dummy.cpp", [[
             extern "C" {
                 __declspec(dllexport) void __cdecl Dummy() {}
                 __declspec(dllexport) int __cdecl DummyInt() { return 42;}
@@ -16,7 +16,7 @@ target("concerto-core-dummy")
             }
             ]])
         elseif is_host("linux") or  is_host("macos") then
-            io.writefile("$(buildir)/$(plat)/$(arch)/dummy.cpp", [[
+            io.writefile("$(builddir)/$(plat)/$(arch)/dummy.cpp", [[
             extern "C" {
                 void Dummy() {}
                 int DummyInt() { return 42;}
