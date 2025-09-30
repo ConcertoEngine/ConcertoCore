@@ -6,7 +6,7 @@
 
 #include <gtest/gtest.h>
 #include <Concerto/Core/Types/Types.hpp>
-#include <Concerto/Core/Result.hpp>
+#include <Concerto/Core/Result/Result.hpp>
 
 namespace CCT_ANONYMOUS_NAMESPACE
 {
@@ -53,6 +53,18 @@ namespace CCT_ANONYMOUS_NAMESPACE
 	TEST(Result, ErrorVariadicConstruction)
 	{
 		Result<std::string, Bar> result(std::in_place_type_t<Bar>(), 1, true, 2);
+
+		ASSERT_FALSE(result.IsOk());
+		ASSERT_TRUE(result.IsError());
+		auto value = result.GetError();
+		ASSERT_EQ(value.a, 1);
+		ASSERT_EQ(value.b, true);
+		ASSERT_EQ(value.c, 2);
+	}
+
+	TEST(Result, VoidTemplateSpecialisation)
+	{
+		Result<void, Bar> result(std::in_place_type_t<Bar>(), 1, true, 2);
 
 		ASSERT_FALSE(result.IsOk());
 		ASSERT_TRUE(result.IsError());

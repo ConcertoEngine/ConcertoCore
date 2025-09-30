@@ -7,6 +7,7 @@
 
 #include <variant>
 #include <type_traits>
+#include <optional>
 
 namespace cct
 {
@@ -40,11 +41,34 @@ namespace cct
 		constexpr operator bool() const;
 
 	private:
-		std::variant<Value, Error> _value;
-		static constexpr decltype(_value.index()) _valueIndex = 0;
-		static constexpr decltype(_value.index()) _errorIndex = 1;
+		std::variant<Value, Error> m_value;
+		static constexpr decltype(m_value.index()) s_valueIndex = 0;
+		static constexpr decltype(m_value.index()) s_errorIndex = 1;
+	};
+
+	template<typename Error>
+	requires (!std::is_void_v<Error>)
+	class Result<void, Error>
+	{
+	public:
+		template<typename... Args>
+		Result(std::in_place_type_t<Error>, Args&&... args);
+;
+		constexpr Result(Error&& error);
+
+		constexpr Error& GetError()&;
+		constexpr const Error& GetError() const&;
+		constexpr Error&& GetError()&&;
+
+		constexpr bool IsError() const;
+		constexpr bool IsOk() const;
+
+		constexpr operator bool() const;
+
+	private:
+		std::optional<Error> m_value;
 	};
 }
 
-#include "Concerto/Core/Result.inl"
+#include "Concerto/Core/Result/Result.inl"
 #endif //CONCERTO_CORE_RESULT_HPP
