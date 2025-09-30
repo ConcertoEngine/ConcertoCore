@@ -5,6 +5,8 @@
 #ifndef CONCERTO_CORE_RESULT_INL
 #define CONCERTO_CORE_RESULT_INL
 
+#include <utility>
+
 #include "Concerto/Core/Assert.hpp"
 #include "Concerto/Core/Result/Result.hpp"
 

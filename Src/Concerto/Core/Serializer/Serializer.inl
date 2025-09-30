@@ -4,6 +4,7 @@
 
 #ifndef CONCERTO_CORE_SERIALIZER_INL
 #define CONCERTO_CORE_SERIALIZER_INL
+
 #include "Concerto/Core/Serializer/Serializer.hpp"
 #include "Concerto/Core/Stream/Stream.hpp"
 #include "Concerto/Core/ByteSwap.hpp"

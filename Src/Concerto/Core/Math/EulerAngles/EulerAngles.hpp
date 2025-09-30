@@ -107,6 +107,6 @@ namespace cct
 	using EulerAnglesf = EulerAngles<float>;
 	using EulerAnglesd = EulerAngles<double>;
 }
-#include "EulerAngles.inl"
+#include "Concerto/Core/Math/EulerAngles/EulerAngles.inl"
 
 #endif //CONCERTO_CORE_MATH_EULERANGLES_HPP

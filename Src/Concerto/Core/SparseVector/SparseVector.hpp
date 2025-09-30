@@ -88,5 +88,5 @@ namespace cct
 	};
 }
 
-#include "Concerto/Core/SparseVector.inl"
+#include "Concerto/Core/SparseVector/SparseVector.inl"
 #endif // CONCERTO_CORE_SPARSEVECTOR_HPP

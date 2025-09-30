@@ -44,6 +44,6 @@ namespace cct
 	};
 }
 
-#include "Stream.inl"
+#include "Concerto/Core/Stream/Stream.inl"
 
 #endif //CONCERTO_CORE_STREAM_HPP

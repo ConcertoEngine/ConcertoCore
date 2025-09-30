@@ -401,6 +401,6 @@ namespace cct
 	template<typename T> constexpr Vector3<T> operator/(T scale, const Vector3<T>& vec);
 }
 
-#include "Vector.inl"
+#include "Concerto/Core/Math/Vector/Vector.inl"
 
 #endif //CONCERTO_CORE_MATH_VECTOR_HPP

@@ -49,5 +49,5 @@ namespace cct
 		requires((std::is_integral_v<T> || std::is_floating_point_v<T>) && !std::is_same_v<T, bool>)
 	inline void CCT_CORE_PUBLIC_API Deserialize(Stream& stream, T& value);
 }
-#include "Serializer.inl"
+#include "Concerto/Core/Serializer/Serializer.inl"
 #endif //CONCERTO_CORE_SERIALIZER_HPP
