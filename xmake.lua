@@ -85,6 +85,7 @@ target("concerto-core")
     if has_config("asserts") then
         add_defines("CCT_ENABLE_ASSERTS")
     end
+target_end()
 
 if has_config("tests") then
     includes("Examples/xmake.lua")
@@ -121,7 +122,7 @@ if has_config("tests") then
         end)
 
     target("concerto-core-tests")
-        add_deps("concerto-core-dummy", "concerto-core")
+        add_deps("concerto-core")
         set_kind("binary")
         if (is_mode("debug")) then
             set_symbols("debug")
