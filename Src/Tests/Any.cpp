@@ -7,7 +7,7 @@
 
 #include <gtest/gtest.h>
 
-#include <Concerto/Core/Any.hpp>
+#include <Concerto/Core/Any/Any.hpp>
 
 namespace CCT_ANONYMOUS_NAMESPACE
 {

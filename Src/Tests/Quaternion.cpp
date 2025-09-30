@@ -4,7 +4,7 @@
 
 #include <gtest/gtest.h>
 
-#include "Concerto/Core/Math/Quaternion.hpp"
+#include "Concerto/Core/Math/Quaternion/Quaternion.hpp"
 
 namespace CCT_ANONYMOUS_NAMESPACE
 {

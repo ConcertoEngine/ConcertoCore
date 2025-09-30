@@ -5,7 +5,7 @@
 #include <string>
 
 #include <gtest/gtest.h>
-#include <Concerto/Core/Types.hpp>
+#include <Concerto/Core/Types/Types.hpp>
 #include <Concerto/Core/Result.hpp>
 
 namespace CCT_ANONYMOUS_NAMESPACE

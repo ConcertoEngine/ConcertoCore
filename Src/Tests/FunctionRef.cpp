@@ -4,7 +4,7 @@
 
 #include <gtest/gtest.h>
 #include <string>
-#include <Concerto/Core/FunctionRef.hpp>
+#include <Concerto/Core/FunctionRef/FunctionRef.hpp>
 
 namespace CCT_ANONYMOUS_NAMESPACE
 {

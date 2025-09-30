@@ -3,7 +3,7 @@
 //
 
 #include <gtest/gtest.h>
-#include <Concerto/Core/Math/Transform.hpp>
+#include <Concerto/Core/Math/Transform/Transform.hpp>
 
 namespace CCT_ANONYMOUS_NAMESPACE
 {

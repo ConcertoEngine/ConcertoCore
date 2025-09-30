@@ -4,7 +4,7 @@
 
 #include <gtest/gtest.h>
 
-#include "Concerto/Core/Math/EulerAngles.hpp"
+#include "Concerto/Core/Math/EulerAngles/EulerAngles.hpp"
 
 namespace CCT_ANONYMOUS_NAMESPACE
 {

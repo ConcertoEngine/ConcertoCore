@@ -3,7 +3,7 @@
 //
 
 #include <gtest/gtest.h>
-#include <Concerto/Core/DynLib.hpp>
+#include <Concerto/Core/DynLib/DynLib.hpp>
 
 #ifdef CCT_PLATFORM_POSIX
 #define PREFIX "lib"

@@ -3,7 +3,7 @@
 //
 
 #include <gtest/gtest.h>
-#include <Concerto/Core/Logger.hpp>
+#include <Concerto/Core/Logger/Logger.hpp>
 
 int main(int argc, char** argv)
 {

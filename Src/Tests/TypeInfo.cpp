@@ -4,7 +4,7 @@
 
 #include <gtest/gtest.h>
 #include <memory>
-#include <Concerto/Core/TypeInfo.hpp>
+#include <Concerto/Core/TypeInfo/TypeInfo.hpp>
 
 enum class EnumClass{};
 enum struct EnumStruct{};

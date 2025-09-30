@@ -4,7 +4,7 @@
 
 #include <gtest/gtest.h>
 #include <array>
-#include "Concerto/Core/Network/Packet.hpp"
+#include "Concerto/Core/Network/Packet/Packet.hpp"
 
 namespace CCT_ANONYMOUS_NAMESPACE
 {

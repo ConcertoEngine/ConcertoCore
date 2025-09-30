@@ -6,8 +6,8 @@
 #include <thread>
 
 #include <gtest/gtest.h>
-#include "Concerto/Core/Network/Socket.hpp"
-#include "Concerto/Core/Buffer.hpp"
+#include "Concerto/Core/Network/Socket/Socket.hpp"
+#include "Concerto/Core/Buffer/Buffer.hpp"
 
 #ifdef CCT_PLATFORM_MACOS // because the CI is failing in release mode
 #include <thread>

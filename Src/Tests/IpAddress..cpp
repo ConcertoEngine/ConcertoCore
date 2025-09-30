@@ -3,7 +3,7 @@
 //
 
 #include <gtest/gtest.h>
-#include "Concerto/Core/Network/IpAddress.hpp"
+#include "Concerto/Core/Network/IpAddress/IpAddress.hpp"
 
 namespace CCT_ANONYMOUS_NAMESPACE
 {

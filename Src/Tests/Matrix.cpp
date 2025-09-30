@@ -4,7 +4,7 @@
 
 #include <gtest/gtest.h>
 
-#include "Concerto/Core/Math/Matrix.hpp"
+#include "Concerto/Core/Math/Matrix/Matrix.hpp"
 
 namespace CCT_ANONYMOUS_NAMESPACE
 {

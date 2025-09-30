@@ -9,10 +9,10 @@
 #include <span>
 
 #include <gtest/gtest.h>
-#include <Concerto/Core/Logger.hpp>
+#include <Concerto/Core/Logger/Logger.hpp>
 #include <Concerto/Core/Network/ENet/ENet.hpp>
-#include <Concerto/Core/Network/ENet/Server.hpp>
-#include <Concerto/Core/Network/ENet/Client.hpp>
+#include <Concerto/Core/Network/ENet/Server/Server.hpp>
+#include <Concerto/Core/Network/ENet/Client/Client.hpp>
 
 namespace CCT_ANONYMOUS_NAMESPACE
 {

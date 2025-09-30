@@ -4,7 +4,7 @@
 
 #include <gtest/gtest.h>
 
-#include <Concerto/Core/Logger.hpp>
+#include <Concerto/Core/Logger/Logger.hpp>
 
 using namespace cct;
 

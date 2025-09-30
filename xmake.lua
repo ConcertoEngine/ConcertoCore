@@ -23,6 +23,28 @@ if has_config("enet") then
     add_requires("enet", {configs = {shared = false}})
 end
 
+function add_files_to_target(p, hpp_as_files, install)
+    for _, dir in ipairs(os.filedirs(p)) do
+        relative_dir = path.relative(dir, "Src/")
+        if os.isdir(dir) then
+            add_files(path.join("Src", relative_dir, "*.cpp"))
+            if hpp_as_files then
+                add_files(path.join("Src", relative_dir, "*.hpp"))
+            end
+            install = path.basename(dir) ~= "Private"
+            add_headerfiles(path.join("Src", "(" .. relative_dir .. "/*.hpp)"), {install = install})
+            add_headerfiles(path.join("Src", "(" .. relative_dir .. "/*.inl)"), {install = install})
+        else
+            local ext = path.extension(relative_dir)
+            if ext == ".hpp" or ext == ".inl" then
+                add_headerfiles(path.join("Src", "(" .. relative_dir .. ")"), {install = install})
+            elseif ext == ".cpp" then
+                add_files(path.join("Src", relative_dir))
+            end
+        end
+    end
+end
+
 target("concerto-core")
     set_kind("$(kind)")
 
@@ -43,25 +65,9 @@ target("concerto-core")
     add_files("Src/Concerto/**.cpp")
     add_defines("CCT_CORE_BUILD")
     add_cxxflags("cl::/Zc:preprocessor", { public = true })
+    add_includedirs("Src", {public = true}) 
+    add_files_to_target("Src/Concerto/Core/**", false, true)
 
-    add_includedirs("Include", {public = true})
-    add_includedirs("Src", {public = false})
-
-    add_headerfiles("Include/(Concerto/Core/*.hpp)",
-                    "Include/(Concerto/Core/Math/*.hpp)",
-                    "Include/(Concerto/Core/Network/*.hpp)",
-                    "Include/(Concerto/Core/Network/ENet/*.hpp)",
-                    "Include/(Concerto/Core/*.h)")
-
-    add_headerfiles("Src/(Concerto/Core/Network/IpAddress/*.hpp)",
-                    "Src/(Concerto/Core/Network/Socket/*.hpp)",
-                    {install = false})
-
-    add_headerfiles("Include/(Concerto/Core/*.inl)",
-                    "Include/(Concerto/Core/Math/*.inl)",
-                    "Include/(Concerto/Core/Network/*.inl)",
-                    "Include/(Concerto/Core/Network/ENet/*.inl)",
-                    "Include/(Concerto/Core/Profiler/*.inl)")
     add_cxxflags("cl::/wd4251")
 
     if is_plat("windows", "mingw") then
