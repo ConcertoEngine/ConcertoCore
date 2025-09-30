@@ -112,14 +112,14 @@ namespace cct
 	template <typename Error>
 	requires (!std::is_void_v<Error>)
 	template <typename ... Args>
-	Result<void, Error>::Result(std::in_place_type_t<Error>, Args&&... args) : m_value(std::forward<Args...>(args...))
+	Result<void, Error>::Result(std::in_place_type_t<Error>, Args&&... args) : m_value(std::forward<Args>(args)...)
 	{
 
 	}
 
 	template <typename Error>
 	requires (!std::is_void_v<Error>)
-	constexpr Result<void, Error>::Result(Error&& error)
+	constexpr Result<void, Error>::Result(Error&& error) : m_value(std::move(error))
 	{
 	}
 
