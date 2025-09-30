@@ -4,7 +4,7 @@
 
 #include <memory>
 #include <gtest/gtest.h>
-#include <Concerto/Core/SparseVector.hpp>
+#include <Concerto/Core/SparseVector/SparseVector.hpp>
 
 namespace CCT_ANONYMOUS_NAMESPACE
 {

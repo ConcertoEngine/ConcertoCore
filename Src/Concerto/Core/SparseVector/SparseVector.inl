@@ -7,7 +7,7 @@
 
 #include "Concerto/Core/Types/Types.hpp"
 #include "Concerto/Core/Assert.hpp"
-#include "Concerto/Core/SparseVector.hpp"
+#include "Concerto/Core/SparseVector/SparseVector.hpp"
 
 namespace cct
 {
