@@ -15,6 +15,6 @@ namespace cct
 	inline To Cast(From&& value) noexcept;
 }
 
-#include "Concerto/Core/Cast.inl"
+#include "Concerto/Core/Cast/Cast.inl"
 
 #endif //CONCERTO_CORE_CAST_HPP

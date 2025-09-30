@@ -27,6 +27,6 @@ namespace cct
 	};
 }
 
-#include "Concerto/Core/DeferredExit.inl"
+#include "Concerto/Core/DeferredExit/DeferredExit.inl"
 
 #endif //CONCERTO_CORE_DEFEREDEXIT_HPP

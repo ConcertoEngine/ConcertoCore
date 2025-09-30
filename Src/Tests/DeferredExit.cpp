@@ -3,7 +3,7 @@
 //
 
 #include <gtest/gtest.h>
-#include "Concerto/Core/DeferredExit.hpp"
+#include "Concerto/Core/DeferredExit/DeferredExit.hpp"
 
 #include "Concerto/Core/Types/Types.hpp"
 
