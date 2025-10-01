@@ -97,32 +97,24 @@ if has_config("tests") then
     target("concerto-core-dummy")
         set_kind("shared")
         set_languages("cxx20")
-        add_files("$$(builddir)/$(plat)/$(arch)/dummy.cpp")
         set_warnings("none")
-        on_load(function(target)
-            if is_host("windows") then
-                io.writefile("$(builddir)/$(plat)/$(arch)/dummy.cpp", [[
-                extern "C" {
-                    __declspec(dllexport) void __cdecl Dummy() {}
-                    __declspec(dllexport) int __cdecl DummyInt() { return 42;}
-                    __declspec(dllexport) int __cdecl Increment(int v) { return v + 1;}
-                    __declspec(dllexport) int __cdecl GlobalInt = 42;
-                }
-                ]])
-            elseif is_host("linux") or  is_host("macos") then
-                io.writefile("$(builddir)/$(plat)/$(arch)/dummy.cpp", [[
-                extern "C" {
-                    void Dummy() {}
-                    int DummyInt() { return 42;}
-                    int Increment(int v) { return v + 1;}
-                    int GlobalInt = 42;
-                }
-                ]])
-            end
+        add_deps("concerto-core")
+        on_config(function(target)
+            local dummy_file = path.join(target:autogendir(), "dummy.cpp")
+            target:add("files", dummy_file)
+            io.writefile(dummy_file, [[
+#include <Concerto/Core/Types/Types.hpp>
+extern "C" {
+    void CCT_EXPORT Dummy() {}
+    int CCT_EXPORT DummyInt() { return 42;}
+    int CCT_EXPORT Increment(int v) { return v + 1;}
+    int CCT_EXPORT GlobalInt = 42;
+}
+]])
         end)
 
     target("concerto-core-tests")
-        add_deps("concerto-core")
+        add_deps("concerto-core", "concerto-core-dummy")
         set_kind("binary")
         if (is_mode("debug")) then
             set_symbols("debug")
