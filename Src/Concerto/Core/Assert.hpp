@@ -21,7 +21,7 @@
 		}														\
 	} while (false)
 #else
-#define CCT_ASSERT(expression, fmt, ...)
+#define CCT_ASSERT(expression, fmt, ...) do { } while (false)
 #endif
 
 #define CCT_ASSERT_FALSE(fmt, ...) CCT_ASSERT(false, fmt __VA_OPT__(,) __VA_ARGS__)
