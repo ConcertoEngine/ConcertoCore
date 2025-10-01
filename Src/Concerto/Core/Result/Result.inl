@@ -151,21 +151,21 @@ namespace cct
 	requires (!std::is_void_v<Error>)
 	constexpr bool Result<void, Error>::IsError() const
 	{
-		return !this->operator bool();
+		return m_value.has_value();
 	}
 
 	template <typename Error>
 	requires (!std::is_void_v<Error>)
 	constexpr bool Result<void, Error>::IsOk() const
 	{
-		return this->operator bool();
+		return !IsError();
 	}
 
 	template <typename Error>
 	requires (!std::is_void_v<Error>)
 	constexpr Result<void, Error>::operator bool() const
 	{
-		return m_value.has_value();
+		return IsOk();
 	}
 }
 
