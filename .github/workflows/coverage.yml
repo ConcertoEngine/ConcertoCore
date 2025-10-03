@@ -94,7 +94,7 @@ jobs:
       if: runner.os == 'Linux'
       run: |
         xmake run concerto-core-tests
-        gcovr -x coverage.out -s -f "Include/.*" -f "Src/.*" build/.objs/
+        gcovr -x coverage.out -s -f -f "Src/Concerto/Core/.*" build/.objs/
 
     - name: Run unit tests and generate coverage output (Windows)
       if: runner.os == 'Windows'
