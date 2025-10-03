@@ -65,6 +65,8 @@
 		#define CCT_CALL __stdcall
 	#elif defined(CCT_ARCH_X86)
 		#define CCT_CALL __cdecl
+	#elif defined(CCT_ARCH_ARM) || defined(CCT_ARCH_ARM64)
+    	#define CCT_CALL
 	#else
 		#error unsupported arch
 	#endif
