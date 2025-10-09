@@ -1,108 +1,104 @@
 //
-// Created by arthur on 16/11/2023.
+// Created by Arthur on 08/10/2025.
 //
 
 #ifndef CONCERTO_CORE_ANY_HPP
 #define CONCERTO_CORE_ANY_HPP
 
-#include "Concerto/Core/Types/Types.hpp"
+#include <array>
+#include <variant>
+#include <type_traits>
+#include <utility>
 
-#include <memory>
+#include "Concerto/Core/Types/Types.hpp"
+#include "Concerto/Core/Defines.hpp"
 
 namespace cct
 {
-	/**
-	 * @brief A class that can store any type of data.
-	 * Use Any::Make to create an Any object.
-	 */
-	class CCT_CORE_PUBLIC_API Any
+	class Any
 	{
-	 private:
-		Any(std::size_t id, std::unique_ptr<void*> data);
-	 public:
-		Any();
-		~Any() = default;
-		Any(const Any& other) = delete;
-		Any(Any&& other) noexcept = default;
+	public:
+		Any() noexcept;
+		~Any();
 
-		Any& operator=(Any&&) = default;
-		Any& operator=(const Any&) = delete;
+		Any(const Any& other);
+		Any(Any&& other) noexcept;
+
+		Any& operator=(const Any& other);
+		Any& operator=(Any&& other) noexcept;
 
 		template<typename T, typename... Args>
 		Any& operator=(Args&&... args);
 
 		template<typename T>
-		Any& operator=(const T& data);
-
-		template<typename T>
 		Any& operator=(T&& data);
 
+		void Reset();
+		[[nodiscard]] bool HasValue() const noexcept;
 
-		/**
-		 * @brief Checks if the type of the data is the same as the template type.
-		 * @tparam T The type to check.
-		 * @return True if the type is the same, false otherwise.
-		 */
 		template<typename T>
-		[[nodiscard]] bool Is() const;
+		[[nodiscard]] bool Is() const noexcept;
 
-		/**
-		 * @brief Returns the data as the template type.
-		 * @tparam T The type to return.
-		 * @return The data as the template type.
-		 * @throw std::bad_cast if the type contained is not the same as the template type.
-		 */
 		template<typename T>
 		T As();
 
-		/**
-		 * @brief Creates an Any object with the given arguments.
-		 * @tparam T The type of the object to create.
-		 * @tparam Args The types of the arguments.
-		 * @param args The arguments to pass to the constructor of the object.
-		 * @return An Any object containing the created object.
-		 */
-		template<typename T, class... Args>
-		requires(!std::is_reference_v<T> && !std::is_const_v<T>)
-		static inline Any Make(Args&&... args);
+		template<typename T, typename... Args>
+		static Any Make(Args&&... args);
 
-		inline void Reset();
+		template<typename T, typename... Args>
+		void Emplace(Args&&... args);
 
-		inline bool HasValue() const;
+	private:
+		// Small-buffer size (bytes)
+		static constexpr std::size_t SmallBufferSize = 32;
 
-	 private:
-		std::size_t _id;
-		std::unique_ptr<void*> _data;
+		struct AlignedBuffer
+		{
+			alignas(std::max_align_t) std::array<std::byte, SmallBufferSize> data{};
+		};
+
+		using Storage = std::variant<AlignedBuffer, void*>;
 
 		template<typename T>
-		class AnyImpl
+		struct Traits
 		{
-		 public:
-			template<typename... Args>
-			explicit AnyImpl(Args&&... args);
+			using Exposed = T;
+			using Decayed = std::remove_reference_t<Exposed>;
+			using Stored = std::conditional_t<std::is_reference_v<Exposed>, std::add_pointer_t<std::remove_reference_t<Exposed>>, Decayed>;
 
-			explicit AnyImpl(T& data);
-
-			explicit AnyImpl(T&& data);
-
-			AnyImpl(const AnyImpl&) = default;
-
-			AnyImpl(AnyImpl&&) = default;
-
-			~AnyImpl() = default;
-
-			AnyImpl& operator=(const AnyImpl& other);
-
-			AnyImpl& operator=(AnyImpl&& other) noexcept;
-
-			T* operator->();
-
-		 private:
-			T _data;
+			static constexpr bool FitsInStack = (sizeof(Stored) <= SmallBufferSize) && (alignof(Stored) <= alignof(std::max_align_t));
 		};
+
+		void* StackPtr() noexcept;
+		const void* StackPtr() const noexcept;
+
+		void* DataPtr() noexcept;
+		const void* DataPtr() const noexcept;
+
+		using DestroyFn = void(*)(Any&);
+		using CopyFn = void(*)(const Any&, Any&);
+		using MoveFn = void(*)(Any&, Any&);
+
+		template<typename Exposed>
+		static void DestroyImpl(Any& a);
+
+		template<typename Exposed>
+		static void CopyImpl(const Any& src, Any& dst);
+
+		template<typename Exposed>
+		static void MoveImpl(Any& src, Any& dst);
+
+		template<typename Exposed, typename... Args>
+		void EmplaceImpl(Args&&... args);
+
+		UInt64 m_typeId = 0;
+		Storage m_storage = {};
+		DestroyFn m_destroy = nullptr;
+		CopyFn m_copy = nullptr;
+		MoveFn m_move = nullptr;
 	};
-
-
 }
+
 #include "Concerto/Core/Any/Any.inl"
-#endif //CONCERTO_CORE_ANY_HPP
+
+#endif // CONCERTO_CORE_ANY_HPP
