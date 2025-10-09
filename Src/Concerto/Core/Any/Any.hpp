@@ -92,7 +92,7 @@ namespace cct
 		void EmplaceImpl(Args&&... args);
 
 		UInt64 m_typeId = 0;
-		Storage m_storage = {};
+		Storage m_storage = { AlignedBuffer() };
 		DestroyFn m_destroy = nullptr;
 		CopyFn m_copy = nullptr;
 		MoveFn m_move = nullptr;
