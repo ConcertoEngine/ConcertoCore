@@ -26,7 +26,7 @@ namespace cct
 	using Byte = std::int8_t;
 	using UByte = std::uint8_t;
 
-	CCT_EXTERN_C CCT_CORE_PUBLIC_API bool IsDebuggerAttached();
+	CCT_CORE_PUBLIC_API bool IsDebuggerAttached();
 }; // namespace cct
 
 
