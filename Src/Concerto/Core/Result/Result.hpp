@@ -51,9 +51,10 @@ namespace cct
 	class Result<void, Error>
 	{
 	public:
+		Result() = default;
 		template<typename... Args>
 		Result(std::in_place_type_t<Error>, Args&&... args);
-;
+
 		constexpr Result(Error&& error);
 
 		constexpr Error& GetError()&;
