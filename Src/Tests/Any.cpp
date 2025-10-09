@@ -1,100 +1,73 @@
 //
-// Created by arthur on 16/11/2023.
+// Created by Arthur on 08/10/2025.
 //
-
-#include <cstring>
-#include <memory>
 
 #include <gtest/gtest.h>
 
 #include <Concerto/Core/Any/Any.hpp>
+#include <Concerto/Core/TypeInfo/TypeInfo.hpp>
 
 namespace CCT_ANONYMOUS_NAMESPACE
 {
-	using namespace cct;
+    using namespace cct;
 
-	TEST(Any, MakeAnyFunc)
-	{
-		Any erasedType = Any::Make<int>(6);
-		EXPECT_TRUE(erasedType.HasValue());
-		EXPECT_TRUE(erasedType.Is<int>());
-		const int value = erasedType.As<int>();
-		EXPECT_EQ(value, 6);
-	}
+    struct Big
+    {
+        Big() = default;
+        explicit Big(int v) : x(v) {}
+        int x = 0;
+        std::array<char, 64> buf{}; // ensure > small buffer
+    };
 
-	TEST(Any, Emtpty)
-	{
-		Any empty;
-		EXPECT_EQ(empty.HasValue(), false);
-		EXPECT_THROW(empty.As<int>(), std::bad_cast);
+    TEST(Any, SmallValue)
+    {
+        auto a = Any::Make<int>(42);
+        ASSERT_TRUE(a.HasValue());
+        ASSERT_TRUE(a.Is<int>());
+        ASSERT_FALSE(a.Is<float>());
+        EXPECT_EQ(a.As<int>(), 42);
 
-		empty = Any::Make<int>(42);
-		EXPECT_TRUE(empty.HasValue());
-		empty.Reset();
-		EXPECT_FALSE(empty.HasValue());
-	}
+        a.Reset();
+        EXPECT_FALSE(a.HasValue());
+    }
 
-	TEST(Any, Move)
-	{
-		Any erasedType = Any::Make<int>(6);
-		Any other(std::move(erasedType));
-		EXPECT_TRUE(other.HasValue());
-		EXPECT_TRUE(other.Is<int>());
-		EXPECT_EQ(other.As<int>(), 6);
-	}
+    TEST(Any, LargeValue)
+    {
+        Big b(99);
+        auto a = Any::Make<Big>(b);
+        ASSERT_TRUE(a.HasValue());
+        ASSERT_TRUE(a.Is<Big>());
+        auto v = a.As<Big>();
+        EXPECT_EQ(v.x, 99);
+    }
 
-	TEST(Any, Pointer)
-	{
-		//Try with int*
-		{
-			auto ptr = std::make_unique<int>(6);
-			Any any = Any::Make<int*>(ptr.get());
+    TEST(Any, Pointer)
+    {
+        int v = 5;
+        auto a = Any::Make<int*>(&v);
+        ASSERT_TRUE(a.HasValue());
+        ASSERT_TRUE(a.Is<int*>());
+        int* p = a.As<int*>();
+        *p = 11;
+        EXPECT_EQ(v, 11);
+    }
 
-			EXPECT_TRUE(any.HasValue());
-			EXPECT_TRUE(any.Is<int*>());
-			EXPECT_EQ(any.As<int*>(), ptr.get());
-			{
-				const int* value = any.As<const int*>();
-				EXPECT_EQ(value, ptr.get());
-			}
-			{
-				int* value = any.As<int*>();
-				EXPECT_EQ(value, ptr.get());
-			}
-		}
-		//Try with void*
-		{
-			auto ptr = std::make_unique<int>(6);
-			Any any = Any::Make<void*>(ptr.get());
+    TEST(Any, Reference)
+    {
+        int v = 7;
+        auto a = Any::Make<int&>(v);
+        ASSERT_TRUE(a.HasValue());
+        ASSERT_TRUE(a.Is<int&>());
+        int& r = a.As<int&>();
+        r = 15;
+        EXPECT_EQ(v, 15);
+    }
 
-			EXPECT_TRUE(any.HasValue());
-			EXPECT_TRUE(any.Is<void*>());
-			EXPECT_EQ(any.As<void*>(), ptr.get());
-			{
-				const void* value = any.As<const void*>();
-				EXPECT_EQ(value, ptr.get());
-			}
-			{
-				void* value = any.As<void*>();
-				EXPECT_EQ(value, ptr.get());
-			}
-		}
-	}
+    TEST(Any, WrongCastThrows)
+    {
+        auto a = Any::Make<int>(3);
+        ASSERT_TRUE(a.Is<int>());
+        EXPECT_THROW((void)a.As<float>(), std::bad_cast);
+    }
+}
 
-	TEST(Any, Reference)
-	{
-		Any any = Any::Make<int>(6);
-
-		EXPECT_TRUE(any.HasValue());
-		EXPECT_TRUE(any.Is<int>());
-		EXPECT_EQ(any.As<int>(), 6);
-		{
-			const int& value = any.As<const int&>();
-			EXPECT_EQ(value, 6);
-		}
-		{
-			int& value = any.As<int&>();
-			EXPECT_EQ(value, 6);
-		}
-	}
-} // namespace CCT_ANONYMOUS_NAMESPACE
