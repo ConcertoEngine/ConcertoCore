@@ -33,7 +33,7 @@ namespace cct
 			{
 				Log(std::vformat(fmt.get(), std::make_format_args(args...)), LogLevel::Debug, loc);
 #ifdef CCT_PLATFORM_WINDOWS
-				OutputDebugString(std::vformat(fmt.get(), std::make_format_args(args...)));
+				DebugString(std::vformat(fmt.get(), std::make_format_args(args...)));
 #endif
 			}
 		};
@@ -113,7 +113,7 @@ namespace cct
 			}
 		}
 
-		static void OutputDebugString(std::string_view string);
+		static void DebugString(std::string_view string);
 	};
 }// namespace cct
 #endif//CONCERTO_CORE_LOGGER_HPP
