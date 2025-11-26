@@ -62,10 +62,10 @@ target("concerto-core")
         add_packages("enet", {public = true})
         add_defines("CCT_ENABLE_ENET")
     end
-    add_files("Src/Concerto/Core/**.cpp")
     add_defines("CCT_CORE_BUILD")
     add_cxxflags("cl::/Zc:preprocessor", { public = true })
     add_includedirs("Src", {public = true}) 
+    add_files_to_target("Src/Concerto/Core/", false, true)
     add_files_to_target("Src/Concerto/Core/**", false, true)
 
     add_cxxflags("cl::/wd4251")
