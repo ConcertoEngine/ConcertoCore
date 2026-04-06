@@ -15,14 +15,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-14]
-        arch: [x86_64, arm64]
+        os: [macos-15]
+        arch: [arm64]
         mode: [debug, release, releasedbg]
         kind: [static, shared]
 
     steps:
-    - name: Update clang to 18
-      run: brew install llvm@18
+    - name: Update clang to 20
+      run: |
+        brew install llvm@20 && brew link llvm@20
+        LLVM_PREFIX=$(brew --prefix llvm@20)
+        echo "LLVM_PREFIX=${LLVM_PREFIX}" >> $GITHUB_ENV
 
     - name: Get current date as package key
       id: cache_key
@@ -55,7 +58,7 @@ jobs:
         key: macOS-${{ matrix.arch }}-${{ matrix.mode }}-${{ matrix.kind }}-${{ steps.dep_hash.outputs.hash }}-W${{ steps.cache_key.outputs.key }}
 
     - name: Configure xmake and install dependencies
-      run: xmake config --arch=${{ matrix.arch }} --mode=${{ matrix.mode }} -k ${{ matrix.kind }} --yes --cc=$(brew --prefix llvm@18)/bin/clang-18 --cxx=$(brew --prefix llvm@18)/bin/clang++ --tests=y
+      run: xmake config -vD --arch=${{ matrix.arch }} --mode=${{ matrix.mode }} -k ${{ matrix.kind }} --yes --toolchain=llvm --runtimes=c++_shared --sdk=${LLVM_PREFIX} --tests=y
 
     - name: Save cached xmake dependencies
       if: ${{ !steps.restore-depcache.outputs.cache-hit }}
@@ -65,7 +68,7 @@ jobs:
         key: ${{ steps.restore-depcache.outputs.cache-primary-key }}
 
     - name: Build
-      run: xmake --yes -v
+      run: xmake --yes -vD
 
     - name: Run unit tests
       run: xmake run concerto-core-tests

@@ -85,6 +85,16 @@ target("concerto-core")
     if has_config("asserts") then
         add_defines("CCT_ENABLE_ASSERTS")
     end
+
+    -- macOS: ensure we link against the correct C++ runtime when using custom toolchain
+    if is_plat("macosx") then
+        local llvm_prefix = os.getenv("LLVM_PREFIX")
+        if llvm_prefix then
+            add_linkdirs(path.join(llvm_prefix, "lib"))
+            add_rpathdirs(path.join(llvm_prefix, "lib"))
+        end
+    end
+
 target_end()
 
 if has_config("tests") then
