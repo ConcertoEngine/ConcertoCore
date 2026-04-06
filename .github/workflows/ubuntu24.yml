@@ -17,17 +17,23 @@ jobs:
 
     strategy:
       matrix:
-        os: [ubuntu-24.04]
+        os: [ubuntu-latest]
         arch: [x86_64, arm64]
         mode: [debug, release, releasedbg]
         kind: [static, shared]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - name: Set gcc/g++ to 13
+      - name: Set gcc/g++ to latest available
         run: |
-          ln -s /usr/bin/g++-13 /usr/local/bin/g++
-          ln -s /usr/bin/gcc-13 /usr/local/bin/gcc
+          # Try gcc-14 first, fall back to gcc-13
+          if command -v g++-14 &> /dev/null; then
+            ln -sf /usr/bin/g++-14 /usr/local/bin/g++
+            ln -sf /usr/bin/gcc-14 /usr/local/bin/gcc
+          else
+            ln -sf /usr/bin/g++-13 /usr/local/bin/g++
+            ln -sf /usr/bin/gcc-13 /usr/local/bin/gcc
+          fi
 
       - name: Get current date as package key
         id: cache_key
@@ -39,7 +45,7 @@ jobs:
       - name: Setup xmake
         uses: xmake-io/github-action-setup-xmake@v1
         with:
-          xmake-version: branch@dev
+          xmake-version: latest
           actions-cache-folder: .xmake-cache-W${{ steps.cache_key.outputs.key }}
 
       - name: Update xmake repo
