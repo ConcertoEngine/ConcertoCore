@@ -102,7 +102,7 @@ if has_config("tests") then
 end
 
 if has_config("tests") then
-    add_requires("gtest")
+    add_requires("catch2")
     
     target("concerto-core-dummy")
         set_kind("shared")
@@ -133,7 +133,7 @@ extern "C" {
         set_languages("cxx20")
 
         add_files("Src/Tests/*.cpp")
-        add_packages("gtest")
+        add_packages("catch2")
 
         if has_config("unitybuild") then
             add_rules("c++.unity_build", {batchsize = 12, uniqueid = "CONCERTO_UNITY_BUILD_ID"})

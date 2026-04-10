@@ -2,7 +2,7 @@
 // Created by arthur on 30/08/2022.
 //
 
-#include <gtest/gtest.h>
+#include <catch2/catch_test_macros.hpp>
 
 #include "Concerto/Core/Math/Matrix/Matrix.hpp"
 
@@ -10,338 +10,250 @@ namespace CCT_ANONYMOUS_NAMESPACE
 {
 	using namespace cct;
 
-	TEST(Matrix, Constructor)
+	SCENARIO("Matrix - construction and dimensions")
 	{
-		Matrix<float, 3, 3> m{};
-		ASSERT_EQ(3, m.GetWidth());
-		ASSERT_EQ(3, m.GetHeight());
+		GIVEN("A default-constructed 3x3 float matrix")
+		{
+			Matrix<float, 3, 3> m{};
+			THEN("Width and Height are 3")
+			{
+				REQUIRE(m.GetWidth() == 3);
+				REQUIRE(m.GetHeight() == 3);
+			}
+		}
 	}
 
-	TEST(Matrix, GetElement)
+	SCENARIO("Matrix - element access")
 	{
-		Matrix<float, 3, 3> m(1.f, 2.f, 3.f,
-							  4.f, 5.f, 6.f,
-							  7.f, 8.f, 9.f);
-		ASSERT_EQ(1.f, m.GetElement(0, 0));
-		ASSERT_EQ(2.f, m.GetElement(0, 1));
-		ASSERT_EQ(3.f, m.GetElement(0, 2));
-		ASSERT_EQ(4.f, m.GetElement(1, 0));
-		ASSERT_EQ(5.f, m.GetElement(1, 1));
-		ASSERT_EQ(6.f, m.GetElement(1, 2));
-		ASSERT_EQ(7.f, m.GetElement(2, 0));
-		ASSERT_EQ(8.f, m.GetElement(2, 1));
-		ASSERT_EQ(9.f, m.GetElement(2, 2));
+		GIVEN("A 3x3 matrix with values 1..9")
+		{
+			Matrix<float, 3, 3> m(1.f, 2.f, 3.f,
+								  4.f, 5.f, 6.f,
+								  7.f, 8.f, 9.f);
+			THEN("GetElement returns the correct values per row/column")
+			{
+				REQUIRE(m.GetElement(0, 0) == 1.f);
+				REQUIRE(m.GetElement(0, 1) == 2.f);
+				REQUIRE(m.GetElement(0, 2) == 3.f);
+				REQUIRE(m.GetElement(1, 0) == 4.f);
+				REQUIRE(m.GetElement(1, 1) == 5.f);
+				REQUIRE(m.GetElement(1, 2) == 6.f);
+				REQUIRE(m.GetElement(2, 0) == 7.f);
+				REQUIRE(m.GetElement(2, 1) == 8.f);
+				REQUIRE(m.GetElement(2, 2) == 9.f);
+			}
+		}
 	}
 
-	TEST(Matrix, operaorAdd)
+	SCENARIO("Matrix - matrix arithmetic operators")
 	{
-		Matrix<float, 3, 3> m1(1.f, 2.f, 3.f,
-							   4.f, 5.f, 6.f,
-							   7.f, 8.f, 9.f);
-		Matrix<float, 3, 3> m2(1.f, 2.f, 3.f,
-							   4.f, 5.f, 6.f,
-							   7.f, 8.f, 9.f);
-		Matrix<float, 3, 3> m3 = m1 + m2;
-		ASSERT_EQ(2.f, m3(0, 0));
-		ASSERT_EQ(4.f, m3(0, 1));
-		ASSERT_EQ(6.f, m3(0, 2));
-		ASSERT_EQ(8.f, m3(1, 0));
-		ASSERT_EQ(10.f, m3(1, 1));
-		ASSERT_EQ(12.f, m3(1, 2));
-		ASSERT_EQ(14.f, m3(2, 0));
-		ASSERT_EQ(16.f, m3(2, 1));
-		ASSERT_EQ(18.f, m3(2, 2));
+		GIVEN("Two identical 3x3 matrices with values 1..9")
+		{
+			Matrix<float, 3, 3> m1(1.f, 2.f, 3.f, 4.f, 5.f, 6.f, 7.f, 8.f, 9.f);
+			Matrix<float, 3, 3> m2(1.f, 2.f, 3.f, 4.f, 5.f, 6.f, 7.f, 8.f, 9.f);
+
+			WHEN("Added (operator+)")
+			{
+				Matrix<float, 3, 3> m3 = m1 + m2;
+				THEN("Each element is doubled")
+				{
+					REQUIRE(m3(0, 0) == 2.f);   REQUIRE(m3(0, 1) == 4.f);   REQUIRE(m3(0, 2) == 6.f);
+					REQUIRE(m3(1, 0) == 8.f);   REQUIRE(m3(1, 1) == 10.f);  REQUIRE(m3(1, 2) == 12.f);
+					REQUIRE(m3(2, 0) == 14.f);  REQUIRE(m3(2, 1) == 16.f);  REQUIRE(m3(2, 2) == 18.f);
+				}
+			}
+
+			WHEN("Subtracted (operator-)")
+			{
+				Matrix<float, 3, 3> m3 = m1 - m2;
+				THEN("All elements are zero")
+				{
+					for (int r = 0; r < 3; ++r)
+						for (int c = 0; c < 3; ++c)
+							REQUIRE(m3(r, c) == 0.f);
+				}
+			}
+
+			WHEN("Multiplied (operator*)")
+			{
+				Matrix<float, 3, 3> m3 = m1 * m2;
+				THEN("Result is the matrix product")
+				{
+					REQUIRE(m3(0, 0) == 30.f);  REQUIRE(m3(0, 1) == 36.f);  REQUIRE(m3(0, 2) == 42.f);
+					REQUIRE(m3(1, 0) == 66.f);  REQUIRE(m3(1, 1) == 81.f);  REQUIRE(m3(1, 2) == 96.f);
+					REQUIRE(m3(2, 0) == 102.f); REQUIRE(m3(2, 1) == 126.f); REQUIRE(m3(2, 2) == 150.f);
+				}
+			}
+
+			WHEN("Divided (operator/)")
+			{
+				Matrix<float, 3, 3> m3 = m1 / m2;
+				THEN("All elements are 1")
+				{
+					for (int r = 0; r < 3; ++r)
+						for (int c = 0; c < 3; ++c)
+							REQUIRE(m3(r, c) == 1.f);
+				}
+			}
+		}
 	}
 
-	TEST(Matrix, operatorSub)
+	SCENARIO("Matrix - scalar arithmetic operators")
 	{
+		GIVEN("A 3x3 matrix with values 1..9")
+		{
+			Matrix<float, 3, 3> m1(1.f, 2.f, 3.f, 4.f, 5.f, 6.f, 7.f, 8.f, 9.f);
 
-		Matrix<float, 3, 3> m1(1.f, 2.f, 3.f,
-							   4.f, 5.f, 6.f,
-							   7.f, 8.f, 9.f);
-		Matrix<float, 3, 3> m2(1.f, 2.f, 3.f,
-							   4.f, 5.f, 6.f,
-							   7.f, 8.f, 9.f);
-		Matrix<float, 3, 3> m3 = m1 - m2;
-		ASSERT_EQ(0.f, m3(0, 0));
-		ASSERT_EQ(0.f, m3(0, 1));
-		ASSERT_EQ(0.f, m3(0, 2));
-		ASSERT_EQ(0.f, m3(1, 0));
-		ASSERT_EQ(0.f, m3(1, 1));
-		ASSERT_EQ(0.f, m3(1, 2));
-		ASSERT_EQ(0.f, m3(2, 0));
-		ASSERT_EQ(0.f, m3(2, 1));
-		ASSERT_EQ(0.f, m3(2, 2));
+			WHEN("Scalar 1 added")
+			{
+				Matrix<float, 3, 3> m2 = m1 + 1.f;
+				THEN("Each element is incremented by 1")
+				{
+					REQUIRE(m2(0, 0) == 2.f);  REQUIRE(m2(0, 1) == 3.f);  REQUIRE(m2(0, 2) == 4.f);
+					REQUIRE(m2(1, 0) == 5.f);  REQUIRE(m2(1, 1) == 6.f);  REQUIRE(m2(1, 2) == 7.f);
+					REQUIRE(m2(2, 0) == 8.f);  REQUIRE(m2(2, 1) == 9.f);  REQUIRE(m2(2, 2) == 10.f);
+				}
+			}
+
+			WHEN("Scalar 1 subtracted")
+			{
+				Matrix<float, 3, 3> m2 = m1 - 1.f;
+				THEN("Each element is decremented by 1")
+				{
+					REQUIRE(m2(0, 0) == 0.f);  REQUIRE(m2(0, 1) == 1.f);  REQUIRE(m2(0, 2) == 2.f);
+					REQUIRE(m2(1, 0) == 3.f);  REQUIRE(m2(1, 1) == 4.f);  REQUIRE(m2(1, 2) == 5.f);
+					REQUIRE(m2(2, 0) == 6.f);  REQUIRE(m2(2, 1) == 7.f);  REQUIRE(m2(2, 2) == 8.f);
+				}
+			}
+
+			WHEN("Multiplied by scalar 2")
+			{
+				Matrix<float, 3, 3> m2 = m1 * 2.f;
+				THEN("Each element is doubled")
+				{
+					REQUIRE(m2(0, 0) == 2.f);  REQUIRE(m2(0, 1) == 4.f);  REQUIRE(m2(0, 2) == 6.f);
+					REQUIRE(m2(1, 0) == 8.f);  REQUIRE(m2(1, 1) == 10.f); REQUIRE(m2(1, 2) == 12.f);
+					REQUIRE(m2(2, 0) == 14.f); REQUIRE(m2(2, 1) == 16.f); REQUIRE(m2(2, 2) == 18.f);
+				}
+			}
+
+			WHEN("Divided by scalar 2")
+			{
+				Matrix<float, 3, 3> m2 = m1 / 2.f;
+				THEN("Each element is halved")
+				{
+					REQUIRE(m2(0, 0) == 0.5f); REQUIRE(m2(0, 1) == 1.f);  REQUIRE(m2(0, 2) == 1.5f);
+					REQUIRE(m2(1, 0) == 2.f);  REQUIRE(m2(1, 1) == 2.5f); REQUIRE(m2(1, 2) == 3.f);
+					REQUIRE(m2(2, 0) == 3.5f); REQUIRE(m2(2, 1) == 4.f);  REQUIRE(m2(2, 2) == 4.5f);
+				}
+			}
+		}
 	}
 
-	TEST(Matrix, operatorMult)
+	SCENARIO("Matrix - compound assignment operators (matrix)")
 	{
-		Matrix<float, 3, 3> m1(1.f, 2.f, 3.f,
-							   4.f, 5.f, 6.f,
-							   7.f, 8.f, 9.f);
+		GIVEN("Two identical 3x3 matrices with values 1..9")
+		{
+			Matrix<float, 3, 3> m1(1.f, 2.f, 3.f, 4.f, 5.f, 6.f, 7.f, 8.f, 9.f);
+			Matrix<float, 3, 3> m2(1.f, 2.f, 3.f, 4.f, 5.f, 6.f, 7.f, 8.f, 9.f);
 
-		Matrix<float, 3, 3> m2(1.f, 2.f, 3.f,
-							   4.f, 5.f, 6.f,
-							   7.f, 8.f, 9.f);
-		Matrix<float, 3, 3> m3 = m1 * m2;
-		ASSERT_EQ(30.f, m3(0, 0));
-		ASSERT_EQ(36.f, m3(0, 1));
-		ASSERT_EQ(42.f, m3(0, 2));
-		ASSERT_EQ(66.f, m3(1, 0));
-		ASSERT_EQ(81.f, m3(1, 1));
-		ASSERT_EQ(96.f, m3(1, 2));
-		ASSERT_EQ(102.f, m3(2, 0));
-		ASSERT_EQ(126.f, m3(2, 1));
-		ASSERT_EQ(150.f, m3(2, 2));
+			WHEN("+=")
+			{
+				m1 += m2;
+				THEN("m1 elements are doubled")
+				{
+					REQUIRE(m1(0, 0) == 2.f);  REQUIRE(m1(0, 1) == 4.f);  REQUIRE(m1(0, 2) == 6.f);
+					REQUIRE(m1(1, 0) == 8.f);  REQUIRE(m1(1, 1) == 10.f); REQUIRE(m1(1, 2) == 12.f);
+					REQUIRE(m1(2, 0) == 14.f); REQUIRE(m1(2, 1) == 16.f); REQUIRE(m1(2, 2) == 18.f);
+				}
+			}
+
+			WHEN("-=")
+			{
+				m1 -= m2;
+				THEN("m1 elements are all zero")
+				{
+					for (int r = 0; r < 3; ++r)
+						for (int c = 0; c < 3; ++c)
+							REQUIRE(m1(r, c) == 0.f);
+				}
+			}
+
+			WHEN("*=")
+			{
+				m1 *= m2;
+				THEN("m1 elements are squared")
+				{
+					REQUIRE(m1(0, 0) == 1.f);  REQUIRE(m1(0, 1) == 4.f);  REQUIRE(m1(0, 2) == 9.f);
+					REQUIRE(m1(1, 0) == 16.f); REQUIRE(m1(1, 1) == 25.f); REQUIRE(m1(1, 2) == 36.f);
+					REQUIRE(m1(2, 0) == 49.f); REQUIRE(m1(2, 1) == 64.f); REQUIRE(m1(2, 2) == 81.f);
+				}
+			}
+
+			WHEN("/=")
+			{
+				m1 /= m2;
+				THEN("m1 elements are all 1")
+				{
+					for (int r = 0; r < 3; ++r)
+						for (int c = 0; c < 3; ++c)
+							REQUIRE(m1(r, c) == 1.f);
+				}
+			}
+		}
 	}
 
-	TEST(Matrix, operatorDiv)
+	SCENARIO("Matrix - compound assignment operators (scalar)")
 	{
-		Matrix<float, 3, 3> m1(1.f, 2.f, 3.f,
-							   4.f, 5.f, 6.f,
-							   7.f, 8.f, 9.f);
-		Matrix<float, 3, 3> m2(1.f, 2.f, 3.f,
-							   4.f, 5.f, 6.f,
-							   7.f, 8.f, 9.f);
-		Matrix<float, 3, 3> m3 = m1 / m2;
-		ASSERT_EQ(1.f, m3(0, 0));
-		ASSERT_EQ(1.f, m3(0, 1));
-		ASSERT_EQ(1.f, m3(0, 2));
-		ASSERT_EQ(1.f, m3(1, 0));
-		ASSERT_EQ(1.f, m3(1, 1));
-		ASSERT_EQ(1.f, m3(1, 2));
-		ASSERT_EQ(1.f, m3(2, 0));
-		ASSERT_EQ(1.f, m3(2, 1));
-		ASSERT_EQ(1.f, m3(2, 2));
+		GIVEN("A 3x3 matrix with values 1..9")
+		{
+			Matrix<float, 3, 3> m1(1.f, 2.f, 3.f, 4.f, 5.f, 6.f, 7.f, 8.f, 9.f);
+
+			WHEN("+= scalar 1")
+			{
+				m1 += 1.f;
+				THEN("Each element is incremented by 1")
+				{
+					REQUIRE(m1(0, 0) == 2.f);  REQUIRE(m1(0, 1) == 3.f);  REQUIRE(m1(0, 2) == 4.f);
+					REQUIRE(m1(1, 0) == 5.f);  REQUIRE(m1(1, 1) == 6.f);  REQUIRE(m1(1, 2) == 7.f);
+					REQUIRE(m1(2, 0) == 8.f);  REQUIRE(m1(2, 1) == 9.f);  REQUIRE(m1(2, 2) == 10.f);
+				}
+			}
+
+			WHEN("-= scalar 1")
+			{
+				m1 -= 1.f;
+				THEN("Each element is decremented by 1")
+				{
+					REQUIRE(m1(0, 0) == 0.f);  REQUIRE(m1(0, 1) == 1.f);  REQUIRE(m1(0, 2) == 2.f);
+					REQUIRE(m1(1, 0) == 3.f);  REQUIRE(m1(1, 1) == 4.f);  REQUIRE(m1(1, 2) == 5.f);
+					REQUIRE(m1(2, 0) == 6.f);  REQUIRE(m1(2, 1) == 7.f);  REQUIRE(m1(2, 2) == 8.f);
+				}
+			}
+
+			WHEN("*= scalar 2")
+			{
+				m1 *= 2.f;
+				THEN("Each element is doubled")
+				{
+					REQUIRE(m1(0, 0) == 2.f);  REQUIRE(m1(0, 1) == 4.f);  REQUIRE(m1(0, 2) == 6.f);
+					REQUIRE(m1(1, 0) == 8.f);  REQUIRE(m1(1, 1) == 10.f); REQUIRE(m1(1, 2) == 12.f);
+					REQUIRE(m1(2, 0) == 14.f); REQUIRE(m1(2, 1) == 16.f); REQUIRE(m1(2, 2) == 18.f);
+				}
+			}
+
+			WHEN("/= scalar 2")
+			{
+				m1 /= 2.f;
+				THEN("Each element is halved")
+				{
+					REQUIRE(m1(0, 0) == 0.5f); REQUIRE(m1(0, 1) == 1.f);  REQUIRE(m1(0, 2) == 1.5f);
+					REQUIRE(m1(1, 0) == 2.f);  REQUIRE(m1(1, 1) == 2.5f); REQUIRE(m1(1, 2) == 3.f);
+					REQUIRE(m1(2, 0) == 3.5f); REQUIRE(m1(2, 1) == 4.f);  REQUIRE(m1(2, 2) == 4.5f);
+				}
+			}
+		}
 	}
 
-	TEST(Matrix, operatorAddScalar)
-	{
-		Matrix<float, 3, 3> m1(1.f, 2.f, 3.f,
-							   4.f, 5.f, 6.f,
-							   7.f, 8.f, 9.f);
-		Matrix<float, 3, 3> m2 = m1 + 1.f;
-		ASSERT_EQ(2.f, m2(0, 0));
-		ASSERT_EQ(3.f, m2(0, 1));
-		ASSERT_EQ(4.f, m2(0, 2));
-		ASSERT_EQ(5.f, m2(1, 0));
-		ASSERT_EQ(6.f, m2(1, 1));
-		ASSERT_EQ(7.f, m2(1, 2));
-		ASSERT_EQ(8.f, m2(2, 0));
-		ASSERT_EQ(9.f, m2(2, 1));
-		ASSERT_EQ(10.f, m2(2, 2));
-	}
-
-	TEST(Matrix, operatorSubScalar)
-	{
-		Matrix<float, 3, 3> m1(1.f, 2.f, 3.f,
-							   4.f, 5.f, 6.f,
-							   7.f, 8.f, 9.f);
-		Matrix<float, 3, 3> m2 = m1 - 1.f;
-		ASSERT_EQ(0.f, m2(0, 0));
-		ASSERT_EQ(1.f, m2(0, 1));
-		ASSERT_EQ(2.f, m2(0, 2));
-		ASSERT_EQ(3.f, m2(1, 0));
-		ASSERT_EQ(4.f, m2(1, 1));
-		ASSERT_EQ(5.f, m2(1, 2));
-		ASSERT_EQ(6.f, m2(2, 0));
-		ASSERT_EQ(7.f, m2(2, 1));
-		ASSERT_EQ(8.f, m2(2, 2));
-	}
-
-	TEST(Matrix, operatorMultScalar)
-	{
-		Matrix<float, 3, 3> m1(1.f, 2.f, 3.f,
-							   4.f, 5.f, 6.f,
-							   7.f, 8.f, 9.f);
-		Matrix<float, 3, 3> m2 = m1 * 2.f;
-		ASSERT_EQ(2.f, m2(0, 0));
-		ASSERT_EQ(4.f, m2(0, 1));
-		ASSERT_EQ(6.f, m2(0, 2));
-		ASSERT_EQ(8.f, m2(1, 0));
-		ASSERT_EQ(10.f, m2(1, 1));
-		ASSERT_EQ(12.f, m2(1, 2));
-		ASSERT_EQ(14.f, m2(2, 0));
-		ASSERT_EQ(16.f, m2(2, 1));
-		ASSERT_EQ(18.f, m2(2, 2));
-	}
-
-	TEST(Matrix, operatorDivScalar)
-	{
-		Matrix<float, 3, 3> m1(1.f, 2.f, 3.f,
-							   4.f, 5.f, 6.f,
-							   7.f, 8.f, 9.f);
-		Matrix<float, 3, 3> m2 = m1 / 2.f;
-		ASSERT_EQ(0.5f, m2(0, 0));
-		ASSERT_EQ(1.f, m2(0, 1));
-		ASSERT_EQ(1.5f, m2(0, 2));
-		ASSERT_EQ(2.f, m2(1, 0));
-		ASSERT_EQ(2.5f, m2(1, 1));
-		ASSERT_EQ(3.f, m2(1, 2));
-		ASSERT_EQ(3.5f, m2(2, 0));
-		ASSERT_EQ(4.f, m2(2, 1));
-		ASSERT_EQ(4.5f, m2(2, 2));
-	}
-
-	TEST(Matrix, operatorAddAssign)
-	{
-		Matrix<float, 3, 3> m1(1.f, 2.f, 3.f,
-							   4.f, 5.f, 6.f,
-							   7.f, 8.f, 9.f);
-		Matrix<float, 3, 3> m2(1.f, 2.f, 3.f,
-							   4.f, 5.f, 6.f,
-							   7.f, 8.f, 9.f);
-		m1 += m2;
-		ASSERT_EQ(2.f, m1(0, 0));
-		ASSERT_EQ(4.f, m1(0, 1));
-		ASSERT_EQ(6.f, m1(0, 2));
-		ASSERT_EQ(8.f, m1(1, 0));
-		ASSERT_EQ(10.f, m1(1, 1));
-		ASSERT_EQ(12.f, m1(1, 2));
-		ASSERT_EQ(14.f, m1(2, 0));
-		ASSERT_EQ(16.f, m1(2, 1));
-		ASSERT_EQ(18.f, m1(2, 2));
-	}
-
-	TEST(Matrix, operatorSubAssign)
-	{
-		Matrix<float, 3, 3> m1(1.f, 2.f, 3.f,
-							   4.f, 5.f, 6.f,
-							   7.f, 8.f, 9.f);
-		Matrix<float, 3, 3> m2(1.f, 2.f, 3.f,
-							   4.f, 5.f, 6.f,
-							   7.f, 8.f, 9.f);
-		m1 -= m2;
-		ASSERT_EQ(0.f, m1(0, 0));
-		ASSERT_EQ(0.f, m1(0, 1));
-		ASSERT_EQ(0.f, m1(0, 2));
-		ASSERT_EQ(0.f, m1(1, 0));
-		ASSERT_EQ(0.f, m1(1, 1));
-		ASSERT_EQ(0.f, m1(1, 2));
-		ASSERT_EQ(0.f, m1(2, 0));
-		ASSERT_EQ(0.f, m1(2, 1));
-		ASSERT_EQ(0.f, m1(2, 2));
-	}
-
-	TEST(Matrix, operatorMultAssign)
-	{
-		Matrix<float, 3, 3> m1(1.f, 2.f, 3.f,
-							   4.f, 5.f, 6.f,
-							   7.f, 8.f, 9.f);
-		Matrix<float, 3, 3> m2(1.f, 2.f, 3.f,
-							   4.f, 5.f, 6.f,
-							   7.f, 8.f, 9.f);
-		m1 *= m2;
-		ASSERT_EQ(1.f, m1(0, 0));
-		ASSERT_EQ(4.f, m1(0, 1));
-		ASSERT_EQ(9.f, m1(0, 2));
-		ASSERT_EQ(16.f, m1(1, 0));
-		ASSERT_EQ(25.f, m1(1, 1));
-		ASSERT_EQ(36.f, m1(1, 2));
-		ASSERT_EQ(49.f, m1(2, 0));
-		ASSERT_EQ(64.f, m1(2, 1));
-		ASSERT_EQ(81.f, m1(2, 2));
-	}
-
-	TEST(Matrix, operatorDivAssign)
-	{
-		Matrix<float, 3, 3> m1(1.f, 2.f, 3.f,
-							   4.f, 5.f, 6.f,
-							   7.f, 8.f, 9.f);
-		Matrix<float, 3, 3> m2(1.f, 2.f, 3.f,
-							   4.f, 5.f, 6.f,
-							   7.f, 8.f, 9.f);
-		m1 /= m2;
-		ASSERT_EQ(1.f, m1(0, 0));
-		ASSERT_EQ(1.f, m1(0, 1));
-		ASSERT_EQ(1.f, m1(0, 2));
-		ASSERT_EQ(1.f, m1(1, 0));
-		ASSERT_EQ(1.f, m1(1, 1));
-		ASSERT_EQ(1.f, m1(1, 2));
-		ASSERT_EQ(1.f, m1(2, 0));
-		ASSERT_EQ(1.f, m1(2, 1));
-		ASSERT_EQ(1.f, m1(2, 2));
-	}
-
-	TEST(Matrix, operatorAddAssignScalar)
-	{
-		Matrix<float, 3, 3> m1(1.f, 2.f, 3.f,
-							   4.f, 5.f, 6.f,
-							   7.f, 8.f, 9.f);
-		m1 += 1.f;
-		ASSERT_EQ(2.f, m1(0, 0));
-		ASSERT_EQ(3.f, m1(0, 1));
-		ASSERT_EQ(4.f, m1(0, 2));
-		ASSERT_EQ(5.f, m1(1, 0));
-		ASSERT_EQ(6.f, m1(1, 1));
-		ASSERT_EQ(7.f, m1(1, 2));
-		ASSERT_EQ(8.f, m1(2, 0));
-		ASSERT_EQ(9.f, m1(2, 1));
-		ASSERT_EQ(10.f, m1(2, 2));
-	}
-
-	TEST(Matrix, operatorSubAssignScalar)
-	{
-		Matrix<float, 3, 3> m1(1.f, 2.f, 3.f,
-							   4.f, 5.f, 6.f,
-							   7.f, 8.f, 9.f);
-		m1 -= 1.f;
-		ASSERT_EQ(0.f, m1(0, 0));
-		ASSERT_EQ(1.f, m1(0, 1));
-		ASSERT_EQ(2.f, m1(0, 2));
-		ASSERT_EQ(3.f, m1(1, 0));
-		ASSERT_EQ(4.f, m1(1, 1));
-		ASSERT_EQ(5.f, m1(1, 2));
-		ASSERT_EQ(6.f, m1(2, 0));
-		ASSERT_EQ(7.f, m1(2, 1));
-		ASSERT_EQ(8.f, m1(2, 2));
-	}
-
-	TEST(Matrix, operatorMultAssignScalar)
-	{
-		Matrix<float, 3, 3> m1(1.f, 2.f, 3.f,
-							   4.f, 5.f, 6.f,
-							   7.f, 8.f, 9.f);
-		m1 *= 2.f;
-		ASSERT_EQ(2.f, m1(0, 0));
-		ASSERT_EQ(4.f, m1(0, 1));
-		ASSERT_EQ(6.f, m1(0, 2));
-		ASSERT_EQ(8.f, m1(1, 0));
-		ASSERT_EQ(10.f, m1(1, 1));
-		ASSERT_EQ(12.f, m1(1, 2));
-		ASSERT_EQ(14.f, m1(2, 0));
-		ASSERT_EQ(16.f, m1(2, 1));
-		ASSERT_EQ(18.f, m1(2, 2));
-	}
-
-	TEST(Matrix, operatorDivAssignScalar)
-	{
-		Matrix<float, 3, 3> m1(1.f, 2.f, 3.f,
-							   4.f, 5.f, 6.f,
-							   7.f, 8.f, 9.f);
-		m1 /= 2.f;
-		ASSERT_EQ(0.5f, m1(0, 0));
-		ASSERT_EQ(1.f, m1(0, 1));
-		ASSERT_EQ(1.5f, m1(0, 2));
-		ASSERT_EQ(2.f, m1(1, 0));
-		ASSERT_EQ(2.5f, m1(1, 1));
-		ASSERT_EQ(3.f, m1(1, 2));
-		ASSERT_EQ(3.5f, m1(2, 0));
-		ASSERT_EQ(4.f, m1(2, 1));
-		ASSERT_EQ(4.5f, m1(2, 2));
-	}
-
-	//TEST(Matrix, Translate)
-	//{
-	//	Matrix4f matrix = Matrix4f::Identity();
-	//	matrix.Translate(Vector3f(1.0f, 2.0f, 3.0f));
-
-	//	constexpr Matrix4f expected(
-	//		1.0f, 0.0f, 0.0f, 1.0f,
-	//		0.0f, 1.0f, 0.0f, 2.0f,
-	//		0.0f, 0.0f, 1.0f, 3.0f,
-	//		0.0f, 0.0f, 0.0f, 1.0f);
-
-	//	ASSERT_EQ(matrix, expected);
-	//}
-}// namespace CCT_ANONYMOUS_NAMESPACE
+	//SCENARIO("Matrix - Translate") { ... }  // commented out in original
+} // namespace CCT_ANONYMOUS_NAMESPACE

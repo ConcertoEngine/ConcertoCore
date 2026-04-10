@@ -4,7 +4,7 @@
 
 #include <string_view>
 
-#include <gtest/gtest.h>
+#include <catch2/catch_test_macros.hpp>
 
 #include <Concerto/Core/Cast.hpp>
 
@@ -30,29 +30,42 @@ namespace CCT_ANONYMOUS_NAMESPACE
 		}
 	};
 
-	TEST(CastTest, ValidCast) {
-		Derived derived;
-		Base& base = derived;
+	SCENARIO("Cast")
+	{
+		GIVEN("A Derived object referenced as Base&")
+		{
+			Derived derived;
+			Base& base = derived;
 
-		Derived& casted = Cast<Derived&>(base);
+			WHEN("Cast to Derived&")
+			{
+				Derived& casted = Cast<Derived&>(base);
+				THEN("The cast succeeds and Speak() returns DerivedStr") { CHECK(casted.Speak() == DerivedStr); }
+			}
+		}
 
-		EXPECT_EQ(casted.Speak(), DerivedStr);
+		GIVEN("A Derived object as Base&&")
+		{
+			Derived derived;
+			Base&& base = std::move(derived);
+
+			WHEN("Cast to Derived&&")
+			{
+				Derived&& casted = Cast<Derived&&>(std::move(base));
+				THEN("The cast succeeds") { CHECK(casted.Speak() == DerivedStr); }
+			}
+		}
+
+		GIVEN("A const Derived object as const Base&")
+		{
+			const Derived derived;
+			const Base& base = derived;
+
+			WHEN("Cast to const Derived&")
+			{
+				auto& casted = Cast<const Derived&>(base);
+				THEN("The cast succeeds") { CHECK(casted.Speak() == DerivedStr); }
+			}
+		}
 	}
-
-	TEST(CastTest, RvalueCast) {
-		Derived derived;
-		Base&& base = std::move(derived);
-
-		Derived&& casted = Cast<Derived&&>(std::move(base));
-
-		EXPECT_EQ(casted.Speak(), DerivedStr);
-	}
-
-	TEST(CastTest, ConstReferenceCast) {
-		const Derived derived;
-		const Base& base = derived;
-		auto& casted = Cast<const Derived&>(base);
-
-		EXPECT_EQ(casted.Speak(), DerivedStr);
-	}
-}
+} // namespace CCT_ANONYMOUS_NAMESPACE
