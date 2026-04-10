@@ -4,13 +4,14 @@
 
 #include <string>
 
-#include <gtest/gtest.h>
+#include <catch2/catch_test_macros.hpp>
 #include <Concerto/Core/Types/Types.hpp>
 #include <Concerto/Core/Result/Result.hpp>
 
 namespace CCT_ANONYMOUS_NAMESPACE
 {
 	using namespace cct;
+
 	class Bar
 	{
 	public:
@@ -22,55 +23,70 @@ namespace CCT_ANONYMOUS_NAMESPACE
 		Int32 c;
 	};
 
-	TEST(Result, ValueContruction)
+	SCENARIO("Result")
 	{
-		Result<Int32, std::string> result(28);
-		ASSERT_TRUE(result.IsOk());
-		ASSERT_FALSE(result.IsError());
-		ASSERT_EQ(result.GetValue(), 28);
-	}
+		GIVEN("A Result<Int32, string> initialized with value 28")
+		{
+			Result<Int32, std::string> result(28);
+			THEN("It is Ok and has the correct value")
+			{
+				REQUIRE(result.IsOk());
+				REQUIRE_FALSE(result.IsError());
+				REQUIRE(result.GetValue() == 28);
+			}
+		}
 
-	TEST(Result, ErrorConstruction)
-	{
-		Result<Int32, std::string> result(std::string("Foo"));
-		ASSERT_FALSE(result.IsOk());
-		ASSERT_TRUE(result.IsError());
-		ASSERT_EQ(result.GetError(), "Foo");
-	}
+		GIVEN("A Result<Int32, string> initialized with error \"Foo\"")
+		{
+			Result<Int32, std::string> result(std::string("Foo"));
+			THEN("It is an error and has the correct message")
+			{
+				REQUIRE_FALSE(result.IsOk());
+				REQUIRE(result.IsError());
+				REQUIRE(result.GetError() == "Foo");
+			}
+		}
 
-	TEST(Result, ValueVariadicConstruction)
-	{
-		Result<Bar, std::string> result(std::in_place_type_t<Bar>(), 1, true, 2);
+		GIVEN("A Result<Bar, string> initialized with variadic value args (1, true, 2)")
+		{
+			Result<Bar, std::string> result(std::in_place_type_t<Bar>(), 1, true, 2);
+			THEN("It is Ok and the Bar fields are correct")
+			{
+				REQUIRE(result.IsOk());
+				REQUIRE_FALSE(result.IsError());
+				auto value = result.GetValue();
+				REQUIRE(value.a == 1);
+				REQUIRE(value.b == true);
+				REQUIRE(value.c == 2);
+			}
+		}
 
-		ASSERT_TRUE(result.IsOk());
-		ASSERT_FALSE(result.IsError());
-		auto value = result.GetValue();
-		ASSERT_EQ(value.a, 1);
-		ASSERT_EQ(value.b, true);
-		ASSERT_EQ(value.c, 2);
-	}
+		GIVEN("A Result<string, Bar> initialized with variadic error args (1, true, 2)")
+		{
+			Result<std::string, Bar> result(std::in_place_type_t<Bar>(), 1, true, 2);
+			THEN("It is an error and the Bar fields are correct")
+			{
+				REQUIRE_FALSE(result.IsOk());
+				REQUIRE(result.IsError());
+				auto value = result.GetError();
+				REQUIRE(value.a == 1);
+				REQUIRE(value.b == true);
+				REQUIRE(value.c == 2);
+			}
+		}
 
-	TEST(Result, ErrorVariadicConstruction)
-	{
-		Result<std::string, Bar> result(std::in_place_type_t<Bar>(), 1, true, 2);
-
-		ASSERT_FALSE(result.IsOk());
-		ASSERT_TRUE(result.IsError());
-		auto value = result.GetError();
-		ASSERT_EQ(value.a, 1);
-		ASSERT_EQ(value.b, true);
-		ASSERT_EQ(value.c, 2);
-	}
-
-	TEST(Result, VoidTemplateSpecialisation)
-	{
-		Result<void, Bar> result(std::in_place_type_t<Bar>(), 1, true, 2);
-
-		ASSERT_FALSE(result.IsOk());
-		ASSERT_TRUE(result.IsError());
-		auto value = result.GetError();
-		ASSERT_EQ(value.a, 1);
-		ASSERT_EQ(value.b, true);
-		ASSERT_EQ(value.c, 2);
+		GIVEN("A Result<void, Bar> initialized with variadic error args (1, true, 2)")
+		{
+			Result<void, Bar> result(std::in_place_type_t<Bar>(), 1, true, 2);
+			THEN("It is an error and the Bar fields are correct")
+			{
+				REQUIRE_FALSE(result.IsOk());
+				REQUIRE(result.IsError());
+				auto value = result.GetError();
+				REQUIRE(value.a == 1);
+				REQUIRE(value.b == true);
+				REQUIRE(value.c == 2);
+			}
+		}
 	}
 } // namespace CCT_ANONYMOUS_NAMESPACE

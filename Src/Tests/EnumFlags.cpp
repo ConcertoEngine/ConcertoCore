@@ -2,7 +2,7 @@
 // Created by Arthur on 06/10/2025.
 //
 
-#include <gtest/gtest.h>
+#include <catch2/catch_test_macros.hpp>
 
 #include <Concerto/Core/EnumFlags/EnumFlags.hpp>
 
@@ -19,51 +19,94 @@ namespace CCT_ANONYMOUS_NAMESPACE
 {
 	using namespace cct;
 
-	TEST(EnumFlags, BasicOrAndContains)
+	SCENARIO("EnumFlags - basic OR, AND and Contains")
 	{
-		auto f = MyFlags::A | MyFlags::B;
-		EXPECT_TRUE(f.Contains(MyFlags::A));
-		EXPECT_TRUE(f.Contains(MyFlags::B));
-		EXPECT_FALSE(f.Contains(MyFlags::C));
+		GIVEN("EnumFlags with A and B set")
+		{
+			auto f = MyFlags::A | MyFlags::B;
 
-		auto g = f & MyFlags::A;
-		EXPECT_TRUE(g.Contains(MyFlags::A));
-		EXPECT_FALSE(g.Contains(MyFlags::B));
-		EXPECT_FALSE(g.Contains(MyFlags::C));
+			THEN("Contains A and B, but not C")
+			{
+				CHECK(f.Contains(MyFlags::A));
+				CHECK(f.Contains(MyFlags::B));
+				CHECK_FALSE(f.Contains(MyFlags::C));
+			}
 
-		EXPECT_TRUE(static_cast<bool>(f));
-		EXPECT_FALSE(static_cast<bool>(EnumFlags<MyFlags>{}));
+			THEN("Is truthy, while empty flags are falsy")
+			{
+				CHECK(static_cast<bool>(f));
+				CHECK_FALSE(static_cast<bool>(EnumFlags<MyFlags>{}));
+			}
+
+			WHEN("ANDed with A")
+			{
+				auto g = f & MyFlags::A;
+				THEN("Result contains only A")
+				{
+					CHECK(g.Contains(MyFlags::A));
+					CHECK_FALSE(g.Contains(MyFlags::B));
+					CHECK_FALSE(g.Contains(MyFlags::C));
+				}
+			}
+		}
 	}
 
-	TEST(EnumFlags, XorToggleReset)
+	SCENARIO("EnumFlags - XOR, Toggle, Set, Reset")
 	{
-		EnumFlags<MyFlags> f = MyFlags::A;
-		f ^= MyFlags::B;
-		EXPECT_TRUE(f.Contains(MyFlags::B));
-		f.Toggle(MyFlags::A);
-		EXPECT_FALSE(f.Contains(MyFlags::A));
-		f.Set(MyFlags::C);
-		EXPECT_TRUE(f.Contains(MyFlags::C));
-		f.Reset(MyFlags::B);
-		EXPECT_FALSE(f.Contains(MyFlags::B));
+		GIVEN("EnumFlags with only A set")
+		{
+			EnumFlags<MyFlags> f = MyFlags::A;
+
+			WHEN("XOR with B, Toggle A, Set C, then Reset B")
+			{
+				f ^= MyFlags::B;
+				CHECK(f.Contains(MyFlags::B));
+				f.Toggle(MyFlags::A);
+				CHECK_FALSE(f.Contains(MyFlags::A));
+				f.Set(MyFlags::C);
+				CHECK(f.Contains(MyFlags::C));
+				f.Reset(MyFlags::B);
+				THEN("B is no longer set") { CHECK_FALSE(f.Contains(MyFlags::B)); }
+			}
+		}
 	}
 
-	TEST(EnumFlags, UnaryNotAndClear)
+	SCENARIO("EnumFlags - unary NOT and Clear")
 	{
-		EnumFlags<MyFlags> f = MyFlags::A | MyFlags::B;
-		auto notA = ~EnumFlags<MyFlags>(MyFlags::A);
-		auto masked = notA & MyFlags::A;
-		EXPECT_TRUE(masked.None());
+		GIVEN("EnumFlags with A and B set")
+		{
+			EnumFlags<MyFlags> f = MyFlags::A | MyFlags::B;
 
-		f.Clear();
-		EXPECT_TRUE(f.None());
-		EXPECT_FALSE(f.Any());
+			WHEN("NOT A is masked with A")
+			{
+				auto notA = ~EnumFlags<MyFlags>(MyFlags::A);
+				auto masked = notA & MyFlags::A;
+				THEN("The masked result has no bits set") { CHECK(masked.None()); }
+			}
+
+			WHEN("Clear() is called")
+			{
+				f.Clear();
+				THEN("None() is true and Any() is false")
+				{
+					CHECK(f.None());
+					CHECK_FALSE(f.Any());
+				}
+			}
+		}
 	}
 
-	TEST(EnumFlags, RawValue)
+	SCENARIO("EnumFlags - raw underlying value")
 	{
-		EnumFlags<MyFlags> f = MyFlags::A | MyFlags::C;
-		using U = EnumFlags<MyFlags>::Underlying;
-		EXPECT_EQ(f.Value(), static_cast<U>(static_cast<U>(MyFlags::A) | static_cast<U>(MyFlags::C)));
+		GIVEN("EnumFlags with A and C set")
+		{
+			EnumFlags<MyFlags> f = MyFlags::A | MyFlags::C;
+
+			THEN("Value() equals the bitwise OR of A and C as underlying type")
+			{
+				using U = EnumFlags<MyFlags>::Underlying;
+				CHECK(f.Value() == static_cast<U>(static_cast<U>(MyFlags::A) | static_cast<U>(MyFlags::C)));
+			}
+		}
 	}
-}
+} // namespace CCT_ANONYMOUS_NAMESPACE

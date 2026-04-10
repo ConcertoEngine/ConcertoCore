@@ -2,7 +2,7 @@
 // Created by arthur on 02/03/2024.
 //
 
-#include <gtest/gtest.h>
+#include <catch2/catch_test_macros.hpp>
 
 #include <Concerto/Core/Logger/Logger.hpp>
 
@@ -33,13 +33,16 @@ namespace CCT_ANONYMOUS_NAMESPACE
 		std::streambuf* _old;
 	};
 
-	//TEST(Debug, Logger)
+	//SCENARIO("Logger - Debug output")
 	//{
-	//	ScoppedCoutRedirector redirector;
-	//	Logger::Debug("Test string {}", 25);
-
-	//	auto currentLocation = std::source_location::current();
-	//	const std::string content = Terminal::Color::CYAN + std::string(currentLocation.function_name()) + ":" + std::to_string(currentLocation.line()) + " message: Test string 25" + Terminal::Color::DEFAULT;
-	//	EXPECT_EQ(redirector.Str(), "Test string 25");
+	//	GIVEN("A redirected cout")
+	//	{
+	//		ScoppedCoutRedirector redirector;
+	//		Logger::Debug("Test string {}", 25);
+	//
+	//		auto currentLocation = std::source_location::current();
+	//		const std::string content = Terminal::Color::CYAN + std::string(currentLocation.function_name()) + ":" + std::to_string(currentLocation.line()) + " message: Test string 25" + Terminal::Color::DEFAULT;
+	//		THEN("The output matches") { CHECK(redirector.Str() == "Test string 25"); }
+	//	}
 	//}
-}
+} // namespace CCT_ANONYMOUS_NAMESPACE

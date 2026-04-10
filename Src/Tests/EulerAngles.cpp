@@ -2,7 +2,8 @@
 // Created by arthur on 14/03/2023.
 //
 
-#include <gtest/gtest.h>
+#include <catch2/catch_test_macros.hpp>
+#include <catch2/matchers/catch_matchers_floating_point.hpp>
 
 #include "Concerto/Core/Math/EulerAngles/EulerAngles.hpp"
 
@@ -11,97 +12,142 @@ namespace CCT_ANONYMOUS_NAMESPACE
 	using namespace cct;
 	constexpr float near = 0.001f;
 
-	TEST(EulerAngles, Constructor)
+	SCENARIO("EulerAngles - construction")
 	{
-		EulerAnglesf e(1.f, 2.f, 3.f);
-		ASSERT_EQ(1.f, e.Pitch());
-		ASSERT_EQ(2.f, e.Yaw());
-		ASSERT_EQ(3.f, e.Roll());
+		GIVEN("EulerAngles(1, 2, 3)")
+		{
+			EulerAnglesf e(1.f, 2.f, 3.f);
+			THEN("Pitch, Yaw, Roll are correct")
+			{
+				REQUIRE(e.Pitch() == 1.f);
+				REQUIRE(e.Yaw() == 2.f);
+				REQUIRE(e.Roll() == 3.f);
+			}
+		}
 	}
 
-	TEST(EulerAngles, operatorAdd)
+	SCENARIO("EulerAngles - arithmetic operators")
 	{
-		EulerAnglesf e1(1.f, 2.f, 3.f);
-		EulerAnglesf e2(1.f, 2.f, 3.f);
-		EulerAnglesf e3 = e1 + e2;
-		ASSERT_EQ(2.f, e3.Pitch());
-		ASSERT_EQ(4.f, e3.Yaw());
-		ASSERT_EQ(6.f, e3.Roll());
+		GIVEN("Two EulerAngles(1, 2, 3)")
+		{
+			EulerAnglesf e1(1.f, 2.f, 3.f);
+			EulerAnglesf e2(1.f, 2.f, 3.f);
+
+			WHEN("Added")
+			{
+				EulerAnglesf e3 = e1 + e2;
+				THEN("Result is (2, 4, 6)")
+				{
+					REQUIRE(e3.Pitch() == 2.f);
+					REQUIRE(e3.Yaw() == 4.f);
+					REQUIRE(e3.Roll() == 6.f);
+				}
+			}
+
+			WHEN("Subtracted")
+			{
+				EulerAnglesf e3 = e1 - e2;
+				THEN("Result is (0, 0, 0)")
+				{
+					REQUIRE(e3.Pitch() == 0.f);
+					REQUIRE(e3.Yaw() == 0.f);
+					REQUIRE(e3.Roll() == 0.f);
+				}
+			}
+
+			WHEN("Multiplied")
+			{
+				EulerAnglesf e2r = e1 * e1;
+				THEN("Result is (1, 4, 9)")
+				{
+					REQUIRE(e2r.Pitch() == 1.f);
+					REQUIRE(e2r.Yaw() == 4.f);
+					REQUIRE(e2r.Roll() == 9.f);
+				}
+			}
+
+			WHEN("Divided")
+			{
+				EulerAnglesf e2r = e1 / e1;
+				THEN("Result is (1, 1, 1)")
+				{
+					REQUIRE(e2r.Pitch() == 1.f);
+					REQUIRE(e2r.Yaw() == 1.f);
+					REQUIRE(e2r.Roll() == 1.f);
+				}
+			}
+		}
 	}
 
-	TEST(EulerAngles, operatorSub)
+	SCENARIO("EulerAngles - compound assignment operators")
 	{
-		EulerAnglesf e1(1.f, 2.f, 3.f);
-		EulerAnglesf e2(1.f, 2.f, 3.f);
-		EulerAnglesf e3 = e1 - e2;
-		ASSERT_EQ(0.f, e3.Pitch());
-		ASSERT_EQ(0.f, e3.Yaw());
-		ASSERT_EQ(0.f, e3.Roll());
+		GIVEN("Two EulerAngles(1, 2, 3)")
+		{
+			EulerAnglesf e1(1.f, 2.f, 3.f);
+			EulerAnglesf e2(1.f, 2.f, 3.f);
+
+			WHEN("+=")
+			{
+				e1 += e2;
+				THEN("e1 is (2, 4, 6)")
+				{
+					REQUIRE(e1.Pitch() == 2.f);
+					REQUIRE(e1.Yaw() == 4.f);
+					REQUIRE(e1.Roll() == 6.f);
+				}
+			}
+
+			WHEN("-=")
+			{
+				e1 -= e2;
+				THEN("e1 is (0, 0, 0)")
+				{
+					REQUIRE(e1.Pitch() == 0);
+					REQUIRE(e1.Yaw() == 0);
+					REQUIRE(e1.Roll() == 0);
+				}
+			}
+
+			WHEN("*=")
+			{
+				e1 *= e1;
+				THEN("e1 is (1, 4, 9)")
+				{
+					REQUIRE(e1.Pitch() == 1.f);
+					REQUIRE(e1.Yaw() == 4.f);
+					REQUIRE(e1.Roll() == 9.f);
+				}
+			}
+
+			WHEN("/=")
+			{
+				e1 /= e1;
+				THEN("e1 is (1, 1, 1)")
+				{
+					REQUIRE(e1.Pitch() == 1);
+					REQUIRE(e1.Yaw() == 1);
+					REQUIRE(e1.Roll() == 1);
+				}
+			}
+		}
 	}
 
-	TEST(EulerAngles, operatorMul)
+	SCENARIO("EulerAngles - ToQuaternion round-trip")
 	{
-		EulerAnglesf e1(1.f, 2.f, 3.f);
-		EulerAnglesf e2 = e1 * e1;
-		ASSERT_EQ(1.f, e2.Pitch());
-		ASSERT_EQ(4.f, e2.Yaw());
-		ASSERT_EQ(9.f, e2.Roll());
+		GIVEN("EulerAngles(45, 25, 68)")
+		{
+			EulerAnglesf e1(45.f, 25.f, 68.f);
+			WHEN("Converted to Quaternion and back")
+			{
+				Quaternionf q = e1.ToQuaternion();
+				EulerAnglesf e2 = q.ToEulerAngles();
+				THEN("Pitch, Yaw, Roll are within tolerance")
+				{
+					CHECK_THAT(e2.Pitch(), Catch::Matchers::WithinAbs(e1.Pitch(), near));
+					CHECK_THAT(e2.Roll(), Catch::Matchers::WithinAbs(e1.Roll(), near));
+					CHECK_THAT(e2.Yaw(), Catch::Matchers::WithinAbs(e1.Yaw(), near));
+				}
+			}
+		}
 	}
-
-	TEST(EulerAngles, operatorDiv)
-	{
-		EulerAnglesf e1(1.f, 2.f, 3.f);
-		EulerAnglesf e2 = e1 / e1;
-		ASSERT_EQ(1.f, e2.Pitch());
-		ASSERT_EQ(1.f, e2.Yaw());
-		ASSERT_EQ(1.f, e2.Roll());
-	}
-
-	TEST(EulerAngles, operatorAddAssign)
-	{
-		EulerAnglesf e1(1.f, 2.f, 3.f);
-		EulerAnglesf e2(1.f, 2.f, 3.f);
-		e1 += e2;
-		ASSERT_EQ(2.f, e1.Pitch());
-		ASSERT_EQ(4.f, e1.Yaw());
-		ASSERT_EQ(6.f, e1.Roll());
-	}
-
-	TEST(EulerAngles, operatorSubAssign)
-	{
-		EulerAnglesf e1(1.f, 2.f, 3.f);
-		EulerAnglesf e2(1.f, 2.f, 3.f);
-		e1 -= e2;
-		ASSERT_EQ(0, e1.Pitch());
-		ASSERT_EQ(0, e1.Yaw());
-		ASSERT_EQ(0, e1.Roll());
-	}
-
-	TEST(EulerAngles, operatorMulAssign)
-	{
-		EulerAnglesf e1(1.f, 2.f, 3.f);
-		e1 *= e1;
-		ASSERT_EQ(1.f, e1.Pitch());
-		ASSERT_EQ(4.f, e1.Yaw());
-		ASSERT_EQ(9.f, e1.Roll());
-	}
-
-	TEST(EulerAngles, operatorDivAssign)
-	{
-		EulerAnglesf e1(1.f, 2.f, 3.f);
-		e1 /= e1;
-		ASSERT_EQ(1, e1.Pitch());
-		ASSERT_EQ(1, e1.Yaw());
-		ASSERT_EQ(1, e1.Roll());
-	}
-
-	TEST(EulerAngles, ToQuaternion)
-	{
-		EulerAnglesf e1(45.f, 25.f, 68.f);
-		Quaternionf q = e1.ToQuaternion();
-		EulerAnglesf e2 = q.ToEulerAngles();
-		EXPECT_NEAR(e1.Pitch(), e2.Pitch(), near);
-		EXPECT_NEAR(e1.Roll(), e2.Roll(), near);
-		EXPECT_NEAR(e1.Yaw(), e2.Yaw(), near);
-	}
-}// namespace CCT_ANONYMOUS_NAMESPACE
+} // namespace CCT_ANONYMOUS_NAMESPACE
