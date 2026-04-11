@@ -23,6 +23,8 @@ if has_config("enet") then
     add_requires("enet", {configs = {shared = false}})
 end
 
+add_requires("spdlog")
+
 function add_files_to_target(p, hpp_as_files, install)
     for _, dir in ipairs(os.filedirs(p)) do
         relative_dir = path.relative(dir, "Src/")
@@ -62,8 +64,10 @@ target("concerto-core")
         add_packages("enet", {public = true})
         add_defines("CCT_ENABLE_ENET")
     end
+    add_packages("spdlog")
     add_defines("CCT_CORE_BUILD")
     add_cxxflags("cl::/Zc:preprocessor", { public = true })
+    add_cxxflags("cl::/utf-8")
     add_includedirs("Src", {public = true}) 
     add_files_to_target("Src/Concerto/Core/", false, true)
     add_files_to_target("Src/Concerto/Core/**", false, true)
